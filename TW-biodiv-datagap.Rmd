@@ -1,0 +1,221 @@
+---
+title: "TW-biodiv-datagap"
+author: "Daphne Hoh"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# (0) Environment setup
+```{r environment setup}
+setwd("/Users/daphne/Desktop/projects/TW-biodiv-datagap/")
+
+.packs <- c("rgbif", "data.table", "tidyverse", "httr", "jsonlite", "dplyr")
+
+sapply(.packs, require, character.only = T)
+
+#sessionInfo()
+```
+
+
+-----
+
+
+# (1) Data source (GBIF, TBN, TaiBIF)
+```{r download GBIF data}
+## 1. Download all Taiwan data
+dlKey <- occ_download(user="daphnehohzw", 
+                      pwd="rgbifapi", 
+                      email="daphnehoh@live.com",
+                      pred("country","TW"),
+                      format = "SIMPLE_CSV") 
+dlKey 
+# https://www.gbif.org/occurrence/download/0205909-230224095556074
+# Citation Info:  
+#   Please always cite the download DOI when using this data.
+#   https://www.gbif.org/citation-guidelines
+#   DOI: 10.15468/dl.6mvz2c
+#   Citation:
+#   GBIF Occurrence Download https://doi.org/10.15468/dl.6mvz2c Accessed from R via rgbif (https://github.com/ropensci/rgbif) on 2023-05-02
+
+## 2. Check status, takes about 10 mins
+# Download made at 20230502
+occ_download_wait('0205909-230224095556074')
+# <<gbif download metadata>>
+#   Status: SUCCEEDED
+#   DOI: 10.15468/dl.6mvz2c
+#   Format: SIMPLE_CSV
+#   Download key: 0205909-230224095556074
+#   Created: 2023-05-02T02:52:50.704+00:00
+#   Modified: 2023-05-02T03:02:32.235+00:00
+#   Download link: https://api.gbif.org/v1/occurrence/download/request/0205909-230224095556074.zip
+#   Total records: 15506793
+
+# Total records 15,506,793 # 1千5百萬筆 # 15.5 million data
+
+
+## 3. Download after status is 'SUCCEEDED'
+# gbifData <- occ_download_get('0205909-230224095556074') %>%
+#   occ_download_import()
+# This file size is 1679.51 MB. Too huge to wait, so I downloaded the file using wget in Terminal
+# cd dir/to/save
+# wget https://api.gbif.org/v1/occurrence/download/request/0205909-230224095556074.zip
+# unzip 0205909-230224095556074.zip
+
+gbif_citation('0205909-230224095556074')
+
+## 4. Load data from GBIF
+## Huge CSV files, use freadr to read
+# ref tutorial: https://inbo.github.io/tutorials/tutorials/r_large_data_files_handling/
+
+## load csv
+csv.name <- "/Users/daphne/Desktop/projects/TW-biodiv-datagap/00.data/GBIF/0205909-230224095556074.csv"
+system.time(gbif <- fread(csv.name, encoding="UTF-8", sep="\t", quote="", fill=TRUE, colClasses="character"))
+
+# time used ~6mins
+#    user  system elapsed 
+# 198.810  35.860 346.933 
+
+# check file size
+#format(object.size(gbif), units="auto") # 9 Gb
+
+dim(gbif) # 15,392,072  50
+colnames(gbif)
+```
+
+```{r load TBN data}
+# TESRI self-produced data ver20230430
+csv.name <- "00.data/TBN/full_tbnOP_export_20230418.csv"
+
+library(data.table)
+tesri <- fread(csv.name, colClasses = "character", encoding = "UTF-8")
+
+## check file size
+format(object.size(tesri), units = "auto") # 675.9 Mb
+
+dim(tesri) # 859,434  60
+colnames(tesri)
+```
+
+```{r download TaiBIF data}
+```
+
+
+-----
+
+
+# (2) Data cleaning
+## Remove duplicates between GBIF (gbifID) and TBN (externalID) datasets
+```{r remove duplicates}
+# remove 'gbif:' from the column value
+tbn$externalID <- sub("gbif:", "", tbn$externalID)
+
+# count how many is duplicate
+tbn$externalID %in% gbif$gbifID %>% summary()
+# FALSE 4,058,671
+# TRUE 14,071,288 (duplicate with GBIF records)
+
+# subset non-duplicate records
+tbn.only <- subset(tbn[tbn$externalID %in% gbif$gbifID == F,])
+dim(tbn.only) # 4,058,671
+
+```
+
+## Combining GBIF df & TBN.only df
+```{r }
+tbn.only$externalID
+
+#gt <- full_join(gbif, tbn.only, by = "occurrenceID") memory exhausted
+
+
+colnames(gbif)
+colnames(tbn.only)
+
+
+## remove leading & trailing blanks in each cell
+#lts <- names(tbn)[vapply(tbn, is.character, logical(1))]
+#tbnt <- tbn[, c(lts) := lapply(.SD, function(x) gsub('\\s+', '', x)), .SDcols = lts]
+```
+
+
+-----
+
+# (3) Descriptive statistics 
+```{r analysis - getting numbers}
+bof <- gbif %>%
+  select(basisOfRecord) %>%
+  group_by(basisOfRecord) %>%
+  summarise(n = n(), perc = n/sum(.$n))
+
+
+
+kingdom <- gbif %>%
+  select(kingdom) %>%
+  group_by(kingdom) %>%
+  summarise(n=n())
+
+
+
+
+
+phylum <- gbif_tbl %>%
+  select(kingdom, phylum) %>%
+  group_by(kingdom, phylum) %>%
+  summarise(n=n())
+
+df <- phylum %>% 
+  print(n=200) %>% # only 96 phylum, excluding NAs
+  as.data.frame()
+```
+
+```{r plot}
+setwd("/Users/daphne/Desktop/0.Research/Gap/02.Analysis/")
+library(forcats)
+library(scales)
+
+bof <- gbif %>%
+  select(basisOfRecord) %>%
+  group_by(basisOfRecord) %>%
+  summarise(n=n()) %>%
+  mutate(perc=n*100/sum(n)) %>%
+  as.data.frame()
+
+bof %>%
+  mutate(basisOfRecord=fct_reorder(basisOfRecord, desc(n))) %>%
+  ggplot(aes(x=basisOfRecord, y=n)) +
+  geom_bar(stat="identity") +
+  geom_text(label=paste0(round(bof$perc,3),"%"), vjust=-1) +
+  ylab("Number of Records") +
+  scale_y_continuous(labels = label_number(suffix = " M", scale = 1e-6)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle=45, hjust=1.05),
+        plot.background = element_blank(),
+        panel.background = element_blank())
+
+ggsave("./plot/basisOfRecord.png", width = 8, height = 8, dpi=300, bg="transparent")
+
+
+
+kp <- gbif %>%
+  select(kingdom, phylum) %>%
+  group_by(kingdom, phylum) %>% 
+  summarise(n=n()) %>%
+  as.data.frame() %>%
+  mutate_all(na_if, "NA") # Replace blank cells to NA
+
+kpPerc <- kp %>%
+  group_by(kingdom) %>%
+  mutate(perc=n*100/sum(n)) %>%
+  as.data.frame()
+
+ggplot(kp, aes(x=kingdom, y=n, fill=phylum)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=45, hjust=1.05),
+        legend.position="none",
+        plot.background = element_blank(),
+        panel.background = element_blank())
+
+
+
+```
+
