@@ -1,9 +1,3 @@
-##################################
-# Biodiversity in National Parks #
-# by Alessio Benedetti           #
-# server.R file                  #
-##################################
-
 library(shiny)
 library(tidyverse)
 library(leaflet.extras)
@@ -150,7 +144,8 @@ shinyServer(function(input, output) {
    
  # parks map
  output$parksMap <- renderLeaflet({
-  leaflet(data=parks) %>% addProviderTiles(providers$Stamen.Watercolor, group = "Stamen Watercolor", options = providerTileOptions(noWrap = TRUE)) %>%#, minZoom = 4)) %>%
+  leaflet(data=parks) %>% 
+  addProviderTiles(providers$Stamen.Watercolor, group = "Stamen Watercolor", options = providerTileOptions(noWrap = TRUE)) %>%#, minZoom = 4)) %>%
   addProviderTiles(providers$OpenStreetMap.Mapnik, group = "Open Street Map", options = providerTileOptions(noWrap = TRUE)) %>%
   addProviderTiles(providers$NASAGIBS.ViirsEarthAtNight2012, group = "Nasa Earth at Night", options = providerTileOptions(noWrap = TRUE)) %>%
   addProviderTiles(providers$Stamen.TerrainBackground, group = "Stamen Terrain Background", options = providerTileOptions(noWrap = TRUE)) %>%
@@ -159,11 +154,11 @@ shinyServer(function(input, output) {
   addMarkers(
     ~Longitude,
     ~Latitude,
-    icon = makeIcon(
-      iconUrl = "32px-US-NationalParkService-Logo.svg.png",
-      shadowUrl = "32px-US-NationalParkService-Logo.svg - black.png",
-      shadowAnchorX = -1, shadowAnchorY = -2
-    ),
+    #icon = makeIcon(
+    #  iconUrl = "32px-US-NationalParkService-Logo.svg.png",
+    #  shadowUrl = "32px-US-NationalParkService-Logo.svg - black.png",
+    #  shadowAnchorX = -1, shadowAnchorY = -2
+    #),
     clusterOptions = markerClusterOptions()
   ) %>%
   addLayersControl(

@@ -1,9 +1,3 @@
-##################################
-# Biodiversity in National Parks #
-# by Alessio Benedetti           #
-# ui.R file                      #
-##################################
-
 library(leaflet)
 library(shinydashboard)
 library(collapsibleTree)
@@ -32,25 +26,26 @@ shinyUI(fluidPage(
   # load page layout
   dashboardPage(
     
-    skin = "purple",
+    skin = "green",
       
-    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 300),
+    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290),
     
-    dashboardSidebar(width = 300,
+    dashboardSidebar(width = 290,
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://www.nps.gov/index.htm' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='US-NationalParkService-Logo.svg' width = '186'></a>",
+          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='TBIA_logo.png' width = '250'></a>",
           "<br>",
-          "<p style = 'text-align: center;'><small><a href='https://www.nps.gov/subjects/hfc/arrowhead-artwork.htm' target='_blank'>NPS logo disclaimer</a></small></p>",
+          "<p style = 'text-align: center;'><small><a href='https://tbiadata.tw' target='_blank'>https://tbiadata.tw</a></small></p>",
           "<br>"
         )),
-        menuItem("Home", tabName = "home", icon = icon("home")),
-        menuItem("Spatial Gap", tabName = "map", icon = icon("thumbtack")),
-        menuItem("Taxonomical Gap", tabName = "table", icon = icon("table")),
-        menuItem("Temporal Gap", tabName = "tree", icon = icon("random", lib = "glyphicon")),
-        menuItem("Methodological Gap", tabName = "charts", icon = icon("stats", lib = "glyphicon")),
-        menuItem("Fill the Gap!", tabName = "choropleth", icon = icon("map marked alt")),
+        menuItem("Home", tabName = "home", icon = icon("house")),
+        menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
+        menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
+        menuItem("Temporal Gap", tabName = "tree", icon = icon("clock")),
+        menuItem("Methodological Gap", tabName = "charts", icon = icon("pencil")),
+        menuItem("Fill the Gap!", tabName = "choropleth", icon = icon("map-marked-alt")),
+        menuItem("References", tabName = "references", icon = icon("book-atlas")),
         menuItem("Releases", tabName = "releases", icon = icon("tasks")),
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br>",
@@ -62,11 +57,8 @@ shinyUI(fluidPage(
           "</table>",
           "<br>"),
         HTML(paste0(
-          "<script>",
-            "var today = new Date();",
-            "var yyyy = today.getFullYear();",
-          "</script>",
-          "<p style = 'text-align: center;'><small>&copy; - <a href='https://tbiadata.tw/' target='_blank'>tbiadata.tw</a> - <script>document.write(yyyy);</script></small></p>")
+         "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA</a>",
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-04-10</div>")
         ))
       )
       
@@ -131,8 +123,12 @@ shinyUI(fluidPage(
           
         ),
         
+        tabItem(tabName = "references", includeMarkdown("www/references.md")
+        
+        ),
+      
         tabItem(tabName = "releases", includeMarkdown("www/releases.md"))
-              
+        
       )
     
     ) # end dashboardBody
