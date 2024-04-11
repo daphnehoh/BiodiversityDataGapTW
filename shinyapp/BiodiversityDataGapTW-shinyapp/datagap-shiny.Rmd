@@ -1,0 +1,199 @@
+---
+title: "datagap-shiny"
+author: "Daphne"
+date: "2024-04-11"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r env prep}
+setwd("D:/GitHub/BiodiversityDataGapTW/analyses/")
+
+.packs <- c("httr", "jsonlite", "dplyr", "data.table", "stringr", 
+            "ggplot2", "scales", "RColorBrewer", "tidyr", "tidyverse",
+            "sf", "parallel", "lwgeom")
+sapply(.packs, require, character.only = T)
+
+sessionInfo()
+
+tbia.color_6 <- c("#3E5145", "#76A678", "#E5C851", "#E2A45F", "#F8E3C4", "#C75454")
+tbia.color_20 <- c(tbia.color_6, brewer.pal(12, "Set3"), brewer.pal(8, "Set2")) %>% unique()
+
+```
+
+# (1) TBIA Data sources
+```{r load raw TBIA data}
+# TBIA portal download ver20240410
+## load in data
+tbia <- fread("D:/GitHub/BiodiversityDataGapTW/analyses/01.raw_data/ver4_ver20240410/tbia_6615ef5ccd1cf200219ad72d.csv", 
+              sep = ",", colClasses = "character", encoding = "UTF-8")
+
+dim(tbia) # 21,390,501 64
+colnames(tbia)
+format(object.size(tbia), units = "auto") # 18.4 Gb
+```
+
+
+
+# (2) Data cleaning
+## Removing duplicates
+```{r Cleaning step 1: remove duplicated rightsHolder_occurrenceID}
+# Find duplicated occurrenceID that is from the same rightsHolder
+
+## cut down tbia dt size for efficiency
+tbia_cut <- tbia %>%
+  select("id", "datasetName", "occurrenceID", "rightsHolder")
+
+## some data has no occurrenceID (assumed all distinct data)
+tbia_blank_occID <- tbia_cut %>% 
+  filter(.$occurrenceID == "") # 8,139 has no occurrenceID (all from iOcean)
+tbia_omited_blank_occID <- tbia_cut %>% 
+  filter(.$occurrenceID != "") # remove these blank for later
+
+## counting & removing duplicate data
+tbia_omited_blank_occID$rh_occID <- paste0(tbia_omited_blank_occID$rightsHolder, "_", tbia_omited_blank_occID$occurrenceID)
+tbia_unique <- unique(tbia_omited_blank_occID, by = "rh_occID")
+
+## Check -- just checking numbers & contents of duplicated records
+n_occur <- data.table(table(tbia_omited_blank_occID$rh_occID)) # see counts of duplicated value
+n_occur_morethan2 <- n_occur[n_occur$N > 1,] # 2389 rightsHolder_occurrenceID appeared twice or more
+n_occur_morethan2_dN <- tbia_omited_blank_occID[tbia_omited_blank_occID$rh_occID %in% n_occur_morethan2$V1,] # 重複來自哪個資料集
+table(n_occur_morethan2_dN$datasetName)
+fwrite(n_occur_morethan2, "C:/Users/taibif/Desktop/n_occur_morethan2.csv", 
+       row.names = F, quote = T)
+
+tbia_dup <- tbia_omited_blank_occID[tbia_omited_blank_occID$rh_occID %in% n_occur_morethan2$V1,]
+tbia_dup1 <- tbia[tbia$id %in% tbia_dup$id,] # 總表
+fwrite(tbia_dup1, "C:/Users/taibif/Desktop/tbia_dup1.csv", 
+       row.names = F, quote = T)
+
+# ## add back those records without occurrenceID
+# tbia1 <- rbind(tbia_unique[,-"rh_occID"], tbia_blank_occID) # remove`rh_occID` column
+# format(object.size(tbia1), units = "auto") # 3.4 Gb
+# 
+# ## save a copy for future loading
+# fwrite(tbia1, "C:/Users/taibif/Desktop/Daphne/TBIA-data-review/02.processed_data/tbia_clean1.1_rightsHolder_occurrenceID_duplicates_removed.csv", 
+#        row.names = F, quote = T)
+# 
+# rm(list = ls(all.names = T))
+# gc()
+# 
+# tbia <- fread("C:/Users/taibif/Desktop/Daphne/TBIA-data-review/02.processed_data/tbia_clean1.1_rightsHolder_occurrenceID_duplicates_removed.csv", 
+#               sep = ",", colClasses = "character", encoding = "UTF-8")
+
+```
+### 20240411 - did not removed any records. iOcean data has issue remained to be solved.
+
+```{r Cleaning step 2: remove duplicated datasetName}
+# Check number of all datasets in TBIA
+
+## Make recognizable ID to remove later
+tbia$dtsN_rH <- paste0(tbia$datasetName, "_", tbia$rightsHolder)
+
+## Final dataset number should be:
+length(unique(tbia$datasetName)) # n = 1,947
+
+## 8 duplicated datasets was found when grouping datasetName_rightsHolder
+## Reason: Same datasets contributed by 2 different rightsHolder 
+tbia_all_dts <- tbia %>%
+  group_by(datasetName, rightsHolder) %>%
+  summarize(idp = first(dtsN_rH), numRecord = n()) %>%
+  ungroup() %>%
+  select(idp, datasetName, rightsHolder, numRecord) # n = 1,951
+
+# Check -- check duplicated dataset
+n_occur <- data.table(table(tbia_all_dts$datasetName))
+sort(n_occur$N, decreasing = T)
+dts_twice <- n_occur[n_occur$N == 2][[1]]
+dup_dts <- tbia_all_dts[tbia_all_dts$datasetName %in% dts_twice,]
+fwrite(dup_dts, "C:/Users/taibif/Desktop/tbia_clean2.0_check_datasetName_rightsHolder_duplicates.csv", 
+       row.names = F, quote = T)
+
+# Keep one with the most data count, if identical: pick one
+# total data count of the removed dataset = 647
+# Final data count = 21390501-647 = 21,389,854
+# the chosen dataset:
+tbia_all_dts2 <- tbia_all_dts %>%
+  group_by(datasetName) %>%
+  filter(numRecord == max(numRecord)) %>% # choose row with higher record number
+  arrange(desc(numRecord), rightsHolder, .by_group = T) %>% # if identical, choose the first rightsHolder by alphabet 
+  slice(1) %>%
+  ungroup() %>%
+  select(idp, datasetName, rightsHolder, numRecord)
+
+# dataset to be removed, 4
+dup_toRemove <- dup_dts %>%
+  group_by(datasetName) %>%
+  filter(numRecord == min(numRecord)) %>% 
+  arrange(numRecord, rightsHolder, .by_group = T) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(idp, datasetName, rightsHolder, numRecord)
+
+# remove from big table
+tbia2 <- tbia[!tbia$dtsN_rH %in% dup_toRemove$idp, ]
+tbia_clean <- tbia2[, -"dtsN_rH"]
+dim(tbia_clean) # 21,389,854
+
+### Final TBIA table
+fwrite(tbia_clean, "D:/GitHub/BiodiversityDataGapTW/analyses/02.processed_data/tbia_v1_duplicates_removed.csv",
+       row.names = F, quote = T)
+
+rm(list = ls(all.names = T))
+gc()
+
+```
+### 20240411 - removed 4 duplicate datasets (647 records)
+
+
+# (2.1) Data quality statistics
+```{r}
+tbia <- fread("D:/GitHub/BiodiversityDataGapTW/analyses/02.processed_data/tbia_v1_duplicates_removed.csv",
+              sep = ",", colClasses = "character", encoding = "UTF-8")
+
+## Make one column that combines standardL* & standardRawL*, prioritizing data with Raw coordinates
+tbia$latitude <- fifelse(tbia$dataGeneralizations == "true", paste0(tbia$standardRawLatitude), paste0(tbia$standardLatitude))
+tbia$longitude <- fifelse(tbia$dataGeneralizations == "true", paste0(tbia$standardRawLongitude), paste0(tbia$standardLongitude))
+
+## Extract year from standardDate
+tbia$year <- str_extract(tbia$standardDate, "\\d{4}")
+tbia$month <- str_extract(tbia$standardDate, "(?<=-)[0-9]{2}(?=-)")
+
+## Select columns needed for analysis only
+keepColumn <- c("id", "rightsHolder", "datasetName", "basisOfRecord", "year", "month",  
+                "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "dataGeneralizations",
+                "scientificNameID", "taxonID", "scientificName", "taxonRank", "common_name_c", 
+                "kingdom", "kingdom_c", "phylum", "phylum_c", "class", "class_c", 
+                "order", "order_c", "family", "family_c", "genus", "genus_c") # 27
+
+tbia1 <- tbia %>%
+  select(all_of(keepColumn))
+
+
+# Assign data quality
+tbia1[tbia1 == ""] <- NA
+
+tbia2 <- tbia1 %>%
+  mutate(dataQuality = case_when(
+    !is.na(scientificName) & !is.na(latitude) & !is.na(longitude) & !is.na(year) & !is.na(month) & !is.na(basisOfRecord) & 
+      (!is.na(coordinatePrecision) | !is.na(coordinateUncertaintyInMeters)) ~ 'gold',
+    
+    !is.na(scientificName) & !is.na(latitude) & !is.na(longitude) & !is.na(year) &
+      (!is.na(coordinatePrecision) | !is.na(coordinateUncertaintyInMeters)) ~ 'silver',
+    
+    !is.na(scientificName) & !is.na(latitude) & !is.na(longitude) & !is.na(year) ~ 'bronze',
+    
+    is.na(scientificName) | is.na(year) | is.na(longitude) | is.na(latitude) ~ 'low',
+    TRUE ~ NA_character_
+  ))
+
+table(tbia2$dataQuality)
+
+fwrite(tbia2, "02.processed_data/tbia_v2_dataQuality.csv",
+       row.names = F, quote = T)
+
+## check how many blank cells in each columns
+blank_counts_test <- colSums(is.na(tbia2))
+```
+
