@@ -69,3 +69,88 @@ ipeds %>%
                    # Cluster all colleges using `clusterOptions`
                    clusterOptions = markerClusterOptions()) 
 
+
+# Glimpse the nc_income data
+glimpse(nc_income)
+
+# Summarize the nc_income data
+summary(nc_income)
+
+# Left join nc_income onto shp@data and store in shp_nc_income
+shp_nc_income <- shp@data %>% 
+  left_join(nc_income, by = c("GEOID10" = "zipcode"))
+
+# Print the number of missing values of each variable in shp_nc_income
+shp_nc_income  %>%
+  summarize(across(everything(), ~sum(is.na(.x))))
+
+
+# plotting polygons
+shp %>%
+  leaflet() %>%
+  addTiles() %>%
+  addPolygons(weight = 1,
+              color = "grey",
+              label = ~paste0("Total income: ", dollar(income)),
+              highlight = hightlightOptions(weight = 3, color = "red", bringToFront = "T"))
+
+
+# Coloring numeric Data
+nc_pal <- colorNumeric(palette = "Blues",
+                       domain = high_inc@data$mean_income)
+# colorBin(), colorQuantile()
+previewColors(pal = nc_pal,
+              values = c(seq(100000, 600000, by = 100000)))
+
+
+# summarize the mean income variable
+summary(shp$mean_income)
+
+# subset shp to include only zip codes in the top quartile of mean income
+high_inc <- shp[!is.na(shp$mean_income) & shp$mean_income > 55917,]
+
+# map the boundaries of the zip codes in the top quartile of mean income
+high_inc %>%
+  leaflet() %>%
+  addTiles() %>%
+  addPolygons()
+
+
+# Use the log function to create a new version of nc_pal
+nc_pal <- colorNumeric("YlGn", domain = log(high_inc@data$mean_income))
+
+# comment out the map tile
+high_inc %>%
+  leaflet() %>%
+  #addProviderTiles("CartoDB") %>%
+  # apply the new nc_pal to the map
+  addPolygons(weight = 1, color = ~nc_pal(log(mean_income)), fillOpacity = 1,
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE))
+
+
+
+## saving map
+saveWidgets(m, file="myMap.html")
+
+
+## group
+# plot zip codes with mean incomes >= $200k
+wealthy_zips %>% 
+  leaflet() %>% 
+  addProviderTiles("CartoDB") %>% 
+  # set color to green and create Wealth Zipcodes group
+  addPolygons(weight = 1, fillOpacity = .7, color = "green",  group = "Wealthy Zipcodes", 
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE))
+
+
+# combine different layer
+# Add polygons using wealthy_zips
+final_map <- m4 %>% 
+  addPolygons(data = wealthy_zips, weight = 1, fillOpacity = .5, color = "Grey",  group = "Wealthy Zip Codes", 
+              label = ~paste0("Mean Income: ", dollar(mean_income)),
+              highlightOptions = highlightOptions(weight = 5, color = "white", bringToFront = TRUE)) %>% 
+  # Update layer controls including "Wealthy Zip Codes"
+  addLayersControl(baseGroups = c("OSM", "Carto", "Esri"), 
+                   overlayGroups = c("Public", "Private", "For-Profit", "Wealthy Zip Codes"))     
