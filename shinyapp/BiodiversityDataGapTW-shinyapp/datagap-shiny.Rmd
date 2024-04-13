@@ -208,7 +208,7 @@ tbia <- fread("D:/GitHub/BiodiversityDataGapTW/analyses/02.processed_data/tbia_v
 # Preparing coordinates
 ## remove data without coordinates
 tbia2_withCoords <- tbia %>%
-  filter(longitude != "" & latitude != "") # 1,041,906 has no coordinates
+  filter(longitude != "" & latitude != "") # 794,306 has no coordinates
 
 # Put points on Taiwan map
 tbia2.1 <- tbia2_withCoords %>% 
@@ -235,7 +235,7 @@ clusterEvalQ(cl, { # make sure all clusters are ready
   library(data.table)
   library(sf)
   library(lwgeom)
-  TWshp <- st_read("layers/Taiwan_WGS84_land_ocean_final/Taiwan_WGS84_land_ocean_final.shp")
+  TWshp <- st_read("D:/GitHub/BiodiversityDataGapTW/analyses/shp/金門馬祖太平島禁限制水域(109061")
   TWshp <- st_make_valid(TWshp)
   shpFile <- st_zm(TWshp) %>%
     select(., COUNTYCODE, type, island)
