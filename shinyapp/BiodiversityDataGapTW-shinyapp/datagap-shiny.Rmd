@@ -190,10 +190,122 @@ tbia2 <- tbia1 %>%
 
 table(tbia2$dataQuality)
 
-fwrite(tbia2, "02.processed_data/tbia_v2_dataQuality.csv",
+fwrite(tbia2, "D:/GitHub/BiodiversityDataGapTW/analyses/02.processed_data/tbia_v1_duplicates_removed.csv",
        row.names = F, quote = T)
 
 ## check how many blank cells in each columns
 blank_counts_test <- colSums(is.na(tbia2))
+```
+
+
+
+# (2.2) Get data points in Taiwan
+```{r}
+tbia <- fread("D:/GitHub/BiodiversityDataGapTW/analyses/02.processed_data/tbia_v1_duplicates_removed.csv",
+              sep = ",", colClasses = "character", encoding = "UTF-8")
+
+
+# Preparing coordinates
+## remove data without coordinates
+tbia2_withCoords <- tbia %>%
+  filter(longitude != "" & latitude != "") # 1,041,906 has no coordinates
+
+# Put points on Taiwan map
+tbia2.1 <- tbia2_withCoords %>% 
+  group_by(rightsHolder, latitude, longitude) %>% 
+  count()
+
+tbia2.2_groupList <- split(tbia2.1, tbia2.1$rightsHolder)
+
+catchLocation <- function(x){
+  x %>%
+    st_as_sf(coords = c("longitude", "latitude"), remove = F) %>%
+    st_set_crs(4326) %>%
+    st_join(., shpFile, join = st_intersects, left = T, largest = T) %>% 
+    st_drop_geometry(.)
+}
+
+## Clip points to the map boundaries
+## Takes too long to run, run in parallel
+cpu.cores <- detectCores() - 1
+cl <- makeCluster(cpu.cores)
+
+clusterEvalQ(cl, { # make sure all clusters are ready
+  library(tidyverse)
+  library(data.table)
+  library(sf)
+  library(lwgeom)
+  TWshp <- st_read("layers/Taiwan_WGS84_land_ocean_final/Taiwan_WGS84_land_ocean_final.shp")
+  TWshp <- st_make_valid(TWshp)
+  shpFile <- st_zm(TWshp) %>%
+    select(., COUNTYCODE, type, island)
+  shpFile <- as(shpFile, "sf")%>%
+    st_set_crs(4326)
+  sf_use_s2(F)
+}
+)
+
+system.time(
+  tbia2.3 <- parLapply(cl, tbia2.2_groupList, catchLocation)%>% 
+    do.call(rbind, .)
+)
+
+stopCluster(cl)
+
+fwrite(tbia2.3, "02.processed_data/ver3_ver20231212_gapManual/tbia_v2.3_mapping.csv",
+       row.names = F, quote = T)
+
+## combines shp file attribute table with occurrence table
+tbia2.4 <- tbia2.3 %>%
+  filter(!is.na(COUNTYCODE)) # remove points fall outside of Taiwan territory
+
+fwrite(tbia2.4, "02.processed_data/ver3_ver20231212_gapManual/tbia_v2.4_mapping_noNA.csv",
+       row.names = F, quote = T)
+
+system.time(
+  tbia3 <- left_join(tbia2_withCoords, tbia2.4, by = c("rightsHolder", "latitude", "longitude"))
+)
+
+fwrite(tbia3, "02.processed_data/ver3_ver20231212_gapManual/tbia_v3_att_occ_tables_combined.csv",
+       row.names = F, quote = T)
+
+blank_counts_test <- colSums(is.na(tbia3))
+
+## remove data outside Taiwan territory
+tbia4 <- tbia3 %>%
+  filter(!is.na(COUNTYCODE))
+
+tbia4 <- tbia4 %>%
+  select(-n)
+
+fwrite(tbia4, "02.processed_data/ver3_ver20231212_gapManual/tbia_v4_datapoints_inTW.csv",
+       row.names = F, quote = T)
+
+blank_counts_test <- colSums(is.na(tbia4))
+
+nrow(tbia2)-nrow(tbia2_withCoords) # 1,041,906 data has no coordinates
+nrow(tbia2_withCoords)-nrow(tbia4) # 128,044 data falls outside of Taiwan territory
+
+
+
+
+
+tbia4 <- fread("C:/Users/taibif/Desktop/Daphne/TBIA-data-review/02.processed_data/ver3_ver20231212_gapManual/tbia_v4_datapoints_inTW.csv",
+              sep = ",", colClasses = "character", encoding = "UTF-8")
+
+
+# landsea vs. data quality
+land <- tbia4 %>%
+  filter(type == "land") %>%
+  group_by(type, dataQuality) %>%
+  summarize(n = n()) %>%
+  mutate(perc = n / sum(n) * 100)
+
+sea <- tbia4 %>%
+  filter(type == "ocean") %>%
+  group_by(type, dataQuality) %>%
+  summarize(n = n()) %>%
+  mutate(perc = n / sum(n) * 100)
+
 ```
 
