@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Edzer Pebesma" />
+
+
+<title>4. Manipulating Simple Features</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">4. Manipulating Simple Features</h1>
+<h4 class="author">Edzer Pebesma</h4>
+
+
+
+<p><strong>For a better version of the sf vignettes see</strong> <a href="https://r-spatial.github.io/sf/articles/" class="uri">https://r-spatial.github.io/sf/articles/</a></p>
+<p>This vignette describes how simple features, i.e. records that come with a geometry, can be manipulated, for the case where these manipulations involve geometries. Manipulations include:</p>
+<ul>
+<li>aggregating feature sets</li>
+<li>summarising feature sets</li>
+<li>joining two feature sets based on feature geometry</li>
+</ul>
+<p>Features are represented by records in an <code>sf</code> object, and have feature attributes (all non-geometry fields) and feature geometry. Since <code>sf</code> objects are a subclass of <code>data.frame</code> or <code>tbl_df</code>, operations on feature attributes work identically to how they work on <code>data.frame</code>s, e.g.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>nc &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="dt">package=</span><span class="st">&quot;sf&quot;</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="co">## Reading layer `nc&#39; from data source </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co">##   `/tmp/Rtmpdj1C8W/Rinst6e528189cf81d/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="co">## Simple feature collection with 100 features and 14 fields</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="co">## Geodetic CRS:  NAD27</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>nc &lt;-<span class="st"> </span><span class="kw">st_transform</span>(nc, <span class="dv">2264</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>nc[<span class="dv">1</span>,]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co">## Simple feature collection with 1 feature and 14 fields</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1193283 ymin: 913326.4 xmax: 1340553 ymax: 1044143</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="co">##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74 NWBIR74</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="co">## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1      10</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="co">##   BIR79 SID79 NWBIR79                       geometry</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="co">## 1  1364     0      19 MULTIPOLYGON (((1270813 913...</span></span></code></pre></div>
+<p>prints the first record.</p>
+<p>Many of the tidyverse/dplyr verbs have methods for <code>sf</code> objects. This means that if both <code>sf</code> and <code>dplyr</code> are loaded, manipulations such as selecting a single attribute will return an <code>sf</code> object:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>nc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(NWBIR74) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 1 field</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1193283 ymin: 913326.4 xmax: 1441000 ymax: 1044143</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">##   NWBIR74                       geometry</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">## 1      10 MULTIPOLYGON (((1270813 913...</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">## 2      10 MULTIPOLYGON (((1340553 959...</span></span></code></pre></div>
+<p>which implies that the geometry is sticky, and gets added automatically. If we want to drop geometry, we can coerce to <code>data.frame</code> first, this drops geometry list-columns:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>nc <span class="op">%&gt;%</span><span class="st"> </span>as.data.frame <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(NWBIR74) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">##   NWBIR74</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">## 1      10</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="co">## 2      10</span></span></code></pre></div>
+<div id="subsetting-feature-sets" class="section level2">
+<h2>Subsetting feature sets</h2>
+<p>We can subset feature sets by using the square bracket notation</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>nc[<span class="dv">1</span>, <span class="st">&quot;NWBIR74&quot;</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co">## Simple feature collection with 1 feature and 1 field</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1193283 ymin: 913326.4 xmax: 1340553 ymax: 1044143</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="co">##   NWBIR74                       geometry</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="co">## 1      10 MULTIPOLYGON (((1270813 913...</span></span></code></pre></div>
+<p>and use the <code>drop</code> argument to drop geometries:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>nc[<span class="dv">1</span>, <span class="st">&quot;NWBIR74&quot;</span>, drop =<span class="st"> </span><span class="ot">TRUE</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="co">## [1] 10</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="co">## attr(,&quot;class&quot;)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="co">## [1] &quot;numeric&quot;</span></span></code></pre></div>
+<p>but we can also use a spatial object as the row selector, to select features that intersect with another spatial feature:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>Ashe =<span class="st"> </span>nc[nc<span class="op">$</span>NAME <span class="op">==</span><span class="st"> &quot;Ashe&quot;</span>,]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">class</span>(Ashe)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="co">## [1] &quot;sf&quot;         &quot;data.frame&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>nc[Ashe,]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="co">## Simple feature collection with 4 features and 14 fields</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1142157 ymin: 823077.4 xmax: 1448917 ymax: 1044143</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="co">##     AREA PERIMETER CNTY_ CNTY_ID      NAME  FIPS FIPSNO CRESS_ID BIR74 SID74</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="co">## 1  0.114     1.442  1825    1825      Ashe 37009  37009        5  1091     1</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="co">## 2  0.061     1.231  1827    1827 Alleghany 37005  37005        3   487     0</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="co">## 18 0.199     1.984  1874    1874    Wilkes 37193  37193       97  3146     4</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a><span class="co">## 19 0.081     1.288  1880    1880   Watauga 37189  37189       95  1323     1</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="co">##    NWBIR74 BIR79 SID79 NWBIR79                       geometry</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="co">## 1       10  1364     0      19 MULTIPOLYGON (((1270813 913...</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="co">## 2       10   542     3      12 MULTIPOLYGON (((1340553 959...</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a><span class="co">## 18     200  3725     7     222 MULTIPOLYGON (((1402673 837...</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a><span class="co">## 19      17  1775     1      33 MULTIPOLYGON (((1171157 868...</span></span></code></pre></div>
+<p>We see that in the result set <code>Ashe</code> is included, as the default value for argument <code>op</code> in <code>[.sf</code> is <code>st_intersects()</code>, and <code>Ashe</code> intersects with itself. We could exclude self-intersection by using predicate <code>st_touches()</code> (overlapping features don’t touch):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>Ashe =<span class="st"> </span>nc[nc<span class="op">$</span>NAME <span class="op">==</span><span class="st"> &quot;Ashe&quot;</span>,]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>nc[Ashe, op =<span class="st"> </span>st_touches]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="co">## Simple feature collection with 3 features and 14 fields</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1142157 ymin: 823077.4 xmax: 1448917 ymax: 1035625</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a><span class="co">##     AREA PERIMETER CNTY_ CNTY_ID      NAME  FIPS FIPSNO CRESS_ID BIR74 SID74</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a><span class="co">## 2  0.061     1.231  1827    1827 Alleghany 37005  37005        3   487     0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a><span class="co">## 18 0.199     1.984  1874    1874    Wilkes 37193  37193       97  3146     4</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="co">## 19 0.081     1.288  1880    1880   Watauga 37189  37189       95  1323     1</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a><span class="co">##    NWBIR74 BIR79 SID79 NWBIR79                       geometry</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a><span class="co">## 2       10   542     3      12 MULTIPOLYGON (((1340553 959...</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a><span class="co">## 18     200  3725     7     222 MULTIPOLYGON (((1402673 837...</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a><span class="co">## 19      17  1775     1      33 MULTIPOLYGON (((1171157 868...</span></span></code></pre></div>
+<p>Using <code>dplyr</code>, we can do the same by calling the predicate directly:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>nc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">lengths</span>(<span class="kw">st_touches</span>(., Ashe)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="co">## Simple feature collection with 3 features and 14 fields</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="co">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1142157 ymin: 823077.4 xmax: 1448917 ymax: 1035625</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="co">##    AREA PERIMETER CNTY_ CNTY_ID      NAME  FIPS FIPSNO CRESS_ID BIR74 SID74</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="co">## 1 0.061     1.231  1827    1827 Alleghany 37005  37005        3   487     0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co">## 2 0.199     1.984  1874    1874    Wilkes 37193  37193       97  3146     4</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co">## 3 0.081     1.288  1880    1880   Watauga 37189  37189       95  1323     1</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="co">##   NWBIR74 BIR79 SID79 NWBIR79                       geometry</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">## 1      10   542     3      12 MULTIPOLYGON (((1340553 959...</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="co">## 2     200  3725     7     222 MULTIPOLYGON (((1402673 837...</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="co">## 3      17  1775     1      33 MULTIPOLYGON (((1171157 868...</span></span></code></pre></div>
+</div>
+<div id="aggregating-or-summarizing-feature-sets" class="section level2">
+<h2>Aggregating or summarizing feature sets</h2>
+<p>Suppose we want to compare the 1974 fraction of SID (sudden infant death) of the counties that intersect with <code>Ashe</code> to the remaining ones. We can do this by:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>a &lt;-<span class="st"> </span><span class="kw">aggregate</span>(nc[, <span class="kw">c</span>(<span class="st">&quot;SID74&quot;</span>, <span class="st">&quot;BIR74&quot;</span>)], <span class="kw">list</span>(<span class="dt">Ashe_nb =</span> <span class="kw">lengths</span>(<span class="kw">st_intersects</span>(nc, Ashe)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), sum)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>(a &lt;-<span class="st"> </span>a <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">frac74 =</span> SID74 <span class="op">/</span><span class="st"> </span>BIR74) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(frac74))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 1 field</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="co">## Geometry type: GEOMETRY</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 406265 ymin: 48359.7 xmax: 3052877 ymax: 1044143</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="co">## Projected CRS: NAD83 / North Carolina (ftUS)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a><span class="co">##         frac74                       geometry</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="co">## 1 0.0020406588 MULTIPOLYGON (((454155.5 58...</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a><span class="co">## 2 0.0009922276 POLYGON ((1372051 837036.9,...</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a><span class="kw">plot</span>(a[<span class="dv">2</span>], <span class="dt">col =</span> <span class="kw">c</span>(<span class="kw">grey</span>(.<span class="dv">8</span>), <span class="kw">grey</span>(.<span class="dv">5</span>)))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(Ashe), <span class="dt">border =</span> <span class="st">&#39;#ff8888&#39;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="joining-two-feature-sets-based-on-attributes" class="section level2">
+<h2>Joining two feature sets based on attributes</h2>
+<p>The usual join verbs of base R (<code>merge</code>) and of dplyr (<code>left_join()</code>, etc) work for <code>sf</code> objects as well; the joining takes place on attributes (ignoring geometries). In case of no matching geometry, an empty geometry is substituted. The second argument should be a <code>data.frame</code> (or similar), not an <code>sf</code> object:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>x =<span class="st"> </span><span class="kw">st_sf</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">geom =</span> <span class="kw">st_sfc</span>(<span class="kw">st_point</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)), <span class="kw">st_point</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>y =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="kw">merge</span>(x, y)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="co">## Simple feature collection with 1 feature and 1 field</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="co">## Geometry type: POINT</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1 ymin: 1 xmax: 1 ymax: 1</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="co">##   a    geometry</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="co">## 1 2 POINT (1 1)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a><span class="kw">merge</span>(x, y, <span class="dt">all =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a><span class="co">## Simple feature collection with 3 features and 1 field (with 1 geometry empty)</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a><span class="co">## Geometry type: GEOMETRY</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 0 ymin: 0 xmax: 1 ymax: 1</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true"></a><span class="co">##   a                 geometry</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true"></a><span class="co">## 1 1              POINT (0 0)</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true"></a><span class="co">## 2 2              POINT (1 1)</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true"></a><span class="co">## 3 3 GEOMETRYCOLLECTION EMPTY</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true"></a><span class="kw">right_join</span>(x, y)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true"></a><span class="co">## Joining with `by = join_by(a)`</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 1 field (with 1 geometry empty)</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true"></a><span class="co">## Geometry type: POINT</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1 ymin: 1 xmax: 1 ymax: 1</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true"></a><span class="co">##   a        geom</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true"></a><span class="co">## 1 2 POINT (1 1)</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true"></a><span class="co">## 2 3 POINT EMPTY</span></span></code></pre></div>
+</div>
+<div id="joining-two-feature-sets-based-on-geometries" class="section level2">
+<h2>Joining two feature sets based on geometries</h2>
+<p>For joining based on spatial intersections (of any kind), <code>st_join()</code> is used:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>x =<span class="st"> </span><span class="kw">st_sf</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">geom =</span> <span class="kw">st_sfc</span>(<span class="kw">st_point</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)), <span class="kw">st_point</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)), <span class="kw">st_point</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>y =<span class="st"> </span><span class="kw">st_buffer</span>(x, <span class="fl">0.1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>x =<span class="st"> </span>x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>y =<span class="st"> </span>y[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>,]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(x), <span class="dt">xlim =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">3.5</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(y), <span class="dt">add =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGwCAMAAAB2PiqAAAAB7FBMVEUMDAwNDQ0PDw8QEBARERESEhITExMUFBQVFRUWFhYYGBgZGRkaGhocHBwdHR0eHh4fHx8gICAjIyMkJCQmJiYpKSkrKyssLCwvLy8wMDAxMTE0NDQ1NTU2NjY3Nzc5OTk6Ojo7Ozs9PT0+Pj4/Pz9BQUFCQkJERERFRUVGRkZHR0dISEhJSUlKSkpLS0tMTExNTU1OTk5PT09SUlJTU1NVVVVYWFhZWVlaWlpcXFxdXV1eXl5fX19hYWFkZGRlZWVmZmZnZ2dpaWlqampra2ttbW1wcHBxcXF1dXV2dnZ3d3d6enp7e3t9fX2BgYGCgoKEhISFhYWIiIiJiYmKioqQkJCTk5OVlZWWlpaXl5eZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGjo6OlpaWoqKipqamqqqqrq6utra2vr6+wsLCysrKzs7O0tLS1tbW2tra3t7e5ubm6urq8vLy9vb2+vr7AwMDBwcHCwsLDw8PFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzR0dHT09PV1dXW1tbX19fZ2dna2trb29vc3Nze3t7f39/i4uLk5OTl5eXm5ubp6enq6urr6+vt7e3w8PDx8fHy8vLz8/P19fX29vb39/f4+Pj5+fn6+vr7+/v9/f3+/v7///8xCex4AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAG0UlEQVR4nO3b2ZNcdQGG4RCMk0DAEIwQQRBRUVxQiYoLioKyuRFBURFlUQQRFUWNCghoQCQkQbYYIkzmH7UyVmYQO1Un9Vb1OV08z0Wf079z81281TVV3bNhBYINYw9gsQmIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBnZTX9nz7yo9e8qkbfvrPsZdMhYBOwrPXLp137W2/+M3dN31i44d+NfaaaRDQYEe+9tbr9x1/c/iucy7eO+aaqRDQUPt2Xn7w9e+Xb91851hbJkRAAz15xi1vPPrb9pvHWDItAhrm4LYZHzcHzv7R/JdMjIAGWX7fN2YdP7X5iTkPmRwBDfKDdy/PPL/9XUfnvGRqBDTEK1sfn/3g6Pk/m++SyRHQEHd++ERP7rtonjsmSEBDfPD1nzMH9r66/ua1Lc/Mfc2kCGiAIxsOrd3/4ZytOzZ+cz2hz39/jEXTIaABHjt3/fa0X66s7L/0K2sHt141xqLpENAA9+xau921+oHz4lvWvkx98JIRBk2IgAa47Qtrt9ufXr28/6HjB385b/57pkRAA9x+5drtjr+uXi784/GDRy6Y/54pEdAAP//Y2u3VNx57fWrp8PGD+z8ywqAJEdAAe89euz1w5vVPP3/Pth+uHdz81TEWTYeABljetP5Djuev2b70gd+vP/v4T0YYNCECGuKK753oycunvjDPIdMjoCEePPdE35l+d9cJHrxZCGiIo++8d/aDw2c+Ot8lkyOgQX637cWZ59d9es5DJkdAw1xz+awfBD1wxpv+33sENMyR9375//8M2rPlkRGmTIuABnrpPZ889Iaju7f8dpQpkyKgoY58cfv//C/h/ive/sRIU6ZEQMP9eseFd73039vlP39p043/GnfONAjoJCzfe9kp53/uuhuuvnTpHd96buw10yCgk/PKn+7Yvfs7DxwYe8dkCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhkMQJ6Yd/RsScw2yIEtGfnprOWblkeewazLEBAD59+/8rK3y/6+tg7mGUBArrsjmOvz218eewhzLAAAW3dv3q54OGRdzDLAgT0tmdWLzsfH3kHsyxAQJ/Zfez1yc3/HnsIMyxAQP847aaDh+4768dj72CWBQho5dnPnn7KxQ+NvYKZFiEgJkxAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgkv8ASwyu+DvfGrYAAAAASUVORK5CYII=" /><!-- --></p>
+<p>The join method is a left join, retaining all records of the first attribute:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">st_join</span>(x, y)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 2 fields</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">## Geometry type: POINT</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1 ymin: 1 xmax: 2 ymax: 2</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="co">##   a.x a.y        geom</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="co">## 1   1  NA POINT (1 1)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="co">## 2   2   2 POINT (2 2)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="kw">st_join</span>(y, x)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 2 fields</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="co">## Geometry type: POLYGON</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1.9 ymin: 1.9 xmax: 3.1 ymax: 3.1</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a><span class="co">##   a.x a.y                           geom</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="co">## 2   2   2 POLYGON ((2.1 2, 2.099863 1...</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a><span class="co">## 3   3  NA POLYGON ((3.1 3, 3.099863 2...</span></span></code></pre></div>
+<p>and the geometry retained is that of the first argument.</p>
+<p>The spatial join predicate can be controlled with any function compatible with <code>st_intersects()</code> (the default), e.g.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">st_join</span>(x, y, <span class="dt">join =</span> st_covers) <span class="co"># no matching y records: points don&#39;t cover circles</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 2 fields</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="co">## Geometry type: POINT</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1 ymin: 1 xmax: 2 ymax: 2</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a><span class="co">##   a.x a.y        geom</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a><span class="co">## 1   1  NA POINT (1 1)</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a><span class="co">## 2   2  NA POINT (2 2)</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a><span class="kw">st_join</span>(y, x, <span class="dt">join =</span> st_covers) <span class="co"># matches for those circles covering a point</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a><span class="co">## Simple feature collection with 2 features and 2 fields</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true"></a><span class="co">## Geometry type: POLYGON</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true"></a><span class="co">## Dimension:     XY</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true"></a><span class="co">## Bounding box:  xmin: 1.9 ymin: 1.9 xmax: 3.1 ymax: 3.1</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true"></a><span class="co">## CRS:           NA</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true"></a><span class="co">##   a.x a.y                           geom</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true"></a><span class="co">## 2   2   2 POLYGON ((2.1 2, 2.099863 1...</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true"></a><span class="co">## 3   3  NA POLYGON ((3.1 3, 3.099863 2...</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
