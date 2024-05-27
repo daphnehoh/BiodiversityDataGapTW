@@ -4,6 +4,7 @@ library(collapsibleTree)
 library(shinycssloaders)
 library(DT)
 library(tigris)
+library(markdown)
 
 ###########
 # LOAD UI #
@@ -40,13 +41,15 @@ shinyUI(fluidPage(
           "<br>"
         )),
         menuItem("Home", tabName = "home", icon = icon("house")),
+        menuItem("Descriptions", tabName = "descriptions", icon = icon("pencil")),
         menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
         menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
         menuItem("Temporal Gap", tabName = "tree", icon = icon("clock")),
-        menuItem("Methodological Gap", tabName = "charts", icon = icon("pencil")),
+        menuItem("tmpMethodological Gap", tabName = "charts", icon = icon("pencil")),
         menuItem("Fill the Gap!", tabName = "choropleth", icon = icon("map-marked-alt")),
         menuItem("References", tabName = "references", icon = icon("book-atlas")),
         menuItem("Releases", tabName = "releases", icon = icon("tasks")),
+        
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br>",
           "<table style='margin-left:auto; margin-right:auto;'>",
@@ -57,8 +60,8 @@ shinyUI(fluidPage(
           "</table>",
           "<br>"),
         HTML(paste0(
-         "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-04-10</div>")
+         "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-05-27</div>")
         ))
       )
       
@@ -68,26 +71,19 @@ shinyUI(fluidPage(
       
       tabItems(
         
-        tabItem(tabName = "home",
-          
-          # home section
-          includeMarkdown("www/home.md")
-          
-        ),
+        # Section: Home
+        tabItem(tabName = "home", includeMarkdown("www/home.md") ),
         
-        tabItem(tabName = "map",
+        # Section: Descriptions
+        tabItem(tabName = "descriptions", includeMarkdown("www/descriptions.md") ),
         
-          # parks map section
-          leafletOutput("parksMap") %>% withSpinner(color = "green")
-                
-        ),
+        # Section: Spatial Gap
+        tabItem(tabName = "map", leafletOutput("parksMap") %>% withSpinner(color = "green") ),
         
-        tabItem(
-          # species data section
-          tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
-          
-        ),
+        # Section: Taxonomical Gap
+        tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green") ),
         
+        # Section: Temporal Gap
         tabItem(tabName = "tree", 
               
           # collapsible species tree section
@@ -98,6 +94,7 @@ shinyUI(fluidPage(
           
         ),
       
+        # Section: Methodological Gap
         tabItem(tabName = "charts",
           
           # ggplot2 species charts section
@@ -108,6 +105,7 @@ shinyUI(fluidPage(
           
         ), 
         
+        # Section: Fill the Gap!
         tabItem(tabName = "choropleth",
           
           # choropleth species map section
@@ -123,13 +121,11 @@ shinyUI(fluidPage(
           
         ),
         
-        tabItem(tabName = "references", includeMarkdown("www/references.md")
+        # Section: References
+        tabItem(tabName = "references", includeMarkdown("www/references.md") ),
         
-        ),
-      
-        tabItem(tabName = "releases", includeMarkdown("www/releases.md"))
-        
-      )
+        # Section: Releases
+        tabItem(tabName = "releases", includeMarkdown("www/releases.md")) )
     
     ) # end dashboardBody
   
