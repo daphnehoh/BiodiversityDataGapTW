@@ -1,14 +1,13 @@
 library(leaflet)
 library(shinydashboard)
+library(shinythemes)
 library(collapsibleTree)
 library(shinycssloaders)
 library(DT)
 library(tigris)
 library(markdown)
 
-###########
-# LOAD UI #
-###########
+
 
 shinyUI(fluidPage(
   
@@ -29,8 +28,15 @@ shinyUI(fluidPage(
     
     skin = "green",
       
-    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290),
+    # header
+    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290,
+                    # github icon
+                    tags$li(class = "dropdown",
+                            tags$a(href = "https://github.com/daphnehoh/BiodiversityDataGapTW", 
+                                   icon("github"), class = "nav-link", target = "_blank"))
+                    ),
     
+    # sidebar
     dashboardSidebar(width = 290,
       sidebarMenu(
         HTML(paste0(
@@ -40,7 +46,7 @@ shinyUI(fluidPage(
           "<p style = 'text-align: center;'><small><a href='https://tbiadata.tw' target='_blank'>https://tbiadata.tw</a></small></p>",
           "<br>"
         )),
-        menuItem("Home", tabName = "home", icon = icon("house")),
+        menuItem("Home", tabName = "home", icon = icon("home")),
         menuItem("Descriptions", tabName = "descriptions", icon = icon("pencil")),
         menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
         menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
@@ -67,21 +73,31 @@ shinyUI(fluidPage(
       
     ), # end dashboardSidebar
     
+    
+    # body
     dashboardBody(
       
       tabItems(
         
         # Section: Home
-        tabItem(tabName = "home", includeMarkdown("www/home.md") ),
+        tabItem(tabName = "home", 
+                includeMarkdown("www/home.md")
+                ),
         
         # Section: Descriptions
-        tabItem(tabName = "descriptions", includeMarkdown("www/descriptions.md") ),
+        tabItem(tabName = "descriptions", 
+                fluidRow(valueBox(value = paste("21,793,791"), subtitle = "TBIA records", icon = icon("database"), color = "red")),
+                includeMarkdown("www/descriptions.md"),
+                ),
         
         # Section: Spatial Gap
-        tabItem(tabName = "map", leafletOutput("parksMap") %>% withSpinner(color = "green") ),
+        tabItem(tabName = "map",
+                leafletOutput("parksMap") %>% withSpinner(color = "green")
+                ),
         
         # Section: Taxonomical Gap
-        tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green") ),
+        tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
+                ),
         
         # Section: Temporal Gap
         tabItem(tabName = "tree", 
