@@ -1,8 +1,9 @@
-library(leaflet)
+library(shiny)
 library(shinydashboard)
 library(shinythemes)
 library(collapsibleTree)
 library(shinycssloaders)
+library(leaflet)
 library(DT)
 library(tigris)
 library(markdown)
@@ -52,7 +53,7 @@ shinyUI(fluidPage(
         menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
         menuItem("Temporal Gap", tabName = "tree", icon = icon("clock")),
         menuItem("tmpMethodological Gap", tabName = "charts", icon = icon("pencil")),
-        menuItem("Fill the Gap!", tabName = "choropleth", icon = icon("map-marked-alt")),
+        menuItem("Fill the Gap!", tabName = "fillgap", icon = icon("map-marked-alt")),
         menuItem("References", tabName = "references", icon = icon("book-atlas")),
         menuItem("Releases", tabName = "releases", icon = icon("tasks")),
         
@@ -77,6 +78,18 @@ shinyUI(fluidPage(
     # body
     dashboardBody(
       
+      tags$script(HTML('
+        $(document).on("change", "#taxaSubGroup", function(){
+          
+          // When the selectize input changes
+          var selectedOptions = $("#taxaSubGroup").val();
+          
+          // Set the value of the checkbox based on whether there are selected options
+          $("#showAll").prop("checked", selectedOptions == null || selectedOptions.length === 0);
+        
+        });
+      ')),
+      
       tabItems(
         
         # Section: Home
@@ -91,10 +104,38 @@ shinyUI(fluidPage(
                 ),
         
         # Section: Spatial Gap
-        tabItem(tabName = "map",
-                leafletOutput("parksMap") %>% withSpinner(color = "green")
+        tabItem(
+          tabName = "map",
+          fluidRow(
+            column(
+              box(width = 12, leafletOutput("spatialMap", height = 900)),
+              width = 9
+            ),
+            column(
+              width = 3,
+              box(
+                width = 12,
+                checkboxInput("showAll", HTML("<b>Show all records</b>"), value = T),
+                HTML("<b>OR</b>"), br(), br(),
+                selectizeInput(
+                  inputId = "taxaSubGroup",
+                  label = "Choose a taxa group:",
+                  choices = NULL,
+                  multiple = T,
+                  options = list(create = T)
                 ),
-        
+              ),
+              box(
+                width = 12,
+                DTOutput("spatial_top15taxa_table"), 
+                style = "width: 100%;"
+                )
+              )
+            )
+          ),
+
+
+      
         # Section: Taxonomical Gap
         tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
                 ),
@@ -122,20 +163,32 @@ shinyUI(fluidPage(
         ), 
         
         # Section: Fill the Gap!
-        tabItem(tabName = "choropleth",
-          
-          # choropleth species map section
-          includeMarkdown("www/choropleth.md"),
-          fluidRow(
-            column(3, uiOutput("statesSelectCombo")),
-            column(3, uiOutput("categorySelectComboChoro"))
-          ),
-          fluidRow(
-            column(3,tableOutput('stateCategoryList') %>% withSpinner(color = "green")),
-            column(9,leafletOutput("choroplethCategoriesPerState") %>% withSpinner(color = "green"))
-          )
-          
-        ),
+        tabItem(tabName = "fillgap",
+                includeMarkdown("www/fillgap.md"),
+                fluidRow(#box(width = 12,
+                             valueBox(10 * 2, "Priority", icon = icon("triangle-exclamation"), color = "red"),
+                             valueBox(10 * 2, "Intermediate", icon = icon("star"), color = "orange"),
+                             valueBox(10 * 2, "Non-priority", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(column(width = 7, leafletOutput("gapMap", height = 600)),
+                         column(width = 5, DTOutput("gapCount"), title = "Priority level and grid count by land type"))
+                ),
+                
+
+            
+        # tabItem(tabName = "choropleth",
+        #   
+        #   # choropleth species map section
+        #   includeMarkdown("www/choropleth.md"),
+        #   fluidRow(
+        #     column(3, uiOutput("statesSelectCombo")),
+        #     column(3, uiOutput("categorySelectComboChoro"))
+        #   ),
+        #   fluidRow(
+        #     column(3,tableOutput('stateCategoryList') %>% withSpinner(color = "green")),
+        #     column(9,leafletOutput("choroplethCategoriesPerState") %>% withSpinner(color = "green"))
+        #   )
+        #   
+        # ),
         
         # Section: References
         tabItem(tabName = "references", includeMarkdown("www/references.md") ),
@@ -143,7 +196,8 @@ shinyUI(fluidPage(
         # Section: Releases
         tabItem(tabName = "releases", includeMarkdown("www/releases.md")) )
     
-    ) # end dashboardBody
+    
+      ) # end dashboardBody
   
   )# end dashboardPage
 

@@ -1,0 +1,82 @@
+---
+title: "data_wrangling"
+author: "Daphne Hoh"
+date: "2024-06-04"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r env prep}
+setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www")
+
+.packs <- c("httr", "jsonlite", "dplyr", "data.table", "stringr", 
+            "ggplot2", "scales", "RColorBrewer", "tidyr", "tidyverse",
+            "sf", "parallel", "lwgeom")
+sapply(.packs, require, character.only = T)
+
+```
+
+```{r}
+tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tbia_ver20240605.csv",
+              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
+names(tbia)
+head(tbia)
+```
+
+
+```{r the manual cleaning}
+# coordinateUncertaintyInMeters
+table(tbia$coordinateUncertaintyInMeters)
+tbia$coordinateUncertaintyInMeters <- as.numeric(gsub("[^0-9.]", "", tbia$coordinateUncertaintyInMeters)) # extracting numbers only
+```
+
+```{r formatting}
+# change to numeric
+tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")] <- 
+  lapply(tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")], as.numeric)
+
+str(tbia)
+```
+
+
+```{r prep for Section: spatial}
+# subset from main table
+spatial_df <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "type", "taxaSubGroup")]
+
+# exclude coordinateUncertaintyInMeters > 5000 meter
+spatial_df <- spatial_df[spatial_df$coordinateUncertaintyInMeters <= 5000,]
+
+# for geometry
+spatial_coords_sf <- st_as_sf(spatial_df, coords = c("longitude", "latitude"), crs = 4326)
+
+## want points in grid, not occ record
+
+leaflet() %>%
+      addTiles() %>%
+      setView(lng = 120, lat = 21, zoom = 7) %>%
+      addResetMapButton() %>%
+      addPolygons(
+        data = spatial_coords_sf,
+        fillColor = ~pal(nmbr_f_),
+        weight = 1,
+        opacity = 1,
+        color = 'white',
+        fillOpacity = 0.5,
+        popup = ~paste("Number of records:", nmbr_f_)) %>%
+      addLegend(
+        data = occ.grid5km_sf,
+        pal = pal,
+        values = ~nmbr_f_,
+        opacity = 0.5,
+        title = "Record count",
+        position = "bottomright")
+
+
+
+```
+
+
+
+
