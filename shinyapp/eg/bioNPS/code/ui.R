@@ -103,16 +103,13 @@ shinyUI(fluidPage(
                 includeMarkdown("www/descriptions.md"),
                 ),
         
+        
         # Section: Spatial Gap
         tabItem(
           tabName = "map",
           fluidRow(
             column(
-              box(width = 12, leafletOutput("spatialMap", height = 900)),
-              width = 9
-            ),
-            column(
-              width = 3,
+              width = 4,
               box(
                 width = 12,
                 checkboxInput("showAll", HTML("<b>Show all records</b>"), value = T),
@@ -126,42 +123,47 @@ shinyUI(fluidPage(
                 ),
               ),
               box(
+                title = "Taxa groups and record count",
                 width = 12,
                 DTOutput("spatial_top15taxa_table"), 
                 style = "width: 100%;"
                 )
-              )
+              ),
+            column(
+              width = 8,
+              box(width = 12, leafletOutput("spatialMap", height = 900))
             )
-          ),
-
-
-      
-        # Section: Taxonomical Gap
-        tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
-                ),
-        
-        # Section: Temporal Gap
-        tabItem(tabName = "tree", 
-              
-          # collapsible species tree section
-          includeMarkdown("www/tree.md"),
-          column(3, uiOutput("parkSelectComboTree")),
-          column(3, uiOutput("categorySelectComboTree")),
-          collapsibleTreeOutput('tree', height='700px') %>% withSpinner(color = "green")
-          
+          )
         ),
+
+
       
-        # Section: Methodological Gap
-        tabItem(tabName = "charts",
-          
-          # ggplot2 species charts section
-          includeMarkdown("www/charts.md"),
-          fluidRow(column(3, uiOutput("categorySelectComboChart"))),
-          column(6, plotOutput("ggplot2Group1") %>% withSpinner(color = "green")),
-          column(6, plotOutput("ggplot2Group2") %>% withSpinner(color = "green"))
-          
-        ), 
-        
+        # # Section: Taxonomical Gap
+        # tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
+        #         ),
+        # 
+        # # Section: Temporal Gap
+        # tabItem(tabName = "tree", 
+        #       
+        #   # collapsible species tree section
+        #   includeMarkdown("www/tree.md"),
+        #   column(3, uiOutput("parkSelectComboTree")),
+        #   column(3, uiOutput("categorySelectComboTree")),
+        #   collapsibleTreeOutput('tree', height='700px') %>% withSpinner(color = "green")
+        #   
+        # ),
+        # 
+        # # Section: Methodological Gap
+        # tabItem(tabName = "charts",
+        #   
+        #   # ggplot2 species charts section
+        #   includeMarkdown("www/charts.md"),
+        #   fluidRow(column(3, uiOutput("categorySelectComboChart"))),
+        #   column(6, plotOutput("ggplot2Group1") %>% withSpinner(color = "green")),
+        #   column(6, plotOutput("ggplot2Group2") %>% withSpinner(color = "green"))
+        #   
+        # ), 
+        # 
         # Section: Fill the Gap!
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),

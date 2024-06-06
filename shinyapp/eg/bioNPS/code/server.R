@@ -149,7 +149,10 @@ options(shiny.developer.mode = TRUE)
 ################
 
 # Occurrence table
-tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
+# tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
+#               sep = ",", colClasses = "character", encoding = "UTF-8")
+
+tbia <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8")
 
 
@@ -194,10 +197,12 @@ shinyServer(function(input, output, session) {
   coords_sf <- st_as_sf(df1, coords = c("longitude", "latitude"), crs = 4326)
 
   ### 5km grid
-  grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  #grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
 
   ### shp with occ fit into grid
-  occ.grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/to_grid5km.shp")
+  #occ.grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/to_grid5km.shp")
+  occ.grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
 
   pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$nmbr_f_)
 
@@ -229,7 +234,8 @@ shinyServer(function(input, output, session) {
     summarize(count = n())
 
   output$spatial_top15taxa_table <- renderDT({
-    datatable(spatial_top15taxa_table)
+    datatable(spatial_top15taxa_table, 
+              options = list(searching = FALSE, lengthMenu = list(c(10, -1), c('10', 'All'))))
   })
 
   ## spatialTaxaMap
