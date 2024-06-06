@@ -7,7 +7,6 @@ General cleaning.
 - Remove records without scientificName
 <br>
 
-
 #### 1. Spatial Gap<br>
 - WGS84 grids in 5km scale<br> 
 - Records with coordinateUncertaintyInMeters and/or coordinatePrecision >5km were removed from plot<br>

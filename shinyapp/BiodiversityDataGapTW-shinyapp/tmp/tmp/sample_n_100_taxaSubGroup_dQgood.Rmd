@@ -1,0 +1,48 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-05-27"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+.packs <- c("httr", "jsonlite", "dplyr", "data.table", "stringr", 
+            "ggplot2", "scales", "RColorBrewer", "tidyr", "tidyverse",
+            "sf", "parallel", "lwgeom")
+sapply(.packs, require, character.only = T)
+
+df <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tbiaobis_v6.csv", sep = ",", colClasses = "character", encoding = "UTF-8")
+
+head(df)
+colnames(df)
+
+
+df1 <- df %>%
+  filter(taxaSubGroup != "") %>%
+  filter(taxonID != "") %>%
+  filter(phylum != "") %>%
+  filter(dataQuality == "good") %>%
+  group_by(taxaSubGroup) %>%
+  sample_n(100, replace = T)
+
+
+table(df1$taxaSubGroup)
+table(df1$type)
+
+table(df1$basisOfRecord)
+table(df1$year)
+
+
+fwrite(df1, "C:/Users/taibi/OneDrive/Desktop/Daphne/tmp/sample_n_100_taxaSubGroup_dQgood.csv", 
+       row.names = F, quote = T)
+```
+
+
+
+
+
+
+
+
+

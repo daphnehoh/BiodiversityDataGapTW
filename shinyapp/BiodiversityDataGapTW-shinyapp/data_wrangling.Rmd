@@ -18,7 +18,7 @@ sapply(.packs, require, character.only = T)
 ```
 
 ```{r}
-tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tbia_ver20240605.csv",
+tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/data/tbia_ver20240605.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -27,6 +27,10 @@ head(tbia)
 
 
 ```{r the manual cleaning}
+# remove data without scientificName
+tbia <- tbia
+
+
 # coordinateUncertaintyInMeters
 table(tbia$coordinateUncertaintyInMeters)
 tbia$coordinateUncertaintyInMeters <- as.numeric(gsub("[^0-9.]", "", tbia$coordinateUncertaintyInMeters)) # extracting numbers only

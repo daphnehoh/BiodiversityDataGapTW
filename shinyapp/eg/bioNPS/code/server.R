@@ -9,6 +9,7 @@ library(sp)
 library(sf)
 library(data.table)
 
+options(shiny.developer.mode = TRUE)
 
 #####################
 # SUPPORT FUNCTIONS #
