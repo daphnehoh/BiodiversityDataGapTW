@@ -7,6 +7,7 @@ library(leaflet)
 library(DT)
 library(tigris)
 library(markdown)
+library(plotly)
 
 
 
@@ -50,8 +51,9 @@ shinyUI(fluidPage(
         menuItem("Home", tabName = "home", icon = icon("home")),
         menuItem("Descriptions", tabName = "descriptions", icon = icon("pencil")),
         menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
-        menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
-        menuItem("Temporal Gap", tabName = "tree", icon = icon("clock")),
+        menuItem("Taxonomical Gap", tabName = "taxa", icon = icon("tree")),
+        menuItem("Species Tree", tabName = "tree", icon = icon("tree")),
+        menuItem("Temporal Gap", tabName = "time", icon = icon("clock")),
         menuItem("tmpMethodological Gap", tabName = "charts", icon = icon("pencil")),
         menuItem("Fill the Gap!", tabName = "fillgap", icon = icon("map-marked-alt")),
         menuItem("References", tabName = "references", icon = icon("book-atlas")),
@@ -115,7 +117,7 @@ shinyUI(fluidPage(
                 checkboxInput("showAll", HTML("<b>Show all records</b>"), value = T),
                 HTML("<b>OR</b>"), br(), br(),
                 selectizeInput(
-                  inputId = "taxaSubGroup",
+                  inputId = "spatial.taxaSubGroup",
                   label = "Choose a taxa group:",
                   choices = NULL,
                   multiple = T,
@@ -131,12 +133,101 @@ shinyUI(fluidPage(
               ),
             column(
               width = 8,
-              box(width = 12, leafletOutput("spatialMap", height = 900))
+              leafletOutput("spatialMap", height = 900)
             )
           )
         ),
 
-
+        
+        
+        # Section: Taxonomical Gap
+        tabItem(tabName = "taxa",
+                includeMarkdown("www/tree.md"),
+                fluidRow(column(6,
+                                HTML("<b>% matched to TaiCOL (at any rank)</b>"),
+                                plotlyOutput("pie.TaiCOL", height = 300)
+                                ),
+                         column(6,
+                                HTML("<b>% matched to highest taxon rank</b>"),
+                                plotlyOutput("pie.taxonRank", height = 300)
+                                )
+                         ),
+                br(),
+                HTML("<b>The 20% unrecorded taxa</b>"),
+                br(), br(),
+                column(3, uiOutput("taxa.taxaLandType")),
+                column(3, uiOutput("taxa.taxaSubGroup"))
+                ),
+        
+        
+        
+        # Section: Species Tree
+        tabItem(tabName = "tree",
+                includeMarkdown("www/tree.md"),
+                column(3, uiOutput("taxa.treeLandType")),
+                column(3, uiOutput("taxa.treeSubGroup")),
+                column(12, style = "overflow-y: scroll; height: 750px;",
+                       collapsibleTreeOutput('tree', height = '1000px'))
+        ),
+        
+        
+        
+        # Section: Temporal Gap
+        tabItem(tabName = "time",
+                fluidRow(
+                  column(4,
+                         selectizeInput(
+                           inputId = "time.taxaSubGroup",
+                           label = "Select a taxa group:",
+                           choices = NULL,
+                           multiple = T,
+                           options = list(create = T)
+                         ),
+                         br(),
+                         uiOutput("time.landType"),
+                         br(),
+                         sliderInput("time.year", "Select year:", min = 1980, max = 2024, value = c(1980, 2024), step = 1, sep = ""),
+                         br(),
+                         selectInput("time.month", "Select month:", choices = 1:12)
+                  ),
+                  column(8,
+                         fluidRow(
+                           column(12, 
+                                  box(width = 12, title = "Year", plotlyOutput("time.yearBarChart"))
+                           ),
+                           column(12, 
+                                  box(width = 12, title = "Month", plotlyOutput("time.monthBarChart"))
+                           )
+                         )
+                  )
+                )
+        ),
+                  
+        
+        
+        # tabItem(
+        #   tabname = "taxa",
+        #   includeMarkdown("www/home.md")
+        #     # fluidRow(
+        #     #   column(6,
+        #     #          box(
+        #     #            title = "Box 1",
+        #     #            "This is the content of Box 1"
+        #     #          )
+        #     #   ),
+        #     #   column(6,
+        #     #          box(
+        #     #            title = "Box 2",
+        #     #            "This is the content of Box 2"
+        #     #          )
+        #     #   )
+        #     # )
+        # ),
+        
+        
+        
+        
+        
       
         # # Section: Taxonomical Gap
         # tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
@@ -167,11 +258,10 @@ shinyUI(fluidPage(
         # Section: Fill the Gap!
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
-                fluidRow(#box(width = 12,
-                             valueBox(10 * 2, "Priority", icon = icon("triangle-exclamation"), color = "red"),
-                             valueBox(10 * 2, "Intermediate", icon = icon("star"), color = "orange"),
-                             valueBox(10 * 2, "Non-priority", icon = icon("thumbs-up"), "yellow")),
-                fluidRow(column(width = 7, leafletOutput("gapMap", height = 600)),
+                fluidRow(valueBox(10 * 2, "Priority", icon = icon("triangle-exclamation"), color = "red"),
+                         valueBox(10 * 2, "Intermediate", icon = icon("star"), color = "orange"),
+                         valueBox(10 * 2, "Non-priority", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(column(width = 7, leafletOutput("gapMap", height = 650)),
                          column(width = 5, DTOutput("gapCount"), title = "Priority level and grid count by land type"))
                 ),
                 

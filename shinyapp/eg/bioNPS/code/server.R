@@ -8,6 +8,7 @@ library(DT)
 library(sp)
 library(sf)
 library(data.table)
+library(plotly)
 
 options(shiny.developer.mode = TRUE)
 
@@ -155,37 +156,14 @@ options(shiny.developer.mode = TRUE)
 tbia <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8")
 
+tbia.color_6 <- c("#3E5145", "#76A678", "#E5C851", "#E2A45F", "#F8E3C4", "#C75454", "#D6F677")
+
 
 
 
 shinyServer(function(input, output, session) {
   
-  # Section: Fill gap
-  ## gapCount table
-  gapCountdf <- data.frame(
-    Level = c("Priority", "Intermediate", "Non-priority"),
-    Land = c("50000", "100", "1"),
-    Sea = c("1000", "10", "1"),
-    stringsAsFactors = FALSE
-  )
   
-  output$gapCount <- renderDT({
-    datatable(gapCountdf)
-  })
-  
-  ## gapMap
-  output$gapMap <- renderLeaflet({
-    leaflet() %>%
-      addTiles(group = "OSM") %>%
-      setView(lng = 120, lat = 20, zoom = 5) %>%
-      addProviderTiles(providers$Stadia, group = "Stadia") %>%
-      addProviderTiles(providers$USGS, group = "USGS") %>%
-      addLayersControl(
-        baseGroups = c("OSM", "Stadia", "USGS"),
-        options = layersControlOptions(collapsed = TRUE)
-      )
-  })
-
   
   # Section : Spatial
   ## spatialMap
@@ -239,11 +217,11 @@ shinyServer(function(input, output, session) {
   })
 
   ## spatialTaxaMap
-  updateSelectizeInput(session, 'taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
+  updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
 
   ### Reactive expression to track selected options in selectize input
   selectedOptions <- reactive({
-    input$taxaSubGroup
+    input$spatial.taxaSubGroup
   })
 
   ### Observer to update the checkbox based on changes in selected options
@@ -254,6 +232,118 @@ shinyServer(function(input, output, session) {
       updateCheckboxInput(session, "showAll", value = FALSE)
     }
   })
+  
+  
+  
+  # Section: Taxonomical Gap
+  ## Pie stats
+  output$pie.TaiCOL <- renderPlotly({
+    data <- data.frame(Category = c("TRUE", "FALSE"),
+                       Value = c(80, 20))
+    plot_ly(data, labels = ~Category, values = ~Value, type = "pie", 
+            hoverinfo = "label+percent", textinfo = "value+percent", marker = list(colors = rainbow(length(data$Category)))) %>%
+      config(displayModeBar = FALSE)
+  })
+  
+  output$pie.taxonRank <- renderPlotly({
+    data <- data.frame(Category = c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"),
+                       Value = c(20, 10, 10, 20, 20, 10, 10))
+    plot_ly(data, labels = ~Category, values = ~Value, type = "pie", 
+            hoverinfo = "label+percent", textinfo = "value+percent", marker = list(colors = tbia.color_6)) %>%
+      config(displayModeBar = FALSE)
+  })
+  
+  ## The unrecorded taxa
+  output$taxa.taxaLandType <- renderUI({
+    selectInput("taxa.taxaLandType", "Select a land type:", unique(tbia$type))
+  })
+  
+  output$taxa.taxaSubGroup <- renderUI({
+    selectInput("taxa.taxaSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
+  })
+  
+  
+  
+  # Section: Species Tree
+  ## collapsible tree
+  output$taxa.treeLandType <- renderUI({
+    selectInput("taxa.treeLandType", "Select a land type:", unique(tbia$type))
+  })
+
+  output$taxa.treeSubGroup <- renderUI({
+    selectInput("taxa.treeSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
+  })
+
+  speciesTree <- reactive({
+    req(input$taxa.treeLandType, input$taxa.treeSubGroup)
+    filtered_data <- tbia[tbia$type == input$taxa.treeLandType & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
+    return(filtered_data)
+  })
+
+  output$tree <- renderCollapsibleTree({
+    collapsibleTree(
+      speciesTree(),
+      root = input$taxa.treeSubGroup,
+      attribute = "scientificName",
+      hierarchy = c("family", "scientificName"),
+      fill = "Green",
+      zoomable = FALSE
+    )
+  })
+
+
+  
+  # Section: Temporal Gap
+  ## taxa select
+  updateSelectizeInput(session, 'time.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
+  
+  ## land type select
+  output$time.landType <- renderUI({
+    selectInput("time.landType", "Select a land type:", unique(tbia$type))
+  })
+  
+  ## year plot
+  output$time.yearBarChart <- renderPlotly({
+    data <- table(sample(LETTERS[19:100], 100, replace = TRUE))
+    plot_ly(x = names(data), y = data, type = "bar", marker = list(color = "#76A678"))
+  })
+  
+  ## month plot
+  output$time.monthBarChart <- renderPlotly({
+    data <- table(sample(letters[1:12], 100, replace = TRUE))
+    plot_ly(x = names(data), y = data, type = "bar", marker = list(color = "#76A678")) %>%
+      config(displayModeBar = FALSE)
+  })
+  
+  
+  
+  # Section: Fill gap
+  ## gapCount table
+  gapCountdf <- data.frame(
+    Level = c("Priority", "Intermediate", "Non-priority"),
+    Land = c("50000", "100", "1"),
+    Sea = c("1000", "10", "1"),
+    stringsAsFactors = FALSE
+  )
+  
+  output$gapCount <- renderDT({
+    datatable(gapCountdf, options = list(searching = FALSE, paging = FALSE))
+  })
+  
+  ## gapMap
+  output$gapMap <- renderLeaflet({
+    leaflet() %>%
+      addTiles(group = "OSM") %>%
+      setView(lng = 120, lat = 20, zoom = 5) %>%
+      addProviderTiles(providers$Stadia, group = "Stadia") %>%
+      addProviderTiles(providers$USGS, group = "USGS") %>%
+      addLayersControl(
+        baseGroups = c("OSM", "Stadia", "USGS"),
+        options = layersControlOptions(collapsed = TRUE)
+      )
+  })
+  
+  
   
   
  # # parks map
