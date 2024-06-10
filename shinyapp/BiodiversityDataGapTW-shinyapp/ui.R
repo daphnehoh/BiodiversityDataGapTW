@@ -1,13 +1,15 @@
-library(leaflet)
+library(shiny)
 library(shinydashboard)
+library(shinythemes)
 library(collapsibleTree)
 library(shinycssloaders)
+library(leaflet)
 library(DT)
 library(tigris)
+library(markdown)
+library(plotly)
 
-###########
-# LOAD UI #
-###########
+
 
 shinyUI(fluidPage(
   
@@ -28,8 +30,15 @@ shinyUI(fluidPage(
     
     skin = "green",
       
-    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290),
+    # header
+    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290,
+                    # github icon
+                    tags$li(class = "dropdown",
+                            tags$a(href = "https://github.com/daphnehoh/BiodiversityDataGapTW", 
+                                   icon("github"), class = "nav-link", target = "_blank"))
+                    ),
     
+    # sidebar
     dashboardSidebar(width = 290,
       sidebarMenu(
         HTML(paste0(
@@ -39,14 +48,17 @@ shinyUI(fluidPage(
           "<p style = 'text-align: center;'><small><a href='https://tbiadata.tw' target='_blank'>https://tbiadata.tw</a></small></p>",
           "<br>"
         )),
-        menuItem("Home", tabName = "home", icon = icon("house")),
-        menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
-        menuItem("Taxonomical Gap", tabName = "table", icon = icon("tree")),
-        menuItem("Temporal Gap", tabName = "tree", icon = icon("clock")),
-        menuItem("Methodological Gap", tabName = "charts", icon = icon("pencil")),
-        menuItem("Fill the Gap!", tabName = "choropleth", icon = icon("map-marked-alt")),
-        menuItem("References", tabName = "references", icon = icon("book-atlas")),
-        menuItem("Releases", tabName = "releases", icon = icon("tasks")),
+        menuItem(HTML("&nbsp;Home"), tabName = "home", icon = icon("home")),
+        menuItem(HTML("&nbsp;Descriptions"), tabName = "descriptions", icon = icon("pencil")),
+        menuItem(HTML("&nbsp;Spatial Gap"), tabName = "map", icon = icon("map-location-dot")),
+        menuItem(HTML("&nbsp;Taxonomical Gap"), tabName = "taxa", icon = icon("tree")),
+        menuItem(HTML("&nbsp;Species Tree"), tabName = "tree", icon = icon("tree")),
+        menuItem(HTML("&nbsp;Temporal Gap"), tabName = "time", icon = icon("clock")),
+        #menuItem(HTML("&nbsp;Basis of Record"), tabName = "bof", icon = icon("pencil")),
+        menuItem(HTML("&nbsp;Fill the Gap!"), tabName = "fillgap", icon = icon("map-marked-alt")),
+        menuItem(HTML("&nbsp;References"), tabName = "references", icon = icon("book-atlas")),
+        menuItem(HTML("&nbsp;Releases"), tabName = "releases", icon = icon("tasks")),
+        
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br>",
           "<table style='margin-left:auto; margin-right:auto;'>",
@@ -57,81 +69,256 @@ shinyUI(fluidPage(
           "</table>",
           "<br>"),
         HTML(paste0(
-         "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-04-10</div>")
+         "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-05-27</div>")
         ))
       )
       
     ), # end dashboardSidebar
     
+    
+    # body
     dashboardBody(
+      
+      tags$script(HTML('
+        $(document).on("change", "#taxaSubGroup", function(){
+          
+          // When the selectize input changes
+          var selectedOptions = $("#taxaSubGroup").val();
+          
+          // Set the value of the checkbox based on whether there are selected options
+          $("#showAll").prop("checked", selectedOptions == null || selectedOptions.length === 0);
+        
+        });
+      ')),
       
       tabItems(
         
-        tabItem(tabName = "home",
-          
-          # home section
-          includeMarkdown("www/home.md")
-          
+        # Section: Home
+        tabItem(tabName = "home", 
+                includeMarkdown("www/home.md")
+                ),
+        
+        # Section: Descriptions
+        tabItem(tabName = "descriptions", 
+                fluidRow(
+                  HTML("<h2>&nbsp;&nbsp;Data descriptions</h2>"),
+                  br(),
+                  valueBox(value = paste("21,793,791"), subtitle = "All TBIA records", icon = icon("database"), color = "red"),
+                  valueBox(value = paste("21,793,791"), subtitle = "Cleaned TBIA records", icon = icon("broom"), color = "orange")),
+                includeMarkdown("www/descriptions.md"),
+                ),
+        
+        
+        # Section: Spatial Gap
+        tabItem(
+          tabName = "map",
+          fluidRow(
+            column(
+              width = 4,
+              box(
+                width = 12,
+                checkboxInput("showAll", HTML("<b>Show all records</b>"), value = T),
+                HTML("<b>OR</b>"), br(), br(),
+                selectizeInput(
+                  inputId = "spatial.taxaSubGroup",
+                  label = "Choose a taxa group:",
+                  choices = NULL,
+                  multiple = T,
+                  options = list(create = T)
+                ),
+              ),
+              box(
+                title = "Taxa groups and record count",
+                width = 12,
+                DTOutput("spatial_top15taxa_table"), 
+                style = "width: 100%;"
+                )
+              ),
+            column(
+              width = 8,
+              leafletOutput("spatialMap", height = 900)
+            )
+          )
+        ),
+
+        
+        
+        # Section: Taxonomical Gap
+        tabItem(tabName = "taxa",
+                includeMarkdown("www/tree.md"),
+                fluidRow(column(6,
+                                HTML("<b>% matched to TaiCOL (at any rank)</b>"),
+                                plotlyOutput("pie.TaiCOL", height = 300)
+                                ),
+                         column(6,
+                                HTML("<b>% matched to highest taxon rank</b>"),
+                                plotlyOutput("pie.taxonRank", height = 300)
+                                )
+                         ),
+                br(),
+                HTML("<b>The 20% unrecorded taxa</b>"),
+                br(), br(),
+                column(3, uiOutput("taxa.taxaLandType")),
+                column(3, uiOutput("taxa.taxaSubGroup"))
+                ),
+        
+        
+        
+        # Section: Species Tree
+        tabItem(tabName = "tree",
+                includeMarkdown("www/tree.md"),
+                column(3, uiOutput("taxa.treeLandType")),
+                column(3, uiOutput("taxa.treeSubGroup")),
+                column(12, style = "overflow-y: scroll; height: 750px;",
+                       collapsibleTreeOutput('tree', height = '1000px'))
         ),
         
-        tabItem(tabName = "map",
         
-          # parks map section
-          leafletOutput("parksMap") %>% withSpinner(color = "green")
+        
+        # Section: Temporal Gap
+        tabItem(tabName = "time",
+                fluidRow(
+                  column(4,
+                         selectizeInput(
+                           inputId = "time.taxaSubGroup",
+                           label = "Select a taxa group:",
+                           choices = NULL,
+                           multiple = T,
+                           options = list(create = TRUE)
+                           ),
+                         br(),
+                         uiOutput("time.landType"),
+                         br(),
+                         sliderInput("time.year", "Select year:", min = 1980, max = 2024, value = c(1980, 2024), step = 1, sep = ""),
+                         br(),
+                         selectizeInput(
+                           inputId = "time.month",
+                           label = "Select month:",
+                           choices = 1:12,
+                           multiple = T,
+                           options = list(create = TRUE)
+                           )
+                         ),
+                  column(8,
+                         fluidRow(
+                           column(12, 
+                                  box(width = 12, title = "Year", plotlyOutput("time.yearBarChart"))
+                           ),
+                           column(12, 
+                                  box(width = 12, title = "Month", plotlyOutput("time.monthBarChart"))
+                           )
+                         )
+                  )
+                )
+        ),
+                  
+        
+        
+  
+        
+        
+        
+        
+        
+        
+        # tabItem(
+        #   tabname = "taxa",
+        #   includeMarkdown("www/home.md")
+        #     # fluidRow(
+        #     #   column(6,
+        #     #          box(
+        #     #            title = "Box 1",
+        #     #            "This is the content of Box 1"
+        #     #          )
+        #     #   ),
+        #     #   column(6,
+        #     #          box(
+        #     #            title = "Box 2",
+        #     #            "This is the content of Box 2"
+        #     #          )
+        #     #   )
+        #     # )
+        # ),
+        
+        
+        
+        
+        
+      
+        # # Section: Taxonomical Gap
+        # tabItem(tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
+        #         ),
+        # 
+        # # Section: Temporal Gap
+        # tabItem(tabName = "tree", 
+        #       
+        #   # collapsible species tree section
+        #   includeMarkdown("www/tree.md"),
+        #   column(3, uiOutput("parkSelectComboTree")),
+        #   column(3, uiOutput("categorySelectComboTree")),
+        #   collapsibleTreeOutput('tree', height='700px') %>% withSpinner(color = "green")
+        #   
+        # ),
+        # 
+        # # Section: Methodological Gap
+        # tabItem(tabName = "charts",
+        #   
+        #   # ggplot2 species charts section
+        #   includeMarkdown("www/charts.md"),
+        #   fluidRow(column(3, uiOutput("categorySelectComboChart"))),
+        #   column(6, plotOutput("ggplot2Group1") %>% withSpinner(color = "green")),
+        #   column(6, plotOutput("ggplot2Group2") %>% withSpinner(color = "green"))
+        #   
+        # ), 
+        # 
+        
+        
+        
+        # Section: Basis of Record
+        tabItem(tabName = "bof",
+                includeMarkdown("www/bof.md"),
+                
                 
         ),
         
-        tabItem(
-          # species data section
-          tabName = "table", dataTableOutput("speciesDataTable") %>% withSpinner(color = "green")
-          
-        ),
         
-        tabItem(tabName = "tree", 
-              
-          # collapsible species tree section
-          includeMarkdown("www/tree.md"),
-          column(3, uiOutput("parkSelectComboTree")),
-          column(3, uiOutput("categorySelectComboTree")),
-          collapsibleTreeOutput('tree', height='700px') %>% withSpinner(color = "green")
-          
-        ),
-      
-        tabItem(tabName = "charts",
-          
-          # ggplot2 species charts section
-          includeMarkdown("www/charts.md"),
-          fluidRow(column(3, uiOutput("categorySelectComboChart"))),
-          column(6, plotOutput("ggplot2Group1") %>% withSpinner(color = "green")),
-          column(6, plotOutput("ggplot2Group2") %>% withSpinner(color = "green"))
-          
-        ), 
         
-        tabItem(tabName = "choropleth",
-          
-          # choropleth species map section
-          includeMarkdown("www/choropleth.md"),
-          fluidRow(
-            column(3, uiOutput("statesSelectCombo")),
-            column(3, uiOutput("categorySelectComboChoro"))
-          ),
-          fluidRow(
-            column(3,tableOutput('stateCategoryList') %>% withSpinner(color = "green")),
-            column(9,leafletOutput("choroplethCategoriesPerState") %>% withSpinner(color = "green"))
-          )
-          
-        ),
+        # Section: Fill the Gap!
+        tabItem(tabName = "fillgap",
+                includeMarkdown("www/fillgap.md"),
+                fluidRow(valueBox(10 * 2, "Priority", icon = icon("triangle-exclamation"), color = "red"),
+                         valueBox(10 * 2, "Intermediate", icon = icon("star"), color = "orange"),
+                         valueBox(10 * 2, "Non-priority", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(column(width = 7, leafletOutput("gapMap", height = 650)),
+                         column(width = 5, DTOutput("gapCount"), title = "Priority level and grid count by land type"))
+                ),
+                
+
+            
+        # tabItem(tabName = "choropleth",
+        #   
+        #   # choropleth species map section
+        #   includeMarkdown("www/choropleth.md"),
+        #   fluidRow(
+        #     column(3, uiOutput("statesSelectCombo")),
+        #     column(3, uiOutput("categorySelectComboChoro"))
+        #   ),
+        #   fluidRow(
+        #     column(3,tableOutput('stateCategoryList') %>% withSpinner(color = "green")),
+        #     column(9,leafletOutput("choroplethCategoriesPerState") %>% withSpinner(color = "green"))
+        #   )
+        #   
+        # ),
         
-        tabItem(tabName = "references", includeMarkdown("www/references.md")
+        # Section: References
+        tabItem(tabName = "references", includeMarkdown("www/references.md") ),
         
-        ),
-      
-        tabItem(tabName = "releases", includeMarkdown("www/releases.md"))
-        
-      )
+        # Section: Releases
+        tabItem(tabName = "releases", includeMarkdown("www/releases.md")) )
     
-    ) # end dashboardBody
+    
+      ) # end dashboardBody
   
   )# end dashboardPage
 
