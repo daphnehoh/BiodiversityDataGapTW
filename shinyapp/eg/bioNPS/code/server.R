@@ -303,15 +303,31 @@ shinyServer(function(input, output, session) {
   })
   
   ## year plot
+  data <- reactive({
+    data.frame(year = 1980:2024,
+               value = as.integer(runif(45, min = 0, max = 100)))
+  })
+  
   output$time.yearBarChart <- renderPlotly({
-    data <- table(sample(LETTERS[19:100], 100, replace = TRUE))
-    plot_ly(x = names(data), y = data, type = "bar", marker = list(color = "#76A678"))
+    data_filtered <- data() %>%
+      filter(year >= input$time.year[1] & year <= input$time.year[2])
+    
+    plot_ly(data_filtered, x = ~year, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count"))
   })
   
   ## month plot
   output$time.monthBarChart <- renderPlotly({
-    data <- table(sample(letters[1:12], 100, replace = TRUE))
-    plot_ly(x = names(data), y = data, type = "bar", marker = list(color = "#76A678")) %>%
+    selected_months <- input$time.month
+    data <- data.frame(month = 1:12,
+                       value = as.integer(runif(12, min = 0, max = 100)))
+    
+    if (!is.null(selected_months)) {
+      data <- data[data$month %in% selected_months, ]
+    }
+    
+    plot_ly(data, x = ~month, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
       config(displayModeBar = FALSE)
   })
   

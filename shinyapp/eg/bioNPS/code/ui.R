@@ -48,16 +48,16 @@ shinyUI(fluidPage(
           "<p style = 'text-align: center;'><small><a href='https://tbiadata.tw' target='_blank'>https://tbiadata.tw</a></small></p>",
           "<br>"
         )),
-        menuItem("Home", tabName = "home", icon = icon("home")),
-        menuItem("Descriptions", tabName = "descriptions", icon = icon("pencil")),
-        menuItem("Spatial Gap", tabName = "map", icon = icon("map-location-dot")),
-        menuItem("Taxonomical Gap", tabName = "taxa", icon = icon("tree")),
-        menuItem("Species Tree", tabName = "tree", icon = icon("tree")),
-        menuItem("Temporal Gap", tabName = "time", icon = icon("clock")),
-        menuItem("tmpMethodological Gap", tabName = "charts", icon = icon("pencil")),
-        menuItem("Fill the Gap!", tabName = "fillgap", icon = icon("map-marked-alt")),
-        menuItem("References", tabName = "references", icon = icon("book-atlas")),
-        menuItem("Releases", tabName = "releases", icon = icon("tasks")),
+        menuItem(HTML("&nbsp;Home"), tabName = "home", icon = icon("home")),
+        menuItem(HTML("&nbsp;Descriptions"), tabName = "descriptions", icon = icon("pencil")),
+        menuItem(HTML("&nbsp;Spatial Gap"), tabName = "map", icon = icon("map-location-dot")),
+        menuItem(HTML("&nbsp;Taxonomical Gap"), tabName = "taxa", icon = icon("tree")),
+        menuItem(HTML("&nbsp;Species Tree"), tabName = "tree", icon = icon("tree")),
+        menuItem(HTML("&nbsp;Temporal Gap"), tabName = "time", icon = icon("clock")),
+        #menuItem(HTML("&nbsp;Basis of Record"), tabName = "bof", icon = icon("pencil")),
+        menuItem(HTML("&nbsp;Fill the Gap!"), tabName = "fillgap", icon = icon("map-marked-alt")),
+        menuItem(HTML("&nbsp;References"), tabName = "references", icon = icon("book-atlas")),
+        menuItem(HTML("&nbsp;Releases"), tabName = "releases", icon = icon("tasks")),
         
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br>",
@@ -101,7 +101,11 @@ shinyUI(fluidPage(
         
         # Section: Descriptions
         tabItem(tabName = "descriptions", 
-                fluidRow(valueBox(value = paste("21,793,791"), subtitle = "TBIA records", icon = icon("database"), color = "red")),
+                fluidRow(
+                  HTML("<h2>&nbsp;&nbsp;Data descriptions</h2>"),
+                  br(),
+                  valueBox(value = paste("21,793,791"), subtitle = "All TBIA records", icon = icon("database"), color = "red"),
+                  valueBox(value = paste("21,793,791"), subtitle = "Cleaned TBIA records", icon = icon("broom"), color = "orange")),
                 includeMarkdown("www/descriptions.md"),
                 ),
         
@@ -181,15 +185,21 @@ shinyUI(fluidPage(
                            label = "Select a taxa group:",
                            choices = NULL,
                            multiple = T,
-                           options = list(create = T)
-                         ),
+                           options = list(create = TRUE)
+                           ),
                          br(),
                          uiOutput("time.landType"),
                          br(),
                          sliderInput("time.year", "Select year:", min = 1980, max = 2024, value = c(1980, 2024), step = 1, sep = ""),
                          br(),
-                         selectInput("time.month", "Select month:", choices = 1:12)
-                  ),
+                         selectizeInput(
+                           inputId = "time.month",
+                           label = "Select month:",
+                           choices = 1:12,
+                           multiple = T,
+                           options = list(create = TRUE)
+                           )
+                         ),
                   column(8,
                          fluidRow(
                            column(12, 
@@ -203,6 +213,13 @@ shinyUI(fluidPage(
                 )
         ),
                   
+        
+        
+  
+        
+        
+        
+        
         
         
         # tabItem(
@@ -255,6 +272,18 @@ shinyUI(fluidPage(
         #   
         # ), 
         # 
+        
+        
+        
+        # Section: Basis of Record
+        tabItem(tabName = "bof",
+                includeMarkdown("www/bof.md"),
+                
+                
+        ),
+        
+        
+        
         # Section: Fill the Gap!
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
