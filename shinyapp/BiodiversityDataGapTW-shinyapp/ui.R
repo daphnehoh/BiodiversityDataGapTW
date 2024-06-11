@@ -50,10 +50,10 @@ shinyUI(fluidPage(
         )),
         menuItem(HTML("&nbsp;Home"), tabName = "home", icon = icon("home")),
         menuItem(HTML("&nbsp;Descriptions"), tabName = "descriptions", icon = icon("pencil")),
-        menuItem(HTML("&nbsp;Spatial Gap"), tabName = "map", icon = icon("map-location-dot")),
-        menuItem(HTML("&nbsp;Taxonomical Gap"), tabName = "taxa", icon = icon("tree")),
+        menuItem(HTML("&nbsp;Taxonomic Gap"), tabName = "taxa", icon = icon("tree")),
         menuItem(HTML("&nbsp;Species Tree"), tabName = "tree", icon = icon("tree")),
         menuItem(HTML("&nbsp;Temporal Gap"), tabName = "time", icon = icon("clock")),
+        menuItem(HTML("&nbsp;Spatial Gap"), tabName = "map", icon = icon("map-location-dot")),
         #menuItem(HTML("&nbsp;Basis of Record"), tabName = "bof", icon = icon("pencil")),
         menuItem(HTML("&nbsp;Fill the Gap!"), tabName = "fillgap", icon = icon("map-marked-alt")),
         menuItem(HTML("&nbsp;References"), tabName = "references", icon = icon("book-atlas")),
@@ -80,6 +80,8 @@ shinyUI(fluidPage(
     # body
     dashboardBody(
       
+      tags$style(HTML(".content-wrapper { height: 1500px; }")),
+      
       tags$script(HTML('
         $(document).on("change", "#taxaSubGroup", function(){
           
@@ -99,15 +101,97 @@ shinyUI(fluidPage(
                 includeMarkdown("www/home.md")
                 ),
         
+        
+        
         # Section: Descriptions
         tabItem(tabName = "descriptions", 
                 fluidRow(
                   HTML("<h2>&nbsp;&nbsp;Data descriptions</h2>"),
                   br(),
-                  valueBox(value = paste("21,793,791"), subtitle = "All TBIA records", icon = icon("database"), color = "red"),
+                  valueBox(value = paste("21,793,791"), subtitle = "All TBIA records (ver20240605)", icon = icon("database"), color = "red"),
                   valueBox(value = paste("21,793,791"), subtitle = "Cleaned TBIA records", icon = icon("broom"), color = "orange")),
                 includeMarkdown("www/descriptions.md"),
                 ),
+        
+        
+        
+        # Section: Taxonomic Gap
+        tabItem(tabName = "taxa",
+                includeMarkdown("www/taxa.md"),
+                HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
+                HTML("<h4><b>Recorded TaiCOL taxa on TBIA:</b></h4>"),
+                br(),
+                fluidRow(
+                  column(6,
+                         HTML("<b>% record matched to highest taxon rank</b>"),
+                         plotlyOutput("taxa.pie.taxonRank", height = 400)),
+                  column(6,
+                         HTML("<b>% record with (infra)species rank matched to TaiCOL</b>"),
+                         plotlyOutput("taxa.pie.TaiCOL", height = 400))
+                ),
+                br(),
+                HTML("<h4><b>The XX% of the unrecorded TaiCOL taxa on TBIA:</b></h4>"),
+                br(),
+                column(2, uiOutput("taxa.taxaSubGroup")),
+                # download unrecorded taxa list here
+                column(10, 
+                       fluidRow(
+                         column(12, HTML("<b>% of recorded & unrecorded taxa on TBIA</b>"),
+                                plotlyOutput("taxa.bar.unrecorded.taxa", height = 400))
+                       )
+                )
+        ),
+        
+        
+        
+        # Section: Species Tree
+        tabItem(tabName = "tree",
+                includeMarkdown("www/tree.md"),
+                column(3, uiOutput("taxa.treeLandType")),
+                column(3, uiOutput("taxa.treeSubGroup")),
+                column(12, style = "overflow-y: scroll; height: 750px;",
+                       collapsibleTreeOutput('tree', height = '1000px'))
+        ),
+        
+        
+        
+        # Section: Temporal Gap
+        tabItem(tabName = "time",
+                fluidRow(
+                  column(4,
+                         selectizeInput(
+                           inputId = "time.taxaSubGroup",
+                           label = "Select a taxa group:",
+                           choices = NULL,
+                           multiple = T,
+                           options = list(create = TRUE)
+                         ),
+                         br(),
+                         uiOutput("time.landType"),
+                         br(),
+                         sliderInput("time.year", "Select year:", min = 1980, max = 2024, value = c(1980, 2024), step = 1, sep = ""),
+                         br(),
+                         selectizeInput(
+                           inputId = "time.month",
+                           label = "Select month:",
+                           choices = 1:12,
+                           multiple = T,
+                           options = list(create = TRUE)
+                         )
+                  ),
+                  column(8,
+                         fluidRow(
+                           column(12, 
+                                  box(width = 12, title = "Year", plotlyOutput("time.yearBarChart"))
+                           ),
+                           column(12, 
+                                  box(width = 12, title = "Month", plotlyOutput("time.monthBarChart"))
+                           )
+                         )
+                  )
+                )
+        ),
+        
         
         
         # Section: Spatial Gap
@@ -144,74 +228,7 @@ shinyUI(fluidPage(
 
         
         
-        # Section: Taxonomical Gap
-        tabItem(tabName = "taxa",
-                includeMarkdown("www/tree.md"),
-                fluidRow(column(6,
-                                HTML("<b>% matched to TaiCOL (at any rank)</b>"),
-                                plotlyOutput("pie.TaiCOL", height = 300)
-                                ),
-                         column(6,
-                                HTML("<b>% matched to highest taxon rank</b>"),
-                                plotlyOutput("pie.taxonRank", height = 300)
-                                )
-                         ),
-                br(),
-                HTML("<b>The 20% unrecorded taxa</b>"),
-                br(), br(),
-                column(3, uiOutput("taxa.taxaLandType")),
-                column(3, uiOutput("taxa.taxaSubGroup"))
-                ),
         
-        
-        
-        # Section: Species Tree
-        tabItem(tabName = "tree",
-                includeMarkdown("www/tree.md"),
-                column(3, uiOutput("taxa.treeLandType")),
-                column(3, uiOutput("taxa.treeSubGroup")),
-                column(12, style = "overflow-y: scroll; height: 750px;",
-                       collapsibleTreeOutput('tree', height = '1000px'))
-        ),
-        
-        
-        
-        # Section: Temporal Gap
-        tabItem(tabName = "time",
-                fluidRow(
-                  column(4,
-                         selectizeInput(
-                           inputId = "time.taxaSubGroup",
-                           label = "Select a taxa group:",
-                           choices = NULL,
-                           multiple = T,
-                           options = list(create = TRUE)
-                           ),
-                         br(),
-                         uiOutput("time.landType"),
-                         br(),
-                         sliderInput("time.year", "Select year:", min = 1980, max = 2024, value = c(1980, 2024), step = 1, sep = ""),
-                         br(),
-                         selectizeInput(
-                           inputId = "time.month",
-                           label = "Select month:",
-                           choices = 1:12,
-                           multiple = T,
-                           options = list(create = TRUE)
-                           )
-                         ),
-                  column(8,
-                         fluidRow(
-                           column(12, 
-                                  box(width = 12, title = "Year", plotlyOutput("time.yearBarChart"))
-                           ),
-                           column(12, 
-                                  box(width = 12, title = "Month", plotlyOutput("time.monthBarChart"))
-                           )
-                         )
-                  )
-                )
-        ),
                   
         
         

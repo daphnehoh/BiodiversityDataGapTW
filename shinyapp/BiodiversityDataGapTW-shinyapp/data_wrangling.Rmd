@@ -8,7 +8,8 @@ editor_options:
 ---
 
 ```{r env prep}
-setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www")
+#setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/")
+setwd("~/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/")
 
 .packs <- c("httr", "jsonlite", "dplyr", "data.table", "stringr", 
             "ggplot2", "scales", "RColorBrewer", "tidyr", "tidyverse",
@@ -18,31 +19,83 @@ sapply(.packs, require, character.only = T)
 ```
 
 ```{r}
-tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/data/tbia_ver20240605.csv",
+# tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/data/tbia_ver20240605.csv",
+#               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
+tbia <- fread("tmp/sample_n_100_taxaSubGroup_dQgood.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
 head(tbia)
+
+# remove unwanted columns
+keep <- c("id", "rightsHolder", "datasetName", "basisOfRecord",
+          "year", "month",
+          "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "type",
+          "taxonID", "taxonRank", "taxaSubGroup",
+          "kingdom", "phylum", "class", "order", "family", "genus", "scientificName")
+
+tbia <- tbia %>%
+  select(all_of(keep))
 ```
+
 
 
 ```{r the manual cleaning}
 # remove data without scientificName
-tbia <- tbia
+tbia <- tbia[!is.na(tbia$scientificName),]
 
+
+# formatting: change to numeric
+tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")] <- 
+  lapply(tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")], as.numeric)
+
+str(tbia)
 
 # coordinateUncertaintyInMeters
 table(tbia$coordinateUncertaintyInMeters)
 tbia$coordinateUncertaintyInMeters <- as.numeric(gsub("[^0-9.]", "", tbia$coordinateUncertaintyInMeters)) # extracting numbers only
 ```
 
-```{r formatting}
-# change to numeric
-tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")] <- 
-  lapply(tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")], as.numeric)
 
-str(tbia)
+
+```{r prep for Section: Taxonomic}
+# Subsection: Taxonomic Gap
+species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform")
+
+## % record matched to highest taxon rank
+df_taxa.rank <- data.frame(table(tbia$taxonRank))
+names(df_taxa.rank) <- c("taxonRank", "count")
+
+### grouping the subs together
+df_taxa.rank$taxonRank1 <- data.table::fifelse(df_taxa.rank$taxonRank %in% species_infraspecies, 
+                                               "(infra)species", 
+                                               paste0(gsub(".*?infra(\\w+)|.*?sub(\\w+)", "\\1", df_taxa.rank$taxonRank)))
+
+fwrite(df_taxa.rank, "../www/data/df_taxa.rank.csv", 
+       row.names = F, quote = T)  
+
+
+## % record matched to TaiCOL (at species & infraspecies rank)
+df_taxa.rank.at.species <- tbia %>%
+  filter(taxonRank %in% species_infraspecies) %>%
+  summarise(count = n_distinct(scientificName)) %>%
+  mutate(proportion = count / 64542 * 100) # TaiCOL last stats 20240610
+
+not.recorded <- data.frame(count = 64542 - df_taxa.rank.at.species$count,
+                           proportion = 100 - df_taxa.rank.at.species$proportion)
+
+df_taxa.rank.at.species <- bind_rows(df_taxa.rank.at.species, not.recorded)
+df_taxa.rank.at.species$category <- c("Recorded", "Unrecorded")
+
+fwrite(df_taxa.rank.at.species, "../www/data/df_taxa.rank.at.species.csv", 
+       row.names = F, quote = T)
+
+
+
+# Subsection: Species Tree
 ```
+
 
 
 ```{r prep for Section: spatial}

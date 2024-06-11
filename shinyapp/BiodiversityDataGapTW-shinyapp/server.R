@@ -165,6 +165,124 @@ shinyServer(function(input, output, session) {
   
   
   
+  # Section: Taxonomic Gap
+  ## Pie stats
+  output$taxa.pie.TaiCOL <- renderPlotly({
+    
+    df_taxa.rank.at.species <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.at.species.csv",
+                                     sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+    
+    plot_ly(df_taxa.rank.at.species, labels = ~category, values = ~count, type = "pie", sort = F,
+            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
+      config(displayModeBar = FALSE)
+    
+  })
+  
+  output$taxa.pie.taxonRank <- renderPlotly({
+    
+    df_taxa.rank <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.csv",
+                          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+    
+    plot_ly(df_taxa.rank, labels = ~taxonRank1, values = ~count, type = "pie", sort = F,
+            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
+      config(displayModeBar = FALSE)
+  
+  })
+  
+  ## The unrecorded taxa
+  output$taxa.taxaSubGroup <- renderUI({
+    selectInput("taxa.taxaSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
+  })
+  
+  output$taxa.bar.unrecorded.taxa <- renderPlotly({
+    
+    # df_taxa.unrecorded.taxa <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.csv",
+    #                                  sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+    # 
+    data <- data.frame(
+      category = c("A", "B"),
+      value1 = c(20, 90),
+      value2 = c(80, 10)
+    )
+    
+    plot_ly(data, x = ~category, type = 'bar', name = 'Value 1', y = ~value1) %>%
+      add_trace(y = ~value2, name = 'Value 2', marker = list(color = tbia.color_6[1])) %>%
+      layout(barmode = 'stack', xaxis = list(title = "Taxa group"), yaxis = list(title = "Proportion (%)")) %>%
+      config(displayModeBar = FALSE)
+
+  })
+  
+  
+  
+  # Section: Species Tree
+  ## collapsible tree
+  output$taxa.treeLandType <- renderUI({
+    selectInput("taxa.treeLandType", "Select a land type:", unique(tbia$type))
+  })
+  
+  output$taxa.treeSubGroup <- renderUI({
+    selectInput("taxa.treeSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
+  })
+  
+  speciesTree <- reactive({
+    req(input$taxa.treeLandType, input$taxa.treeSubGroup)
+    filtered_data <- tbia[tbia$type == input$taxa.treeLandType & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
+    return(filtered_data)
+  })
+  
+  output$tree <- renderCollapsibleTree({
+    collapsibleTree(
+      speciesTree(),
+      root = input$taxa.treeSubGroup,
+      attribute = "scientificName",
+      hierarchy = c("family", "scientificName"),
+      fill = "Green",
+      zoomable = FALSE
+    )
+  })
+  
+  
+  
+  # Section: Temporal Gap
+  ## taxa select
+  updateSelectizeInput(session, 'time.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
+  
+  ## land type select
+  output$time.landType <- renderUI({
+    selectInput("time.landType", "Select a land type:", unique(tbia$type))
+  })
+  
+  ## year plot
+  data <- reactive({
+    data.frame(year = 1980:2024,
+               value = as.integer(runif(45, min = 0, max = 100)))
+  })
+  
+  output$time.yearBarChart <- renderPlotly({
+    data_filtered <- data() %>%
+      filter(year >= input$time.year[1] & year <= input$time.year[2])
+    
+    plot_ly(data_filtered, x = ~year, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count"))
+  })
+  
+  ## month plot
+  output$time.monthBarChart <- renderPlotly({
+    selected_months <- input$time.month
+    data <- data.frame(month = 1:12,
+                       value = as.integer(runif(12, min = 0, max = 100)))
+    
+    if (!is.null(selected_months)) {
+      data <- data[data$month %in% selected_months, ]
+    }
+    
+    plot_ly(data, x = ~month, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
+      config(displayModeBar = FALSE)
+  })
+  
+  
+  
   # Section : Spatial
   ## spatialMap
   
@@ -235,101 +353,7 @@ shinyServer(function(input, output, session) {
   
   
   
-  # Section: Taxonomical Gap
-  ## Pie stats
-  output$pie.TaiCOL <- renderPlotly({
-    data <- data.frame(Category = c("TRUE", "FALSE"),
-                       Value = c(80, 20))
-    plot_ly(data, labels = ~Category, values = ~Value, type = "pie", 
-            hoverinfo = "label+percent", textinfo = "value+percent", marker = list(colors = rainbow(length(data$Category)))) %>%
-      config(displayModeBar = FALSE)
-  })
   
-  output$pie.taxonRank <- renderPlotly({
-    data <- data.frame(Category = c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"),
-                       Value = c(20, 10, 10, 20, 20, 10, 10))
-    plot_ly(data, labels = ~Category, values = ~Value, type = "pie", 
-            hoverinfo = "label+percent", textinfo = "value+percent", marker = list(colors = tbia.color_6)) %>%
-      config(displayModeBar = FALSE)
-  })
-  
-  ## The unrecorded taxa
-  output$taxa.taxaLandType <- renderUI({
-    selectInput("taxa.taxaLandType", "Select a land type:", unique(tbia$type))
-  })
-  
-  output$taxa.taxaSubGroup <- renderUI({
-    selectInput("taxa.taxaSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
-  })
-  
-  
-  
-  # Section: Species Tree
-  ## collapsible tree
-  output$taxa.treeLandType <- renderUI({
-    selectInput("taxa.treeLandType", "Select a land type:", unique(tbia$type))
-  })
-
-  output$taxa.treeSubGroup <- renderUI({
-    selectInput("taxa.treeSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
-  })
-
-  speciesTree <- reactive({
-    req(input$taxa.treeLandType, input$taxa.treeSubGroup)
-    filtered_data <- tbia[tbia$type == input$taxa.treeLandType & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
-    return(filtered_data)
-  })
-
-  output$tree <- renderCollapsibleTree({
-    collapsibleTree(
-      speciesTree(),
-      root = input$taxa.treeSubGroup,
-      attribute = "scientificName",
-      hierarchy = c("family", "scientificName"),
-      fill = "Green",
-      zoomable = FALSE
-    )
-  })
-
-
-  
-  # Section: Temporal Gap
-  ## taxa select
-  updateSelectizeInput(session, 'time.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
-  
-  ## land type select
-  output$time.landType <- renderUI({
-    selectInput("time.landType", "Select a land type:", unique(tbia$type))
-  })
-  
-  ## year plot
-  data <- reactive({
-    data.frame(year = 1980:2024,
-               value = as.integer(runif(45, min = 0, max = 100)))
-  })
-  
-  output$time.yearBarChart <- renderPlotly({
-    data_filtered <- data() %>%
-      filter(year >= input$time.year[1] & year <= input$time.year[2])
-    
-    plot_ly(data_filtered, x = ~year, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
-      layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count"))
-  })
-  
-  ## month plot
-  output$time.monthBarChart <- renderPlotly({
-    selected_months <- input$time.month
-    data <- data.frame(month = 1:12,
-                       value = as.integer(runif(12, min = 0, max = 100)))
-    
-    if (!is.null(selected_months)) {
-      data <- data[data$month %in% selected_months, ]
-    }
-    
-    plot_ly(data, x = ~month, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
-      layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
-      config(displayModeBar = FALSE)
-  })
   
   
   
