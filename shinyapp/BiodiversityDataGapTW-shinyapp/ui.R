@@ -120,23 +120,26 @@ shinyUI(fluidPage(
                 includeMarkdown("www/taxa.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 HTML("<h4><b>Recorded TaiCOL taxa on TBIA:</b></h4>"),
-                br(),
                 fluidRow(
                   column(6,
-                         HTML("<b>% record matched to highest taxon rank</b>"),
+                         div(HTML("<b>% record matched to highest taxon rank</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.taxonRank", height = 400)),
                   column(6,
-                         HTML("<b>% record with (infra)species rank matched to TaiCOL</b>"),
+                         div(HTML("<b>% record with (infra)species rank matched to TaiCOL</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.TaiCOL", height = 400))
                 ),
                 br(),
                 HTML("<h4><b>The XX% of the unrecorded TaiCOL taxa on TBIA:</b></h4>"),
                 br(),
-                column(2, uiOutput("taxa.taxaSubGroup")),
+                column(2, 
+                       uiOutput("taxa.landtype.taxa.prop"),
+                       br(),
+                       uiOutput("taxa.landtype.taxa.prop.count")),
                 # download unrecorded taxa list here
                 column(10, 
                        fluidRow(
-                         column(12, HTML("<b>% of recorded & unrecorded taxa on TBIA</b>"),
+                         column(12, 
+                                div(HTML("<b>% of recorded & unrecorded taxa on TBIA</b>"), style = "margin-bottom: 10px;"),
                                 plotlyOutput("taxa.bar.unrecorded.taxa", height = 400))
                        )
                 )
@@ -147,8 +150,9 @@ shinyUI(fluidPage(
         # Section: Species Tree
         tabItem(tabName = "tree",
                 includeMarkdown("www/tree.md"),
-                column(3, uiOutput("taxa.treeLandType")),
+                HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 column(3, uiOutput("taxa.treeSubGroup")),
+                column(3, uiOutput("taxa.treeHabitat")),
                 column(12, style = "overflow-y: scroll; height: 750px;",
                        collapsibleTreeOutput('tree', height = '1000px'))
         ),

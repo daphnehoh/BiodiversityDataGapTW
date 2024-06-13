@@ -18,7 +18,7 @@ sapply(.packs, require, character.only = T)
 
 ```
 
-```{r}
+```{r load TBIA data}
 # tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/data/tbia_ver20240605.csv",
 #               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
@@ -41,7 +41,7 @@ tbia <- tbia %>%
 
 
 
-```{r the manual cleaning}
+```{r the manual cleaning} 
 # remove data without scientificName
 tbia <- tbia[!is.na(tbia$scientificName),]
 
@@ -59,7 +59,131 @@ tbia$coordinateUncertaintyInMeters <- as.numeric(gsub("[^0-9.]", "", tbia$coordi
 
 
 
-```{r prep for Section: Taxonomic}
+```{r prep for Section: Taxonomic - TaiCOL list}
+# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240528.zip
+
+keep <- c("rank","taxon_id","simple_name","common_name_c",
+          "is_endemic","alien_type","is_terrestrial","is_freshwater","is_brackish","is_marine","is_in_taiwan",
+          "kingdom","kingdom_c","phylum","phylum_c","class","class_c","order","order_c","family","family_c","genus","genus_c")
+          
+df.taicol.list <- fread("../www/data/TaiCOL_taxon_20240528.csv", select = keep,
+                        sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
+df.taicol.list <- df.taicol.list %>%
+  filter(is_in_taiwan == "true")
+
+# add a new column categorizing them into my defined taxaSubGroup
+# make taxaSubGroup in df.taicol.list
+`%ni%` <- Negate(`%in%`)
+
+taxa <- df.taicol.list
+
+taxa$micro <- fifelse(taxa$simple_name %in% c("Bacteria", "Archaea", "Protozoa", "Chromista"), paste0(taxa$simple_name), "x")
+
+taxa$virus <- fifelse(taxa$kingdom %in% c("Orthornavirae", "Bamfordvirae", "Heunggongvirae", "Pararnavirae", 
+                                          "Ribozyviria kingdom incertae sedis", "Shotokuvirae", "Viruses kingdom incertae sedis"), "Viruses", "x")
+
+taxa <- taxa %>%
+  mutate(fungi = case_when(simple_name == "Fungi" ~ "Other fungi",
+                           kingdom == "Fungi" & phylum %ni% c("Ascomycota", "Basidiomycota") ~ "Other fungi",
+                           phylum == "Ascomycota" ~ "Ascomycota",
+                           phylum == "Basidiomycota" ~ "Ascomycota",
+                           TRUE ~ "x"))
+
+taxa <- taxa %>%
+  mutate(plant.tmp = case_when(simple_name == "Plantae" ~ "Other plants",
+                               kingdom == "Plantae" & is.na(phylum) ~ "Other plants",
+                               kingdom == "Plantae" & phylum %in% c("Charophyta", "Chlorophyta", "Rhodophyta") ~ "Algae",
+                               kingdom == "Plantae" & phylum %in% c("Anthocerotophyta", "Bryophyta", "Marchantiophyta") ~ "Mossess",
+                               kingdom == "Plantae" & class %in% c("Polypodiopsida", "Lycopodiopsida") ~ "Ferns",
+                               kingdom == "Plantae" & class == "Magnoliopsida" ~ "Angiosperms",
+                               kingdom == "Plantae" & class %in% c("Cycadopsida", "Ginkgoopsida", "Pinopsida") ~ "Gymnosperms",
+                               TRUE ~ "x"))
+taxa$plant <- fifelse(taxa$kingdom == "Plantae" & taxa$plant.tmp == "x", "Other plants", paste0(taxa$plant.tmp))          
+
+taxa <- taxa %>%
+  mutate(animal.tmp = case_when(simple_name == "Animalia" ~ "Other animals",
+                                kingdom == "Animalia" & phylum == "Chordata" & class %in% 
+                                  c("Chondrichthyes", "Actinopterygii", "Actinopteri", "Elasmobranchii", "Holocephali", "Myxini") ~ "Fishes",
+                                kingdom == "Animalia" & phylum == "Chordata" & class == "Aves" ~ "Birds",
+                                kingdom == "Animalia" & phylum == "Chordata" & class == "Amphibia" ~ "Amphibians",
+                                kingdom == "Animalia" & phylum == "Chordata" & class == "Reptilia" ~ "Reptiles",
+                                kingdom == "Animalia" & phylum == "Chordata" & class == "Mammalia" ~ "Mammals",
+                                kingdom == "Animalia" & phylum == "Chordata" & class == "NA" ~ "Other chordates",
+                                kingdom == "Animalia" & class == "Insecta" & order == "Coleoptera" ~ "Coleoptera",
+                                kingdom == "Animalia" & class == "Insecta" & order == "Lepidoptera" ~ "Lepidoptera",
+                                kingdom == "Animalia" & class == "Insecta" & order %ni% c("Coleoptera", "Lepidoptera") ~ "Other insects",
+                                kingdom == "Animalia" & phylum == "Arthropoda" & class == "Insecta" & order == "NA" ~ "Other insects",
+                                kingdom == "Animalia" & phylum == "Arthropoda" & class == "Arachnida" ~ "Arachnida",
+                                kingdom == "Animalia" & phylum == "Arthropoda" & class == "Malacostraca" ~ "Malacostraca",
+                                kingdom == "Animalia" & phylum == "Arthropoda" & class %ni% c("Insecta" ,"Arachnida", "Malacostraca") ~ "Other arthropods",
+                                kingdom == "Animalia" & phylum == "Arthropoda" & class == "NA" ~ "Other arthropods",
+                                kingdom == "Animalia" & phylum == "Mollusca" & class == "Bivalvia" ~ "Bivalves",
+                                kingdom == "Animalia" & phylum == "Mollusca" & class == "Gastropoda" ~ "Gastropods",
+                                kingdom == "Animalia" & phylum == "Mollusca" & class == "Cephalopoda" ~ "Cephalopods",
+                                kingdom == "Animalia" & phylum == "Mollusca" & class %ni% c("Bivalvia", "Gastropoda", "Cephalopoda") ~ "Other molluscs",
+                                kingdom == "Animalia" & phylum == "Mollusca" & class == "NA" ~ "Other molluscs",
+                                kingdom == "Animalia" & phylum == "Cnidaria" ~ "Cnidarians",
+                                kingdom == "Animalia" & phylum == "Echinodermata" ~ "Echinoderms",
+                                kingdom == "Animalia" & phylum == "NA" ~ "Other animals",
+                                TRUE ~ "x"))
+taxa$animal <- fifelse(taxa$kingdom == "Animalia" & taxa$animal.tmp == "x", "Other animals", paste0(taxa$animal.tmp))                                     
+
+# combine and make taxaSubGroup
+taxa1 <- taxa %>%
+  mutate_all(~ifelse(. == 'x', NA, .)) %>%
+  unite(taxaSubGroup, micro, virus, fungi, plant, animal, sep = ",", remove = T, na.rm = T)
+
+# those with incomplete tree levels so the categorizing failed
+table(taxa1$taxaSubGroup) # 9175 empty
+incomplete <- taxa1[taxa1$taxaSubGroup=="",]
+incomplete$taxaSubGroup <- paste0(incomplete$kingdom)
+table(incomplete$taxaSubGroup)
+incomplete <- incomplete %>% mutate(taxaSubGroup = replace(taxaSubGroup, taxaSubGroup == "NA", "Unclassified"))
+
+incomplete_subset <- select(incomplete, taxon_id, taxaSubGroup)
+taxa2 <- left_join(taxa1, incomplete_subset, by = "taxon_id") %>%
+  mutate(taxaSubGroup.x = ifelse(taxaSubGroup.x == "", NA, taxaSubGroup.x), taxaSubGroup.y = ifelse(taxaSubGroup.y == "", NA, taxaSubGroup.y)) %>%
+  mutate(taxaSubGroup = coalesce(taxaSubGroup.x, taxaSubGroup.y)) %>%
+  select(-c(plant.tmp, animal.tmp, taxaSubGroup.x, taxaSubGroup.y))
+table(taxa2$taxaSubGroup)
+
+## because some record are infraspecies, extract the species level name only
+taxa2$simple_scientificName<- str_extract(taxa2$simple_name, "^\\w+ \\w+") 
+  
+## keep habitats to 'yes' only for easier filtering (i.e. make 'false' as NA)
+taxa3 <- taxa2 %>% 
+  mutate(is_terrestrial = replace(is_terrestrial, is_terrestrial == "false", NA)) %>% 
+  mutate(is_freshwater = replace(is_freshwater, is_freshwater == "false", NA)) %>% 
+  mutate(is_brackish = replace(is_brackish, is_brackish == "false", NA)) %>% 
+  mutate(is_marine = replace(is_marine, is_marine == "false", NA))
+
+# final TaiCOL table that classified with taxaSubGroup
+fwrite(taxa3, "../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv",
+       row.names = F, quote = T)
+
+## add habitat info into TBIA table
+habitat <- select(taxa3, taxon_id, is_terrestrial, is_freshwater, is_brackish, is_marine)
+names(tbia)[12] <- "taxon_id"
+tbia1 <- left_join(tbia, habitat, by = "taxon_id")
+
+### because some record are infraspecies, extract the species level name only
+tbia1$simple_scientificName<- str_extract(tbia1$scientificName, "^\\w+ \\w+") 
+
+fwrite(tbia1, "../www/data/tbia_habitat.csv",
+       row.names = F, quote = T)
+
+```
+
+
+
+```{r load new TBIA table}
+tbia <- fread("../www/data/tbia_habitat.csv", 
+              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+```
+
+
+```{r prep for Section: Taxonomic - data wrangling}
 # Subsection: Taxonomic Gap
 species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform")
 
@@ -76,10 +200,10 @@ fwrite(df_taxa.rank, "../www/data/df_taxa.rank.csv",
        row.names = F, quote = T)  
 
 
-## % record matched to TaiCOL (at species & infraspecies rank)
+## % record species rank matched to TaiCOL
 df_taxa.rank.at.species <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
-  summarise(count = n_distinct(scientificName)) %>%
+  summarise(count = n_distinct(simple_scientificName)) %>%
   mutate(proportion = count / 64542 * 100) # TaiCOL last stats 20240610
 
 not.recorded <- data.frame(count = 64542 - df_taxa.rank.at.species$count,
@@ -92,13 +216,68 @@ fwrite(df_taxa.rank.at.species, "../www/data/df_taxa.rank.at.species.csv",
        row.names = F, quote = T)
 
 
+## The XX% of the unrecorded TaiCOL taxa on TBIA
+### get total number of species recorded in TaiCOL
+df.taicol.list <- fread("../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv",
+                        sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
+### Habitat = All
+group.all <- df.taicol.list %>%
+  # get distinct simple_scientificName because need to remove infraspecies count
+  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
+  group_by(taxaSubGroup) %>%
+  summarise(taicol.count = n())
+
+sum(group.all$taicol.count) # 63,828 species level
+
+### get total number of species (un)recorded in TBIA
+df_taxa.unrecorded.taxa.prop1.groupAll <- tbia %>%
+  group_by(taxaSubGroup) %>%
+  summarise(record.count = n_distinct(simple_scientificName))
+
+
+### combine counts of 2 df above
+df_taxa.unrecorded.taxa.prop2.groupAll <- left_join(group.all, df_taxa.unrecorded.taxa.prop1, by = "taxaSubGroup")
+
+df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop2.groupAll %>%
+  rowwise() %>%
+  mutate(record.prop = round(record.count / taicol.count * 100, 2),
+         taicol.prop = round(100 - record.prop, 2)) %>%
+  ungroup() %>%
+  filter(!grepl("Other ", taxaSubGroup) & taxaSubGroup != "Unclassified") # remove "Other x" from df
+
+fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "../www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
+       row.names = F, quote = T)
+
+ 
+### Habitat = either of the is_*
+habitats <- c("is_terrestrial", "is_freshwater", "is_brackish", "is_marine")
+group.habitat <- list()
+
+group.habitat <- map(habitats, ~{
+  df.taicol.list %>%
+    # get distinct simple_scientificName because need to remove infraspecies count
+    distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
+    group_by(taxaSubGroup, !!.x) %>%  # Use !! to unquote the variable
+    summarise(taicol.count = n())
+})
+
+group.habitats <- bind_rows(group.habitat, .id = "habitat")
+
+
 
 # Subsection: Species Tree
 ```
 
 
+```{r prep for Section: Temporal}
 
-```{r prep for Section: spatial}
+
+```
+
+
+
+```{r prep for Section: Spatial}
 # subset from main table
 spatial_df <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "type", "taxaSubGroup")]
 
@@ -133,6 +312,9 @@ leaflet() %>%
 
 
 ```
+
+
+
 
 
 

@@ -190,25 +190,30 @@ shinyServer(function(input, output, session) {
   })
   
   ## The unrecorded taxa
-  output$taxa.taxaSubGroup <- renderUI({
-    selectInput("taxa.taxaSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
+  output$taxa.landtype.taxa.prop <- renderUI({
+    selectInput("taxa.landtype.taxa.prop", "Select habitat:", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
+  })
+  
+  output$taxa.landtype.taxa.prop.count <- renderUI({
+    selectInput("taxa.landtype.taxa.prop.count", "Select visualization:", c("Count", "Proportion"))
   })
   
   output$taxa.bar.unrecorded.taxa <- renderPlotly({
     
-    # df_taxa.unrecorded.taxa <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.csv",
-    #                                  sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-    # 
-    data <- data.frame(
-      category = c("A", "B"),
-      value1 = c(20, 90),
-      value2 = c(80, 10)
-    )
+    ## if habitat == "All"
+    df_taxa.unrecorded.taxa.prop.groupAll <- 
+      fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv",
+      sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
-    plot_ly(data, x = ~category, type = 'bar', name = 'Value 1', y = ~value1) %>%
-      add_trace(y = ~value2, name = 'Value 2', marker = list(color = tbia.color_6[1])) %>%
-      layout(barmode = 'stack', xaxis = list(title = "Taxa group"), yaxis = list(title = "Proportion (%)")) %>%
+    plot_ly(df_taxa.unrecorded.taxa.prop, x = ~taxaSubGroup, type = 'bar', name = 'Recorded', y = ~record.prop,
+            hoverinfo = 'text+y', text = ~paste("Recorded species: "), textposition = "none") %>%
+      add_trace(y = ~taicol.prop, name = 'Unrecorded', marker = list(color = tbia.color_6[1]),
+                hoverinfo = 'text+y', text = ~paste("Unrecorded species: ", taicol.count), textposition = "none") %>%
+      layout(barmode = 'stack', 
+             xaxis = list(title = "Taxa group"), 
+             yaxis = list(title = "Proportion (%)", tickvals = seq(0, 100, 10))) %>%
       config(displayModeBar = FALSE)
+    
 
   })
   
@@ -216,17 +221,17 @@ shinyServer(function(input, output, session) {
   
   # Section: Species Tree
   ## collapsible tree
-  output$taxa.treeLandType <- renderUI({
-    selectInput("taxa.treeLandType", "Select a land type:", unique(tbia$type))
-  })
-  
   output$taxa.treeSubGroup <- renderUI({
     selectInput("taxa.treeSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
   })
   
+  output$taxa.treeHabitat <- renderUI({
+    selectInput("taxa.treeHabitat", "Select habitat:", taicol$habitat)
+  })
+  
   speciesTree <- reactive({
-    req(input$taxa.treeLandType, input$taxa.treeSubGroup)
-    filtered_data <- tbia[tbia$type == input$taxa.treeLandType & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
+    req(input$taxa.treeHabitat, input$taxa.treeSubGroup)
+    filtered_data <- tbia[tbia$type == input$taxa.treeHabitat & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
     return(filtered_data)
   })
   
@@ -236,7 +241,7 @@ shinyServer(function(input, output, session) {
       root = input$taxa.treeSubGroup,
       attribute = "scientificName",
       hierarchy = c("family", "scientificName"),
-      fill = "Green",
+      fill = "Red",
       zoomable = FALSE
     )
   })
