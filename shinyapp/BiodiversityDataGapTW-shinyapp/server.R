@@ -167,6 +167,19 @@ shinyServer(function(input, output, session) {
   
   # Section: Taxonomic Gap
   ## Pie stats
+  ## % record matched to highest taxon rank
+  output$taxa.pie.taxonRank <- renderPlotly({
+    
+    df_taxa.rank <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.csv",
+                          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+    
+    plot_ly(df_taxa.rank, labels = ~taxonRank, values = ~count, type = "pie", sort = F,
+            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
+      config(displayModeBar = FALSE)
+    
+  })
+  
+  ## % record species rank matched to TaiCOL
   output$taxa.pie.TaiCOL <- renderPlotly({
     
     df_taxa.rank.at.species <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.at.species.csv",
@@ -178,16 +191,7 @@ shinyServer(function(input, output, session) {
     
   })
   
-  output$taxa.pie.taxonRank <- renderPlotly({
-    
-    df_taxa.rank <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.csv",
-                          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-    
-    plot_ly(df_taxa.rank, labels = ~taxonRank1, values = ~count, type = "pie", sort = F,
-            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
-      config(displayModeBar = FALSE)
   
-  })
   
   ## The unrecorded taxa
   output$taxa.landtype.taxa.prop <- renderUI({
