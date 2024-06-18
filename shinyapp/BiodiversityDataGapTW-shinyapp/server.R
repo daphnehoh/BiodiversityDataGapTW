@@ -340,58 +340,55 @@ shinyServer(function(input, output, session) {
   pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
   
   df_taxa_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa_map.shp")
-  pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCont)
+  pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCount)
   
   ## show maps
   df_taxa_map_selected <- reactive({
     req(input$spatial.taxaSubGroup)  # Require input$spatial.taxaSubGroup to be available
     df_taxa_map %>%
-      filter(txSbGrp %in% input$spatial.taxaSubGroup)
+      filter(tSG %in% input$spatial.taxaSubGroup)
   })
-  
-  # Initialize reactive values for map state
-  mapState <- reactiveValues(
-    zoom = 6,  # Initial zoom level
-    lng = 120,  # Initial longitude
-    lat = 21  # Initial latitude
-  )
-  
-  ## Render the spatialMap based on selection
+
+  # ## Render the spatialMap based on selection
   output$spatialMap <- renderLeaflet({
     if (input$showAll) {
+
       leaflet() %>%
         addProviderTiles(providers$Stadia) %>%
-        setView(lng = mapState$lng, lat = mapState$lat, zoom = mapState$zoom) %>%
+        setView(lng = 120, lat = 22, zoom = 7) %>%
         addResetMapButton() %>%
         addPolygons(
           data = df_map,
           fillColor = ~pal_map(occCount),
           weight = 1,
-          opacity = 1,
-          color = 'white',
+          opacity = 0.5,
+          color = 'orange',
           fillOpacity = 0.5,
           popup = ~paste("Number of records:", occCount))
-    } else {
-      leaflet() %>%
-        addProviderTiles(providers$Stadia) %>%
-        setView(lng = mapState$lng, lat = mapState$lat, zoom = mapState$zoom) %>%
-        addResetMapButton() %>%
-        addPolygons(
-          data = df_taxa_map_selected(),
-          fillColor = ~pal_taxa(occCont),
-          weight = 1,
-          opacity = 1,
-          color = 'white',
-          fillOpacity = 0.5,
-          popup = ~paste("Number of records:", occCont))
+
+      } else {
+
+        leaflet() %>%
+          addProviderTiles(providers$Stadia) %>%
+          setView(lng = 120, lat = 22, zoom = 7) %>%
+          addResetMapButton() %>%
+          addPolygons(
+            data = df_taxa_map_selected(),
+            fillColor = ~pal_taxa(occCount),
+            weight = 1,
+            opacity = 0.3,
+            color = 'blue',
+            fillOpacity = 0.5,
+            popup = ~paste("Number of records:", occCount))
+
     }
   })
-  
+
   # Update selectizeInput choices based on df_spatial_allOccCount_grid_table
   observe({
     updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_spatial_allOccCount_grid_table$taxaSubGroup), server = TRUE)
   })
-  
+
   # Update checkbox based on selection
   observeEvent(input$spatial.taxaSubGroup, {
     if (is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0) {
@@ -400,61 +397,10 @@ shinyServer(function(input, output, session) {
       updateCheckboxInput(session, "showAll", value = FALSE)
     }
   })
+
   
-  # To prevent map keep resetting to default zoom level when a taxa is selected
-  observe({
-    proxy <- leafletProxy("spatialMap")
-    # Update mapState$zoom and mapState$lat/mapState$lng based on user interaction
-    mapState$zoom <- input$spatialMap_zoom
-    mapState$lat <- input$spatialMap_moveend$lat
-    mapState$lng <- input$spatialMap_moveend$lng
-  })
-  
-  
-  # ## show all records map
-  # df_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_map.shp")
-  # pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
-  # 
-  # output$spatialMap <- renderLeaflet({
-  #   leaflet() %>%
-  #     addProviderTiles(providers$Stadia) %>%
-  #     setView(lng = 120, lat = 21, zoom = 7) %>%
-  #     addResetMapButton() %>%
-  #     addPolygons(
-  #       data = df_map,
-  #       fillColor = ~pal_map(occCount),
-  #       weight = 1,
-  #       opacity = 1,
-  #       color = 'white',
-  #       fillOpacity = 0.5,
-  #       popup = ~paste("Number of records:", occCount))
-  # })
-  # 
-  # 
-  # ## show selected taxa
-  # df_taxa_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa_map.shp")
-  # pal_taxa_map <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCont)
-  # 
-  # df_taxa_map_selected <- reactive({
-  #   df_taxa_map %>%
-  #     filter(txSbGrp %in% input$spatial.taxaSubGroup)
-  # })
-  # 
-  # output$spatialMap <- renderLeaflet({
-  #   leaflet() %>%
-  #     addProviderTiles(providers$Stadia) %>%
-  #     setView(lng = 120, lat = 21, zoom = 7) %>%
-  #     addResetMapButton() %>%
-  #     addPolygons(
-  #       data = df_taxa_map_selected(),
-  #       fillColor = ~pal_taxa_map(occCont),
-  #       weight = 1,
-  #       opacity = 1,
-  #       color = 'white',
-  #       fillOpacity = 0.5,
-  #       popup = ~paste("Number of records:", occCont))
-  # })
-  
+
+
   
   
   # Section: Fill gap
@@ -478,7 +424,7 @@ shinyServer(function(input, output, session) {
   output$gapMap <- renderLeaflet({
     leaflet() %>%
       addProviderTiles(providers$Stadia) %>%
-      setView(lng = 120, lat = 20, zoom = 5) %>%
+      setView(lng = 120, lat = 22, zoom = 7) %>%
       addProviderTiles(providers$OSM, group = "OSM") %>%
       addProviderTiles(providers$USGS, group = "USGS") %>%
       addLayersControl(

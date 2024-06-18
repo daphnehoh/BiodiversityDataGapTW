@@ -419,6 +419,7 @@ taxaOccCount <- df_map_grid %>%
 
 ### 5.1 combine grid counts with 5km geometry
 taxaOccCount_grid <- merge(taxaOccCount, grid5km_sf, by = "id", all.x = TRUE)
+names(taxaOccCount_grid) <- c("id", "tSG", "occCount", "geometry") # rename because ESRI cannot save long field name
 st_write(taxaOccCount_grid, "../www/data/df_taxa_map.shp", append = TRUE)
 
 
