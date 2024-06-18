@@ -78,6 +78,9 @@ df.taicol.list$simple_scientificName <- str_extract(df.taicol.list$simple_name, 
 names(df.taicol.list)
 names(df.taicol.list)[1] <- "taxonRank"
 names(df.taicol.list)[2] <- "taxonID"
+
+# change string from title to lower case
+df.taicol.list$taxonRank <- tolower(df.taicol.list$taxonRank)
 ```
 
 ```{r prep: make taxaSubGroup in TaiCOL list}
@@ -97,7 +100,7 @@ taxa <- taxa %>%
   mutate(fungi = case_when(simple_name == "Fungi" ~ "Other fungi",
                            kingdom == "Fungi" & phylum %ni% c("Ascomycota", "Basidiomycota") ~ "Other fungi",
                            phylum == "Ascomycota" ~ "Ascomycota",
-                           phylum == "Basidiomycota" ~ "Ascomycota",
+                           phylum == "Basidiomycota" ~ "Basidiomycota",
                            TRUE ~ "x"))
 
 taxa <- taxa %>%
@@ -155,10 +158,10 @@ taxa1 <- taxa1 %>%
 ```{r prep: TaiCOL habitats}
 ## keep habitats to 'yes' only for easier filtering (i.e. make 'false' as NA)
 taxa2 <- taxa1 %>% 
-  mutate(is_terrestrial = replace(is_terrestrial, is_terrestrial == "false", NA)) %>% 
-  mutate(is_freshwater = replace(is_freshwater, is_freshwater == "false", NA)) %>% 
-  mutate(is_brackish = replace(is_brackish, is_brackish == "false", NA)) %>% 
-  mutate(is_marine = replace(is_marine, is_marine == "false", NA))
+  mutate(is_terrestrial = replace(is_terrestrial, is_terrestrial == "true", "is_terrestrial")) %>% 
+  mutate(is_freshwater = replace(is_freshwater, is_freshwater == "true", "is_freshwater")) %>% 
+  mutate(is_brackish = replace(is_brackish, is_brackish == "true", "is_brackish")) %>% 
+  mutate(is_marine = replace(is_marine, is_marine == "true", "is_marine"))
 
 # final TaiCOL table that classified with taxaSubGroup
 fwrite(taxa2, "../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv",
@@ -181,6 +184,8 @@ tbia <- fread("../www/data/tbia_habitat.csv",
 
 taicol <- fread("../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
+species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
 ```
 
 
@@ -215,8 +220,22 @@ fwrite(df_taxa.rank.at.species, "../www/data/df_taxa.rank.at.species.csv",
        row.names = F, quote = T)
 
 
+
+
+
 # (3)
 ## The XX% of the unrecorded TaiCOL taxa on TBIA
+### Select habitat: All
+species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
+
+group.all <- taicol %>%
+  filter(taxonRank %in% species_infraspecies) %>%
+  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
+  group_by(taxaSubGroup) %>%
+  summarise(taicol.count = n())
+
+sum(group.all$taicol.count) # 63,800 species level
+
 ### get total number of species (un)recorded in TBIA
 df_taxa.unrecorded.taxa.prop <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
@@ -224,60 +243,37 @@ df_taxa.unrecorded.taxa.prop <- tbia %>%
   group_by(taxaSubGroup) %>%
   summarise(record.count = n())
 
+### combine counts of TBIA + TaiCOL above
+df_taxa.unrecorded.taxa.prop.groupAll <- left_join(group.all, df_taxa.unrecorded.taxa.prop, by = "taxaSubGroup")
 
-
-
-### separate them by habitats
-#### replace 'true' string in each habitat to its' respective column name
-habitats <- c("is_terrestrial", "is_freshwater", "is_brackish", "is_marine")
-
-for (col in habitats) {
-  for (i in 1:nrow(tbia)) {
-    if (!is.na(tbia[[col]][i]) && tbia[[col]][i] == "true") {
-      tbia[[col]][i] <- col
-    }
-  }  
-}
-
-df_taxa.unrecorded.taxa.prop.habitats <- list()
-
-df_taxa.unrecorded.taxa.prop.habitats <- map(habitats, ~{
-  tbia %>%
-    filter(taxonRank %in% species_infraspecies) %>%
-    distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
-    group_by(taxaSubGroup, .data[[.x]]) %>%
-    summarise(record.count = n())
-})
-
-for (df in seq_along(df_taxa.unrecorded.taxa.prop.habitats)) { # rename column name is_* to habitat
-  df_taxa.unrecorded.taxa.prop.habitats[[df]] <- rename(df_taxa.unrecorded.taxa.prop.habitats[[df]], habitat = 2)
-}
-
-group.habitats.tbia <- do.call(rbind, df_taxa.unrecorded.taxa.prop.habitats)
-
-
-
-
-df <- taicol
-
-# Function for processing habitats and counts
-process_habitats <- function(df, habitats) {
+df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop.groupAll %>%
+  rowwise() %>%
+  mutate(record.prop = round(record.count / taicol.count * 100, 2),
+         taicol.prop = round(100 - record.prop, 2)) %>%
+  ungroup() %>%
+  filter(taxaSubGroup != "Unclassified") %>%
+  mutate_all(~replace_na(., 0)) %>%
+  mutate(cum.total = taicol.count - record.count)
   
-  # replace 'true' as column name of habitat "is_*"
-  for (col in habitats) {
-    for (i in 1:nrow(df)) {
-      if (!is.na(df[[col]][i]) && df[[col]][i] == "true") {
-        df[[col]][i] <- col
-      }
-    }
-  }  
+  #filter(!grepl("Other ", taxaSubGroup) & taxaSubGroup != "Unclassified") # remove "Other x" from df
+
+fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "../www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
+       row.names = F, quote = T)
+
+
+### Select habitat: separate them by habitats
+#### function for processing habitats and counts
+process_habitats <- function(df) {
   
+  species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
+  habitats <- c("is_terrestrial", "is_freshwater", "is_brackish", "is_marine")
+
   # summarise count by habitat
   df_taxa.unrecorded.taxa.prop.habitats <- map(habitats, ~{
     df %>%
       filter(taxonRank %in% species_infraspecies) %>%
-      distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
-      group_by(taxaSubGroup, .data[[.x]]) %>%
+      distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% # not counting infraspecies
+      group_by(taxaSubGroup, .data[[.x]]) %>% # group and count separately for each habitat
       summarise(record.count = n())
   })
   
@@ -286,93 +282,225 @@ process_habitats <- function(df, habitats) {
     df_taxa.unrecorded.taxa.prop.habitats[[i]] <- rename(df_taxa.unrecorded.taxa.prop.habitats[[i]], habitat = 2)
   }
   
-  group.habitats.df <- do.call(rbind, df_taxa.unrecorded.taxa.prop.habitats)
+  group.habitats.df <- do.call(rbind, df_taxa.unrecorded.taxa.prop.habitats) %>%
+    filter(!is.na(habitat) & habitat != "false") # excluding NA and false count
   
   return(group.habitats.df)
 }
 
-# Usage
-processed_data <- process_habitats(taicol, habitats)
+#### apply summarize function
+taicol_habitat_count <- process_habitats(taicol)
+tbia_habitat_count <- process_habitats(tbia)
 
+#### combine the counts
+names(taicol_habitat_count)[3] <- "taicol.count"
 
+df_counts_by_habitats <- left_join(taicol_habitat_count, tbia_habitat_count, by = c("taxaSubGroup", "habitat")) %>%
+  filter(taxaSubGroup != "Unclassified") %>%
+  mutate_all(~replace_na(., 0)) %>%
+  mutate(cum.total = taicol.count - record.count)
+  
 
-
-
-
-
-
-
-
-#-------------------------------
-### Select: Habitat = All
-group.all <- taicol %>%
-  filter(rank %in% str_to_title(species_infraspecies)) %>%
-  # get distinct simple_scientificName because need to remove infraspecies count
-  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
-  group_by(taxaSubGroup) %>%
-  summarise(taicol.count = n())
-
-sum(group.all$taicol.count) # 63,800 species level
-
-### combine counts of TBIA + TaiCOL above
-df_taxa.unrecorded.taxa.prop.groupAll <- left_join(group.all, df_taxa.unrecorded.taxa.prop, by = "taxaSubGroup")
-
-df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop.groupAll %>%
-  rowwise() %>%
-  mutate(record.prop = round(record.count / taicol.count * 100, 2),
-         taicol.prop = round(100 - record.prop, 2)) #%>%
-  # ungroup() %>%
-  # filter(!grepl("Other ", taxaSubGroup) & taxaSubGroup != "Unclassified") # remove "Other x" from df
-
-fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "../www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
+fwrite(df_counts_by_habitats, "../www/data/df_counts_by_habitats.csv", 
        row.names = F, quote = T)
 
- 
-### Select: Habitat = either of the is_*
-habitats <- c("is_terrestrial", "is_freshwater", "is_brackish", "is_marine")
-group.habitat <- list()
-
-group.habitat <- map(habitats, ~{
-  taicol %>%
-    filter(rank %in% str_to_title(species_infraspecies)) %>%
-    # get distinct simple_scientificName because need to remove infraspecies count
-    distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
-    group_by(taxaSubGroup, .data[[.x]]) %>%  # Use !! to unquote the variable
-    summarise(taicol.count = n()) %>%
-    rowwise() %>%
-    mutate(record.prop = round(record.count / taicol.count * 100, 2),
-           taicol.prop = round(100 - record.prop, 2))
-})
-
-group.habitats <- bind_rows(group.habitat, .id = "habitat")
-
-#### Combine the all + habitats into single table
-
-
-
-
+### Unrecorded taxa for download
+## tmp
 
 
 # Subsection: Species Tree
+taicol_species <- taicol %>%
+  filter(taxonRank %in% species_infraspecies) %>%
+  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
+  select(taxonID, taxaSubGroup, family, genus, simple_scientificName) %>%
+  filter(if_all(everything(), ~ !grepl("incertae sedis", ., ignore.case = TRUE))) # remove rows containing 'incertae sedis'
+
+tbia_recorded_species <- tbia %>%
+  filter(taxonRank %in% species_infraspecies) %>%
+  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
+  select(taxonID)
+  
+taicol_species$tbia.recorded <- ifelse(taicol_species$taxonID %in% tbia_recorded_species$taxonID, TRUE, FALSE)
+
+table(taicol_species$tbia.recorded)
+
+taicol_species$recorded <- fifelse(taicol_species$tbia.recorded == TRUE, 
+                                   paste0("[Recorded] ", taicol_species$simple_scientificName), taicol_species$simple_scientificName)
+
+fwrite(taicol_species, "../www/data/df_tree.csv", 
+       row.names = F, quote = T)
 ```
 
 
 ```{r prep for Section: Temporal}
+df_time <- tbia[, c("id", "year", "month", "taxaSubGroup")]
 
+fwrite(df_time, "../www/data/df_time.csv", 
+       row.names = F, quote = T)
 
 ```
 
 
 
 ```{r prep for Section: Spatial}
-# subset from main table
-spatial_df <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "type", "taxaSubGroup")]
+# load the 5km grid file
+grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
 
-# exclude coordinateUncertaintyInMeters > 5000 meter
-spatial_df <- spatial_df[spatial_df$coordinateUncertaintyInMeters <= 5000,]
+# load the tbia table
+df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "taxaSubGroup")]
 
-# for geometry
-spatial_coords_sf <- st_as_sf(spatial_df, coords = c("longitude", "latitude"), crs = 4326)
+## 1. exclude uncertainty in distance
+table(df_map$coordinatePrecision)
+table(df_map$coordinateUncertaintyInMeters)
+df_map <- df_map[df_map$coordinateUncertaintyInMeters <= 5000,] # exclude > 5km (5000 meter) for 5km grid plotting
+
+
+## 2. map All records to grid
+df_map_stats <- df_map %>% 
+  group_by(taxaSubGroup, latitude, longitude) %>% 
+  count()
+
+df_map_list <- split(df_map_stats, df_map_stats$taxaSubGroup)
+
+catchLocation <- function(x){
+  x %>%
+    st_as_sf(coords = c("longitude", "latitude"), remove = FALSE) %>% # set coordinates
+    st_set_crs(4326) %>%  # table transform to polygon
+    st_join(., dg_grid, join = st_intersects, left = TRUE, largest = TRUE) %>% 
+    st_drop_geometry(.)
+}
+
+#### parallel ####
+cpu.cores <- detectCores() -1
+cl <- makeCluster(cpu.cores)
+clusterEvalQ(cl, { # make sure all clusters are ready
+  library(tidyverse)
+  library(data.table)
+  library(sf)
+  library(lwgeom)
+  dg_grid <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  dg_grid <- as(dg_grid, "sf")%>%
+    st_set_crs(4326)
+  sf_use_s2(F)
+}
+)
+
+system.time(
+  df_map_grid <- parLapply(cl, df_map_list, catchLocation)%>% 
+    do.call(rbind,.))
+
+stopCluster(cl)
+
+
+### 3 make all records table
+allOccCount_grid_table <- df_map_grid %>% 
+  group_by(taxaSubGroup) %>% 
+  summarise(allOccCount = sum(n))
+
+fwrite(allOccCount_grid_table, "../www/data/df_spatial_allOccCount_grid_table.csv", 
+       row.names = F, quote = T)
+
+
+### 4 make All records shp
+allOccCount <- df_map_grid %>% 
+  group_by(id) %>% 
+  summarise(occCount = sum(n))
+
+### 4.1 combine grid counts with 5km geometry
+allOccCount_grid <- merge(allOccCount, grid5km_sf, by = "id", all.x = TRUE)
+st_write(allOccCount_grid, "../www/data/df_map.shp")
+
+
+
+### 5 make taxaSubGroup
+taxaOccCount <- df_map_grid %>% 
+  group_by(taxaSubGroup, id) %>% 
+  summarise(occCount = sum(n))
+
+### 5.1 combine grid counts with 5km geometry
+taxaOccCount_grid <- merge(taxaOccCount, grid5km_sf, by = "id", all.x = TRUE)
+st_write(taxaOccCount_grid, "../www/data/df_taxa_map.shp", append = TRUE)
+
+
+
+
+
+
+
+
+
+# separate to group for parallel processing
+n <- 150000
+num_groups <- ceiling(nrow(tbia_withCoords2) / n)
+records_in_last_group <- nrow(tbia_withCoords2) %% n
+group_var <- rep(1:num_groups, each = n)
+group_var <- c(group_var, rep(num_groups + 1, times = records_in_last_group))
+tbia_withCoords2_groupList <- split(tbia_withCoords2, group_var)
+
+catchLocation <- function(x){
+  x %>%
+    st_as_sf(coords = c("longitude", "latitude"), remove = F) %>%
+    st_set_crs(4326) %>%
+    st_join(., shpFile, join = st_intersects, left = T, largest = T) %>%
+    st_drop_geometry(.)
+}
+
+## Clip points to the map boundaries
+## Takes too long to run, run in parallel
+cpu.cores <- detectCores() - 10
+cl <- makeCluster(cpu.cores)
+
+clusterEvalQ(cl, { # make sure all clusters are ready
+  library(tidyverse)
+  library(data.table)
+  library(sf)
+  library(lwgeom)
+  TWshp <- st_read("C:/Users/taibi/Documents/GitHub/TBIA-data-review/layers/TWshp&grid/TWshp_land&sea/TWshp_land&sea.shp")
+  TWshp <- st_make_valid(TWshp)
+  shpFile <- st_zm(TWshp) %>%
+    select(., TOWNID, TOWNNAME)
+  shpFile <- as(shpFile, "sf")%>%
+    st_set_crs(4326)
+  sf_use_s2(F)
+}
+)
+
+system.time(
+  tbia2 <- parLapply(cl, tbia_withCoords2_groupList, catchLocation) %>%
+    do.call(rbind, .)
+) # 20240606 - 55min, 5.24hr
+
+stopCluster(cl)
+
+fwrite(tbia2, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_shp.csv",
+       row.names = F, quote = T)
+
+
+## combines shp file attribute table with occurrence table
+tbia2.1 <- tbia2 %>%
+  filter(!is.na(TOWNID)) # remove points fall outside of Taiwan territory
+
+fwrite(tbia2.1, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_TWshp.csv",
+       row.names = F, quote = T)
+
+tbia3 <- left_join(tbia2.1, tbia_withCoords, by = "tmpID")
+
+tbia3$type <- data.table::fifelse(tbia3$TOWNID == "sea", "sea", "land")
+tbia3 <- tbia3[, -c("tmpID", "latitude.y", "longitude.y")]
+colnames(tbia3)[colnames(tbia3) == "latitude.x"] <- "latitude"
+colnames(tbia3)[colnames(tbia3) == "longitude.x"] <- "longitude"
+
+
+fwrite(tbia3, "02.processed_data/ver5_ver20240605_shiny/tbia_points_in_TW.csv",
+       row.names = F, quote = T)
+
+
+
+
+
+
+
+
 
 ## want points in grid, not occ record
 
@@ -381,20 +509,20 @@ leaflet() %>%
       setView(lng = 120, lat = 21, zoom = 7) %>%
       addResetMapButton() %>%
       addPolygons(
-        data = spatial_coords_sf,
+        data = df_map_sf,
         fillColor = ~pal(nmbr_f_),
         weight = 1,
         opacity = 1,
         color = 'white',
         fillOpacity = 0.5,
-        popup = ~paste("Number of records:", nmbr_f_)) %>%
-      addLegend(
-        data = occ.grid5km_sf,
-        pal = pal,
-        values = ~nmbr_f_,
-        opacity = 0.5,
-        title = "Record count",
-        position = "bottomright")
+        popup = ~paste("Number of records:", nmbr_f_)) #%>%
+      # addLegend(
+      #   data = occ.grid5km_sf,
+      #   pal = pal,
+      #   values = ~nmbr_f_,
+      #   opacity = 0.5,
+      #   title = "Record count",
+      #   position = "bottomright")
 
 
 

@@ -1,0 +1,91 @@
+"taxaSubGroup","habitat","taicol.count","record.count","cum.total"
+"Algae","is_terrestrial",37,2,35
+"Amphibians","is_terrestrial",43,20,23
+"Angiosperms","is_terrestrial",6284,84,6200
+"Arachnida","is_terrestrial",1954,0,1954
+"Ascomycota","is_terrestrial",19,0,19
+"Bacteria","is_terrestrial",90,0,90
+"Basidiomycota","is_terrestrial",1915,58,1857
+"Birds","is_terrestrial",714,65,649
+"Chromista","is_terrestrial",118,3,115
+"Coleoptera","is_terrestrial",7431,0,7431
+"Ferns","is_terrestrial",752,73,679
+"Gastropods","is_terrestrial",337,32,305
+"Gymnosperms","is_terrestrial",129,26,103
+"Lepidoptera","is_terrestrial",5123,60,5063
+"Malacostraca","is_terrestrial",74,0,74
+"Mammals","is_terrestrial",93,16,77
+"Mossess","is_terrestrial",1541,0,1541
+"Other animals","is_terrestrial",176,8,168
+"Other arthropods","is_terrestrial",154,0,154
+"Other fungi","is_terrestrial",11,0,11
+"Other insects","is_terrestrial",10896,55,10841
+"Protozoa","is_terrestrial",248,10,238
+"Reptiles","is_terrestrial",120,35,85
+"Algae","is_freshwater",457,25,432
+"Amphibians","is_freshwater",43,20,23
+"Angiosperms","is_freshwater",282,4,278
+"Archaea","is_freshwater",1,0,1
+"Ascomycota","is_freshwater",12,2,10
+"Bacteria","is_freshwater",178,0,178
+"Birds","is_freshwater",85,3,82
+"Bivalves","is_freshwater",3,0,3
+"Chromista","is_freshwater",598,48,550
+"Cnidarians","is_freshwater",1,0,1
+"Coleoptera","is_freshwater",219,0,219
+"Ferns","is_freshwater",14,0,14
+"Fishes","is_freshwater",269,31,238
+"Gastropods","is_freshwater",7,1,6
+"Lepidoptera","is_freshwater",9,0,9
+"Malacostraca","is_freshwater",109,0,109
+"Mammals","is_freshwater",3,0,3
+"Mossess","is_freshwater",1,0,1
+"Other animals","is_freshwater",91,0,91
+"Other arthropods","is_freshwater",98,0,98
+"Other fungi","is_freshwater",2,0,2
+"Other insects","is_freshwater",1437,24,1413
+"Protozoa","is_freshwater",144,13,131
+"Reptiles","is_freshwater",16,2,14
+"Algae","is_brackish",14,0,14
+"Angiosperms","is_brackish",126,2,124
+"Arachnida","is_brackish",1,0,1
+"Ascomycota","is_brackish",8,1,7
+"Bacteria","is_brackish",22,0,22
+"Birds","is_brackish",5,0,5
+"Chromista","is_brackish",85,6,79
+"Cnidarians","is_brackish",2,0,2
+"Ferns","is_brackish",3,0,3
+"Fishes","is_brackish",419,17,402
+"Gastropods","is_brackish",9,0,9
+"Malacostraca","is_brackish",98,0,98
+"Other animals","is_brackish",29,0,29
+"Other arthropods","is_brackish",88,0,88
+"Other insects","is_brackish",2,0,2
+"Protozoa","is_brackish",9,1,8
+"Reptiles","is_brackish",2,0,2
+"Algae","is_marine",473,11,462
+"Angiosperms","is_marine",27,2,25
+"Arachnida","is_marine",19,0,19
+"Archaea","is_marine",4,0,4
+"Ascomycota","is_marine",234,4,230
+"Bacteria","is_marine",260,0,260
+"Basidiomycota","is_marine",13,2,11
+"Birds","is_marine",39,0,39
+"Bivalves","is_marine",829,0,829
+"Cephalopods","is_marine",111,23,88
+"Chromista","is_marine",1443,53,1390
+"Cnidarians","is_marine",983,0,983
+"Coleoptera","is_marine",37,0,37
+"Echinoderms","is_marine",256,28,228
+"Fishes","is_marine",3215,48,3167
+"Gastropods","is_marine",2811,21,2790
+"Malacostraca","is_marine",1895,0,1895
+"Mammals","is_marine",35,0,35
+"Mossess","is_marine",1,0,1
+"Other animals","is_marine",397,6,391
+"Other arthropods","is_marine",1632,0,1632
+"Other fungi","is_marine",14,0,14
+"Other insects","is_marine",22,1,21
+"Other molluscs","is_marine",51,7,44
+"Protozoa","is_marine",473,0,473
+"Reptiles","is_marine",19,2,17

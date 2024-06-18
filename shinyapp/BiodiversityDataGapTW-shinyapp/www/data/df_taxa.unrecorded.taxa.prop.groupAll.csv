@@ -1,32 +1,32 @@
-"taxaSubGroup","taicol.count","record.count","record.prop","taicol.prop"
-"Algae",1050,46,4.38,95.62
-"Amphibians",45,21,46.67,53.33
-"Angiosperms",6836,90,1.32,98.68
-"Arachnida",2001,,,
-"Archaea",10,,,
-"Ascomycota",6126,38,0.62,99.38
-"Bacteria",2717,,,
-"Birds",749,65,8.68,91.32
-"Bivalves",933,,,
-"Cephalopods",115,23,20,80
-"Chromista",1814,56,3.09,96.91
-"Cnidarians",983,,,
-"Coleoptera",7645,,,
-"Echinoderms",268,28,10.45,89.55
-"Ferns",803,76,9.46,90.54
-"Fishes",3350,73,2.18,97.82
-"Gastropods",3318,59,1.78,98.22
-"Gymnosperms",131,27,20.61,79.39
-"Lepidoptera",5229,70,1.34,98.66
-"Malacostraca",2100,,,
-"Mammals",127,21,16.54,83.46
-"Mossess",1569,,,
-"Other animals",776,15,1.93,98.07
-"Other arthropods",2043,,,
-"Other fungi",405,2,0.49,99.51
-"Other insects",11092,60,0.54,99.46
-"Other molluscs",55,7,12.73,87.27
-"Protozoa",1015,25,2.46,97.54
-"Reptiles",140,39,27.86,72.14
-"Unclassified",7,,,
-"Viruses",348,,,
+"taxaSubGroup","taicol.count","record.count","record.prop","taicol.prop","cum.total"
+"Algae",1050,46,4.38,95.62,1004
+"Amphibians",45,21,46.67,53.33,24
+"Angiosperms",6836,90,1.32,98.68,6746
+"Arachnida",2001,0,0,0,2001
+"Archaea",10,0,0,0,10
+"Ascomycota",4146,38,0.92,99.08,4108
+"Bacteria",2717,0,0,0,2717
+"Basidiomycota",1980,60,3.03,96.97,1920
+"Birds",749,65,8.68,91.32,684
+"Bivalves",933,0,0,0,933
+"Cephalopods",115,23,20,80,92
+"Chromista",1814,56,3.09,96.91,1758
+"Cnidarians",983,0,0,0,983
+"Coleoptera",7645,0,0,0,7645
+"Echinoderms",268,28,10.45,89.55,240
+"Ferns",803,76,9.46,90.54,727
+"Fishes",3350,73,2.18,97.82,3277
+"Gastropods",3318,59,1.78,98.22,3259
+"Gymnosperms",131,27,20.61,79.39,104
+"Lepidoptera",5229,70,1.34,98.66,5159
+"Malacostraca",2100,0,0,0,2100
+"Mammals",127,21,16.54,83.46,106
+"Mossess",1569,0,0,0,1569
+"Other animals",776,15,1.93,98.07,761
+"Other arthropods",2043,0,0,0,2043
+"Other fungi",405,2,0.49,99.51,403
+"Other insects",11092,60,0.54,99.46,11032
+"Other molluscs",55,7,12.73,87.27,48
+"Protozoa",1015,25,2.46,97.54,990
+"Reptiles",140,39,27.86,72.14,101
+"Viruses",348,0,0,0,348

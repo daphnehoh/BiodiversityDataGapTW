@@ -156,7 +156,7 @@ options(shiny.developer.mode = TRUE)
 tbia <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8")
 
-tbia.color_6 <- c("#3E5145", "#76A678", "#E5C851", "#E2A45F", "#F8E3C4", "#C75454", "#D6F677")
+tbia.color_6 <- c("#3E5145", "#76A678", "#E5C851", "#E2A45F", "#F8E3C4", "#C75454")
 
 
 
@@ -204,20 +204,46 @@ shinyServer(function(input, output, session) {
   
   output$taxa.bar.unrecorded.taxa <- renderPlotly({
     
-    ## if habitat == "All"
-    df_taxa.unrecorded.taxa.prop.groupAll <- 
-      fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv",
-      sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+    if (input$taxa.landtype.taxa.prop == "All") {
+      
+      ## if habitat == "All"
+      df_taxa.unrecorded.taxa.prop.groupAll <- 
+        fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv",
+        sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+      
+      plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
+                           hoverinfo = 'text', text = ~paste0("Unrecorded species: ", cum.total), textposition = "none") %>%
+        add_trace(y = ~record.count, name = "Recorded", marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species via TaiCOL: ", taicol.count, "<br>Recorded species: ", record.count), textposition = "none")
+      
+    } else {
+      
+      ## if habitat == one of the "is_*"
+      df_counts_by_habitats <- 
+        fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_counts_by_habitats.csv",
+              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+      
+      ## select habitat
+      selected_habitat <- input$taxa.landtype.taxa.prop
+      df_subset <- df_counts_by_habitats[df_counts_by_habitats$habitat == selected_habitat, ]
+      
+      plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
+                           hoverinfo = 'text', text = ~paste0("Unrecorded species: ", cum.total), textposition = "none") %>%
+        add_trace(y = ~record.count, name = 'Recorded', marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species via TaiCOL: ", taicol.count, "<br>Recorded species: ", record.count), textposition = "none")
+      
+    }
     
-    plot_ly(df_taxa.unrecorded.taxa.prop, x = ~taxaSubGroup, type = 'bar', name = 'Recorded', y = ~record.prop,
-            hoverinfo = 'text+y', text = ~paste("Recorded species: "), textposition = "none") %>%
-      add_trace(y = ~taicol.prop, name = 'Unrecorded', marker = list(color = tbia.color_6[1]),
-                hoverinfo = 'text+y', text = ~paste("Unrecorded species: ", taicol.count), textposition = "none") %>%
+    # Customize layout and configuration for the plot
+    plot_data <- plot_data %>%
       layout(barmode = 'stack', 
-             xaxis = list(title = "Taxa group"), 
-             yaxis = list(title = "Proportion (%)", tickvals = seq(0, 100, 10))) %>%
-      config(displayModeBar = FALSE)
-    
+             xaxis = list(title = "Taxa group", tickangle = 45), 
+             yaxis = list(title = "Record count", tickvals = seq(0, 12000, 500)),
+             legend = list(x = 0, y = 1.1, orientation = "h")) %>%
+        config(displayModeBar = FALSE)
+      
+    # Return the plotly object
+    return(plot_data)
 
   })
   
@@ -225,96 +251,239 @@ shinyServer(function(input, output, session) {
   
   # Section: Species Tree
   ## collapsible tree
-  output$taxa.treeSubGroup <- renderUI({
-    selectInput("taxa.treeSubGroup", "Select taxa group:", unique(tbia$taxaSubGroup))
-  })
+  df_tree <- 
+    fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_tree.csv",
+          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
-  output$taxa.treeHabitat <- renderUI({
-    selectInput("taxa.treeHabitat", "Select habitat:", taicol$habitat)
+  output$taxa.treeSubGroup <- renderUI({
+    selectInput("taxa.treeSubGroup", "Select taxa group:", sort(unique(df_tree$taxaSubGroup)))
   })
   
   speciesTree <- reactive({
-    req(input$taxa.treeHabitat, input$taxa.treeSubGroup)
-    filtered_data <- tbia[tbia$type == input$taxa.treeHabitat & tbia$taxaSubGroup == input$taxa.treeSubGroup, ]
+    req(input$taxa.treeSubGroup)
+    filtered_data <- df_tree %>%
+      filter(taxaSubGroup == input$taxa.treeSubGroup) %>%
+      arrange(family, genus, recorded)
     return(filtered_data)
   })
-  
+
   output$tree <- renderCollapsibleTree({
     collapsibleTree(
       speciesTree(),
       root = input$taxa.treeSubGroup,
-      attribute = "scientificName",
-      hierarchy = c("family", "scientificName"),
-      fill = "Red",
-      zoomable = FALSE
-    )
+      attribute = "taxaSubGroup",
+      hierarchy = c("family", "genus", "recorded"))
   })
   
   
   
   # Section: Temporal Gap
-  ## taxa select
-  updateSelectizeInput(session, 'time.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
-  
-  ## land type select
-  output$time.landType <- renderUI({
-    selectInput("time.landType", "Select a land type:", unique(tbia$type))
+  ## load time data
+  df_time <- reactive({
+    fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_time.csv",
+          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+  })
+
+  ## Update taxaSubGroup choices
+  observe({
+    updateSelectizeInput(session, 'time.taxaSubGroup', choices = unique(df_time()$taxaSubGroup), server = TRUE)
   })
   
-  ## year plot
-  data <- reactive({
-    data.frame(year = 1980:2024,
-               value = as.integer(runif(45, min = 0, max = 100)))
-  })
-  
-  output$time.yearBarChart <- renderPlotly({
-    data_filtered <- data() %>%
+  ## Filtered data based on year range, month, and taxaSubGroup
+  filtered_data <- reactive({
+    req(input$time.year)
+    data_filtered <- df_time() %>%
       filter(year >= input$time.year[1] & year <= input$time.year[2])
     
-    plot_ly(data_filtered, x = ~year, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
-      layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count"))
-  })
-  
-  ## month plot
-  output$time.monthBarChart <- renderPlotly({
-    selected_months <- input$time.month
-    data <- data.frame(month = 1:12,
-                       value = as.integer(runif(12, min = 0, max = 100)))
-    
-    if (!is.null(selected_months)) {
-      data <- data[data$month %in% selected_months, ]
+    if (!is.null(input$time.month)) {
+      data_filtered <- data_filtered %>%
+        filter(month %in% input$time.month)
     }
     
-    plot_ly(data, x = ~month, y = ~value, type = "bar", marker = list(color = "#76A678")) %>%
-      layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
+    if (!is.null(input$time.taxaSubGroup)) {
+      data_filtered <- data_filtered %>%
+        filter(taxaSubGroup %in% input$time.taxaSubGroup)
+    }
+    
+    data_filtered
+  })
+  
+  ## Render year bar chart
+  output$time.yearBarChart <- renderPlotly({
+    plot_ly(filtered_data(), x = ~year, type = "histogram", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count")) %>%
       config(displayModeBar = FALSE)
   })
   
+  ## Render month bar chart
+  output$time.monthBarChart <- renderPlotly({
+    req(input$time.month)
+    plot_ly(filtered_data(), x = ~month, type = "histogram", marker = list(color = "#76A678")) %>%
+      layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
+      config(displayModeBar = FALSE)
+  })
+
   
   
   # Section : Spatial
-  ## spatialMap
+  ## Load taxa table
+  df_spatial_allOccCount_grid_table <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_spatial_allOccCount_grid_table.csv",
+                                             sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
-  ### get coords from tbia
-  df1 <- tbia[1:10, c("longitude", "latitude", "type", "taxaSubGroup")]
-  df1$longitude <- as.numeric(df1$longitude)
-  df1$latitude <- as.numeric(df1$latitude)
-  coords_sf <- st_as_sf(df1, coords = c("longitude", "latitude"), crs = 4326)
-
-  ### 5km grid
-  #grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
-  grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
-
-  ### shp with occ fit into grid
-  #occ.grid5km_sf <- st_read("C:/Users/taibi/OneDrive/Desktop/Daphne/to_grid5km.shp")
-  occ.grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
-
-  pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$nmbr_f_)
-
+  output$df_spatial_allOccCount_grid_table <- renderDT({
+    datatable(df_spatial_allOccCount_grid_table,
+              options = list(searching = FALSE, lengthMenu = list(c(10, -1), c('10', 'All'))))
+  })
+  
+  # Load map data
+  df_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_map.shp")
+  pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
+  
+  df_taxa_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa_map.shp")
+  pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCont)
+  
+  ## show maps
+  df_taxa_map_selected <- reactive({
+    req(input$spatial.taxaSubGroup)  # Require input$spatial.taxaSubGroup to be available
+    df_taxa_map %>%
+      filter(txSbGrp %in% input$spatial.taxaSubGroup)
+  })
+  
+  # Initialize reactive values for map state
+  mapState <- reactiveValues(
+    zoom = 6,  # Initial zoom level
+    lng = 120,  # Initial longitude
+    lat = 21  # Initial latitude
+  )
+  
+  ## Render the spatialMap based on selection
   output$spatialMap <- renderLeaflet({
+    if (input$showAll) {
+      leaflet() %>%
+        addProviderTiles(providers$Stadia) %>%
+        setView(lng = mapState$lng, lat = mapState$lat, zoom = mapState$zoom) %>%
+        addResetMapButton() %>%
+        addPolygons(
+          data = df_map,
+          fillColor = ~pal_map(occCount),
+          weight = 1,
+          opacity = 1,
+          color = 'white',
+          fillOpacity = 0.5,
+          popup = ~paste("Number of records:", occCount))
+    } else {
+      leaflet() %>%
+        addProviderTiles(providers$Stadia) %>%
+        setView(lng = mapState$lng, lat = mapState$lat, zoom = mapState$zoom) %>%
+        addResetMapButton() %>%
+        addPolygons(
+          data = df_taxa_map_selected(),
+          fillColor = ~pal_taxa(occCont),
+          weight = 1,
+          opacity = 1,
+          color = 'white',
+          fillOpacity = 0.5,
+          popup = ~paste("Number of records:", occCont))
+    }
+  })
+  
+  # Update selectizeInput choices based on df_spatial_allOccCount_grid_table
+  observe({
+    updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_spatial_allOccCount_grid_table$taxaSubGroup), server = TRUE)
+  })
+  
+  # Update checkbox based on selection
+  observeEvent(input$spatial.taxaSubGroup, {
+    if (is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0) {
+      updateCheckboxInput(session, "showAll", value = TRUE)
+    } else {
+      updateCheckboxInput(session, "showAll", value = FALSE)
+    }
+  })
+  
+  # To prevent map keep resetting to default zoom level when a taxa is selected
+  observe({
+    proxy <- leafletProxy("spatialMap")
+    # Update mapState$zoom and mapState$lat/mapState$lng based on user interaction
+    mapState$zoom <- input$spatialMap_zoom
+    mapState$lat <- input$spatialMap_moveend$lat
+    mapState$lng <- input$spatialMap_moveend$lng
+  })
+  
+  
+  # ## show all records map
+  # df_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_map.shp")
+  # pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
+  # 
+  # output$spatialMap <- renderLeaflet({
+  #   leaflet() %>%
+  #     addProviderTiles(providers$Stadia) %>%
+  #     setView(lng = 120, lat = 21, zoom = 7) %>%
+  #     addResetMapButton() %>%
+  #     addPolygons(
+  #       data = df_map,
+  #       fillColor = ~pal_map(occCount),
+  #       weight = 1,
+  #       opacity = 1,
+  #       color = 'white',
+  #       fillOpacity = 0.5,
+  #       popup = ~paste("Number of records:", occCount))
+  # })
+  # 
+  # 
+  # ## show selected taxa
+  # df_taxa_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa_map.shp")
+  # pal_taxa_map <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCont)
+  # 
+  # df_taxa_map_selected <- reactive({
+  #   df_taxa_map %>%
+  #     filter(txSbGrp %in% input$spatial.taxaSubGroup)
+  # })
+  # 
+  # output$spatialMap <- renderLeaflet({
+  #   leaflet() %>%
+  #     addProviderTiles(providers$Stadia) %>%
+  #     setView(lng = 120, lat = 21, zoom = 7) %>%
+  #     addResetMapButton() %>%
+  #     addPolygons(
+  #       data = df_taxa_map_selected(),
+  #       fillColor = ~pal_taxa_map(occCont),
+  #       weight = 1,
+  #       opacity = 1,
+  #       color = 'white',
+  #       fillOpacity = 0.5,
+  #       popup = ~paste("Number of records:", occCont))
+  # })
+  
+  
+  
+  # Section: Fill gap
+  ## gapCount table
+  gapCountdf <- data.frame(
+    Level = c("Priority", "Intermediate", "Non-priority"),
+    Land = c("50000", "100", "1"),
+    Sea = c("1000", "10", "1"),
+    stringsAsFactors = FALSE
+  )
+  
+  output$gapCount <- renderDT({
+    datatable(gapCountdf, options = list(searching = FALSE, paging = FALSE))
+  })
+  
+  ## gapMap
+  ## grid layer
+  occ.grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
+  pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$allOccC)
+  
+  output$gapMap <- renderLeaflet({
     leaflet() %>%
-      addTiles() %>%
-      setView(lng = 120, lat = 21, zoom = 7) %>%
+      addProviderTiles(providers$Stadia) %>%
+      setView(lng = 120, lat = 20, zoom = 5) %>%
+      addProviderTiles(providers$OSM, group = "OSM") %>%
+      addProviderTiles(providers$USGS, group = "USGS") %>%
+      addLayersControl(
+        baseGroups = c("Stadia", "OSM", "USGS"),
+        options = layersControlOptions(collapsed = TRUE)) %>%
       addResetMapButton() %>%
       addPolygons(
         data = occ.grid5km_sf,
@@ -333,200 +502,5 @@ shinyServer(function(input, output, session) {
         position = "bottomright")
   })
 
-  ## top 15 table
-  spatial_top15taxa_table <- tbia %>%
-    group_by(taxaSubGroup) %>%
-    summarize(count = n())
-
-  output$spatial_top15taxa_table <- renderDT({
-    datatable(spatial_top15taxa_table, 
-              options = list(searching = FALSE, lengthMenu = list(c(10, -1), c('10', 'All'))))
-  })
-
-  ## spatialTaxaMap
-  updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(tbia$taxaSubGroup), server = TRUE)
-
-  ### Reactive expression to track selected options in selectize input
-  selectedOptions <- reactive({
-    input$spatial.taxaSubGroup
-  })
-
-  ### Observer to update the checkbox based on changes in selected options
-  observe({
-    if (is.null(selectedOptions()) || length(selectedOptions()) == 0) {
-      updateCheckboxInput(session, "showAll", value = TRUE)
-    } else {
-      updateCheckboxInput(session, "showAll", value = FALSE)
-    }
-  })
-  
-  
-  
-  
-  
-  
-  
-  # Section: Fill gap
-  ## gapCount table
-  gapCountdf <- data.frame(
-    Level = c("Priority", "Intermediate", "Non-priority"),
-    Land = c("50000", "100", "1"),
-    Sea = c("1000", "10", "1"),
-    stringsAsFactors = FALSE
-  )
-  
-  output$gapCount <- renderDT({
-    datatable(gapCountdf, options = list(searching = FALSE, paging = FALSE))
-  })
-  
-  ## gapMap
-  output$gapMap <- renderLeaflet({
-    leaflet() %>%
-      addTiles(group = "OSM") %>%
-      setView(lng = 120, lat = 20, zoom = 5) %>%
-      addProviderTiles(providers$Stadia, group = "Stadia") %>%
-      addProviderTiles(providers$USGS, group = "USGS") %>%
-      addLayersControl(
-        baseGroups = c("OSM", "Stadia", "USGS"),
-        options = layersControlOptions(collapsed = TRUE)
-      )
-  })
-  
-  
-  
-  
- # # parks map
- # # output$parksMap <- renderLeaflet({
- # #  leaflet(data=parks) %>% 
- # #  addProviderTiles(providers$Stamen.Watercolor, group = "Stamen Watercolor", options = providerTileOptions(noWrap = TRUE)) %>%#, minZoom = 4)) %>%
- # #  addProviderTiles(providers$OpenStreetMap.Mapnik, group = "Open Street Map", options = providerTileOptions(noWrap = TRUE)) %>%
- # #  addProviderTiles(providers$NASAGIBS.ViirsEarthAtNight2012, group = "Nasa Earth at Night", options = providerTileOptions(noWrap = TRUE)) %>%
- # #  addProviderTiles(providers$Stamen.TerrainBackground, group = "Stamen Terrain Background", options = providerTileOptions(noWrap = TRUE)) %>%
- # #  addProviderTiles(providers$Esri.WorldImagery, group = "Esri World Imagery", options = providerTileOptions(noWrap = TRUE)) %>%
- # #  addFullscreenControl() %>%
- # #  addMarkers(
- # #    ~Longitude,
- # #    ~Latitude,
- # #    #icon = makeIcon(
- # #    #  iconUrl = "32px-US-NationalParkService-Logo.svg.png",
- # #    #  shadowUrl = "32px-US-NationalParkService-Logo.svg - black.png",
- # #    #  shadowAnchorX = -1, shadowAnchorY = -2
- # #    #),
- # #    clusterOptions = markerClusterOptions()
- # #  ) %>%
- # #  addLayersControl(
- # #    baseGroups = c("Stamen Watercolor","Open Street Map","Nasa Earth at Night","Stamen Terrain Background","Esri World Imagery"),
- # #    position = c("topleft"),
- # #    options = layersControlOptions(collapsed = TRUE)
- # #  )
- # # })
- # # 
- # 
- # # code to load the park card once the click event on a marker is intercepted 
- # observeEvent(input$parksMap_marker_click, { 
- #   pin <- input$parksMap_marker_click
- #   #print(Sys.time()) #uncomment to log coords
- #   #print(pin) #uncomment to log coords
- #   selectedPoint <- reactive(parks[parks$Latitude == pin$lat & parks$Longitude == pin$lng,])
- #   leafletProxy("parksMap", data = selectedPoint()) %>% clearPopups() %>% 
- #   addPopups(~Longitude,
- #             ~Latitude,
- #             popup = ~park_card(selectedPoint()$ParkName, selectedPoint()$ParkCode, selectedPoint()$State, selectedPoint()$Acres, selectedPoint()$Latitude, selectedPoint()$Longitude)
- #   )
- # })
- # 
- # 
- # # DT table
- # # output$speciesDataTable <- renderDataTable(
- # #   species[,-c(8,12,13,14,15,16,17,18)],
- # #   filter = "top",
- # #   colnames = c('Species ID', 'Park name', 'Category', 'Order', 'Family', 'Scientific name', 'Common name', 'Occurence', 'Nativeness' ,'Abundance')
- # #   
- # # )
- # 
- # # collapsible tree
- # output$parkSelectComboTree <- renderUI({
- #     selectInput("selectedParkTree","Select a park:", parksNames)
- # })
- # 
- # output$categorySelectComboTree <- renderUI({
- #   selectInput("selectedCategoryTree","Select a category:", sort(as.character(unique(species[species$Park.Name==input$selectedParkTree, c("Category")]))))
- # })
- # 
- # speciesTree <- reactive(species[species$Park.Name==input$selectedParkTree & species$Category==input$selectedCategoryTree,
- #                                 c("Category", "Order", "Family","Scientific.Name")])
- # 
- # output$tree <- renderCollapsibleTree(
- #   collapsibleTree(
- #     speciesTree(),
- #     root = input$selectedCategoryTree,
- #     attribute = "Scientific.Name",
- #     hierarchy = c("Order", "Family","Scientific.Name"),
- #     fill = "Green",
- #     zoomable = FALSE
- #   )
- # )
- # 
- # # ggplot2 charts
- # output$categorySelectComboChart <- renderUI({
- #   selectInput("selectedCategoryChart","Select a category:", speciesCategories)
- # })
- # 
- # speciesGgplot1 <- reactive(species[species$ParkGroup == 'First Group' & species$Category==input$selectedCategoryChart,])
- # speciesGgplot2 <- reactive(species[species$ParkGroup == 'Second Group' & species$Category==input$selectedCategoryChart,])
- # 
- # output$ggplot2Group1 <- renderPlot({
- #   
- #   g1 <- ggplot(data = speciesGgplot1()) + stat_count(mapping = aes(x=fct_rev(Park.Name)), fill="green3") + labs(title="Species' count per park [A-Hal]", x ="Park name", y = paste0("Total number of ", input$selectedCategoryChart)) + coord_flip() + theme_classic() + geom_text(stat='count', aes(fct_rev(Park.Name), label=..count..), hjust=2, size=4)
- #   print(g1)
- #   
- # })
- # 
- # output$ggplot2Group2 <- renderPlot({
- #   
- #   g2 <- ggplot(data = speciesGgplot2()) + stat_count(mapping = aes(x=fct_rev(Park.Name)), fill="green3") + labs(title="Species' count per park [Haw-Z]", x ="Park name", y = paste0("Total number of ", input$selectedCategoryChart)) + coord_flip() + theme_classic() + geom_text(stat='count', aes(fct_rev(Park.Name), label=..count..), hjust=2, size=4)
- #   print(g2)
- #   
- # })
- # 
- # # leaflet choropleth
- # output$statesSelectCombo <- renderUI({
- #   selectInput("statesCombo","Select a state:", paste0(state.name[match(speciesStates,state.abb)]," (",speciesStates,")"))
- # })
- # 
- # output$categorySelectComboChoro <- renderUI({
- #   selectInput("selectedCategoryChoro","Select a category:", speciesCategories)
- # })
- # 
- # selectedChoroCategory <- reactive(speciesCategoriesByState[speciesCategoriesByState$Category==input$selectedCategoryChoro,])
- # selectedChoroCategoryJoinStates <- reactive(geo_join(states, selectedChoroCategory(), "STUSPS", "ParkState"))
- # 
- # output$stateCategoryList <- renderTable({
- #   speciesCategoriesByState[speciesCategoriesByState$ParkState == substr(input$statesCombo,nchar(input$statesCombo)-2,nchar(input$statesCombo)-1), c("Category","n")]
- # },colnames = FALSE) 
- # 
- #   
- # output$choroplethCategoriesPerState <- renderLeaflet({
- # 
- #   leaflet(options = leafletOptions(zoomControl = FALSE)) %>% htmlwidgets::onRender("function(el, x) {L.control.zoom({ position: 'topright' }).addTo(this) }") %>%
- #     addProviderTiles("CartoDB.PositronNoLabels") %>%
- #     setView(-98.483330, 38.712046, zoom = 4) %>%
- #     addPolygons(data = selectedChoroCategoryJoinStates(),
- #                 fillColor = colorNumeric("Greens", domain=selectedChoroCategoryJoinStates()$n)(selectedChoroCategoryJoinStates()$n),
- #                 fillOpacity = 0.7,
- #                 weight = 0.2,
- #                 smoothFactor = 0.2,
- #                 highlight = highlightOptions(
- #                   weight = 5,
- #                   color = "#666",
- #                   fillOpacity = 0.7,
- #                   bringToFront = TRUE),
- #                 label = paste0("Total of ", as.character(selectedChoroCategoryJoinStates()$n)," species in ",as.character(selectedChoroCategoryJoinStates()$NAME)," (",as.character(selectedChoroCategoryJoinStates()$STUSPS),").")) %>%
- #     addLegend(pal = colorNumeric("Greens", domain=selectedChoroCategoryJoinStates()$n),
- #               values = selectedChoroCategoryJoinStates()$n,
- #               position = "bottomright",
- #               title = input$selectedCategoryChoro)
- # 
- # })
 
 })
