@@ -189,7 +189,7 @@ species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "for
 ```
 
 
-```{r prep for Section: Taxonomic - data wrangling}
+```{r prep for Section: Taxonomic}
 # Subsection: Taxonomic Gap
 species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
 
@@ -337,9 +337,7 @@ df_time <- tbia[, c("id", "year", "month", "taxaSubGroup")]
 
 fwrite(df_time, "../www/data/df_time.csv", 
        row.names = F, quote = T)
-
 ```
-
 
 
 ```{r prep for Section: Spatial}
@@ -406,6 +404,7 @@ allOccCount <- df_map_grid %>%
   group_by(id) %>% 
   summarise(occCount = sum(n))
 
+
 ### 4.1 combine grid counts with 5km geometry
 allOccCount_grid <- merge(allOccCount, grid5km_sf, by = "id", all.x = TRUE)
 st_write(allOccCount_grid, "../www/data/df_map.shp")
@@ -425,105 +424,70 @@ st_write(taxaOccCount_grid, "../www/data/df_taxa_map.shp", append = TRUE)
 
 
 
-
-
-
-
-
-# separate to group for parallel processing
-n <- 150000
-num_groups <- ceiling(nrow(tbia_withCoords2) / n)
-records_in_last_group <- nrow(tbia_withCoords2) %% n
-group_var <- rep(1:num_groups, each = n)
-group_var <- c(group_var, rep(num_groups + 1, times = records_in_last_group))
-tbia_withCoords2_groupList <- split(tbia_withCoords2, group_var)
-
-catchLocation <- function(x){
-  x %>%
-    st_as_sf(coords = c("longitude", "latitude"), remove = F) %>%
-    st_set_crs(4326) %>%
-    st_join(., shpFile, join = st_intersects, left = T, largest = T) %>%
-    st_drop_geometry(.)
-}
-
-## Clip points to the map boundaries
-## Takes too long to run, run in parallel
-cpu.cores <- detectCores() - 10
-cl <- makeCluster(cpu.cores)
-
-clusterEvalQ(cl, { # make sure all clusters are ready
-  library(tidyverse)
-  library(data.table)
-  library(sf)
-  library(lwgeom)
-  TWshp <- st_read("C:/Users/taibi/Documents/GitHub/TBIA-data-review/layers/TWshp&grid/TWshp_land&sea/TWshp_land&sea.shp")
-  TWshp <- st_make_valid(TWshp)
-  shpFile <- st_zm(TWshp) %>%
-    select(., TOWNID, TOWNNAME)
-  shpFile <- as(shpFile, "sf")%>%
-    st_set_crs(4326)
-  sf_use_s2(F)
-}
-)
-
-system.time(
-  tbia2 <- parLapply(cl, tbia_withCoords2_groupList, catchLocation) %>%
-    do.call(rbind, .)
-) # 20240606 - 55min, 5.24hr
-
-stopCluster(cl)
-
-fwrite(tbia2, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_shp.csv",
-       row.names = F, quote = T)
-
-
-## combines shp file attribute table with occurrence table
-tbia2.1 <- tbia2 %>%
-  filter(!is.na(TOWNID)) # remove points fall outside of Taiwan territory
-
-fwrite(tbia2.1, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_TWshp.csv",
-       row.names = F, quote = T)
-
-tbia3 <- left_join(tbia2.1, tbia_withCoords, by = "tmpID")
-
-tbia3$type <- data.table::fifelse(tbia3$TOWNID == "sea", "sea", "land")
-tbia3 <- tbia3[, -c("tmpID", "latitude.y", "longitude.y")]
-colnames(tbia3)[colnames(tbia3) == "latitude.x"] <- "latitude"
-colnames(tbia3)[colnames(tbia3) == "longitude.x"] <- "longitude"
-
-
-fwrite(tbia3, "02.processed_data/ver5_ver20240605_shiny/tbia_points_in_TW.csv",
-       row.names = F, quote = T)
-
-
-
-
-
-
-
-
-
-## want points in grid, not occ record
-
-leaflet() %>%
-      addTiles() %>%
-      setView(lng = 120, lat = 21, zoom = 7) %>%
-      addResetMapButton() %>%
-      addPolygons(
-        data = df_map_sf,
-        fillColor = ~pal(nmbr_f_),
-        weight = 1,
-        opacity = 1,
-        color = 'white',
-        fillOpacity = 0.5,
-        popup = ~paste("Number of records:", nmbr_f_)) #%>%
-      # addLegend(
-      #   data = occ.grid5km_sf,
-      #   pal = pal,
-      #   values = ~nmbr_f_,
-      #   opacity = 0.5,
-      #   title = "Record count",
-      #   position = "bottomright")
+# # separate to group for parallel processing
+# n <- 150000
+# num_groups <- ceiling(nrow(tbia_withCoords2) / n)
+# records_in_last_group <- nrow(tbia_withCoords2) %% n
+# group_var <- rep(1:num_groups, each = n)
+# group_var <- c(group_var, rep(num_groups + 1, times = records_in_last_group))
+# tbia_withCoords2_groupList <- split(tbia_withCoords2, group_var)
+# 
+# catchLocation <- function(x){
+#   x %>%
+#     st_as_sf(coords = c("longitude", "latitude"), remove = F) %>%
+#     st_set_crs(4326) %>%
+#     st_join(., shpFile, join = st_intersects, left = T, largest = T) %>%
+#     st_drop_geometry(.)
+# }
+# 
+# ## Clip points to the map boundaries
+# ## Takes too long to run, run in parallel
+# cpu.cores <- detectCores() - 10
+# cl <- makeCluster(cpu.cores)
+# 
+# clusterEvalQ(cl, { # make sure all clusters are ready
+#   library(tidyverse)
+#   library(data.table)
+#   library(sf)
+#   library(lwgeom)
+#   TWshp <- st_read("C:/Users/taibi/Documents/GitHub/TBIA-data-review/layers/TWshp&grid/TWshp_land&sea/TWshp_land&sea.shp")
+#   TWshp <- st_make_valid(TWshp)
+#   shpFile <- st_zm(TWshp) %>%
+#     select(., TOWNID, TOWNNAME)
+#   shpFile <- as(shpFile, "sf")%>%
+#     st_set_crs(4326)
+#   sf_use_s2(F)
+# }
+# )
+# 
+# system.time(
+#   tbia2 <- parLapply(cl, tbia_withCoords2_groupList, catchLocation) %>%
+#     do.call(rbind, .)
+# ) # 20240606 - 55min, 5.24hr
+# 
+# stopCluster(cl)
+# 
+# fwrite(tbia2, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_shp.csv",
+#        row.names = F, quote = T)
+# 
+# 
+# ## combines shp file attribute table with occurrence table
+# tbia2.1 <- tbia2 %>%
+#   filter(!is.na(TOWNID)) # remove points fall outside of Taiwan territory
+# 
+# fwrite(tbia2.1, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_TWshp.csv",
+#        row.names = F, quote = T)
+# 
+# tbia3 <- left_join(tbia2.1, tbia_withCoords, by = "tmpID")
+# 
+# tbia3$type <- data.table::fifelse(tbia3$TOWNID == "sea", "sea", "land")
+# tbia3 <- tbia3[, -c("tmpID", "latitude.y", "longitude.y")]
+# colnames(tbia3)[colnames(tbia3) == "latitude.x"] <- "latitude"
+# colnames(tbia3)[colnames(tbia3) == "longitude.x"] <- "longitude"
+# 
+# 
+# fwrite(tbia3, "02.processed_data/ver5_ver20240605_shiny/tbia_points_in_TW.csv",
+#        row.names = F, quote = T)
 
 
 
@@ -531,6 +495,26 @@ leaflet() %>%
 
 
 
+```{r prep for Section: Gap}
+# save as shp file
+df_gapCount <- st_read("../www/data/df_map.shp")
+
+df_gapCount <- df_gapCount %>%
+  mutate(priority = case_when(occCount < 10 ~ "Priority",
+                              occCount >= 10 & occCount < 20 ~ "Intermediate",
+                              occCount > 20 ~ "Non-priority"))
+
+st_write(df_gapCount, "../www/data/df_gapCount_table.shp",
+         row.names = F, quote = T)
+
+# save as table
+df_gapCount_table <- as.data.frame(df_gapCount) %>%
+  group_by(priority) %>%
+  summarise(gridCount = sum(occCount))
+  
+fwrite(df_gapCount_table, "../www/data/df_gapCount_table.csv", 
+       row.names = F, quote = T)
+```
 
 
 

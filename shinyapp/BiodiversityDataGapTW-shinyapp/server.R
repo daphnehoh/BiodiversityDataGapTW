@@ -354,8 +354,14 @@ shinyServer(function(input, output, session) {
     if (input$showAll) {
 
       leaflet() %>%
-        addProviderTiles(providers$Stadia) %>%
-        setView(lng = 120, lat = 22, zoom = 7) %>%
+        addTiles() %>%
+        setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
+        addProviderTiles(providers$Stadia, group = "Stadia") %>%
+        addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+        addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
+        addLayersControl(
+          baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
+          options = layersControlOptions(collapsed = TRUE)) %>%
         addResetMapButton() %>%
         addPolygons(
           data = df_map,
@@ -364,13 +370,26 @@ shinyServer(function(input, output, session) {
           opacity = 0.5,
           color = 'orange',
           fillOpacity = 0.5,
-          popup = ~paste("Number of records:", occCount))
+          popup = ~paste("Number of records:", occCount)) %>%
+        addLegend(
+          data = df_map,
+          pal = pal_map,
+          values = ~occCount,
+          opacity = 0.5,
+          title = "Record count",
+          position = "bottomright")
 
       } else {
 
         leaflet() %>%
-          addProviderTiles(providers$Stadia) %>%
-          setView(lng = 120, lat = 22, zoom = 7) %>%
+          addTiles() %>%
+          setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
+          addProviderTiles(providers$Stadia, group = "Stadia") %>%
+          addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+          addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
+          addLayersControl(
+            baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
+            options = layersControlOptions(collapsed = TRUE)) %>%
           addResetMapButton() %>%
           addPolygons(
             data = df_taxa_map_selected(),
@@ -379,7 +398,14 @@ shinyServer(function(input, output, session) {
             opacity = 0.3,
             color = 'blue',
             fillOpacity = 0.5,
-            popup = ~paste("Number of records:", occCount))
+            popup = ~paste("Number of records:", occCount)) %>%
+          addLegend(
+            data = df_map,
+            pal = pal_map,
+            values = ~occCount,
+            opacity = 0.5,
+            title = "Record count",
+            position = "bottomright")
 
     }
   })
@@ -399,22 +425,18 @@ shinyServer(function(input, output, session) {
   })
 
   
-
-
-  
   
   # Section: Fill gap
   ## gapCount table
-  gapCountdf <- data.frame(
-    Level = c("Priority", "Intermediate", "Non-priority"),
-    Land = c("50000", "100", "1"),
-    Sea = c("1000", "10", "1"),
-    stringsAsFactors = FALSE
-  )
+  gapCountdf <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_gapCount_table.csv",
+                      sep = ",", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>% na.omit()
+  
+  gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("high", "medium", "low"))), ]
   
   output$gapCount <- renderDT({
-    datatable(gapCountdf, options = list(searching = FALSE, paging = FALSE))
+    datatable(gapCountdf_sorted, options = list(searching = FALSE, paging = FALSE))
   })
+  
   
   ## gapMap
   ## grid layer
@@ -423,12 +445,13 @@ shinyServer(function(input, output, session) {
   
   output$gapMap <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(providers$Stadia) %>%
-      setView(lng = 120, lat = 22, zoom = 7) %>%
-      addProviderTiles(providers$OSM, group = "OSM") %>%
-      addProviderTiles(providers$USGS, group = "USGS") %>%
+      addTiles() %>%
+      setView(lng = 120, lat = 23, zoom = 7) %>%
+      addProviderTiles(providers$Stadia, group = "Stadia") %>%
+      addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+      addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
       addLayersControl(
-        baseGroups = c("Stadia", "OSM", "USGS"),
+        baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
         options = layersControlOptions(collapsed = TRUE)) %>%
       addResetMapButton() %>%
       addPolygons(
