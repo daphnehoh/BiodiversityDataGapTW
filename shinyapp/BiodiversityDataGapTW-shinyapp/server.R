@@ -12,157 +12,11 @@ library(plotly)
 
 options(shiny.developer.mode = TRUE)
 
-#####################
-# SUPPORT FUNCTIONS #
-#####################
-
-# # function to retrieve a park image from the park wiki page
-# park_image <- function (park_Name){
-#   
-#   #bug1_fix#
-#   park_WikiUrl <- gsub(" ","_",paste0("https://en.wikipedia.org/wiki/",park_Name))
-#   #bug1_fix#
-#   park_Img <- read_html(park_WikiUrl)
-#   park_Img <- park_Img %>% html_nodes("img")
-#   
-#   list_park_Img <- (grepl("This is a featured article", park_Img) | grepl("Question_book-new.svg.png", park_Img) | grepl("Listen to this article", park_Img) | grepl("This is a good article", park_Img))
-#   park_Img <- park_Img[min(which(list_park_Img == FALSE))]
-#   
-#   park_Img <- gsub("\"","'",park_Img)
-#   park_Img <- gsub("//upload.wikimedia.org","https://upload.wikimedia.org",park_Img)
-#   park_Img <- sub("<img","<img style = 'max-width:100%; max-height:200px; margin: 10px 0px 0px 0px; border-radius: 5%; border: 1px solid black;'",park_Img)
-#   
-#   return(park_Img)
-#   
-# }
-#   
-# # function that build the park card html pop up
-# park_card <- function (park_Name, park_Code, park_State, park_Acres, park_Latitude, park_Longitude) {
-#   
-#   card_content <- paste0("<style>div.leaflet-popup-content {width:auto !important;}</style>",
-#                     "<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.1/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>",
-#                     "<table style='width:100%;'>",
-#                     "<tr>",
-#                     "<th><b><h2 style='text-align: left;'>",park_Name,"</h2></b></th>",
-#                     "<th><img style = 'border:1px solid black;' src='https://www.crwflags.com/art/states/",park_State,".gif' alt='flag' title='Flag of ",state.name[match(park_State,state.abb)]," ' width=80></th>",
-#                     "</tr>",
-#                     "</table>",
-#                     "<div class='flip-card'>",
-#                       "<div class='flip-card-inner'>",
-#                         "<div class='flip-card-front'>",
-#                           "<table style='width:100%;'>",
-#                             "<tr>",
-#                               "<td colspan='2'>",park_image(park_Name),"</td>",
-#                             "</tr>",
-#                             "<tr>",
-#                               "<td style='padding: 5px;'><h4><b>Code: </b>",park_Code,"</h4></td>",
-#                               "<td style='padding: 5px;'><h4><b>Acres: </b>",format(park_Acres, big.mark = ' '),"</h4></td>",
-#                             "</tr>",
-#                             "<tr>",
-#                               "<td style='padding: 5px;'><h4><b>Latitude: </b>",park_Latitude,"</h4></td>",
-#                               "<td style='padding: 5px;'><h4><b>Longitude: </b>",park_Longitude,"</h4></td>",
-#                             "</tr>",
-#                           "</table>",
-#                         "</div>",
-#                         "<div class='flip-card-back'>",
-#                           "<h3>Media links</h3> ",
-#                           "<hr>",
-#                           "<table style='width:80%;'>",
-#                             "<tr>",
-#                               "<td style='text-align: left; padding-left: 25px;'><h4>Official page:</h4></td>",
-#                               "<td><a style='color:white;' href='https://www.nps.gov/",park_Code,"/index.htm' target='_blank'><i class='fas fa-globe fa-2x'></i></a></td>",
-#                             "</tr>",
-#                             "<tr>",
-#                               "<td style='text-align: left; padding-left: 25px;'><h4>Wikipedia page:<h4></td>",
-#                               "<td><a style='color:white' href='https://en.wikipedia.org/wiki/",park_Name,"' target='_blank'><i class='fab fa-wikipedia-w fa-2x'></i></td></p>",
-#                             "</tr>",        
-#                             "<tr>",
-#                               "<td style='text-align: left; padding-left: 25px;'><h4>Pictures:<h4></td>",
-#                               "<td><a style='color:white' href='https://www.google.com/search?tbm=isch&q=",park_Name,"&tbs=isz:m' target='_blank'><i class='fas fa-images fa-2x'></i></a></td>",
-#                             "</tr>",
-#                             "<tr>",
-#                               "<td style='text-align: left; padding-left: 25px;'><h4>Youtube videos:<h4></td>",
-#                               "<td><a style='color:white' href='https://www.youtube.com/results?search_query=",park_Name,"' target='_blank'><i class='fab fa-youtube fa-2x'></i></td>",
-#                             "</tr>",
-#                           "</table>",
-#                         "</div>",
-#                       "</div>",
-#                     "</div>"
-#   )
-#   
-#   return(card_content)
-#   
-# }
-# 
-# ##################
-# # DATA WRANGLING #
-# ##################
-# 
-# # preprocessed parks file:
-# #   3 records were multi states parks, only was was attributed
-# #     DEVA,Death Valley National Park,CA/NV,4740912,36.24,-116.82  --> CA
-# #     GRSM,Great Smoky Mountains National Park,TN/NC,521490,35.68,-83.53 --> TN
-# #     YELL,Yellowstone National Park,WY/MT/ID,2219791,44.6,-110.5 --> WY
-# #   added (U.S.) suffix to Glacier National Park record for wiki disambigaution
-# 
-# parks <- read.csv("www/parks.csv")
-# species <- read.csv("www/species.csv")
-# 
-# # tidy & enrich dataframes
-# levels(species$Park.Name)[levels(species$Park.Name)=='Glacier National Park'] <- 'Glacier National Park (U.S.)'
-# parks$Acres <- as.numeric(parks$Acres)
-# parks$Latitude <- as.numeric(parks$Latitude)
-# parks$Longitude <- as.numeric(parks$Longitude)
-# 
-# parks <- parks %>%
-#   mutate(
-#     ParkRegion = state.region[match(parks$State,state.abb)]
-#   )
-# 
-# parks$ParkGroup <- ""
-# parks$ParkGroup[1:28] <- "First Group"
-# parks$ParkGroup[29:56] <- "Second Group"
-# 
-# species <- species %>%
-#   mutate(
-#     ParkRegion = parks$ParkRegion[match(substr(species$Species.ID,1,4),parks[,c("ParkCode")])]
-#   )
-# 
-# species <- species %>%
-#   mutate(
-#     ParkGroup = parks$ParkGroup[match(substr(species$Species.ID,1,4),parks[,c("ParkCode")])]
-#   )
-# 
-# species <- species %>%
-#   mutate(
-#     ParkState = parks$State[match(species$Park.Name,parks$ParkName)]
-#   )
-# 
-# # support structures
-# parksNames <- sort(as.character(unique(species[,c("Park.Name")])))
-# speciesCategories <- sort(as.character(unique(species[,c("Category")])))
-# speciesCategoriesByState <- species %>% group_by(Category, ParkState) %>% tally(sort=TRUE)
-# states <- states(cb=T)
-# speciesStates <- sort(as.character(unique(speciesCategoriesByState$ParkState[complete.cases(speciesCategoriesByState)]))) 
-
-################
-# SERVER LOGIC #
-################
-
-# Occurrence table
-# tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
-#               sep = ",", colClasses = "character", encoding = "UTF-8")
-
-tbia <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
-              sep = ",", colClasses = "character", encoding = "UTF-8")
-
+# TBIA colour theme
 tbia.color_6 <- c("#3E5145", "#76A678", "#E5C851", "#E2A45F", "#F8E3C4", "#C75454")
 
 
-
-
 shinyServer(function(input, output, session) {
-  
   
   
   # Section: Taxonomic Gap
@@ -170,7 +24,7 @@ shinyServer(function(input, output, session) {
   ## % record matched to highest taxon rank
   output$taxa.pie.taxonRank <- renderPlotly({
     
-    df_taxa.rank <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.csv",
+    df_taxa.rank <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.rank.csv",
                           sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
     plot_ly(df_taxa.rank, labels = ~taxonRank, values = ~count, type = "pie", sort = F,
@@ -182,7 +36,7 @@ shinyServer(function(input, output, session) {
   ## % record species rank matched to TaiCOL
   output$taxa.pie.TaiCOL <- renderPlotly({
     
-    df_taxa.rank.at.species <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.rank.at.species.csv",
+    df_taxa.rank.at.species <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.rank.at.species.csv",
                                      sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
     plot_ly(df_taxa.rank.at.species, labels = ~category, values = ~count, type = "pie", sort = F,
@@ -208,7 +62,7 @@ shinyServer(function(input, output, session) {
       
       ## if habitat == "All"
       df_taxa.unrecorded.taxa.prop.groupAll <- 
-        fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv",
+        fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv",
         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
       plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
@@ -220,7 +74,7 @@ shinyServer(function(input, output, session) {
       
       ## if habitat == one of the "is_*"
       df_counts_by_habitats <- 
-        fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_counts_by_habitats.csv",
+        fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/sdf_counts_by_habitats.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
       ## select habitat
@@ -251,9 +105,8 @@ shinyServer(function(input, output, session) {
   
   # Section: Species Tree
   ## collapsible tree
-  df_tree <- 
-    fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_tree.csv",
-          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+  df_tree <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_tree.csv",
+                   sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$taxa.treeSubGroup <- renderUI({
     selectInput("taxa.treeSubGroup", "Select taxa group:", sort(unique(df_tree$taxaSubGroup)))
@@ -280,7 +133,7 @@ shinyServer(function(input, output, session) {
   # Section: Temporal Gap
   ## load time data
   df_time <- reactive({
-    fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_time.csv",
+    fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_time.csv",
           sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   })
 
@@ -327,7 +180,7 @@ shinyServer(function(input, output, session) {
   
   # Section : Spatial
   ## Load taxa table
-  df_spatial_allOccCount_grid_table <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_spatial_allOccCount_grid_table.csv",
+  df_spatial_allOccCount_grid_table <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_spatial_allOccCount_grid_table.csv",
                                              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$df_spatial_allOccCount_grid_table <- renderDT({
@@ -336,10 +189,10 @@ shinyServer(function(input, output, session) {
   })
   
   # Load map data
-  df_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_map.shp")
+  df_map <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_map.shp")
   pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
   
-  df_taxa_map <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_taxa_map.shp")
+  df_taxa_map <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa_map.shp")
   pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCount)
   
   ## show maps
@@ -428,7 +281,7 @@ shinyServer(function(input, output, session) {
   
   # Section: Fill gap
   ## gapCount table
-  gapCountdf <- fread("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/df_gapCount_table.csv",
+  gapCountdf <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_gapCount_table.csv",
                       sep = ",", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>% na.omit()
   
   gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("high", "medium", "low"))), ]
@@ -440,7 +293,7 @@ shinyServer(function(input, output, session) {
   
   ## gapMap
   ## grid layer
-  occ.grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
+  occ.grid5km_sf <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
   pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$allOccC)
   
   output$gapMap <- renderLeaflet({

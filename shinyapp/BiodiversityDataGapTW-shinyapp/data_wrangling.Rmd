@@ -8,21 +8,20 @@ editor_options:
 ---
 
 ```{r env prep}
-#setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/")
-setwd("~/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/")
+setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/")
 
-.packs <- c("httr", "jsonlite", "dplyr", "data.table", "stringr", 
-            "ggplot2", "scales", "RColorBrewer", "tidyr", "tidyverse",
+.packs <- c("httr", "jsonlite", "data.table",
+            "dplyr", "stringr", "tidyverse",
             "sf", "parallel", "lwgeom")
-sapply(.packs, require, character.only = T)
 
+sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-# tbia <- fread("C:/Users/taibi/OneDrive/Desktop/Daphne/data/tbia_ver20240605.csv",
+# tbia <- fread("www/data/raw/tbia_ver20240605.csv",
 #               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
-tbia <- fread("tmp/sample_n_100_taxaSubGroup_dQgood.csv",
+tbia <- fread("tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -31,7 +30,7 @@ head(tbia)
 # remove unwanted columns
 keep <- c("id", "rightsHolder", "datasetName", "basisOfRecord",
           "year", "month",
-          "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "type",
+          "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters",
           "taxonID", "taxonRank", "taxaSubGroup",
           "kingdom", "phylum", "class", "order", "family", "genus", "scientificName")
 
@@ -65,7 +64,7 @@ keep <- c("rank","taxon_id","simple_name","common_name_c",
           "is_endemic","alien_type","is_terrestrial","is_freshwater","is_brackish","is_marine","is_in_taiwan",
           "kingdom","kingdom_c","phylum","phylum_c","class","class_c","order","order_c","family","family_c","genus","genus_c")
           
-df.taicol.list <- fread("../www/data/TaiCOL_taxon_20240528.csv", select = keep,
+df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240528.csv", select = keep,
                         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 df.taicol.list <- df.taicol.list %>% 
@@ -164,7 +163,7 @@ taxa2 <- taxa1 %>%
   mutate(is_marine = replace(is_marine, is_marine == "true", "is_marine"))
 
 # final TaiCOL table that classified with taxaSubGroup
-fwrite(taxa2, "../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv",
+fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv",
        row.names = F, quote = T)
 ```
 
@@ -172,17 +171,17 @@ fwrite(taxa2, "../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv",
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
 tbia1 <- left_join(tbia, habitat, by = "taxonID")
 
-fwrite(tbia1, "../www/data/tbia_habitat.csv",
+fwrite(tbia1, "www/data/processed/tbia_habitat.csv",
        row.names = F, quote = T)
 ```
 
 
-
-```{r load updated TBIA & TaiCOL table}
-tbia <- fread("../www/data/tbia_habitat.csv", 
+# Load updated TBIA & TaiCOL table
+```{r updated TBIA & TaiCOL table}
+tbia <- fread("www/data/processed/tbia_habitat.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
-taicol <- fread("../www/data/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+taicol <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
@@ -203,7 +202,7 @@ df_taxa.rank$taxonRank <- fifelse(df_taxa.rank$rank %in% species_infraspecies,
                                   "(infra)species", 
                                   paste0(df_taxa.rank$rank))
 
-fwrite(df_taxa.rank, "../www/data/df_taxa.rank.csv", 
+fwrite(df_taxa.rank, "www/data/processed/df_taxa.rank.csv", 
        row.names = F, quote = T)  
 
 
@@ -216,7 +215,7 @@ df_taxa.rank.at.species <- tbia %>%
   bind_rows(data.frame(count = 64542 - .$count, proportion = 100 - .$proportion)) %>%
   mutate(category = c("Recorded", "Unrecorded"))
 
-fwrite(df_taxa.rank.at.species, "../www/data/df_taxa.rank.at.species.csv", 
+fwrite(df_taxa.rank.at.species, "www/data/processed/df_taxa.rank.at.species.csv", 
        row.names = F, quote = T)
 
 
@@ -257,7 +256,7 @@ df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop.groupAll 
   
   #filter(!grepl("Other ", taxaSubGroup) & taxaSubGroup != "Unclassified") # remove "Other x" from df
 
-fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "../www/data/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
+fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
        row.names = F, quote = T)
 
 
@@ -301,7 +300,7 @@ df_counts_by_habitats <- left_join(taicol_habitat_count, tbia_habitat_count, by 
   mutate(cum.total = taicol.count - record.count)
   
 
-fwrite(df_counts_by_habitats, "../www/data/df_counts_by_habitats.csv", 
+fwrite(df_counts_by_habitats, "www/data/processed/df_counts_by_habitats.csv", 
        row.names = F, quote = T)
 
 ### Unrecorded taxa for download
@@ -327,7 +326,7 @@ table(taicol_species$tbia.recorded)
 taicol_species$recorded <- fifelse(taicol_species$tbia.recorded == TRUE, 
                                    paste0("[Recorded] ", taicol_species$simple_scientificName), taicol_species$simple_scientificName)
 
-fwrite(taicol_species, "../www/data/df_tree.csv", 
+fwrite(taicol_species, "www/data/processed/df_tree.csv", 
        row.names = F, quote = T)
 ```
 
@@ -335,14 +334,14 @@ fwrite(taicol_species, "../www/data/df_tree.csv",
 ```{r prep for Section: Temporal}
 df_time <- tbia[, c("id", "year", "month", "taxaSubGroup")]
 
-fwrite(df_time, "../www/data/df_time.csv", 
+fwrite(df_time, "www/data/processed/df_time.csv", 
        row.names = F, quote = T)
 ```
 
 
 ```{r prep for Section: Spatial}
 # load the 5km grid file
-grid5km_sf <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+grid5km_sf <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
 
 # load the tbia table
 df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "taxaSubGroup")]
@@ -369,14 +368,14 @@ catchLocation <- function(x){
 }
 
 #### parallel ####
-cpu.cores <- detectCores() -1
+cpu.cores <- detectCores() - 5
 cl <- makeCluster(cpu.cores)
 clusterEvalQ(cl, { # make sure all clusters are ready
   library(tidyverse)
   library(data.table)
   library(sf)
   library(lwgeom)
-  dg_grid <- st_read("/Users/daphne/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  dg_grid <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
   dg_grid <- as(dg_grid, "sf")%>%
     st_set_crs(4326)
   sf_use_s2(F)
@@ -395,7 +394,7 @@ allOccCount_grid_table <- df_map_grid %>%
   group_by(taxaSubGroup) %>% 
   summarise(allOccCount = sum(n))
 
-fwrite(allOccCount_grid_table, "../www/data/df_spatial_allOccCount_grid_table.csv", 
+fwrite(allOccCount_grid_table, "www/data/processed/df_spatial_allOccCount_grid_table.csv", 
        row.names = F, quote = T)
 
 
@@ -407,7 +406,7 @@ allOccCount <- df_map_grid %>%
 
 ### 4.1 combine grid counts with 5km geometry
 allOccCount_grid <- merge(allOccCount, grid5km_sf, by = "id", all.x = TRUE)
-st_write(allOccCount_grid, "../www/data/df_map.shp")
+st_write(allOccCount_grid, "www/data/processed/df_map.shp")
 
 
 
@@ -419,7 +418,7 @@ taxaOccCount <- df_map_grid %>%
 ### 5.1 combine grid counts with 5km geometry
 taxaOccCount_grid <- merge(taxaOccCount, grid5km_sf, by = "id", all.x = TRUE)
 names(taxaOccCount_grid) <- c("id", "tSG", "occCount", "geometry") # rename because ESRI cannot save long field name
-st_write(taxaOccCount_grid, "../www/data/df_taxa_map.shp", append = TRUE)
+st_write(taxaOccCount_grid, "www/data/processed/df_taxa_map.shp", append = TRUE)
 
 
 
@@ -497,14 +496,14 @@ st_write(taxaOccCount_grid, "../www/data/df_taxa_map.shp", append = TRUE)
 
 ```{r prep for Section: Gap}
 # save as shp file
-df_gapCount <- st_read("../www/data/df_map.shp")
+df_gapCount <- st_read("www/data/processed/df_map.shp")
 
 df_gapCount <- df_gapCount %>%
   mutate(priority = case_when(occCount < 10 ~ "Priority",
                               occCount >= 10 & occCount < 20 ~ "Intermediate",
                               occCount > 20 ~ "Non-priority"))
 
-st_write(df_gapCount, "../www/data/df_gapCount_table.shp",
+st_write(df_gapCount, "www/data/processed/df_gapCount_table.shp",
          row.names = F, quote = T)
 
 # save as table
@@ -512,7 +511,7 @@ df_gapCount_table <- as.data.frame(df_gapCount) %>%
   group_by(priority) %>%
   summarise(gridCount = sum(occCount))
   
-fwrite(df_gapCount_table, "../www/data/df_gapCount_table.csv", 
+fwrite(df_gapCount_table, "www/data/processed/df_gapCount_table.csv", 
        row.names = F, quote = T)
 ```
 

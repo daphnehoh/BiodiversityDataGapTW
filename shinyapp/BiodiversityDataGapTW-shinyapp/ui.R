@@ -42,9 +42,9 @@ shinyUI(fluidPage(
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='TBIA_logo_white.png' width = '250'></a>",
+          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='copilot1.JPG' width = '250'></a>",
           "<br>",
-          "<p style = 'text-align: center;'><small><a href='https://tbiadata.tw' target='_blank'>https://tbiadata.tw</a></small></p>",
+          "<p style = 'text-align: center;'><small><a href='https://xxx.tw' target='_blank'>https://xxx.tw</a></small></p>",
           "<br>"
         )),
         menuItem(HTML("&nbsp;Home"), tabName = "home", icon = icon("home")),
@@ -73,7 +73,7 @@ shinyUI(fluidPage(
           "<br>"),
         HTML(paste0(
          "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-06-18</div>", "<br>")
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-06-19</div>", "<br>")
         ))
       )
       
@@ -83,7 +83,7 @@ shinyUI(fluidPage(
     # body
     dashboardBody(
       
-      tags$style(HTML(".content-wrapper { height: 2500px; }")),
+      tags$style(HTML(".content-wrapper { overflow-y: hidden; }")),
       
       tags$script(HTML('
         $(document).on("change", "#taxaSubGroup", function(){
@@ -166,7 +166,7 @@ shinyUI(fluidPage(
         # Section: Temporal Gap
         tabItem(
           tabName = "time",
-          includeMarkdown("www/taxa.md"),
+          includeMarkdown("www/temporal.md"),
           HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
           fluidRow(
             column(3,
@@ -207,7 +207,7 @@ shinyUI(fluidPage(
         # Section: Spatial Gap
         tabItem(
           tabName = "map",
-          includeMarkdown("www/taxa.md"),
+          includeMarkdown("www/spatial.md"),
           HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
           fluidRow(
             column(
