@@ -42,7 +42,7 @@ shinyUI(fluidPage(
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='copilot1.JPG' width = '250'></a>",
+          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='www/copilot1.jpg' width = '250'></a>",
           "<br>",
           "<p style = 'text-align: center;'><small><a href='https://xxx.tw' target='_blank'>https://xxx.tw</a></small></p>",
           "<br>"

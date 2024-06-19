@@ -24,7 +24,7 @@ shinyServer(function(input, output, session) {
   ## % record matched to highest taxon rank
   output$taxa.pie.taxonRank <- renderPlotly({
     
-    df_taxa.rank <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.rank.csv",
+    df_taxa.rank <- fread("www/data/processed/df_taxa.rank.csv",
                           sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
     plot_ly(df_taxa.rank, labels = ~taxonRank, values = ~count, type = "pie", sort = F,
@@ -36,7 +36,7 @@ shinyServer(function(input, output, session) {
   ## % record species rank matched to TaiCOL
   output$taxa.pie.TaiCOL <- renderPlotly({
     
-    df_taxa.rank.at.species <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.rank.at.species.csv",
+    df_taxa.rank.at.species <- fread("www/data/processed/df_taxa.rank.at.species.csv",
                                      sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
     plot_ly(df_taxa.rank.at.species, labels = ~category, values = ~count, type = "pie", sort = F,
@@ -62,7 +62,7 @@ shinyServer(function(input, output, session) {
       
       ## if habitat == "All"
       df_taxa.unrecorded.taxa.prop.groupAll <- 
-        fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv",
+        fread("www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv",
         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
       plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
@@ -74,7 +74,7 @@ shinyServer(function(input, output, session) {
       
       ## if habitat == one of the "is_*"
       df_counts_by_habitats <- 
-        fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/sdf_counts_by_habitats.csv",
+        fread("www/data/processed/df_counts_by_habitats.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
       ## select habitat
@@ -105,7 +105,7 @@ shinyServer(function(input, output, session) {
   
   # Section: Species Tree
   ## collapsible tree
-  df_tree <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_tree.csv",
+  df_tree <- fread("www/data/processed/df_tree.csv",
                    sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$taxa.treeSubGroup <- renderUI({
@@ -133,7 +133,7 @@ shinyServer(function(input, output, session) {
   # Section: Temporal Gap
   ## load time data
   df_time <- reactive({
-    fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_time.csv",
+    fread("www/data/processed/df_time.csv",
           sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   })
 
@@ -180,7 +180,7 @@ shinyServer(function(input, output, session) {
   
   # Section : Spatial
   ## Load taxa table
-  df_spatial_allOccCount_grid_table <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_spatial_allOccCount_grid_table.csv",
+  df_spatial_allOccCount_grid_table <- fread("www/data/processed/df_spatial_allOccCount_grid_table.csv",
                                              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$df_spatial_allOccCount_grid_table <- renderDT({
@@ -189,10 +189,10 @@ shinyServer(function(input, output, session) {
   })
   
   # Load map data
-  df_map <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_map.shp")
+  df_map <- st_read("www/data/processed/df_map.shp")
   pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
   
-  df_taxa_map <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_taxa_map.shp")
+  df_taxa_map <- st_read("www/data/processed/df_taxa_map.shp")
   pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCount)
   
   ## show maps
@@ -209,11 +209,12 @@ shinyServer(function(input, output, session) {
       leaflet() %>%
         addTiles() %>%
         setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-        addProviderTiles(providers$Stadia, group = "Stadia") %>%
-        addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+        addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
+        #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
         addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
         addLayersControl(
-          baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
+          baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
+          #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
           options = layersControlOptions(collapsed = TRUE)) %>%
         addResetMapButton() %>%
         addPolygons(
@@ -237,19 +238,20 @@ shinyServer(function(input, output, session) {
         leaflet() %>%
           addTiles() %>%
           setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-          addProviderTiles(providers$Stadia, group = "Stadia") %>%
-          addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+          addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
+          #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
           addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
           addLayersControl(
-            baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
+            baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
+            #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
             options = layersControlOptions(collapsed = TRUE)) %>%
           addResetMapButton() %>%
           addPolygons(
             data = df_taxa_map_selected(),
             fillColor = ~pal_taxa(occCount),
             weight = 1,
-            opacity = 0.3,
-            color = 'blue',
+            opacity = 0.6,
+            color = 'purple',
             fillOpacity = 0.5,
             popup = ~paste("Number of records:", occCount)) %>%
           addLegend(
@@ -281,10 +283,10 @@ shinyServer(function(input, output, session) {
   
   # Section: Fill gap
   ## gapCount table
-  gapCountdf <- fread("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_gapCount_table.csv",
+  gapCountdf <- fread("www/data/processed/df_gapCount_table.csv",
                       sep = ",", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>% na.omit()
   
-  gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("high", "medium", "low"))), ]
+  gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("Priority", "Intermediate", "Non-priority"))), ]
   
   output$gapCount <- renderDT({
     datatable(gapCountdf_sorted, options = list(searching = FALSE, paging = FALSE))
@@ -293,18 +295,19 @@ shinyServer(function(input, output, session) {
   
   ## gapMap
   ## grid layer
-  occ.grid5km_sf <- st_read("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/tmp/to_grid5km.shp")
+  occ.grid5km_sf <- st_read("tmp/to_grid5km.shp")
   pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$allOccC)
   
   output$gapMap <- renderLeaflet({
     leaflet() %>%
       addTiles() %>%
       setView(lng = 120, lat = 23, zoom = 7) %>%
-      addProviderTiles(providers$Stadia, group = "Stadia") %>%
-      addProviderTiles(providers$Stadia.Outdoors, group = "Stadia.Outdoors") %>%
+      addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
+      #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
       addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
       addLayersControl(
-        baseGroups = c("OSM", "Stadia", "Stadia.Outdoors", "Esri.OceanBasemap"),
+        baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
+        #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
         options = layersControlOptions(collapsed = TRUE)) %>%
       addResetMapButton() %>%
       addPolygons(
