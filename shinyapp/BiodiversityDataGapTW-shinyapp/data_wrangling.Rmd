@@ -18,10 +18,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-# tbia <- fread("www/data/raw/tbia_ver20240605.csv",
-#               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-
-tbia <- fread("tmp/tmp/sample_n_100_taxaSubGroup_dQgood.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240605/tbia_ver20240605_processed.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
