@@ -18,43 +18,25 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240605/tbia_ver20240605_processed.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240605_shiny/tbia5_vtaxa.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
 head(tbia)
 
 # remove unwanted columns
-keep <- c("id", "rightsHolder", "datasetName", "basisOfRecord",
-          "year", "month",
+keep <- c("id", "year", "month",
           "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters",
           "taxonID", "taxonRank", "taxaSubGroup",
-          "kingdom", "phylum", "class", "order", "family", "genus", "scientificName")
+          "kingdom", "phylum", "class", "order", "family", "genus", "scientificName", "simple_scientificName")
 
 tbia <- tbia %>%
   select(all_of(keep))
 ```
 
 
-```{r prep: the manual cleaning} 
-# (1) remove data without scientificName
-tbia <- tbia[!is.na(tbia$scientificName),]
 
-# (1.1) add a simple_scientificName column to extract species name without infraspecies for some stats
-tbia$simple_scientificName <- str_extract(tbia$scientificName, "^\\w+ \\w+") 
-
-
-# formatting: change to numeric
-tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")] <- 
-  lapply(tbia[, c("longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters")], as.numeric)
-
-# (2) coordinateUncertaintyInMeters (extract numbers)
-table(tbia$coordinateUncertaintyInMeters)
-tbia$coordinateUncertaintyInMeters <- as.numeric(gsub("[^0-9.]", "", tbia$coordinateUncertaintyInMeters))
-```
-
-
-```{r load TaiCOL data to combine with TBIA table}
+```{r load TaiCOL data}
 # download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240528.zip
 
 keep <- c("rank","taxon_id","simple_name","common_name_c",
@@ -165,6 +147,9 @@ fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv",
 ```
 
 ```{r prep: add habitat info to TBIA table}
+taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+              sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
 tbia1 <- left_join(tbia, habitat, by = "taxonID")
 
@@ -204,7 +189,7 @@ fwrite(df_taxa.rank, "www/data/processed/df_taxa.rank.csv",
 
 
 # (2)
-## % record species rank matched to TaiCOL
+## % record (infra)species rank matched to TaiCOL
 df_taxa.rank.at.species <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
   summarise(count = n_distinct(simple_scientificName)) %>%
@@ -365,7 +350,7 @@ catchLocation <- function(x){
 }
 
 #### parallel ####
-cpu.cores <- detectCores() - 5
+cpu.cores <- detectCores() - 8
 cl <- makeCluster(cpu.cores)
 clusterEvalQ(cl, { # make sure all clusters are ready
   library(tidyverse)
