@@ -1,0 +1,37 @@
+addAwesomeMarkersDependencies
+                        Add AwesomeMarkers and related lib dependencies
+                        to a map
+addBingTiles            Adds Bing Tiles Layer
+addBootstrapDependency
+                        Add Bootstrap dependency to a map
+addBounceMarkers        Add Bounce Markers to map
+addDrawToolbar          Adds a Toolbar to draw shapes/points on the
+                        map.
+addFullscreenControl    Add fullscreen control
+addGeoJSONv2            Adds a GeoJSON/TopoJSON to the leaflet map.
+addGeodesicPolylines    Add Geodesic Lines
+addHash                 Add dynamic URL Hash
+addHeatmap              Add a heatmap
+addResetMapButton       Reset map's view to original view
+addSearchFeatures       Add a feature search control to the map.
+addSearchOSM            Add a OSM search control to the map.
+addStyleEditor          Add style editor
+addWMSLegend            Add WMS Legend
+addWebGLHeatmap         Add a webgl heatmap
+debugMap                For debugging a leaflet map
+drawShapeOptions        Options for drawn shapes
+enableMeasurePath       Enables measuring of length of polylines and
+                        areas of polygons
+enableTileCaching       Enables caching of Tiles
+gpsOptions              Options for the GPS Control
+leaflet.extras          leaflet.extras: Extra Functionality for
+                        'leaflet' Package.
+leafletExtrasDependencies
+                        Various leaflet dependency functions for use in
+                        downstream packages
+propsToHTML             Converts GeoJSON Feature properties to HTML
+pulseIconList           Make pulse-icon set
+searchOptions           Options for search control.
+suspendScroll           Prevents accidental map scrolling when
+                        scrolling in a document.
+weatherIconList         Make weather-icon set

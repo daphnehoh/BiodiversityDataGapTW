@@ -1,0 +1,26 @@
+{
+    "id": "080571CA",
+    "path": "C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp-en/server.R",
+    "project_path": "server.R",
+    "type": "r_source",
+    "hash": "3248248685",
+    "contents": "",
+    "dirty": false,
+    "created": 1718761813062.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "0,0",
+        "scrollLine": "2"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1718786130,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1718786130186,
+    "read_only": false,
+    "read_only_alternatives": []
+}

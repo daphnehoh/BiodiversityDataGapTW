@@ -1,7 +1,13 @@
+.git
 /shinyapp-en/.Rproj.user
 /shinyapp-en/.RData
 /shinyapp-en/.Rhistory
 /shinyapp-en/.DS_Store
 
+# English version
 /shinyapp-en/www/data/processed/df_time.csv
 /shinyapp-en/www/data/processed/tbia_habitat.csv
+
+# Chinese version
+/shinyapp-zh/www/data/processed/df_time.csv
+/shinyapp-zh/www/data/processed/tbia_habitat.csv

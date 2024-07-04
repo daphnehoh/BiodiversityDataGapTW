@@ -1,0 +1,28 @@
+{
+    "id": "E9D5D72A",
+    "path": "C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp-en/data_wrangling.Rmd",
+    "project_path": "data_wrangling.Rmd",
+    "type": "r_markdown",
+    "hash": "1892937813",
+    "contents": "",
+    "dirty": false,
+    "created": 1718776272154.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "tempName": "Untitled2",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "496,32",
+        "scrollLine": "0",
+        "chunk_output_type": "console"
+    },
+    "folds": "9|15|17|0|\n19|21|34|0|\n38|23|61|0|\n63|45|133|0|\n135|28|146|0|\n148|43|157|0|\n161|34|169|0|\n172|34|312|0|\n",
+    "lastKnownWriteTime": 1719883867,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1720057871389,
+    "read_only": false,
+    "read_only_alternatives": []
+}
