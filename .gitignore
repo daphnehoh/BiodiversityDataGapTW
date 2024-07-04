@@ -2,3 +2,6 @@
 .RData
 .Rhistory
 .DS_Store
+
+/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_time.csv
+/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/tbia_habitat.csv
