@@ -1,7 +1,7 @@
-.Rproj.user
-.RData
-.Rhistory
-.DS_Store
+/shinyapp-en/.Rproj.user
+/shinyapp-en/.RData
+/shinyapp-en/.Rhistory
+/shinyapp-en/.DS_Store
 
-/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/df_time.csv
-/shinyapp/BiodiversityDataGapTW-shinyapp/www/data/processed/tbia_habitat.csv
+/shinyapp-en/www/data/processed/df_time.csv
+/shinyapp-en/www/data/processed/tbia_habitat.csv
