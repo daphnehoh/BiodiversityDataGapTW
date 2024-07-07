@@ -17,7 +17,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia5_vtaxa.csv",
+tbia <- fread("www/data/processed/tbia5_vtaxa.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -152,14 +152,14 @@ taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv",
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
 tbia1 <- left_join(tbia, habitat, by = "taxonID")
 
-fwrite(tbia1, "C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia_habitat.csv",
+fwrite(tbia1, "www/data/processed/tbia_habitat.csv",
        row.names = F, quote = T)
 ```
 
 
 # Load updated TBIA & TaiCOL table
 ```{r updated TBIA & TaiCOL table}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia_habitat.csv", 
+tbia <- fread("www/data/processed/tbia_habitat.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 taicol <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 

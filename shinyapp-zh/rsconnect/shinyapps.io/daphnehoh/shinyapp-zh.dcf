@@ -1,0 +1,10 @@
+name: shinyapp-zh
+title:
+username: daphnehoh
+account: daphnehoh
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12285177
+bundleId: 8834124
+url: https://daphnehoh.shinyapps.io/shinyapp-zh/
+version: 1
