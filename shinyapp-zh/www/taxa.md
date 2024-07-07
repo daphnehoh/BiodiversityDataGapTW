@@ -1,5 +1,4 @@
-### Taxonomic overview
+### 物種類群資料概況
 
-In this section we view taxonomic gap of TBIA records in view of the Catalogue of Life in Taiwan (https://taicol.tw/).
-<br>
-Current species and infraspecies count at TaiCOL is at 64,542 (last accessed: 20240610)<br>
+這個部分我們查看[臺灣物種名錄](https://taicol.tw/)與 TBIA 入口網裏的物種記錄空缺。我們也呈現了物種類群在各栖地類型的數量統計。栖地類型的歸類比照 TaiCOL。<br>
+TaiCOL 中目前的收錄物種數量為 64,508 (最新統計：20240704)<br>

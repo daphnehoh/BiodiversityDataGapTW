@@ -42,20 +42,20 @@ shinyUI(fluidPage(
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://tbiadata.tw' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='www/copilot1.jpg' width = '250'></a>",
+          "<a href='https://portal.taibif.tw/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='www/TaiBIF_logo.png' width = '250'></a>",
           "<br>",
-          "<p style = 'text-align: center;'><small><a href='https://xxx.tw' target='_blank'>https://xxx.tw</a></small></p>",
+          "<p style = 'text-align: center;'><small><a href='https://portal.taibif.tw/' target='_blank'>https://portal.taibif.tw/</a></small></p>",
           "<br>"
         )),
-        menuItem(HTML("&nbsp;Home"), tabName = "home", icon = icon("home")),
-        menuItem(HTML("&nbsp;Descriptions"), tabName = "descriptions", icon = icon("pencil")),
-        menuItem(HTML("&nbsp;Taxonomic Gap"), tabName = "taxa", icon = icon("tree")),
-        menuItem(HTML("&nbsp;Species Tree"), tabName = "tree", icon = icon("tree")),
-        menuItem(HTML("&nbsp;Temporal Gap"), tabName = "time", icon = icon("clock")),
-        menuItem(HTML("&nbsp;Spatial Gap"), tabName = "map", icon = icon("map-location-dot")),
-        menuItem(HTML("&nbsp;Fill the Gap!"), tabName = "fillgap", icon = icon("map-marked-alt")),
-        menuItem(HTML("&nbsp;References"), tabName = "references", icon = icon("book-atlas")),
-        menuItem(HTML("&nbsp;Releases"), tabName = "releases", icon = icon("tasks")),
+        menuItem(HTML("&nbsp;首頁"), tabName = "home", icon = icon("home")),
+        menuItem(HTML("&nbsp;説明"), tabName = "descriptions", icon = icon("pencil")),
+        menuItem(HTML("&nbsp;物種類群資料概況"), tabName = "taxa", icon = icon("tree")),
+        menuItem(HTML("&nbsp;物種樹"), tabName = "tree", icon = icon("tree")),
+        menuItem(HTML("&nbsp;時間資料概況"), tabName = "time", icon = icon("clock")),
+        menuItem(HTML("&nbsp;空間資料概況"), tabName = "map", icon = icon("map-location-dot")),
+        menuItem(HTML("&nbsp;一起填補空缺！"), tabName = "fillgap", icon = icon("map-marked-alt")),
+        menuItem(HTML("&nbsp;參考"), tabName = "references", icon = icon("book-atlas")),
+        menuItem(HTML("&nbsp;發布"), tabName = "releases", icon = icon("tasks")),
         
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
@@ -73,7 +73,7 @@ shinyUI(fluidPage(
           "<br>"),
         HTML(paste0(
          "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-06-19</div>", "<br>")
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-07-04</div>", "<br>")
         ))
       )
       
@@ -109,10 +109,10 @@ shinyUI(fluidPage(
         # Section: Descriptions
         tabItem(tabName = "descriptions", 
                 fluidRow(
-                  HTML("<h2><b>&nbsp;&nbsp;Data descriptions</b></h2>"),
+                  HTML("<h3><b>&nbsp;&nbsp;資料説明</b></h3>"),
                   br(),
-                  valueBox(value = paste("21,793,791"), subtitle = "All TBIA records (ver20240605)", icon = icon("database"), color = "red"),
-                  valueBox(value = paste("21,793,791"), subtitle = "Cleaned TBIA records", icon = icon("broom"), color = "orange")),
+                  valueBox(value = paste("21,987,687"), subtitle = "所有 TBIA 資料 (ver20240704)", icon = icon("database"), color = "red"),
+                  valueBox(value = paste("20,XXX,XXX"), subtitle = "已清理 TBIA 資料", icon = icon("broom"), color = "orange")),
                 includeMarkdown("www/descriptions.md"),
                 ),
         
@@ -122,17 +122,17 @@ shinyUI(fluidPage(
         tabItem(tabName = "taxa",
                 includeMarkdown("www/taxa.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                HTML("<h4><b>Recorded TaiCOL taxa on TBIA:</b></h4>"),
+                HTML("<h4><b>TaiCOL 裏的 TBIA 記錄：</b></h4>"),
                 fluidRow(
                   column(6,
-                         div(HTML("<b>% record matched to highest taxon rank</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>對到最高階層的記錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.taxonRank", height = 400)),
                   column(6,
-                         div(HTML("<b>% record with (infra)species rank matched to TaiCOL</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>對到 TaiCOL 種階層（包含種下）的記錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.TaiCOL", height = 400))
                 ),
                 br(),
-                HTML("<h4><b>The XX% of the unrecorded TaiCOL taxa on TBIA:</b></h4>"),
+                HTML("<h4><b>比照 TaiCOL，TBIA 裏還未記錄的物種占了 XX%</b></h4>"),
                 br(),
                 column(2,
                        uiOutput("taxa.landtype.taxa.prop"), br()),
@@ -143,7 +143,7 @@ shinyUI(fluidPage(
                 column(12, 
                        fluidRow(
                          column(12, 
-                                div(HTML("<b>Recorded & unrecorded species on TBIA (excluding infraspecies)</b>"), style = "margin-bottom: 10px;"),
+                                div(HTML("<b>TBIA 裏已記錄與未記錄物種（不包含種下）</b>"), style = "margin-bottom: 10px;"),
                                 plotlyOutput("taxa.bar.unrecorded.taxa", height = 500))
                        )
                 )
@@ -172,17 +172,17 @@ shinyUI(fluidPage(
             column(3,
                    selectizeInput(
                      inputId = "time.taxaSubGroup",
-                     label = "Select a taxa group:",
+                     label = "選擇物種類群：",
                      choices = NULL,
                      multiple = TRUE,
                      options = list(create = TRUE)
                    ),
                    br(),
-                   sliderInput("time.year", "Select year:", min = 1900, max = 2024, value = c(1900, 2024), step = 1),
+                   sliderInput("time.year", "選擇年份區間：", min = 1900, max = 2024, value = c(1900, 2024), step = 1),
                    br(),
                    selectizeInput(
                      inputId = "time.month",
-                     label = "Select month:",
+                     label = "選擇月份：",
                      choices = 1:12,
                      selected = 1:12,
                      multiple = TRUE,
@@ -214,18 +214,18 @@ shinyUI(fluidPage(
               width = 4,
               box(
                 width = 12,
-                checkboxInput("showAll", HTML("<b>Show all records</b>"), value = T),
-                HTML("<b>OR</b>"), br(), br(),
+                checkboxInput("showAll", HTML("<b>顯示所有記錄</b>"), value = T),
+                HTML("<b>或</b>"), br(), br(),
                 selectizeInput(
                   inputId = "spatial.taxaSubGroup",
-                  label = "Choose a taxa group:",
+                  label = "選擇物種類群：",
                   choices = NULL,
                   multiple = T,
                   options = list(create = T)
                 ),
               ),
               box(
-                title = "Taxa groups and record count",
+                title = "物種類群與記錄筆數",
                 width = 12,
                 DTOutput("df_spatial_allOccCount_grid_table"), 
                 style = "width: 100%;"
@@ -244,9 +244,9 @@ shinyUI(fluidPage(
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                fluidRow(valueBox(10 * 2, "Priority", icon = icon("triangle-exclamation"), color = "red"),
-                         valueBox(10 * 2, "Intermediate", icon = icon("star"), color = "orange"),
-                         valueBox(10 * 2, "Non-priority", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(valueBox(10 * 2, "優先填補", icon = icon("triangle-exclamation"), color = "red"),
+                         valueBox(10 * 2, "中等", icon = icon("star"), color = "orange"),
+                         valueBox(10 * 2, "不優先", icon = icon("thumbs-up"), "yellow")),
                 fluidRow(column(width = 7, leafletOutput("gapMap", height = 650)),
                          column(width = 5, DTOutput("gapCount"), title = "Priority level and grid count by land type"))
                 ),

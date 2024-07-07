@@ -1,14 +1,13 @@
 ---
 title: "data_wrangling"
 author: "Daphne Hoh"
-date: "2024-06-04"
 output: html_document
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r env prep}
-setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/")
+setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp-zh/")
 
 .packs <- c("httr", "jsonlite", "data.table",
             "dplyr", "stringr", "tidyverse",
@@ -18,7 +17,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240605_shiny/tbia5_vtaxa.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia5_vtaxa.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -37,13 +36,13 @@ tbia <- tbia %>%
 
 
 ```{r load TaiCOL data}
-# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240528.zip
+# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240621.zip
 
 keep <- c("rank","taxon_id","simple_name","common_name_c",
           "is_endemic","alien_type","is_terrestrial","is_freshwater","is_brackish","is_marine","is_in_taiwan",
           "kingdom","kingdom_c","phylum","phylum_c","class","class_c","order","order_c","family","family_c","genus","genus_c")
           
-df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240528.csv", select = keep,
+df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240621.csv", select = keep,
                         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 df.taicol.list <- df.taicol.list %>% 
@@ -127,7 +126,7 @@ taxa1 <- taxa %>%
   select(-c(plant.tmp, animal.tmp, is_in_taiwan))
 
 # those with incomplete taxa levels so the categorizing failed
-table(taxa1$taxaSubGroup) # 21 empty
+table(taxa1$taxaSubGroup) # 32 empty
 taxa1 <- taxa1 %>% 
   mutate(taxaSubGroup = replace(taxaSubGroup, taxaSubGroup %in% "", "Unclassified"))
 
@@ -142,12 +141,12 @@ taxa2 <- taxa1 %>%
   mutate(is_marine = replace(is_marine, is_marine == "true", "is_marine"))
 
 # final TaiCOL table that classified with taxaSubGroup
-fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv",
+fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv",
        row.names = F, quote = T)
 ```
 
 ```{r prep: add habitat info to TBIA table}
-taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
@@ -163,7 +162,7 @@ fwrite(tbia1, "www/data/processed/tbia_habitat.csv",
 tbia <- fread("www/data/processed/tbia_habitat.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
-taicol <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+taicol <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
@@ -215,7 +214,7 @@ group.all <- taicol %>%
   group_by(taxaSubGroup) %>%
   summarise(taicol.count = n())
 
-sum(group.all$taicol.count) # 63,800 species level
+sum(group.all$taicol.count) # 63,789 species level
 
 ### get total number of species (un)recorded in TBIA
 df_taxa.unrecorded.taxa.prop <- tbia %>%
@@ -323,7 +322,7 @@ fwrite(df_time, "www/data/processed/df_time.csv",
 
 ```{r prep for Section: Spatial}
 # load the 5km grid file
-grid5km_sf <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+grid5km_sf <- st_read("www/data/layers/5km/0_05degree_tw_landocean_grid.shp")
 
 # load the tbia table
 df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "taxaSubGroup")]
@@ -357,7 +356,7 @@ clusterEvalQ(cl, { # make sure all clusters are ready
   library(data.table)
   library(sf)
   library(lwgeom)
-  dg_grid <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  dg_grid <- st_read("www/data/layers/5km/0_05degree_tw_landocean_grid.shp")
   dg_grid <- as(dg_grid, "sf")%>%
     st_set_crs(4326)
   sf_use_s2(F)
@@ -388,7 +387,7 @@ allOccCount <- df_map_grid %>%
 
 ### 4.1 combine grid counts with 5km geometry
 allOccCount_grid <- merge(allOccCount, grid5km_sf, by = "id", all.x = TRUE)
-st_write(allOccCount_grid, "www/data/processed/df_map.shp")
+st_write(allOccCount_grid, "www/data/processed/df_map.shp", append = FALSE)
 
 
 
@@ -400,7 +399,7 @@ taxaOccCount <- df_map_grid %>%
 ### 5.1 combine grid counts with 5km geometry
 taxaOccCount_grid <- merge(taxaOccCount, grid5km_sf, by = "id", all.x = TRUE)
 names(taxaOccCount_grid) <- c("id", "tSG", "occCount", "geometry") # rename because ESRI cannot save long field name
-st_write(taxaOccCount_grid, "www/data/processed/df_taxa_map.shp", append = TRUE)
+st_write(taxaOccCount_grid, "www/data/processed/df_taxa_map.shp", append = FALSE)
 
 
 
@@ -486,7 +485,7 @@ df_gapCount <- df_gapCount %>%
                               occCount > 20 ~ "Non-priority"))
 
 st_write(df_gapCount, "www/data/processed/df_gapCount_table.shp",
-         row.names = F, quote = T)
+         row.names = F, quote = T, append = FALSE)
 
 # save as table
 df_gapCount_table <- as.data.frame(df_gapCount) %>%

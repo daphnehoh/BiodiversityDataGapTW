@@ -1,26 +1,26 @@
-## Nihao :)<br>
+## 哈囉 :)
 
-This Shiny app let you visualize the current data gap in the [Taiwan Biodiversity Information Alliance](https://tbiadata.tw) data portal.<br>
+這個 Shiny App 讓您可以視覺化[臺灣生物多樣性資訊聯盟](https://tbiadata.tw)入口網中目前的資料空缺。<br>
 <br>
 
-The objective of this app is to allow anyone to get a quick data overview in the TBIA data portal.<br>
-<i class="fa-solid fa-magnifying-glass"></i> For data creator and publisher to determine current data gap for aid in developing approaches to fill these gaps<br>
-<i class="fa-solid fa-magnifying-glass-chart"></i> For data user to identify data gap that might hinder their use<br>
+這個應用程式的目標是讓任何人在 TBIA 入口網站中快速查閲資料概況。<br>
+<i class="fa-solid fa-magnifying-glass"></i> 供資料貢獻者和發佈者檢視目前的資料概況，以幫助制定填補這些空缺的方法<br>
+<i class="fa-solid fa-magnifying-glass-chart"></i> 供資料使用者識別可能影響其使用的資料空缺<br>
 <br>
 
-The left navigation panel allow you to access data visualized in map, charts, tables and species tree for each different type of gaps, and some additional information for you if you would like to fill these gaps.<br>
+左側導航面板讓您檢視地圖、圖表、表格和物種樹視覺化各類型的資料概況和空缺，資料允許的話，也提供了填補這些空缺的一些資訊。<br>
 <br>
 
-Codes developing this Shiny app can be found on [GitHub](https://github.com/daphnehoh/BiodiversityDataGapTW).<br>
+製作這個 Shiny App 的程式碼可以在 [GitHub](https://github.com/daphnehoh/BiodiversityDataGapTW) 裏找到。<br>
 <br>
 
-Creator: Daphne Z Hoh [[ORCID](https://orcid.org/0000-0002-7810-1034)]<br>
+作者: 何芷蔚 Daphne Z Hoh [[ORCID](https://orcid.org/0000-0002-7810-1034)]<br>
 <i class="fa fa-envelope"></i> daphnehohzhiwei <i class="fa fa-at"></i> gmail.com<br>
-Postdoctoral Researcher @ [Taiwan Biodiversity Information Facility](https://portal.taibif.tw/)<br>
+博士後研究員 @ [TaiBIF 臺灣生物多樣性資訊機構](https://portal.taibif.tw/)<br>
 <br>
 
-Project: 
-Taiwan Biodiversity Information Alliance<br>
+計劃: 
+臺灣生物多樣性資訊聯盟<br>
 <i class="fa fa-envelope"></i> tbianoti <i class="fa fa-at"></i> gmail.com<br>
 
 <br>
@@ -29,4 +29,4 @@ Taiwan Biodiversity Information Alliance<br>
 <br>
 <br>
 
-This work is funded by [Taiwan National Science and Technology Council](https://www.nstc.gov.tw/) and [Taiwan Forestry and Nature Conservation Agency](https://www.forest.gov.tw/). 
+這項工作由[中央研究院生物多樣性研究中心](https://www.biodiv.tw/)、臺灣[國家科學技術委員會](https://www.nstc.gov.tw/)和[林業保育署](https://www.forest.gov.tw/)指導資助。

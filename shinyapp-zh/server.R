@@ -295,7 +295,7 @@ shinyServer(function(input, output, session) {
   
   ## gapMap
   ## grid layer
-  occ.grid5km_sf <- st_read("tmp/to_grid5km.shp")
+  occ.grid5km_sf <- st_read("www/data/layers/5km/0_05degree_tw_landocean_grid.shp")
   pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$allOccC)
   
   output$gapMap <- renderLeaflet({

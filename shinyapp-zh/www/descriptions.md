@@ -1,21 +1,26 @@
-<h4>General cleaning:</h4>
-- Remove records without scientificName (XXX records)<br>
-- Remove duplicated records (XXX records)<br>
+<h4>資料前處理:</h4>
+- 移除沒有 scientificName 的資料 (277,066 筆)<br>
+- 移除重複資料 (735 筆)<br>
+- 移除沒有坐標經緯度的資料 (680,408 筆)<br>
 <br>
 
-<h3>Notes on viewing different sections.</h3>
+
+<h3>檢視不同部分的注意事項：</h3>
 <br>
 
-#### 1. Taxonomical Gap<br>
-- Categorized into 32 taxa groups<br>
+#### 1. 物種上的資料空缺<br>
+- 我們把物種大致分成了 32 大類群，分類邏輯可以在[這裏]()看到。<br>
+- 我們比照[臺灣物種名錄](https://taicol.tw/)，將 TBIA 入口網裏還未曾記錄過的物種表單輸出成 CSV 供下載。<br>
+<br>
 
-#### 2. Temporal Gap<br>
-- Suspicious years were not removed<br>
+#### 2. 時間上的資料空缺<br>
+- 我們沒有特別針對有年份疑慮的資料做移除 (例如：年份 < 1800 & > 2025)。這些資料佔了不到 200 筆。<br>
+<br>
 
-#### 3. Spatial Gap<br>
-- WGS84 grids in 5km scale<br> 
-- Records with coordinateUncertaintyInMeters and/or coordinatePrecision >5km were removed from plot<br>
+#### 3. 上的資料空缺<br>
+- 我們使用 WGS84 大地坐標系統，將資料呈現在 5*5 公里網格的台灣海陸疆界裏。<br> 
+- 在將資料套曡在網格上時，我們不呈現 coordinateUncertaintyInMeters 與 coordinatePrecision 大於 5 公里的資料。<br>
+<br>
 
-
-#### 4. Fill the Gap!<br>
-- Downloadable CSV shows grids with different records level<br>
+#### 4. 一起填補空缺！<br>
+- 我們將地理上的資料空缺以筆數範圍做爲的填補緊急度層級整理成表單輸出成 CSV 供下載。<br>
