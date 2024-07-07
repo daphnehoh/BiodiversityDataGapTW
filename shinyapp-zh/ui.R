@@ -30,7 +30,7 @@ shinyUI(fluidPage(
     skin = "green",
       
     # header
-    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 290,
+    dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 300,
                     # github icon
                     tags$li(class = "dropdown",
                             tags$a(href = "https://github.com/daphnehoh/BiodiversityDataGapTW", 
@@ -38,15 +38,12 @@ shinyUI(fluidPage(
                     ),
     
     # sidebar
-    dashboardSidebar(width = 290,
+    dashboardSidebar(width = 300,
       sidebarMenu(
         HTML(paste0(
-          "<br>",
           "<a href='https://portal.taibif.tw/' target='_blank'>
-            <img style='display: block; margin-left: auto; margin-right: auto;' src='copilot3.jpg' width='250'></a>",
-          "<br>",
-          "<p style = 'text-align: center;'><small><a href='https://portal.taibif.tw/' target='_blank'>https://portal.taibif.tw/</a></small></p>",
-          "<br>"
+            <img style='display: block; margin-left: auto; margin-right: auto;' src='copilot3.jpg' width='300'></a>"
+          #"<p style = 'text-align: center;'><small><a href='https://portal.taibif.tw/' target='_blank'>https://portal.taibif.tw/</a></small></p>",
         )),
         menuItem(HTML("&nbsp;首頁"), tabName = "home", icon = icon("home")),
         menuItem(HTML("&nbsp;説明"), tabName = "descriptions", icon = icon("pencil")),
@@ -59,22 +56,20 @@ shinyUI(fluidPage(
         menuItem(HTML("&nbsp;發佈"), tabName = "releases", icon = icon("tasks")),
         
         HTML(paste0(
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
-          "<table style='margin-left:auto; margin-right:auto;'>",
-            "<tr>",
-              "<td style='padding: 7px;'><a href='mailto:tbianoti@gmail.com' target='_blank'><i class='fa-solid fa-envelope'></i></i></a></td>",
-              "<td style='padding: 7px;'><a href='https://www.youtube.com/@tbia4945' target='_blank'><i class='fab fa-youtube fa-lg'></i></a></td>",
-            "</tr>",
-          "</table>",
-          "<br>"),
+        "<br>",
+        "<br>",
+        "<div style='text-align: center;'>
+          <div style='display: inline-block; margin: 10px;'>
+            <a href='mailto:tbianoti@gmail.com' target='_blank'><i class='fa-solid fa-envelope'></i></a><br>
+          </div>
+          <div style='display: inline-block; margin: 10px;'>
+            <a href='https://www.youtube.com/@tbia4945' target='_blank'><i class='fab fa-youtube fa-lg'></i></a><br>
+          </div>
+        </div>"),
+        
         HTML(paste0(
          "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-07-04</div>", "<br>")
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-07-08</div>")
         ))
       )
       
