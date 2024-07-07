@@ -42,7 +42,8 @@ shinyUI(fluidPage(
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://portal.taibif.tw/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='copilot1.jpg' width = '250'></a>",
+          "<a href='https://portal.taibif.tw/' target='_blank'>
+            <img style='display: block; margin-left: auto; margin-right: auto;' src='copilot3.jpg' width='250'></a>",
           "<br>",
           "<p style = 'text-align: center;'><small><a href='https://portal.taibif.tw/' target='_blank'>https://portal.taibif.tw/</a></small></p>",
           "<br>"
@@ -55,7 +56,7 @@ shinyUI(fluidPage(
         menuItem(HTML("&nbsp;空間資料概況"), tabName = "map", icon = icon("map-location-dot")),
         menuItem(HTML("&nbsp;一起填補空缺！"), tabName = "fillgap", icon = icon("map-marked-alt")),
         menuItem(HTML("&nbsp;參考"), tabName = "references", icon = icon("book-atlas")),
-        menuItem(HTML("&nbsp;發布"), tabName = "releases", icon = icon("tasks")),
+        menuItem(HTML("&nbsp;發佈"), tabName = "releases", icon = icon("tasks")),
         
         HTML(paste0(
           "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>",
@@ -112,8 +113,8 @@ shinyUI(fluidPage(
                   HTML("<h3><b>&nbsp;&nbsp;資料説明</b></h3>"),
                   br(),
                   valueBox(value = paste("21,987,687"), subtitle = "所有 TBIA 資料 (ver20240704)", icon = icon("database"), color = "red"),
-                  valueBox(value = paste("20,XXX,XXX"), subtitle = "已清理 TBIA 資料", icon = icon("broom"), color = "orange")),
-                includeMarkdown("www/descriptions.md"),
+                  valueBox(value = paste("20,875,777"), subtitle = "已清理 TBIA 資料", icon = icon("broom"), color = "orange")),
+                includeMarkdown("www/descriptions.md")
                 ),
         
         
@@ -222,7 +223,7 @@ shinyUI(fluidPage(
                   choices = NULL,
                   multiple = T,
                   options = list(create = T)
-                ),
+                )
               ),
               box(
                 title = "物種類群與記錄筆數",
