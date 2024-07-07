@@ -42,7 +42,7 @@ shinyUI(fluidPage(
       sidebarMenu(
         HTML(paste0(
           "<br>",
-          "<a href='https://portal.taibif.tw/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='www/TaiBIF_logo.png' width = '250'></a>",
+          "<a href='https://portal.taibif.tw/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='copilot1.jpg' width = '250'></a>",
           "<br>",
           "<p style = 'text-align: center;'><small><a href='https://portal.taibif.tw/' target='_blank'>https://portal.taibif.tw/</a></small></p>",
           "<br>"
