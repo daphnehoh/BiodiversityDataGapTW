@@ -1,5 +1,10 @@
-"priority","gridCount"
-"Intermediate",3007
-"Non-priority",11017481
-"Priority",2166
-,300
+"priority","landType","gridCount"
+"建議優先填補","coastal",139
+"建議優先填補","land",285
+"建議優先填補","sea",3969
+"建議填補","coastal",71
+"建議填補","land",306
+"建議填補","sea",13
+"資料筆數高於平均值","coastal",198
+"資料筆數高於平均值","land",822
+"資料筆數高於平均值","sea",2

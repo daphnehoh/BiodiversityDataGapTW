@@ -1,18 +1,9 @@
-"rank","count","taxonRank"
-"class",9508,"class"
-"family",279101,"family"
-"form",3882,"(infra)species"
-"genus",227001,"genus"
-"hybrid formula",1409,"hybrid formula"
-"infraclass",5,"infraclass"
-"kingdom",601,"kingdom"
-"order",85972,"order"
-"phylum",1080,"phylum"
-"species",19201292,"(infra)species"
-"subclass",431,"subclass"
-"subfamily",83,"subfamily"
-"subgenus",12,"subgenus"
-"subkingdom",1,"subkingdom"
-"subspecies",903495,"(infra)species"
-"superfamily",581,"superfamily"
-"variety",161323,"(infra)species"
+"taxonRank","count","proportion"
+"species",19201292,91.9788135311083
+"non-Linnaean",1071222,5.1314113960884
+"family",279101,1.33696101467265
+"genus",227001,1.0873894657909
+"order",85972,0.411826587340917
+"class",9508,0.0455456101107039
+"phylum",1080,0.00517346013037024
+"kingdom",601,0.00287893475773381

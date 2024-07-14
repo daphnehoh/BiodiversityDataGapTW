@@ -21,5 +21,5 @@
 #### 3 & 4. 空間上的資料概況與空缺<br>
 - 敏感資料在座標上有著不同程度的模糊化。為了利於後續資料空缺概況的分析與呈現，我們將資料的座標欄位進行合併。在敏感資料上，我們使用該原始座標點位 standardRawLatitude 和 standardRawLongitude，與非敏感資料的 standardLatitude 和 standardLongitude 進行合併，生成 latitude 和 longitude 欄位給後續分析並做呈現。
 - 我們使用 WGS84 大地坐標系統，將資料呈現在 5x5 公里網格的台灣海陸疆界内。<br> 
-- 在將資料套曡在網格上時，我們不呈現 coordinateUncertaintyInMeters 與 coordinatePrecision 大於 5 公里的資料。<br>
+- 在將資料套曡在網格上時，我們不呈現 coordinateUncertaintyInMeters 與 coordinatePrecision 大於 5 公里的資料（1,180,542 筆）。<br>
 <br>

@@ -105,10 +105,10 @@ shinyUI(fluidPage(
         # Section: Descriptions
         tabItem(tabName = "descriptions", 
                 fluidRow(
-                  HTML("<h3><b>&nbsp;&nbsp;資料説明</b></h3>"),
+                  HTML("<h3>&nbsp;&nbsp;資料説明</h3>"),
                   br(),
                   valueBox(value = paste("21,987,687"), subtitle = "所有 TBIA 資料 (ver20240704)", icon = icon("database"), color = "red"),
-                  valueBox(value = paste("20,875,777"), subtitle = "已清理 TBIA 資料", icon = icon("broom"), color = "orange")),
+                  valueBox(value = paste("20,875,777"), subtitle = "已清理的 TBIA 資料", icon = icon("broom"), color = "orange")),
                 includeMarkdown("www/descriptions.md")
                 ),
         
@@ -121,21 +121,22 @@ shinyUI(fluidPage(
                 HTML("<h4><b>TaiCOL 裏的 TBIA 記錄：</b></h4>"),
                 fluidRow(
                   column(6,
-                         div(HTML("<b>對到最高階層的記錄 %</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>對到最高林奈階層的記錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.taxonRank", height = 400)),
                   column(6,
-                         div(HTML("<b>對到 TaiCOL 種階層（包含種下）的記錄 %</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>對到 TaiCOL 種（包含種下）階層的記錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.TaiCOL", height = 400))
                 ),
                 br(),
-                HTML("<h4><b>比照 TaiCOL，TBIA 裏還未記錄的物種占了 XX%</b></h4>"),
+                HTML("<h4><b>物種類群在各栖地類型（比照 TaiCOL）的數量統計：</b></h4>"),
+                HTML("備注：有些入口網的物種記錄在 TaiCOL 還未收錄，所以會有“入口網已記錄物種數”比“TaiCOL總物種數”還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
+                br(),
+                HTML("長條圖可用鼠標選擇範圍放大，點擊兩下會回到預設模式。"),
+                br(),
                 br(),
                 column(2,
                        uiOutput("taxa.landtype.taxa.prop"), br()),
                 br(),
-
-                # download unrecorded taxa list here
-              
                 column(12, 
                        fluidRow(
                          column(12, 
@@ -152,6 +153,7 @@ shinyUI(fluidPage(
                 includeMarkdown("www/tree.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 column(3, uiOutput("taxa.treeSubGroup")),
+                column(2, downloadButton("downloadData", "下載入口網未曾記錄物種名錄")),
                 column(12, 
                        box(width = 12, style = "overflow-y: scroll; height: 5000px;",
                        collapsibleTreeOutput('tree', height = '5000px')))
@@ -240,11 +242,11 @@ shinyUI(fluidPage(
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                fluidRow(valueBox(10 * 2, "優先填補", icon = icon("triangle-exclamation"), color = "red"),
-                         valueBox(10 * 2, "中等", icon = icon("star"), color = "orange"),
-                         valueBox(10 * 2, "不優先", icon = icon("thumbs-up"), "yellow")),
-                fluidRow(column(width = 7, leafletOutput("gapMap", height = 650)),
-                         column(width = 5, DTOutput("gapCount"), title = "Priority level and grid count by land type"))
+                fluidRow(valueBox(4393, "建議優先填補網格數", icon = icon("triangle-exclamation"), color = "red"),
+                         valueBox(390, "建議填補網格數", icon = icon("star"), color = "orange"),
+                         valueBox(1022, "資料筆數高於平均值網格數", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(column(width = 8, leafletOutput("gapMap", height = 650)),
+                         column(width = 4, DTOutput("gapCount")))
                 ),
                 
 
