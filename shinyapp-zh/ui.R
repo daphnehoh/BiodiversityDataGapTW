@@ -69,7 +69,7 @@ shinyUI(fluidPage(
         
         HTML(paste0(
          "<p style = 'text-align: center;'><large>&copy; <a href='https://tbiadata.tw/' target='_blank'>TBIA 臺灣生物多樣性資訊聯盟</a>",
-          "<div style='text-align: center; font-size: small;'>Last update: 2024-07-08</div>")
+          "<div style='text-align: center; font-size: small;'>Last update: 2024-07-14</div>")
         ))
       )
       
@@ -129,7 +129,7 @@ shinyUI(fluidPage(
                 ),
                 br(),
                 HTML("<h4><b>物種類群在各栖地類型（比照 TaiCOL）的數量統計：</b></h4>"),
-                HTML("備注：有些入口網的物種記錄在 TaiCOL 還未收錄，所以會有“入口網已記錄物種數”比“TaiCOL總物種數”還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
+                HTML("備注：有些入口網的物種記錄在 TaiCOL 還未收錄，所以會有 “入口網已記錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
                 br(),
                 HTML("長條圖可用鼠標選擇範圍放大，點擊兩下會回到預設模式。"),
                 br(),
