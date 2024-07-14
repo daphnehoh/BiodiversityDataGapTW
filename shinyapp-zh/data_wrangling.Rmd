@@ -471,5 +471,68 @@ fwrite(df_gapCount_table, "www/data/processed/df_gapCount_table.csv",
 # make CSV gap table for download
 write.csv(df_gapCount_with0, "www/data/processed/df_gapCount_with0.csv", 
           row.names = F, quote = T)
+
+# Preparation for Google My Map
+df <- df_gapCount_with0
+
+## create a list of data frames, split by priority and landType
+split_dfs <- split(df, list(df$priority, df$landType))
+
+## check their dim() as Google My Map only supports 2000 rows
+for (name in names(split_dfs)) {
+  cat("Dimensions of", name, ":", dim(split_dfs[[name]]), "\n")
+}
+
+split_large_df <- function(df, max_rows = 2000) {
+  if (nrow(df) <= max_rows) {
+    return(list(df))
+  } else {
+    part1 <- df %>% slice(1:max_rows)
+    part2 <- df %>% slice((max_rows + 1):n())
+    return(list(part1 = part1, part2 = part2))
+  }
+}
+
+# Apply the function to each dataframe in split_dfs
+split_dfs_adjusted <- lapply(names(split_dfs), function(name) {
+  df <- split_dfs[[name]]
+  split_result <- split_large_df(df)
+  
+  if (length(split_result) == 1) {
+    return(setNames(split_result, name))
+  } else {
+    return(setNames(split_result, paste0(name, c("_part1", "_part2"))))
+  }
+})
+
+# Flatten the list
+split_dfs_final <- unlist(split_dfs_adjusted, recursive = FALSE)
+
+for (name in names(split_dfs_final)) {
+  cat("Dimensions of", name, ":", dim(split_dfs_final[[name]]), "\n")
+}
+
+
+###
+for (name in names(split_dfs_final)) {
+  # Check if the data frame is already an sf object
+  if (!inherits(split_dfs_final[[name]], "sf")) {
+    # If it's not an sf object but has a geometry column, convert it
+    if ("geometry" %in% colnames(split_dfs_final[[name]])) {
+      split_dfs_final[[name]] <- st_as_sf(split_dfs_final[[name]])
+    } else {
+      # If there's no geometry column, skip this data frame or handle the error
+      warning(paste("Skipping", name, "- no geometry column found"))
+      next
+    }
+  }
+  
+  # Write to KML
+  st_write(split_dfs_final[[name]], 
+           dsn = paste0("www/data/processed/GoogleMyMap/gmm_", name, ".kml"),
+           driver = "KML",
+           delete_dsn = TRUE)
+}
+
 ```
 
