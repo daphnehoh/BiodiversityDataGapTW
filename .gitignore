@@ -9,10 +9,10 @@
 /shinyapp-en/www/data/processed/tbia_habitat.csv
 
 # Chinese version
+.Rproj.user
 /shinyapp-zh/.Rproj.user
 /shinyapp-zh/.RData
 /shinyapp-zh/.Rhistory
 /shinyapp-zh/.DS_Store
-/shinyapp-zh/www/data/processed/df_time.csv
 /shinyapp-zh/www/data/processed/tbia_habitat.csv
-.Rproj.user
+
