@@ -63,8 +63,8 @@ shinyServer(function(input, output, session) {
       
       plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'TaiCOL總物種數', y = ~taicol.count,
                            hoverinfo = 'text', text = ~paste0("TaiCOL總物種數：", taicol.count), textposition = "none") %>%
-        add_trace(y = ~record.count, name = "入口網已記錄", marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("TaiCOL總物種數: ", taicol.count, "<br>入口網已記錄物種數：", record.count), textposition = "none")
+        add_trace(y = ~record.count, name = "入口網已紀錄", marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("TaiCOL總物種數: ", taicol.count, "<br>入口網已紀錄物種數：", record.count), textposition = "none")
       
     } else {
       
@@ -79,8 +79,8 @@ shinyServer(function(input, output, session) {
       
       plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'TaiCOL總物種數', y = ~taicol.count,
                            hoverinfo = 'text', text = ~paste0("TaiCOL總物種數：", taicol.count), textposition = "none") %>%
-        add_trace(y = ~record.count, name = '入口網已記錄', marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("TaiCOL總物種數: ", taicol.count, "<br>入口網已記錄物種數：", record.count), textposition = "none")
+        add_trace(y = ~record.count, name = '入口網已紀錄', marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("TaiCOL總物種數: ", taicol.count, "<br>入口網已紀錄物種數：", record.count), textposition = "none")
       
     }
     
@@ -112,6 +112,7 @@ shinyServer(function(input, output, session) {
       z = ~count_numeric,
       type = "heatmap",
       colorscale = "Viridis",
+      showscale = FALSE,
       colorbar = list(
         title = "Record count",
         tickvals = c(0, 1, 2, 3, 4, 5, 6, 7),
@@ -122,9 +123,8 @@ shinyServer(function(input, output, session) {
                      "Record count: ", count),
       hoverinfo = "text") %>%
       config(displayModeBar = FALSE) %>%
-      layout(xaxis = list(title = "物種類群"), 
-             yaxis = list(title = "記錄類型", tickangle = 45),
-             showlegend = FALSE) 
+      layout(xaxis = list(title = "紀錄類型"), 
+             yaxis = list(title = "物種類群", tickangle = 45)) 
   
     })
   
@@ -136,7 +136,7 @@ shinyServer(function(input, output, session) {
                    sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$taxa.treeSubGroup <- renderUI({
-    selectInput("taxa.treeSubGroup", "Select taxa group:", sort(unique(df_tree$taxaSubGroup)))
+    selectInput("taxa.treeSubGroup", "選擇物種類群：", sort(unique(df_tree$taxaSubGroup)))
   })
   
   speciesTree <- reactive({
@@ -256,7 +256,7 @@ shinyServer(function(input, output, session) {
   
   ## show maps
   df_taxa_map_selected <- reactive({
-    req(input$spatial.taxaSubGroup)  # Require input$spatial.taxaSubGroup to be available
+    req(input$spatial.taxaSubGroup)
     df_taxa_map %>%
       filter(tSG %in% input$spatial.taxaSubGroup)
   })
@@ -345,7 +345,7 @@ shinyServer(function(input, output, session) {
   gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("建議優先填補", "建議填補", "資料筆數高於平均值"))), ]
   
   gapCountdf_sorted <- gapCountdf_sorted %>%
-    rename("優先填補等級" = "priority", "地型分類" = "landType", "網格數" = "gridCount")
+    rename("優先填補等級" = "priority", "棲地類型" = "landType", "網格數" = "gridCount")
   
   output$gapCount <- renderDT({
     datatable(gapCountdf_sorted, options = list(searching = FALSE, paging = FALSE))
@@ -354,12 +354,38 @@ shinyServer(function(input, output, session) {
   
   ## gapMap
   ## grid layer
+  # Update selectizeInput choices based on the data
   df_gapCount_table_shp <- st_read("www/data/processed/df_gapCount_table.shp")
-  breaks <- c(0, 1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_gapCount_table_shp$occCount, na.rm = TRUE))
   
-  pal <- colorBin(palette = "YlOrRd", domain = df_gapCount_table_shp$occCount, bins = breaks)
+  # Dynamically generate the dropdown menu
+  output$gap.priority <- renderUI({
+    selectInput(
+      inputId = "priority",
+      label = "選擇優先填補等級:",
+      choices = unique(df_gapCount_table_shp$priority),
+      selected = unique(df_gapCount_table_shp$priority)[1]  # Default selection
+    )
+  })
+  
+  df_gap_map_selected <- reactive({
+    req(input$priority)
+    filtered <- df_gapCount_table_shp %>%
+      filter(priority == input$priority)
+    if (nrow(filtered) == 0) return(df_gapCount_table_shp)  # Fallback to full dataset if filter results in empty set
+    filtered
+  })
+  
+  breaks <- reactive({
+    c(0, 1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_gapCount_table_shp$occCount, na.rm = TRUE))
+  })
+  
+  pal <- reactive({
+    colorBin(palette = "YlOrRd", domain = df_gapCount_table_shp$occCount, bins = breaks())
+  })
   
   output$gapMap <- renderLeaflet({
+    req(df_gap_map_selected())
+    
     leaflet() %>%
       addTiles() %>%
       setView(lng = 120, lat = 23, zoom = 7) %>%
@@ -367,26 +393,29 @@ shinyServer(function(input, output, session) {
       addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
       addLayersControl(
         baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-        options = layersControlOptions(collapsed = TRUE)) %>%
+        options = layersControlOptions(collapsed = TRUE)
+      ) %>%
       addResetMapButton() %>%
       addPolygons(
-        data = df_gapCount_table_shp,
-        fillColor = ~pal(occCount),
-        weight = 1,
+        data = df_gap_map_selected(),
+        fillColor = ~pal()(occCount),
+        weight = 0.5,
         opacity = 0.6,
         color = 'orange',
         fillOpacity = 0.5,
         popup = ~paste("<strong>資料筆數:</strong>", occCount, "<br>",
-                       "<strong>地型分類:</strong>", landType, "<br>",
-                       "<strong>優先填補等級:</strong>", priority)) %>%
+                       "<strong>棲地類型:</strong>", landType, "<br>",
+                       "<strong>優先填補等級:</strong>", priority)
+      ) %>%
       addLegend(
-        data = df_gapCount_table_shp,
-        pal = pal,
+        data = df_gap_map_selected(),
+        pal = pal(),
         values = ~occCount,
         opacity = 0.5,
         title = "資料筆數",
-        position = "bottomright")
+        position = "bottomright"
+      )
   })
-
-
+  
+  
 })

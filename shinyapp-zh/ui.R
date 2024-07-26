@@ -119,18 +119,18 @@ shinyUI(fluidPage(
         tabItem(tabName = "taxa",
                 includeMarkdown("www/taxa.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                HTML("<h4><b>TaiCOL 裏的 TBIA 記錄：</b></h4>"),
+                HTML("<h4><b>TaiCOL 裡的 TBIA 紀錄：</b></h4>"),
                 fluidRow(
                   column(6,
-                         div(HTML("<b>對到最高林奈階層的記錄 %</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>對到最高林奈階層的紀錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.taxonRank", height = 400)),
                   column(6,
-                         div(HTML("<b>入口網裏曾與未曾記錄的 TaiCOL 種（包含種下）階層 % 數</b>"), style = "margin-bottom: 10px;"),
+                         div(HTML("<b>入口網曾與未曾紀錄的 TaiCOL 種（包含種下）階層 % 數</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.TaiCOL", height = 400))
                 ),
                 br(),
-                HTML("<h4><b>物種類群在各栖地類型（比照 TaiCOL）的數量統計：</b></h4>"),
-                HTML("備注：有些入口網的物種記錄在 TaiCOL 還未收錄，所以會有 “入口網已記錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
+                HTML("<h4><b>物種類群在各棲地類型（比照 TaiCOL）的數量統計：</b></h4>"),
+                HTML("備注：有些入口網的物種紀錄在 TaiCOL 還未收錄，所以會有 “入口網已紀錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
                 br(),
                 HTML("長條圖可用鼠標選擇範圍放大，點擊兩下會回到預設模式。"),
                 br(),
@@ -139,7 +139,7 @@ shinyUI(fluidPage(
                        uiOutput("taxa.landtype.taxa.prop"), br()),
                 br(),
                 column(12,
-                       div(HTML("<b>TBIA 裏已記錄與未記錄物種（不包含種下）</b>"), style = "margin-bottom: 10px;"),
+                       div(HTML("<b>TBIA 裡已紀錄與未紀錄物種（不包含種下）</b>"), style = "margin-bottom: 10px;"),
                        plotlyOutput("taxa.bar.unrecorded.taxa", height = 500)),
                 br(),
                 column(12,
@@ -147,7 +147,8 @@ shinyUI(fluidPage(
                        HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                        div(HTML("<b>物種類群與資料類型：</b>"), style = "margin-bottom: 10px;"),
                        HTML("此圖讓您檢視物種類群與資料類型的數量分布。顔色越淺表示資料數量越多。"),
-                       plotlyOutput("df_bof", height = 800))
+                       br(),
+                       plotlyOutput("df_bof", height = 700))
         ),
         
         
@@ -157,7 +158,7 @@ shinyUI(fluidPage(
                 includeMarkdown("www/tree.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 column(3, uiOutput("taxa.treeSubGroup")),
-                column(2, downloadButton("downloadData", "下載入口網未曾記錄物種名錄")),
+                column(2, downloadButton("downloadData", "下載入口網未曾紀錄物種名錄")),
                 column(12, 
                        box(width = 12, style = "overflow-y: scroll; height: 5000px;",
                        collapsibleTreeOutput('tree', height = '5000px')))
@@ -216,7 +217,7 @@ shinyUI(fluidPage(
               width = 4,
               box(
                 width = 12,
-                checkboxInput("showAll", HTML("<b>顯示所有記錄</b>"), value = T),
+                checkboxInput("showAll", HTML("<b>顯示所有紀錄</b>"), value = T),
                 HTML("<b>或</b>"), br(), br(),
                 selectizeInput(
                   inputId = "spatial.taxaSubGroup",
@@ -227,7 +228,7 @@ shinyUI(fluidPage(
                 )
               ),
               box(
-                title = "物種類群與記錄筆數",
+                title = "物種類群與紀錄筆數",
                 width = 12,
                 DTOutput("df_spatial_allOccCount_grid_table"), 
                 style = "width: 100%;"
@@ -249,12 +250,13 @@ shinyUI(fluidPage(
                 fluidRow(valueBox(4393, "建議優先填補網格數", icon = icon("triangle-exclamation"), color = "red"),
                          valueBox(390, "建議填補網格數", icon = icon("star"), color = "orange"),
                          valueBox(1022, "資料筆數高於平均值網格數", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(column(width = 4, uiOutput("gap.priority"))),
                 fluidRow(column(width = 8, leafletOutput("gapMap", height = 650)),
                          column(width = 4, DTOutput("gapCount")))
                 ),
-                
-
-
+        
+        
+        
         # Section: Call for data
         tabItem(tabName = "callfordata", 
                 includeMarkdown("www/callfordata.md")

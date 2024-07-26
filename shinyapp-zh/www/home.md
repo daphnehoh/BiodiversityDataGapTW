@@ -12,7 +12,7 @@
 左側導航面板的選單，供您檢視不同類型的視覺化圖表，同時提供一些填補空缺的資訊。<br>
 <br>
 
-製作這個 Shiny App 的程式碼完全公開，可以在 [GitHub](https://github.com/daphnehoh/BiodiversityDataGapTW) 裏找到。<br>
+製作這個 Shiny App 的程式碼完全公開，可以在 [GitHub](https://github.com/daphnehoh/BiodiversityDataGapTW) 找到。<br>
 <br>
 
 作者: 何芷蔚 Daphne Z Hoh*、吳俊毅、端木茂甯<br>
@@ -32,4 +32,4 @@
 <br>
 <br>
 
-這項工作由[中央研究院生物多樣性研究中心](https://www.biodiv.tw/)、[臺灣國家科學技術委員會](https://www.nstc.gov.tw/)和[林業保育署](https://www.forest.gov.tw/)所指導。
+這項工作由[中央研究院生物多樣性研究中心](https://www.biodiv.tw/)、[臺灣國家科學技術委員會](https://www.nstc.gov.tw/)和[農業部林業及自然保育署](https://www.forest.gov.tw/)所指導。
