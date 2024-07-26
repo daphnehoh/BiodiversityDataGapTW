@@ -48,7 +48,7 @@ shinyServer(function(input, output, session) {
   
   ## The unrecorded taxa
   output$taxa.landtype.taxa.prop <- renderUI({
-    selectInput("taxa.landtype.taxa.prop", "選擇栖地類型：", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
+    selectInput("taxa.landtype.taxa.prop", "選擇棲地類型：", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
   })
   
   
@@ -90,11 +90,43 @@ shinyServer(function(input, output, session) {
              yaxis = list(title = "物種數量", tickvals = seq(0, 12000, 500)),
              legend = list(x = 0, y = 1.1, orientation = "h")) %>%
         config(displayModeBar = FALSE)
-      
-    # Return the plotly object
+    
     return(plot_data)
 
   })
+  
+  
+  
+  
+  # Section: Taxon & basisOfRecord
+  ## heatmap
+  df_taxa.basisOfRecord <- fread("www/data/processed/df_taxa.basisOfRecord.csv",
+                   sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+  
+  output$df_bof <- renderPlotly({
+    
+    plot_ly(
+      data = df_taxa.basisOfRecord,
+      x = ~basisOfRecord,
+      y = ~taxaSubGroup,
+      z = ~count_numeric,
+      type = "heatmap",
+      colorscale = "Viridis",
+      colorbar = list(
+        title = "Record count",
+        tickvals = c(0, 1, 2, 3, 4, 5, 6, 7),
+        ticktext = c("0", "1-10", "11-100", "101-1,000", "1,001-10,000", "10,001-100,000", "100,001-10,000,000", "10,000,000+")
+      ),
+      text = ~paste0(taxaSubGroup, "<br>",
+                     basisOfRecord, "<br>",
+                     "Record count: ", count),
+      hoverinfo = "text") %>%
+      config(displayModeBar = FALSE) %>%
+      layout(xaxis = list(title = "物種類群"), 
+             yaxis = list(title = "記錄類型", tickangle = 45),
+             showlegend = FALSE) 
+  
+    })
   
   
   

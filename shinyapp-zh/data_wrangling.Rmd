@@ -17,7 +17,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia5_vtaxa.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia6_bof.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -26,6 +26,7 @@ head(tbia)
 # remove unwanted columns
 keep <- c("id", "year", "month",
           "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters",
+          "basisOfRecord",
           "taxonID", "taxonRank", "taxaSubGroup",
           "kingdom", "phylum", "class", "order", "family", "genus", "scientificName", "simple_scientificName")
 
@@ -319,6 +320,40 @@ taicol_species_unrecorded <- taicol_species %>%
 colnames(taicol_species_unrecorded)[5] <- "unrecorded"
 
 fwrite(taicol_species_unrecorded, "www/data/processed/df_tree_unrecorded_list.csv", 
+       row.names = F, quote = T)
+
+
+
+# Subsection: Taxon & basisOfRecord
+df_taxa.basisOfRecord <- tbia %>%
+  group_by(taxaSubGroup, basisOfRecord) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(count_bin = case_when(
+    count > 10000000 ~ "10,000,000+",
+    count > 100000 ~ "100,001-10,000,000",
+    count > 10000 ~ "10,001-100,000",
+    count > 1000 ~ "1,001-10,000",
+    count > 100 ~ "101-1,000",
+    count > 10 ~ "11-100",
+    count > 0 ~ "1-10",
+    TRUE ~ "0"
+  ))
+
+# Create a numeric representation for the heatmap
+df_taxa.basisOfRecord <- df_taxa.basisOfRecord %>%
+  mutate(count_numeric = case_when(
+    count > 10000000 ~ 7,
+    count > 100000 ~ 6,
+    count > 10000 ~ 5,
+    count > 1000 ~ 4,
+    count > 100 ~ 3,
+    count > 10 ~ 2,
+    count > 0 ~ 1,
+    TRUE ~ 0
+  ))
+
+
+fwrite(df_taxa.basisOfRecord, "www/data/processed/df_taxa.basisOfRecord.csv", 
        row.names = F, quote = T)
 ```
 

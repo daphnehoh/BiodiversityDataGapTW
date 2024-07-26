@@ -2,3 +2,8 @@ body {
   font-family: Arial;
   font-size: 18px;
 }
+
+.main-header .logo {
+  height: 56px; 
+  line-height: 56px; 
+}
