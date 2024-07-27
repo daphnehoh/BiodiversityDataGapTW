@@ -96,14 +96,14 @@ shinyUI(fluidPage(
       
       tabItems(
         
-        # Section: Home
+        # Section: Home # --------------------------------------------------------------------
         tabItem(tabName = "home", 
                 includeMarkdown("www/home.md")
                 ),
         
         
         
-        # Section: Descriptions
+        # Section: Descriptions # --------------------------------------------------------------------
         tabItem(tabName = "descriptions", 
                 fluidRow(
                   HTML("<h3>&nbsp;&nbsp;資料説明</h3>"),
@@ -115,45 +115,55 @@ shinyUI(fluidPage(
         
         
         
-        # Section: Taxonomic Gap
+        # Section: Taxonomic Gap # --------------------------------------------------------------------
         tabItem(tabName = "taxa",
                 includeMarkdown("www/taxa.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 HTML("<h4><b>TaiCOL 裡的 TBIA 紀錄：</b></h4>"),
+                
                 fluidRow(
                   column(6,
                          div(HTML("<b>對到最高林奈階層的紀錄 %</b>"), style = "margin-bottom: 10px;"),
                          plotlyOutput("taxa.pie.taxonRank", height = 400)),
                   column(6,
                          div(HTML("<b>入口網曾與未曾紀錄的 TaiCOL 種（包含種下）階層 % 數</b>"), style = "margin-bottom: 10px;"),
-                         plotlyOutput("taxa.pie.TaiCOL", height = 400))
-                ),
+                         plotlyOutput("taxa.pie.TaiCOL", height = 400))),
+                
                 br(),
+                HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
+                
+                fluidRow(
+                  column(4,
+                         div(HTML("<b>物種類群與紀錄筆數：</b>"), style = "margin-bottom: 10px;"),
+                         br(),
+                         div(DTOutput("df_allOccCount_grid_table"), style = "width: 100%;")),
+                  
+                  column(8,
+                         div(HTML("<b>物種類群與資料類型：</b>"), style = "margin-bottom: 10px;"),
+                         HTML("此圖讓您檢視物種類群與資料類型的數量分布。顔色越淺表示資料數量越多。"),
+                         br(),
+                         plotlyOutput("df_bof", height = 800))
+                  ),
+                
+                br(),
+                HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
+                
                 HTML("<h4><b>物種類群在各棲地類型（比照 TaiCOL）的數量統計：</b></h4>"),
                 HTML("備注：有些入口網的物種紀錄在 TaiCOL 還未收錄，所以會有 “入口網已紀錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
                 br(),
                 HTML("長條圖可用鼠標選擇範圍放大，點擊兩下會回到預設模式。"),
                 br(),
                 br(),
-                column(2,
-                       uiOutput("taxa.landtype.taxa.prop"), br()),
+                column(2, uiOutput("taxa.landtype.taxa.prop"), br()),
                 br(),
                 column(12,
                        div(HTML("<b>TBIA 裡已紀錄與未紀錄物種（不包含種下）</b>"), style = "margin-bottom: 10px;"),
-                       plotlyOutput("taxa.bar.unrecorded.taxa", height = 500)),
-                br(),
-                column(12,
-                       br(),
-                       HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                       div(HTML("<b>物種類群與資料類型：</b>"), style = "margin-bottom: 10px;"),
-                       HTML("此圖讓您檢視物種類群與資料類型的數量分布。顔色越淺表示資料數量越多。"),
-                       br(),
-                       plotlyOutput("df_bof", height = 700))
+                       plotlyOutput("taxa.bar.unrecorded.taxa", height = 500))
         ),
+      
         
         
-        
-        # Section: Species Tree
+        # Section: Species Tree # --------------------------------------------------------------------
         tabItem(tabName = "tree",
                 includeMarkdown("www/tree.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
@@ -162,11 +172,11 @@ shinyUI(fluidPage(
                 column(12, 
                        box(width = 12, style = "overflow-y: scroll; height: 5000px;",
                        collapsibleTreeOutput('tree', height = '5000px')))
-        ),
+                ),
         
         
         
-        # Section: Temporal Gap
+        # Section: Temporal Gap # --------------------------------------------------------------------
         tabItem(
           tabName = "time",
           includeMarkdown("www/temporal.md"),
@@ -207,7 +217,7 @@ shinyUI(fluidPage(
       
         
         
-        # Section: Spatial Gap
+        # Section: Spatial Gap # --------------------------------------------------------------------
         tabItem(
           tabName = "map",
           includeMarkdown("www/spatial.md"),
@@ -225,25 +235,17 @@ shinyUI(fluidPage(
                   choices = NULL,
                   multiple = T,
                   options = list(create = T)
-                )
-              ),
-              box(
-                title = "物種類群與紀錄筆數",
+                )))),
+            fluidRow(
+              column(
                 width = 12,
-                DTOutput("df_spatial_allOccCount_grid_table"), 
-                style = "width: 100%;"
-                )
-              ),
-            column(
-              width = 8,
-              leafletOutput("spatialMap", height = 900)
+                leafletOutput("spatialMap", height = 900))
             )
-          )
-        ),
+          ),
 
         
         
-        # Section: Fill the Gap!
+        # Section: Fill the Gap! # --------------------------------------------------------------------
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
@@ -257,19 +259,18 @@ shinyUI(fluidPage(
         
         
         
-        # Section: Call for data
+        # Section: Call for data # --------------------------------------------------------------------
         tabItem(tabName = "callfordata", 
                 includeMarkdown("www/callfordata.md")
         ),
         
         
         
-        # Section: Releases
+        # Section: Releases & Ref # --------------------------------------------------------------------
         tabItem(tabName = "releases", 
                 includeMarkdown("www/releases.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 includeMarkdown("www/references.md"))
-        
         
         
         ) # end tabItems

@@ -45,12 +45,50 @@ shinyServer(function(input, output, session) {
   })
   
   
+  ## Taxa & record count table
+  df_allOccCount_grid_table <- fread("www/data/processed/df_spatial_allOccCount_grid_table.csv",
+                                             sep = ",", encoding = "UTF-8")
   
-  ## The unrecorded taxa
+  output$df_allOccCount_grid_table <- renderDT({
+    datatable(df_allOccCount_grid_table,
+              options = list(searching = FALSE, lengthMenu = list(c(15, -1), c('15', 'All'))))
+  })
+  
+  
+  ## Taxa & basisOfRecord heatmap
+  df_taxa.basisOfRecord <- fread("www/data/processed/df_taxa.basisOfRecord.csv",
+                                 sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+  
+  output$df_bof <- renderPlotly({
+    
+    plot_ly(
+      data = df_taxa.basisOfRecord,
+      x = ~basisOfRecord,
+      y = ~taxaSubGroup,
+      z = ~count_numeric,
+      type = "heatmap",
+      colorscale = "Viridis",
+      showscale = FALSE,
+      colorbar = list(
+        title = "Record count",
+        tickvals = c(0, 1, 2, 3, 4, 5, 6, 7),
+        ticktext = c("0", "1-10", "11-100", "101-1,000", "1,001-10,000", "10,001-100,000", "100,001-10,000,000", "10,000,000+")
+      ),
+      text = ~paste0(taxaSubGroup, "<br>",
+                     basisOfRecord, "<br>",
+                     "Record count: ", count),
+      hoverinfo = "text") %>%
+      config(displayModeBar = FALSE) %>%
+      layout(xaxis = list(title = "紀錄類型"), 
+             yaxis = list(title = "物種類群", tickangle = 45)) 
+    
+  })
+  
+  
+  ## The unrecorded taxa bar chart and their habitat
   output$taxa.landtype.taxa.prop <- renderUI({
     selectInput("taxa.landtype.taxa.prop", "選擇棲地類型：", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
   })
-  
   
   output$taxa.bar.unrecorded.taxa <- renderPlotly({
     
@@ -84,7 +122,7 @@ shinyServer(function(input, output, session) {
       
     }
     
-    # Customize layout and configuration for the plot
+    ### Customize layout and configuration for the plot
     plot_data <- plot_data %>%
       layout(xaxis = list(title = "物種類群", tickangle = 45), 
              yaxis = list(title = "物種數量", tickvals = seq(0, 12000, 500)),
@@ -94,39 +132,6 @@ shinyServer(function(input, output, session) {
     return(plot_data)
 
   })
-  
-  
-  
-  
-  # Section: Taxon & basisOfRecord
-  ## heatmap
-  df_taxa.basisOfRecord <- fread("www/data/processed/df_taxa.basisOfRecord.csv",
-                   sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-  
-  output$df_bof <- renderPlotly({
-    
-    plot_ly(
-      data = df_taxa.basisOfRecord,
-      x = ~basisOfRecord,
-      y = ~taxaSubGroup,
-      z = ~count_numeric,
-      type = "heatmap",
-      colorscale = "Viridis",
-      showscale = FALSE,
-      colorbar = list(
-        title = "Record count",
-        tickvals = c(0, 1, 2, 3, 4, 5, 6, 7),
-        ticktext = c("0", "1-10", "11-100", "101-1,000", "1,001-10,000", "10,001-100,000", "100,001-10,000,000", "10,000,000+")
-      ),
-      text = ~paste0(taxaSubGroup, "<br>",
-                     basisOfRecord, "<br>",
-                     "Record count: ", count),
-      hoverinfo = "text") %>%
-      config(displayModeBar = FALSE) %>%
-      layout(xaxis = list(title = "紀錄類型"), 
-             yaxis = list(title = "物種類群", tickangle = 45)) 
-  
-    })
   
   
   
@@ -235,105 +240,94 @@ shinyServer(function(input, output, session) {
 
   
   
-  # Section : Spatial
-  ## Load taxa table
-  df_spatial_allOccCount_grid_table <- fread("www/data/processed/df_spatial_allOccCount_grid_table.csv",
-                                             sep = ",", encoding = "UTF-8")
-  
-  output$df_spatial_allOccCount_grid_table <- renderDT({
-    datatable(df_spatial_allOccCount_grid_table,
-              options = list(searching = FALSE, lengthMenu = list(c(10, -1), c('10', 'All'))))
-  })
-  
+  # Section: Spatial
   # Load map data
   df_map <- st_read("www/data/processed/df_map.shp")
+  df_taxa_map <- st_read("www/data/processed/df_taxa_map.shp")
+  
+  # Define color palettes and breaks
   breaks <- c(1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_map$occCount, na.rm = TRUE))
   pal_map <- colorBin(palette = "YlOrRd", domain = df_map$occCount, bins = breaks)
-  
-  df_taxa_map <- st_read("www/data/processed/df_taxa_map.shp")
-  breaks <- c(1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_map$occCount, na.rm = TRUE))
   pal_taxa <- colorBin(palette = "YlOrRd", domain = df_taxa_map$occCount, bins = breaks)
   
-  ## show maps
+  # Reactive expression for selected taxa map data
   df_taxa_map_selected <- reactive({
     req(input$spatial.taxaSubGroup)
-    df_taxa_map %>%
-      filter(tSG %in% input$spatial.taxaSubGroup)
+    df_taxa_map %>% filter(tSG %in% input$spatial.taxaSubGroup)
   })
-
-  # ## Render the spatialMap based on selection
+  
+  # Reactive expression for sum of selected occCount
+  df_taxa_map_summarized <- reactive({
+    df_taxa_map_selected() %>%
+      group_by(geometry) %>%
+      summarize(occCount = sum(occCount, na.rm = TRUE)) %>%
+      ungroup()
+  })
+  
+  # Render the spatial map based on selection
   output$spatialMap <- renderLeaflet({
+    base_map <- leaflet() %>%
+      addTiles() %>%
+      setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
+      addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
+      addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
+      addLayersControl(
+        baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
+        options = layersControlOptions(collapsed = TRUE)
+      ) %>%
+      addResetMapButton()
+    
     if (input$showAll) {
-
-      leaflet() %>%
-        addTiles() %>%
-        setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-        addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
-        addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
-        addLayersControl(
-          baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-          options = layersControlOptions(collapsed = TRUE)) %>%
-        addResetMapButton() %>%
+      base_map %>%
         addPolygons(
           data = df_map,
           fillColor = ~pal_map(occCount),
           weight = 1,
-          opacity = 0.6,
+          opacity = 0.4,
           color = 'orange',
-          fillOpacity = 0.6,
-          popup = ~paste("Number of records:", occCount)) %>%
+          fillOpacity = 0.4,
+          popup = ~paste("Number of records:", occCount)
+        ) %>%
         addLegend(
           data = df_map,
           values = ~occCount,
           pal = pal_map,
-          opacity = 0.6,
+          opacity = 0.4,
           title = "Record count",
           position = "bottomright",
-          labFormat = labelFormat(digits = 0, big.mark = ","))
-
-      } else {
-
-        leaflet() %>%
-          addTiles() %>%
-          setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-          addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
-          addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
-          addLayersControl(
-            baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-            options = layersControlOptions(collapsed = TRUE)) %>%
-          addResetMapButton() %>%
-          addPolygons(
-            data = df_taxa_map_selected(),
-            fillColor = ~pal_taxa(occCount),
-            weight = 1,
-            opacity = 0.4,
-            color = 'mediumvioletred',
-            fillOpacity = 0.6,
-            popup = ~paste("Number of records:", occCount)) %>%
-          addLegend(
-            data = df_map,
-            values = ~occCount,
-            pal = pal_map,
-            opacity = 0.6,
-            title = "Record count",
-            position = "bottomright",
-            labFormat = labelFormat(digits = 0, big.mark = ","))
-
+          labFormat = labelFormat(digits = 0, big.mark = ",")
+        )
+    } else {
+      base_map %>%
+        addPolygons(
+          data = df_taxa_map_summarized(),
+          fillColor = ~pal_taxa(occCount),
+          weight = 1,
+          opacity = 0.4,
+          color = 'mediumvioletred',
+          fillOpacity = 0.4,
+          popup = ~paste("Number of selected records:", occCount)
+        ) %>%
+        addLegend(
+          data = df_taxa_map_summarized(),
+          values = ~occCount,
+          pal = pal_taxa,
+          opacity = 0.4,
+          title = "Record count",
+          position = "bottomright",
+          labFormat = labelFormat(digits = 0, big.mark = ",")
+        )
     }
   })
-
+  
   # Update selectizeInput choices based on df_spatial_allOccCount_grid_table
   observe({
-    updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_spatial_allOccCount_grid_table$taxaSubGroup), server = TRUE)
+    updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_allOccCount_grid_table$taxaSubGroup), server = TRUE)
   })
-
+  
   # Update checkbox based on selection
   observeEvent(input$spatial.taxaSubGroup, {
-    if (is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0) {
-      updateCheckboxInput(session, "showAll", value = TRUE)
-    } else {
-      updateCheckboxInput(session, "showAll", value = FALSE)
-    }
+    updateCheckboxInput(session, "showAll", value = is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0)
   })
 
   

@@ -1,4 +1,4 @@
-## 哈囉  :)
+## 哈囉 :)
 <br>
 
 這個 Shiny App 視覺化了[臺灣生物多樣性資訊聯盟](https://tbiadata.tw)（以下簡稱：TBIA）入口網現在的資料空缺。<br>
@@ -18,12 +18,11 @@
 作者: 何芷蔚 Daphne Z Hoh*、吳俊毅、端木茂甯<br>
 <br>
 *聯絡：<br>
-<i class="fa fa-envelope"></i> daphnehohzhiwei <i class="fa fa-at"></i> gmail.com<br>
+<i class="fa fa-envelope"></i> daphnehohzhiwei <i class="fa fa-at"></i> gmail.com / [ORCID](https://orcid.org/0000-0002-7810-1034) <br>
 博士後研究員 @ [TaiBIF 臺灣生物多樣性資訊機構](https://portal.taibif.tw/)<br>
-[[ORCID](https://orcid.org/0000-0002-7810-1034)]
 <br>
 
-計劃: 
+計劃：<br> 
 臺灣生物多樣性資訊聯盟<br>
 <i class="fa fa-envelope"></i> tbianoti <i class="fa fa-at"></i> gmail.com<br>
 
