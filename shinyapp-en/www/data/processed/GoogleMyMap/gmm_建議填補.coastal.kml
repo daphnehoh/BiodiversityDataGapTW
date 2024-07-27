@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="gmm_建議填補.coastal" id="gmm_建議填補.coastal">
+	<SimpleField name="id" type="string"></SimpleField>
+	<SimpleField name="occCount" type="int"></SimpleField>
+	<SimpleField name="center_x" type="float"></SimpleField>
+	<SimpleField name="center_y" type="float"></SimpleField>
+	<SimpleField name="landType" type="string"></SimpleField>
+	<SimpleField name="priority" type="string"></SimpleField>
+</Schema>
+<Folder><name>gmm_建議填補.coastal</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_01808</SimpleData>
+		<SimpleData name="occCount">1279</SimpleData>
+		<SimpleData name="center_x">114.374999999994</SimpleData>
+		<SimpleData name="center_y">10.395833838128</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>114.35,10.375 114.35,10.4166666666667 114.4,10.4166666666667 114.4,10.375 114.35,10.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_51455</SimpleData>
+		<SimpleData name="occCount">2672</SimpleData>
+		<SimpleData name="center_x">116.724999999994</SimpleData>
+		<SimpleData name="center_y">20.7291675165787</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.7,20.7083333333333 116.7,20.75 116.75,20.75 116.75,20.7083333333333 116.7,20.7083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_57137</SimpleData>
+		<SimpleData name="occCount">2994</SimpleData>
+		<SimpleData name="center_x">120.825</SimpleData>
+		<SimpleData name="center_y">21.8958342057174</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.8,21.875 120.8,21.9166666666667 120.85,21.9166666666667 120.85,21.875 120.8,21.875</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_57734</SimpleData>
+		<SimpleData name="occCount">2401</SimpleData>
+		<SimpleData name="center_x">120.675000000005</SimpleData>
+		<SimpleData name="center_y">22.0208342078861</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.65,22.0 120.65,22.0416666666667 120.7,22.0416666666667 120.7,22.0 120.65,22.0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_57738</SimpleData>
+		<SimpleData name="occCount">2938</SimpleData>
+		<SimpleData name="center_x">120.875000000002</SimpleData>
+		<SimpleData name="center_y">22.0208342078844</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.85,22.0 120.85,22.0416666666667 120.9,22.0416666666667 120.9,22.0 120.85,22.0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_57751</SimpleData>
+		<SimpleData name="occCount">2911</SimpleData>
+		<SimpleData name="center_x">121.525000000001</SimpleData>
+		<SimpleData name="center_y">22.020834207885</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,22.0 121.5,22.0416666666667 121.55,22.0416666666667 121.55,22.0 121.5,22.0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58135</SimpleData>
+		<SimpleData name="occCount">2669</SimpleData>
+		<SimpleData name="center_x">120.724999999999</SimpleData>
+		<SimpleData name="center_y">22.1041675426383</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.7,22.0833333333333 120.7,22.125 120.75,22.125 120.75,22.0833333333333 120.7,22.0833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58338</SimpleData>
+		<SimpleData name="occCount">1500</SimpleData>
+		<SimpleData name="center_x">120.875000000005</SimpleData>
+		<SimpleData name="center_y">22.1458342099995</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.85,22.125 120.85,22.1666666666667 120.9,22.1666666666667 120.9,22.125 120.85,22.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58534</SimpleData>
+		<SimpleData name="occCount">2191</SimpleData>
+		<SimpleData name="center_x">120.675000000001</SimpleData>
+		<SimpleData name="center_y">22.1875008773718</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.65,22.1666666666667 120.65,22.2083333333333 120.7,22.2083333333333 120.7,22.1666666666667 120.65,22.1666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58734</SimpleData>
+		<SimpleData name="occCount">1631</SimpleData>
+		<SimpleData name="center_x">120.675000000002</SimpleData>
+		<SimpleData name="center_y">22.2291675447249</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.65,22.2083333333333 120.65,22.25 120.7,22.25 120.7,22.2083333333333 120.65,22.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58738</SimpleData>
+		<SimpleData name="occCount">2902</SimpleData>
+		<SimpleData name="center_x">120.875000000005</SimpleData>
+		<SimpleData name="center_y">22.2291675447252</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.85,22.2083333333333 120.85,22.25 120.9,22.25 120.9,22.2083333333333 120.85,22.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_58934</SimpleData>
+		<SimpleData name="occCount">2723</SimpleData>
+		<SimpleData name="center_x">120.675</SimpleData>
+		<SimpleData name="center_y">22.2708342120719</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.65,22.25 120.65,22.2916666666667 120.7,22.2916666666667 120.7,22.25 120.65,22.25</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59128</SimpleData>
+		<SimpleData name="occCount">2039</SimpleData>
+		<SimpleData name="center_x">120.374999999999</SimpleData>
+		<SimpleData name="center_y">22.3125008794198</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.35,22.2916666666667 120.35,22.3333333333333 120.4,22.3333333333333 120.4,22.2916666666667 120.35,22.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59133</SimpleData>
+		<SimpleData name="occCount">1354</SimpleData>
+		<SimpleData name="center_x">120.624999999996</SimpleData>
+		<SimpleData name="center_y">22.3125008794201</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.6,22.2916666666667 120.6,22.3333333333333 120.65,22.3333333333333 120.65,22.2916666666667 120.6,22.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59339</SimpleData>
+		<SimpleData name="occCount">1175</SimpleData>
+		<SimpleData name="center_x">120.924999999998</SimpleData>
+		<SimpleData name="center_y">22.3541675467612</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.9,22.3333333333333 120.9,22.375 120.95,22.375 120.95,22.3333333333333 120.9,22.3333333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59539</SimpleData>
+		<SimpleData name="occCount">1744</SimpleData>
+		<SimpleData name="center_x">120.925</SimpleData>
+		<SimpleData name="center_y">22.3958342141015</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.9,22.375 120.9,22.4166666666667 120.95,22.4166666666667 120.95,22.375 120.9,22.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59739</SimpleData>
+		<SimpleData name="occCount">2099</SimpleData>
+		<SimpleData name="center_x">120.925000000002</SimpleData>
+		<SimpleData name="center_y">22.4375008814305</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.9,22.4166666666667 120.9,22.4583333333333 120.95,22.4583333333333 120.95,22.4166666666667 120.9,22.4166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59928</SimpleData>
+		<SimpleData name="occCount">1576</SimpleData>
+		<SimpleData name="center_x">120.374999999995</SimpleData>
+		<SimpleData name="center_y">22.4791675487551</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.35,22.4583333333333 120.35,22.5 120.4,22.5 120.4,22.4583333333333 120.35,22.4583333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_59939</SimpleData>
+		<SimpleData name="occCount">2860</SimpleData>
+		<SimpleData name="center_x">120.925000000004</SimpleData>
+		<SimpleData name="center_y">22.4791675487525</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.9,22.4583333333333 120.9,22.5 120.95,22.5 120.95,22.4583333333333 120.9,22.4583333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_60140</SimpleData>
+		<SimpleData name="occCount">2765</SimpleData>
+		<SimpleData name="center_x">120.974999999993</SimpleData>
+		<SimpleData name="center_y">22.5208342160741</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.95,22.5 120.95,22.5416666666667 121.0,22.5416666666667 121.0,22.5 120.95,22.5</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_60741</SimpleData>
+		<SimpleData name="occCount">1234</SimpleData>
+		<SimpleData name="center_x">121.025000000004</SimpleData>
+		<SimpleData name="center_y">22.6458342180019</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.0,22.625 121.0,22.6666666666667 121.05,22.6666666666667 121.05,22.625 121.0,22.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_60751</SimpleData>
+		<SimpleData name="occCount">1431</SimpleData>
+		<SimpleData name="center_x">121.525000000004</SimpleData>
+		<SimpleData name="center_y">22.6458342180053</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,22.625 121.5,22.6666666666667 121.55,22.6666666666667 121.55,22.625 121.5,22.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_61745</SimpleData>
+		<SimpleData name="occCount">1708</SimpleData>
+		<SimpleData name="center_x">121.224999999998</SimpleData>
+		<SimpleData name="center_y">22.8541675544384</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.2,22.8333333333333 121.2,22.875 121.25,22.875 121.25,22.8333333333333 121.2,22.8333333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_62146</SimpleData>
+		<SimpleData name="occCount">1634</SimpleData>
+		<SimpleData name="center_x">121.274999999999</SimpleData>
+		<SimpleData name="center_y">22.937500888979</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.25,22.9166666666667 121.25,22.9583333333333 121.3,22.9583333333333 121.3,22.9166666666667 121.25,22.9166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_62347</SimpleData>
+		<SimpleData name="occCount">2106</SimpleData>
+		<SimpleData name="center_x">121.324999999996</SimpleData>
+		<SimpleData name="center_y">22.9791675562318</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.3,22.9583333333333 121.3,23.0 121.35,23.0 121.35,22.9583333333333 121.3,22.9583333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_62747</SimpleData>
+		<SimpleData name="occCount">1846</SimpleData>
+		<SimpleData name="center_x">121.325000000001</SimpleData>
+		<SimpleData name="center_y">23.0625008907513</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.3,23.0416666666667 121.3,23.0833333333333 121.35,23.0833333333333 121.35,23.0416666666667 121.3,23.0416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63148</SimpleData>
+		<SimpleData name="occCount">2656</SimpleData>
+		<SimpleData name="center_x">121.375</SimpleData>
+		<SimpleData name="center_y">23.1458342252198</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.35,23.125 121.35,23.1666666666667 121.4,23.1666666666667 121.4,23.125 121.35,23.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63348</SimpleData>
+		<SimpleData name="occCount">1720</SimpleData>
+		<SimpleData name="center_x">121.375000000002</SimpleData>
+		<SimpleData name="center_y">23.1875008924575</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.35,23.1666666666667 121.35,23.2083333333333 121.4,23.2083333333333 121.4,23.1666666666667 121.35,23.1666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63509</SimpleData>
+		<SimpleData name="occCount">1597</SimpleData>
+		<SimpleData name="center_x">119.424999999999</SimpleData>
+		<SimpleData name="center_y">23.2291675596821</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.4,23.2083333333333 119.4,23.25 119.45,23.25 119.45,23.2083333333333 119.4,23.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63548</SimpleData>
+		<SimpleData name="occCount">1029</SimpleData>
+		<SimpleData name="center_x">121.374999999998</SimpleData>
+		<SimpleData name="center_y">23.2291675596792</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.35,23.2083333333333 121.35,23.25 121.4,23.25 121.4,23.2083333333333 121.35,23.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63713</SimpleData>
+		<SimpleData name="occCount">2479</SimpleData>
+		<SimpleData name="center_x">119.624999999999</SimpleData>
+		<SimpleData name="center_y">23.2708342269121</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.6,23.25 119.6,23.2916666666667 119.65,23.2916666666667 119.65,23.25 119.6,23.25</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63722</SimpleData>
+		<SimpleData name="occCount">1750</SimpleData>
+		<SimpleData name="center_x">120.075000000002</SimpleData>
+		<SimpleData name="center_y">23.2708342269113</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.05,23.25 120.05,23.2916666666667 120.1,23.2916666666667 120.1,23.25 120.05,23.25</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63749</SimpleData>
+		<SimpleData name="occCount">1621</SimpleData>
+		<SimpleData name="center_x">121.425000000006</SimpleData>
+		<SimpleData name="center_y">23.2708342269147</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.4,23.25 121.4,23.2916666666667 121.45,23.2916666666667 121.45,23.25 121.4,23.25</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_63950</SimpleData>
+		<SimpleData name="occCount">1702</SimpleData>
+		<SimpleData name="center_x">121.474999999994</SimpleData>
+		<SimpleData name="center_y">23.3125008941251</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.45,23.2916666666667 121.45,23.3333333333333 121.5,23.3333333333333 121.5,23.2916666666667 121.45,23.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_64307</SimpleData>
+		<SimpleData name="occCount">1627</SimpleData>
+		<SimpleData name="center_x">119.324999999995</SimpleData>
+		<SimpleData name="center_y">23.3958342285399</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.3,23.375 119.3,23.4166666666667 119.35,23.4166666666667 119.35,23.375 119.3,23.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_64523</SimpleData>
+		<SimpleData name="occCount">2197</SimpleData>
+		<SimpleData name="center_x">120.124999999995</SimpleData>
+		<SimpleData name="center_y">23.4375008957384</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.1,23.4166666666667 120.1,23.4583333333333 120.15,23.4583333333333 120.15,23.4166666666667 120.1,23.4166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_64550</SimpleData>
+		<SimpleData name="occCount">1994</SimpleData>
+		<SimpleData name="center_x">121.475000000003</SimpleData>
+		<SimpleData name="center_y">23.4375008957409</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.45,23.4166666666667 121.45,23.4583333333333 121.5,23.4583333333333 121.5,23.4166666666667 121.45,23.4166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_64912</SimpleData>
+		<SimpleData name="occCount">1917</SimpleData>
+		<SimpleData name="center_x">119.574999999998</SimpleData>
+		<SimpleData name="center_y">23.5208342301199</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.55,23.5 119.55,23.5416666666667 119.6,23.5416666666667 119.6,23.5 119.55,23.5</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65114</SimpleData>
+		<SimpleData name="occCount">1752</SimpleData>
+		<SimpleData name="center_x">119.675000000005</SimpleData>
+		<SimpleData name="center_y">23.562500897298</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.65,23.5416666666667 119.65,23.5833333333333 119.7,23.5833333333333 119.7,23.5416666666667 119.65,23.5416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65311</SimpleData>
+		<SimpleData name="occCount">2301</SimpleData>
+		<SimpleData name="center_x">119.524999999998</SimpleData>
+		<SimpleData name="center_y">23.6041675644739</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.5,23.5833333333333 119.5,23.625 119.55,23.625 119.55,23.5833333333333 119.5,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65314</SimpleData>
+		<SimpleData name="occCount">2198</SimpleData>
+		<SimpleData name="center_x">119.675000000002</SimpleData>
+		<SimpleData name="center_y">23.6041675644762</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.65,23.5833333333333 119.65,23.625 119.7,23.625 119.7,23.5833333333333 119.65,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65323</SimpleData>
+		<SimpleData name="occCount">2913</SimpleData>
+		<SimpleData name="center_x">120.124999999998</SimpleData>
+		<SimpleData name="center_y">23.6041675644765</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.1,23.5833333333333 120.1,23.625 120.15,23.625 120.15,23.5833333333333 120.1,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65351</SimpleData>
+		<SimpleData name="occCount">1880</SimpleData>
+		<SimpleData name="center_x">121.525000000001</SimpleData>
+		<SimpleData name="center_y">23.6041675644789</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,23.5833333333333 121.5,23.625 121.55,23.625 121.55,23.5833333333333 121.5,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65511</SimpleData>
+		<SimpleData name="occCount">1260</SimpleData>
+		<SimpleData name="center_x">119.524999999999</SimpleData>
+		<SimpleData name="center_y">23.6458342316574</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.5,23.625 119.5,23.6666666666667 119.55,23.6666666666667 119.55,23.625 119.5,23.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65512</SimpleData>
+		<SimpleData name="occCount">1113</SimpleData>
+		<SimpleData name="center_x">119.574999999998</SimpleData>
+		<SimpleData name="center_y">23.6458342316559</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.55,23.625 119.55,23.6666666666667 119.6,23.6666666666667 119.6,23.625 119.55,23.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65523</SimpleData>
+		<SimpleData name="occCount">2388</SimpleData>
+		<SimpleData name="center_x">120.124999999999</SimpleData>
+		<SimpleData name="center_y">23.6458342316568</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.1,23.625 120.1,23.6666666666667 120.15,23.6666666666667 120.15,23.625 120.1,23.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65551</SimpleData>
+		<SimpleData name="occCount">1609</SimpleData>
+		<SimpleData name="center_x">121.525000000006</SimpleData>
+		<SimpleData name="center_y">23.6458342316516</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,23.625 121.5,23.6666666666667 121.55,23.6666666666667 121.55,23.625 121.5,23.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_65951</SimpleData>
+		<SimpleData name="occCount">2423</SimpleData>
+		<SimpleData name="center_x">121.525000000002</SimpleData>
+		<SimpleData name="center_y">23.7291675659789</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,23.7083333333333 121.5,23.75 121.55,23.75 121.55,23.7083333333333 121.5,23.7083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_67327</SimpleData>
+		<SimpleData name="occCount">2473</SimpleData>
+		<SimpleData name="center_x">120.325000000003</SimpleData>
+		<SimpleData name="center_y">24.0208342359408</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.3,24.0 120.3,24.0416666666667 120.35,24.0416666666667 120.35,24.0 120.3,24.0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_67728</SimpleData>
+		<SimpleData name="occCount">1119</SimpleData>
+		<SimpleData name="center_x">120.375000000001</SimpleData>
+		<SimpleData name="center_y">24.1041675701607</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.35,24.0833333333333 120.35,24.125 120.4,24.125 120.4,24.0833333333333 120.35,24.0833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_67929</SimpleData>
+		<SimpleData name="occCount">1356</SimpleData>
+		<SimpleData name="center_x">120.425000000001</SimpleData>
+		<SimpleData name="center_y">24.1458342372694</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.4,24.125 120.4,24.1666666666667 120.45,24.1666666666667 120.45,24.125 120.4,24.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_67954</SimpleData>
+		<SimpleData name="occCount">2424</SimpleData>
+		<SimpleData name="center_x">121.675000000003</SimpleData>
+		<SimpleData name="center_y">24.1458342372693</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.65,24.125 121.65,24.1666666666667 121.7,24.1666666666667 121.7,24.125 121.65,24.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_68330</SimpleData>
+		<SimpleData name="occCount">1470</SimpleData>
+		<SimpleData name="center_x">120.474999999994</SimpleData>
+		<SimpleData name="center_y">24.2291675714552</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.45,24.2083333333333 120.45,24.25 120.5,24.25 120.5,24.2083333333333 120.45,24.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_69084</SimpleData>
+		<SimpleData name="occCount">1071</SimpleData>
+		<SimpleData name="center_x">118.175</SimpleData>
+		<SimpleData name="center_y">24.3958342397584</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>118.15,24.375 118.15,24.4166666666667 118.2,24.4166666666667 118.2,24.375 118.15,24.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_69133</SimpleData>
+		<SimpleData name="occCount">2741</SimpleData>
+		<SimpleData name="center_x">120.625000000001</SimpleData>
+		<SimpleData name="center_y">24.3958342397551</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.6,24.375 120.6,24.4166666666667 120.65,24.4166666666667 120.65,24.375 120.6,24.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_69333</SimpleData>
+		<SimpleData name="occCount">2862</SimpleData>
+		<SimpleData name="center_x">120.625000000003</SimpleData>
+		<SimpleData name="center_y">24.4375009068284</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.6,24.4166666666667 120.6,24.4583333333333 120.65,24.4583333333333 120.65,24.4166666666667 120.6,24.4166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_69758</SimpleData>
+		<SimpleData name="occCount">1014</SimpleData>
+		<SimpleData name="center_x">121.875000000002</SimpleData>
+		<SimpleData name="center_y">24.5208342409301</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.85,24.5 121.85,24.5416666666667 121.9,24.5416666666667 121.9,24.5 121.85,24.5</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_70336</SimpleData>
+		<SimpleData name="occCount">1904</SimpleData>
+		<SimpleData name="center_x">120.774999999997</SimpleData>
+		<SimpleData name="center_y">24.6458342420548</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.75,24.625 120.75,24.6666666666667 120.8,24.6666666666667 120.8,24.625 120.75,24.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_71359</SimpleData>
+		<SimpleData name="occCount">2986</SimpleData>
+		<SimpleData name="center_x">121.925</SimpleData>
+		<SimpleData name="center_y">24.8541675771274</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.9,24.8333333333333 121.9,24.875 121.95,24.875 121.95,24.8333333333333 121.9,24.8333333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_71740</SimpleData>
+		<SimpleData name="occCount">1909</SimpleData>
+		<SimpleData name="center_x">120.974999999995</SimpleData>
+		<SimpleData name="center_y">24.9375009111296</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.95,24.9166666666667 120.95,24.9583333333333 121.0,24.9583333333333 121.0,24.9166666666667 120.95,24.9166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_71960</SimpleData>
+		<SimpleData name="occCount">1667</SimpleData>
+		<SimpleData name="center_x">121.974999999996</SimpleData>
+		<SimpleData name="center_y">24.9791675781167</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.95,24.9583333333333 121.95,25.0 122,25 122.0,24.9583333333333 121.95,24.9583333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_72342</SimpleData>
+		<SimpleData name="occCount">2500</SimpleData>
+		<SimpleData name="center_x">121.075000000002</SimpleData>
+		<SimpleData name="center_y">25.0625009120703</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.05,25.0416666666667 121.05,25.0833333333333 121.1,25.0833333333333 121.1,25.0416666666667 121.05,25.0416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_72343</SimpleData>
+		<SimpleData name="occCount">2320</SimpleData>
+		<SimpleData name="center_x">121.124999999996</SimpleData>
+		<SimpleData name="center_y">25.062500912074</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.1,25.0416666666667 121.1,25.0833333333333 121.15,25.0833333333333 121.15,25.0416666666667 121.1,25.0416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_72547</SimpleData>
+		<SimpleData name="occCount">2517</SimpleData>
+		<SimpleData name="center_x">121.324999999999</SimpleData>
+		<SimpleData name="center_y">25.1041675790335</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.3,25.0833333333333 121.3,25.125 121.35,25.125 121.35,25.0833333333333 121.3,25.0833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_72759</SimpleData>
+		<SimpleData name="occCount">1155</SimpleData>
+		<SimpleData name="center_x">121.925000000002</SimpleData>
+		<SimpleData name="center_y">25.1458342459925</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.9,25.125 121.9,25.1666666666667 121.95,25.1666666666667 121.95,25.125 121.9,25.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_72956</SimpleData>
+		<SimpleData name="occCount">2936</SimpleData>
+		<SimpleData name="center_x">121.775</SimpleData>
+		<SimpleData name="center_y">25.1875009129609</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.75,25.1666666666667 121.75,25.2083333333333 121.8,25.2083333333333 121.8,25.1666666666667 121.75,25.1666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_73551</SimpleData>
+		<SimpleData name="occCount">1549</SimpleData>
+		<SimpleData name="center_x">121.525</SimpleData>
+		<SimpleData name="center_y">25.3125009137809</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.5,25.2916666666667 121.5,25.3333333333333 121.55,25.3333333333333 121.55,25.2916666666667 121.5,25.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_73552</SimpleData>
+		<SimpleData name="occCount">1449</SimpleData>
+		<SimpleData name="center_x">121.575000000006</SimpleData>
+		<SimpleData name="center_y">25.3125009137838</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.55,25.2916666666667 121.55,25.3333333333333 121.6,25.3333333333333 121.6,25.2916666666667 121.55,25.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_77921</SimpleData>
+		<SimpleData name="occCount">1890</SimpleData>
+		<SimpleData name="center_x">120.024999999996</SimpleData>
+		<SimpleData name="center_y">26.2291675849131</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.0,26.2083333333333 120.0,26.25 120.05,26.25 120.05,26.2083333333333 120.0,26.2083333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_78120</SimpleData>
+		<SimpleData name="occCount">2414</SimpleData>
+		<SimpleData name="center_x">119.975000000004</SimpleData>
+		<SimpleData name="center_y">26.2708342517029</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.95,26.25 119.95,26.2916666666667 120.0,26.2916666666667 120.0,26.25 119.95,26.25</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.coastal">
+		<SimpleData name="id">10_78730</SimpleData>
+		<SimpleData name="occCount">2201</SimpleData>
+		<SimpleData name="center_x">120.474999999996</SimpleData>
+		<SimpleData name="center_y">26.3958342520623</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.45,26.375 120.45,26.4166666666667 120.5,26.4166666666667 120.5,26.375 120.45,26.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

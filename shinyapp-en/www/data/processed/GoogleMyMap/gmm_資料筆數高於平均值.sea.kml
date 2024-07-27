@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="gmm_資料筆數高於平均值.sea" id="gmm_資料筆數高於平均值.sea">
+	<SimpleField name="id" type="string"></SimpleField>
+	<SimpleField name="occCount" type="int"></SimpleField>
+	<SimpleField name="center_x" type="float"></SimpleField>
+	<SimpleField name="center_y" type="float"></SimpleField>
+	<SimpleField name="landType" type="string"></SimpleField>
+	<SimpleField name="priority" type="string"></SimpleField>
+</Schema>
+<Folder><name>gmm_資料筆數高於平均值.sea</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.sea">
+		<SimpleData name="id">10_51657</SimpleData>
+		<SimpleData name="occCount">3331</SimpleData>
+		<SimpleData name="center_x">116.824999999999</SimpleData>
+		<SimpleData name="center_y">20.7708341841216</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.8,20.75 116.8,20.7916666666667 116.85,20.7916666666667 116.85,20.75 116.8,20.75</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.sea">
+		<SimpleData name="id">10_68730</SimpleData>
+		<SimpleData name="occCount">8752</SimpleData>
+		<SimpleData name="center_x">120.474999999994</SimpleData>
+		<SimpleData name="center_y">24.3125009056141</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.45,24.2916666666667 120.45,24.3333333333333 120.5,24.3333333333333 120.5,24.2916666666667 120.45,24.2916666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

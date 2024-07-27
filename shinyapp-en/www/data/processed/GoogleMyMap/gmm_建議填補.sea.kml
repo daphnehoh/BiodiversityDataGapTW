@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="gmm_建議填補.sea" id="gmm_建議填補.sea">
+	<SimpleField name="id" type="string"></SimpleField>
+	<SimpleField name="occCount" type="int"></SimpleField>
+	<SimpleField name="center_x" type="float"></SimpleField>
+	<SimpleField name="center_y" type="float"></SimpleField>
+	<SimpleField name="landType" type="string"></SimpleField>
+	<SimpleField name="priority" type="string"></SimpleField>
+</Schema>
+<Folder><name>gmm_建議填補.sea</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_50856</SimpleData>
+		<SimpleData name="occCount">1295</SimpleData>
+		<SimpleData name="center_x">116.775000000005</SimpleData>
+		<SimpleData name="center_y">20.6041675139256</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.75,20.5833333333333 116.75,20.625 116.8,20.625 116.8,20.5833333333333 116.75,20.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_50857</SimpleData>
+		<SimpleData name="occCount">1396</SimpleData>
+		<SimpleData name="center_x">116.825</SimpleData>
+		<SimpleData name="center_y">20.6041675139234</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.8,20.5833333333333 116.8,20.625 116.85,20.625 116.85,20.5833333333333 116.8,20.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51055</SimpleData>
+		<SimpleData name="occCount">1011</SimpleData>
+		<SimpleData name="center_x">116.724999999994</SimpleData>
+		<SimpleData name="center_y">20.6458341815002</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.7,20.625 116.7,20.6666666666667 116.75,20.6666666666667 116.75,20.625 116.7,20.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51056</SimpleData>
+		<SimpleData name="occCount">1293</SimpleData>
+		<SimpleData name="center_x">116.775000000004</SimpleData>
+		<SimpleData name="center_y">20.6458341814989</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.75,20.625 116.75,20.6666666666667 116.8,20.6666666666667 116.8,20.625 116.75,20.625</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51254</SimpleData>
+		<SimpleData name="occCount">1278</SimpleData>
+		<SimpleData name="center_x">116.675000000007</SimpleData>
+		<SimpleData name="center_y">20.6875008490405</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.65,20.6666666666667 116.65,20.7083333333333 116.7,20.7083333333333 116.7,20.6666666666667 116.65,20.6666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51256</SimpleData>
+		<SimpleData name="occCount">2201</SimpleData>
+		<SimpleData name="center_x">116.775000000003</SimpleData>
+		<SimpleData name="center_y">20.6875008490371</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.75,20.6666666666667 116.75,20.7083333333333 116.8,20.7083333333333 116.8,20.6666666666667 116.75,20.6666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51257</SimpleData>
+		<SimpleData name="occCount">1874</SimpleData>
+		<SimpleData name="center_x">116.824999999998</SimpleData>
+		<SimpleData name="center_y">20.6875008490345</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.8,20.6666666666667 116.8,20.7083333333333 116.85,20.7083333333333 116.85,20.6666666666667 116.8,20.6666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51655</SimpleData>
+		<SimpleData name="occCount">1466</SimpleData>
+		<SimpleData name="center_x">116.724999999996</SimpleData>
+		<SimpleData name="center_y">20.7708341841233</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.7,20.75 116.7,20.7916666666667 116.75,20.7916666666667 116.75,20.75 116.7,20.75</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51656</SimpleData>
+		<SimpleData name="occCount">1248</SimpleData>
+		<SimpleData name="center_x">116.775000000005</SimpleData>
+		<SimpleData name="center_y">20.7708341841235</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.75,20.75 116.75,20.7916666666667 116.8,20.7916666666667 116.8,20.75 116.75,20.75</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_51658</SimpleData>
+		<SimpleData name="occCount">1506</SimpleData>
+		<SimpleData name="center_x">116.874999999997</SimpleData>
+		<SimpleData name="center_y">20.770834184126</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>116.85,20.75 116.85,20.7916666666667 116.9,20.7916666666667 116.9,20.75 116.85,20.75</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_66954</SimpleData>
+		<SimpleData name="occCount">1698</SimpleData>
+		<SimpleData name="center_x">121.675</SimpleData>
+		<SimpleData name="center_y">23.9375009016886</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.65,23.9166666666667 121.65,23.9583333333333 121.7,23.9583333333333 121.7,23.9166666666667 121.65,23.9166666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_67154</SimpleData>
+		<SimpleData name="occCount">1481</SimpleData>
+		<SimpleData name="center_x">121.675000000002</SimpleData>
+		<SimpleData name="center_y">23.9791675688236</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.65,23.9583333333333 121.65,24.0 121.7,24.0 121.7,23.9583333333333 121.65,23.9583333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_建議填補.sea">
+		<SimpleData name="id">10_67554</SimpleData>
+		<SimpleData name="occCount">1440</SimpleData>
+		<SimpleData name="center_x">121.675000000002</SimpleData>
+		<SimpleData name="center_y">24.0625009030538</SimpleData>
+		<SimpleData name="landType">sea</SimpleData>
+		<SimpleData name="priority">建議填補</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.65,24.0416666666667 121.65,24.0833333333333 121.7,24.0833333333333 121.7,24.0416666666667 121.65,24.0416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,5 +1,3 @@
-### Taxonomic overview
+### Taxon data overview
 
-In this section we view taxonomic gap of TBIA records in view of the Catalogue of Life in Taiwan (https://taicol.tw/).
-<br>
-Current species and infraspecies count at TaiCOL is at 64,542 (last accessed: 20240610)<br>
+This page provides an overview of taxon-related data from TaiCOL and the TBIA portal, including record counts by taxon group, its basis of records, and statistics by habitat type (as per TaiCOL). As of the latest update (July 4, 2024), TaiCOL includes a total of 64,508 species records (including infraspecies).

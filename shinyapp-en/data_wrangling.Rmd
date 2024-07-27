@@ -1,14 +1,13 @@
 ---
 title: "data_wrangling"
 author: "Daphne Hoh"
-date: "2024-06-04"
 output: html_document
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r env prep}
-setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp/BiodiversityDataGapTW-shinyapp/")
+setwd("C:/Users/taibi/Documents/GitHub/BiodiversityDataGapTW/shinyapp-zh/")
 
 .packs <- c("httr", "jsonlite", "data.table",
             "dplyr", "stringr", "tidyverse",
@@ -18,7 +17,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240605_shiny/tbia5_vtaxa.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia6_bof.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -27,6 +26,7 @@ head(tbia)
 # remove unwanted columns
 keep <- c("id", "year", "month",
           "latitude", "longitude", "coordinatePrecision", "coordinateUncertaintyInMeters",
+          "basisOfRecord",
           "taxonID", "taxonRank", "taxaSubGroup",
           "kingdom", "phylum", "class", "order", "family", "genus", "scientificName", "simple_scientificName")
 
@@ -37,13 +37,13 @@ tbia <- tbia %>%
 
 
 ```{r load TaiCOL data}
-# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240528.zip
+# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240621.zip
 
 keep <- c("rank","taxon_id","simple_name","common_name_c",
           "is_endemic","alien_type","is_terrestrial","is_freshwater","is_brackish","is_marine","is_in_taiwan",
           "kingdom","kingdom_c","phylum","phylum_c","class","class_c","order","order_c","family","family_c","genus","genus_c")
           
-df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240528.csv", select = keep,
+df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240621.csv", select = keep,
                         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 df.taicol.list <- df.taicol.list %>% 
@@ -127,7 +127,7 @@ taxa1 <- taxa %>%
   select(-c(plant.tmp, animal.tmp, is_in_taiwan))
 
 # those with incomplete taxa levels so the categorizing failed
-table(taxa1$taxaSubGroup) # 21 empty
+table(taxa1$taxaSubGroup) # 32 empty
 taxa1 <- taxa1 %>% 
   mutate(taxaSubGroup = replace(taxaSubGroup, taxaSubGroup %in% "", "Unclassified"))
 
@@ -142,12 +142,12 @@ taxa2 <- taxa1 %>%
   mutate(is_marine = replace(is_marine, is_marine == "true", "is_marine"))
 
 # final TaiCOL table that classified with taxaSubGroup
-fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv",
+fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv",
        row.names = F, quote = T)
 ```
 
 ```{r prep: add habitat info to TBIA table}
-taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
@@ -163,26 +163,32 @@ fwrite(tbia1, "www/data/processed/tbia_habitat.csv",
 tbia <- fread("www/data/processed/tbia_habitat.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
-taicol <- fread("www/data/processed/TaiCOL_taxon_20240528_taxaSubGroup.csv", 
+taicol <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-
-species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
 ```
 
 
 ```{r prep for Section: Taxonomic}
 # Subsection: Taxonomic Gap
-species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
 
 # (1)
 ## % record matched to highest taxon rank
 df_taxa.rank <- data.frame(table(tbia$taxonRank))
 names(df_taxa.rank) <- c("rank", "count")
 
+## show Linnaean rank only
+linnaean <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
+
 ### grouping the subs together
-df_taxa.rank$taxonRank <- fifelse(df_taxa.rank$rank %in% species_infraspecies,
-                                  "(infra)species", 
+df_taxa.rank$taxonRank <- fifelse(!df_taxa.rank$rank %in% linnaean,
+                                  "non-Linnaean", 
                                   paste0(df_taxa.rank$rank))
+
+df_taxa.rank <- df_taxa.rank %>%
+  group_by(taxonRank) %>%
+  summarise(count = sum(count)) %>%
+  mutate(proportion = count / sum(count) * 100) %>%
+  arrange(desc(proportion))
 
 fwrite(df_taxa.rank, "www/data/processed/df_taxa.rank.csv", 
        row.names = F, quote = T)  
@@ -190,18 +196,17 @@ fwrite(df_taxa.rank, "www/data/processed/df_taxa.rank.csv",
 
 # (2)
 ## % record (infra)species rank matched to TaiCOL
+species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
+
 df_taxa.rank.at.species <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
   summarise(count = n_distinct(simple_scientificName)) %>%
-  mutate(proportion = count / 64542 * 100) %>% # TaiCOL last stats 20240610
-  bind_rows(data.frame(count = 64542 - .$count, proportion = 100 - .$proportion)) %>%
-  mutate(category = c("Recorded", "Unrecorded"))
+  mutate(proportion = count / 64508 * 100) %>% # TaiCOL last stats 20240704
+  bind_rows(data.frame(count = 64508 - .$count, proportion = 100 - .$proportion)) %>% # 拿 TaiCOL 總數來減掉已記錄的數量
+  mutate(category = c("入口網有記錄", "入口網未記錄"))
 
 fwrite(df_taxa.rank.at.species, "www/data/processed/df_taxa.rank.at.species.csv", 
        row.names = F, quote = T)
-
-
-
 
 
 # (3)
@@ -209,23 +214,23 @@ fwrite(df_taxa.rank.at.species, "www/data/processed/df_taxa.rank.at.species.csv"
 ### Select habitat: All
 species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
 
-group.all <- taicol %>%
+taicol.group.all <- taicol %>%
   filter(taxonRank %in% species_infraspecies) %>%
   distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% 
   group_by(taxaSubGroup) %>%
   summarise(taicol.count = n())
 
-sum(group.all$taicol.count) # 63,800 species level
+sum(taicol.group.all$taicol.count) # 63,789 species level (excluding infraspecies)
 
 ### get total number of species (un)recorded in TBIA
 df_taxa.unrecorded.taxa.prop <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
-  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% # to remove infraspecies count
+  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
   group_by(taxaSubGroup) %>%
   summarise(record.count = n())
 
 ### combine counts of TBIA + TaiCOL above
-df_taxa.unrecorded.taxa.prop.groupAll <- left_join(group.all, df_taxa.unrecorded.taxa.prop, by = "taxaSubGroup")
+df_taxa.unrecorded.taxa.prop.groupAll <- left_join(taicol.group.all, df_taxa.unrecorded.taxa.prop, by = "taxaSubGroup")
 
 df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop.groupAll %>%
   rowwise() %>%
@@ -235,8 +240,6 @@ df_taxa.unrecorded.taxa.prop.groupAll <-  df_taxa.unrecorded.taxa.prop.groupAll 
   filter(taxaSubGroup != "Unclassified") %>%
   mutate_all(~replace_na(., 0)) %>%
   mutate(cum.total = taicol.count - record.count)
-  
-  #filter(!grepl("Other ", taxaSubGroup) & taxaSubGroup != "Unclassified") # remove "Other x" from df
 
 fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv", 
        row.names = F, quote = T)
@@ -246,14 +249,13 @@ fwrite(df_taxa.unrecorded.taxa.prop.groupAll, "www/data/processed/df_taxa.unreco
 #### function for processing habitats and counts
 process_habitats <- function(df) {
   
-  species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "form", "subform", "special form")
   habitats <- c("is_terrestrial", "is_freshwater", "is_brackish", "is_marine")
 
   # summarise count by habitat
   df_taxa.unrecorded.taxa.prop.habitats <- map(habitats, ~{
     df %>%
-      filter(taxonRank %in% species_infraspecies) %>%
-      distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>% # not counting infraspecies
+      filter(taxonRank == "species") %>%
+      distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
       group_by(taxaSubGroup, .data[[.x]]) %>% # group and count separately for each habitat
       summarise(record.count = n())
   })
@@ -285,8 +287,6 @@ df_counts_by_habitats <- left_join(taicol_habitat_count, tbia_habitat_count, by 
 fwrite(df_counts_by_habitats, "www/data/processed/df_counts_by_habitats.csv", 
        row.names = F, quote = T)
 
-### Unrecorded taxa for download
-## tmp
 
 
 # Subsection: Species Tree
@@ -310,11 +310,61 @@ taicol_species$recorded <- fifelse(taicol_species$tbia.recorded == TRUE,
 
 fwrite(taicol_species, "www/data/processed/df_tree.csv", 
        row.names = F, quote = T)
+
+### Unrecorded taxa for download
+taicol_species_unrecorded <- taicol_species %>%
+  filter(tbia.recorded == FALSE) %>%
+  select(-tbia.recorded, -simple_scientificName) %>%
+  filter(!is.na(recorded))
+
+colnames(taicol_species_unrecorded)[5] <- "unrecorded"
+
+fwrite(taicol_species_unrecorded, "www/data/processed/df_tree_unrecorded_list.csv", 
+       row.names = F, quote = T)
+
+
+
+# Subsection: Taxon & basisOfRecord
+df_taxa.basisOfRecord <- tbia %>%
+  group_by(taxaSubGroup, basisOfRecord) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(count_bin = case_when(
+    count > 10000000 ~ "10,000,000+",
+    count > 100000 ~ "100,001-10,000,000",
+    count > 10000 ~ "10,001-100,000",
+    count > 1000 ~ "1,001-10,000",
+    count > 100 ~ "101-1,000",
+    count > 10 ~ "11-100",
+    count > 0 ~ "1-10",
+    TRUE ~ "0"
+  ))
+
+# Create a numeric representation for the heatmap
+df_taxa.basisOfRecord <- df_taxa.basisOfRecord %>%
+  mutate(count_numeric = case_when(
+    count > 10000000 ~ 7,
+    count > 100000 ~ 6,
+    count > 10000 ~ 5,
+    count > 1000 ~ 4,
+    count > 100 ~ 3,
+    count > 10 ~ 2,
+    count > 0 ~ 1,
+    TRUE ~ 0
+  ))
+
+
+fwrite(df_taxa.basisOfRecord, "www/data/processed/df_taxa.basisOfRecord.csv", 
+       row.names = F, quote = T)
 ```
 
 
 ```{r prep for Section: Temporal}
 df_time <- tbia[, c("id", "year", "month", "taxaSubGroup")]
+
+df_time <- df_time %>%
+  group_by(taxaSubGroup, year, month) %>%
+  summarise(occCount = n()) %>%
+  mutate(month = sub("^0", "", month))
 
 fwrite(df_time, "www/data/processed/df_time.csv", 
        row.names = F, quote = T)
@@ -323,23 +373,32 @@ fwrite(df_time, "www/data/processed/df_time.csv",
 
 ```{r prep for Section: Spatial}
 # load the 5km grid file
-grid5km_sf <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+grid5km_sf <- st_read("www/data/layers/TWshp_land&sea_grids/TWshp_grid5km_landType.shp") %>%
+  select(id, center_x, center_y, geometry, landType)
 
 # load the tbia table
-df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "taxaSubGroup")]
+df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordinateUncertaintyInMeters", "taxaSubGroup")] %>%
+  mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude), 
+         coordinatePrecision = as.numeric(coordinatePrecision),
+         coordinateUncertaintyInMeters = as.numeric(coordinateUncertaintyInMeters))
 
 ## 1. exclude uncertainty in distance
 table(df_map$coordinatePrecision)
 table(df_map$coordinateUncertaintyInMeters)
-df_map <- df_map[df_map$coordinateUncertaintyInMeters <= 5000,] # exclude > 5km (5000 meter) for 5km grid plotting
-
+df_map <- df_map[df_map$coordinateUncertaintyInMeters < 5000 | is.na(df_map$coordinateUncertaintyInMeters)] # exclude < 5km (5000 meter) for 5km grid plotting, 1,180,542 excluded
 
 ## 2. map All records to grid
 df_map_stats <- df_map %>% 
   group_by(taxaSubGroup, latitude, longitude) %>% 
   count()
 
-df_map_list <- split(df_map_stats, df_map_stats$taxaSubGroup)
+# separate to group for parallel processing
+n <- 200000
+num_groups <- ceiling(nrow(df_map_stats) / n)
+records_in_last_group <- nrow(df_map_stats) %% n
+group_var <- rep(1:num_groups, each = n)
+group_var <- c(group_var, rep(num_groups + 1, times = records_in_last_group))
+df_map_stats_groupList <- split(df_map_stats, group_var)
 
 catchLocation <- function(x){
   x %>%
@@ -357,7 +416,7 @@ clusterEvalQ(cl, { # make sure all clusters are ready
   library(data.table)
   library(sf)
   library(lwgeom)
-  dg_grid <- st_read("tmp/layers/TW_WGS84_land&ocean_grids/0_05degree_tw_landocean_grid.shp")
+  dg_grid <- st_read("www/data/layers/TWshp_land&sea_grids/TWshp_grid5km_landType.shp")
   dg_grid <- as(dg_grid, "sf")%>%
     st_set_crs(4326)
   sf_use_s2(F)
@@ -365,8 +424,9 @@ clusterEvalQ(cl, { # make sure all clusters are ready
 )
 
 system.time(
-  df_map_grid <- parLapply(cl, df_map_list, catchLocation)%>% 
-    do.call(rbind,.))
+  df_map_grid <- parLapply(cl, df_map_stats_groupList, catchLocation)%>% 
+    do.call(rbind,.)
+  ) 
 
 stopCluster(cl)
 
@@ -388,115 +448,126 @@ allOccCount <- df_map_grid %>%
 
 ### 4.1 combine grid counts with 5km geometry
 allOccCount_grid <- merge(allOccCount, grid5km_sf, by = "id", all.x = TRUE)
-st_write(allOccCount_grid, "www/data/processed/df_map.shp")
+st_write(allOccCount_grid, "www/data/processed/df_map.shp", append = FALSE)
 
 
-
-### 5 make taxaSubGroup
+### 5 make taxaSubGroup map
 taxaOccCount <- df_map_grid %>% 
   group_by(taxaSubGroup, id) %>% 
   summarise(occCount = sum(n))
 
 ### 5.1 combine grid counts with 5km geometry
 taxaOccCount_grid <- merge(taxaOccCount, grid5km_sf, by = "id", all.x = TRUE)
-names(taxaOccCount_grid) <- c("id", "tSG", "occCount", "geometry") # rename because ESRI cannot save long field name
-st_write(taxaOccCount_grid, "www/data/processed/df_taxa_map.shp", append = TRUE)
-
-
-
-
-# # separate to group for parallel processing
-# n <- 150000
-# num_groups <- ceiling(nrow(tbia_withCoords2) / n)
-# records_in_last_group <- nrow(tbia_withCoords2) %% n
-# group_var <- rep(1:num_groups, each = n)
-# group_var <- c(group_var, rep(num_groups + 1, times = records_in_last_group))
-# tbia_withCoords2_groupList <- split(tbia_withCoords2, group_var)
-# 
-# catchLocation <- function(x){
-#   x %>%
-#     st_as_sf(coords = c("longitude", "latitude"), remove = F) %>%
-#     st_set_crs(4326) %>%
-#     st_join(., shpFile, join = st_intersects, left = T, largest = T) %>%
-#     st_drop_geometry(.)
-# }
-# 
-# ## Clip points to the map boundaries
-# ## Takes too long to run, run in parallel
-# cpu.cores <- detectCores() - 10
-# cl <- makeCluster(cpu.cores)
-# 
-# clusterEvalQ(cl, { # make sure all clusters are ready
-#   library(tidyverse)
-#   library(data.table)
-#   library(sf)
-#   library(lwgeom)
-#   TWshp <- st_read("C:/Users/taibi/Documents/GitHub/TBIA-data-review/layers/TWshp&grid/TWshp_land&sea/TWshp_land&sea.shp")
-#   TWshp <- st_make_valid(TWshp)
-#   shpFile <- st_zm(TWshp) %>%
-#     select(., TOWNID, TOWNNAME)
-#   shpFile <- as(shpFile, "sf")%>%
-#     st_set_crs(4326)
-#   sf_use_s2(F)
-# }
-# )
-# 
-# system.time(
-#   tbia2 <- parLapply(cl, tbia_withCoords2_groupList, catchLocation) %>%
-#     do.call(rbind, .)
-# ) # 20240606 - 55min, 5.24hr
-# 
-# stopCluster(cl)
-# 
-# fwrite(tbia2, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_shp.csv",
-#        row.names = F, quote = T)
-# 
-# 
-# ## combines shp file attribute table with occurrence table
-# tbia2.1 <- tbia2 %>%
-#   filter(!is.na(TOWNID)) # remove points fall outside of Taiwan territory
-# 
-# fwrite(tbia2.1, "02.processed_data/ver5_ver20240605_shiny/points_mapped_in_TWshp.csv",
-#        row.names = F, quote = T)
-# 
-# tbia3 <- left_join(tbia2.1, tbia_withCoords, by = "tmpID")
-# 
-# tbia3$type <- data.table::fifelse(tbia3$TOWNID == "sea", "sea", "land")
-# tbia3 <- tbia3[, -c("tmpID", "latitude.y", "longitude.y")]
-# colnames(tbia3)[colnames(tbia3) == "latitude.x"] <- "latitude"
-# colnames(tbia3)[colnames(tbia3) == "longitude.x"] <- "longitude"
-# 
-# 
-# fwrite(tbia3, "02.processed_data/ver5_ver20240605_shiny/tbia_points_in_TW.csv",
-#        row.names = F, quote = T)
-
-
-
+names(taxaOccCount_grid) <- c("id", "tSG", "occCount", "center_x", "center_y", "landType", "geometry") # rename because ESRI cannot save long field name
+st_write(taxaOccCount_grid, "www/data/processed/df_taxa_map.shp", append = FALSE)
 ```
 
 
 
 ```{r prep for Section: Gap}
-# save as shp file
+# determine gap level & save as shp file
 df_gapCount <- st_read("www/data/processed/df_map.shp")
+summary(df_gapCount$occCount)
 
-df_gapCount <- df_gapCount %>%
-  mutate(priority = case_when(occCount < 10 ~ "Priority",
-                              occCount >= 10 & occCount < 20 ~ "Intermediate",
-                              occCount > 20 ~ "Non-priority"))
+## df_gapCount contains only grid with at least 1 occCount, merge with grid5km_sf to get all grid (include those with 0 occCount)
+df_gapCount_with0 <- left_join(as.data.frame(grid5km_sf), as.data.frame(df_gapCount), by = "id") %>% 
+  select(c(id, occCount, center_x.x, center_y.x, landType.x, geometry.x)) %>%
+  rename_with(~str_remove(., "\\.x$"), ends_with(".x")) %>%
+  mutate(occCount = replace_na(occCount, 0))
+  
+# calculate gap level mean
+grid5km_sf <- st_read("www/data/layers/TWshp_land&sea_grids/TWshp_grid5km_landType.shp")
+number_of_grids_5km <- nrow(grid5km_sf)
 
-st_write(df_gapCount, "www/data/processed/df_gapCount_table.shp",
-         row.names = F, quote = T)
+sum(df_gapCount_with0$occCount) / number_of_grids_5km # 3392.8
+## use 3,000 as average for gap level
+## i.e. each grid has to contain at least 3,000 records to be considered as non-priority
+
+df_gapCount_with0 <- df_gapCount_with0 %>%
+  mutate(priority = case_when(occCount < 1000 ~ "建議優先填補",
+                              occCount >= 1000 & occCount < 3000 ~ "建議填補",
+                              occCount >= 3000 ~ "資料筆數高於平均值"))
+
+st_write(df_gapCount_with0, "www/data/processed/df_gapCount_table.shp",
+         row.names = F, quote = T, append = FALSE, layer_options = "ENCODING=UTF-8")
+
+
 
 # save as table
-df_gapCount_table <- as.data.frame(df_gapCount) %>%
-  group_by(priority) %>%
-  summarise(gridCount = sum(occCount))
+df_gapCount_table <- as.data.frame(df_gapCount_with0) %>%
+  group_by(priority, landType) %>%
+  summarise(gridCount = n())
   
 fwrite(df_gapCount_table, "www/data/processed/df_gapCount_table.csv", 
        row.names = F, quote = T)
+
+
+
+# make CSV gap table for download
+write.csv(df_gapCount_with0, "www/data/processed/df_gapCount_with0.csv", 
+          row.names = F, quote = T)
+
+# Preparation for Google My Map
+df <- df_gapCount_with0
+
+## create a list of data frames, split by priority and landType
+split_dfs <- split(df, list(df$priority, df$landType))
+
+## check their dim() as Google My Map only supports 2000 rows
+for (name in names(split_dfs)) {
+  cat("Dimensions of", name, ":", dim(split_dfs[[name]]), "\n")
+}
+
+split_large_df <- function(df, max_rows = 2000) {
+  if (nrow(df) <= max_rows) {
+    return(list(df))
+  } else {
+    part1 <- df %>% slice(1:max_rows)
+    part2 <- df %>% slice((max_rows + 1):n())
+    return(list(part1 = part1, part2 = part2))
+  }
+}
+
+# Apply the function to each dataframe in split_dfs
+split_dfs_adjusted <- lapply(names(split_dfs), function(name) {
+  df <- split_dfs[[name]]
+  split_result <- split_large_df(df)
+  
+  if (length(split_result) == 1) {
+    return(setNames(split_result, name))
+  } else {
+    return(setNames(split_result, paste0(name, c("_part1", "_part2"))))
+  }
+})
+
+# Flatten the list
+split_dfs_final <- unlist(split_dfs_adjusted, recursive = FALSE)
+
+for (name in names(split_dfs_final)) {
+  cat("Dimensions of", name, ":", dim(split_dfs_final[[name]]), "\n")
+}
+
+
+###
+for (name in names(split_dfs_final)) {
+  # Check if the data frame is already an sf object
+  if (!inherits(split_dfs_final[[name]], "sf")) {
+    # If it's not an sf object but has a geometry column, convert it
+    if ("geometry" %in% colnames(split_dfs_final[[name]])) {
+      split_dfs_final[[name]] <- st_as_sf(split_dfs_final[[name]])
+    } else {
+      # If there's no geometry column, skip this data frame or handle the error
+      warning(paste("Skipping", name, "- no geometry column found"))
+      next
+    }
+  }
+  
+  # Write to KML
+  st_write(split_dfs_final[[name]], 
+           dsn = paste0("www/data/processed/GoogleMyMap/gmm_", name, ".kml"),
+           driver = "KML",
+           delete_dsn = TRUE)
+}
+
 ```
-
-
-
 

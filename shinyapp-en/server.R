@@ -27,9 +27,8 @@ shinyServer(function(input, output, session) {
     df_taxa.rank <- fread("www/data/processed/df_taxa.rank.csv",
                           sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
     
-    plot_ly(df_taxa.rank, labels = ~taxonRank, values = ~count, type = "pie", sort = F,
-            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
-      config(displayModeBar = FALSE)
+    plot_ly(df_taxa.rank, labels = ~taxonRank, values = ~count, type = "pie",
+            hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6))
     
   })
   
@@ -37,7 +36,11 @@ shinyServer(function(input, output, session) {
   output$taxa.pie.TaiCOL <- renderPlotly({
     
     df_taxa.rank.at.species <- fread("www/data/processed/df_taxa.rank.at.species.csv",
-                                     sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+                                     sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>%
+      mutate(category = case_when(
+        category == "入口網有記錄" ~ "Recorded in TBIA", 
+        category == "入口網未記錄" ~ "Unrecorded in TBIA"  
+      ))
     
     plot_ly(df_taxa.rank.at.species, labels = ~category, values = ~count, type = "pie", sort = F,
             hoverinfo = "label+value", textinfo = "percent", marker = list(colors = tbia.color_6)) %>%
@@ -46,14 +49,49 @@ shinyServer(function(input, output, session) {
   })
   
   
+  ## Taxa & record count table
+  df_allOccCount_grid_table <- fread("www/data/processed/df_spatial_allOccCount_grid_table.csv",
+                                             sep = ",", encoding = "UTF-8")
   
-  ## The unrecorded taxa
-  output$taxa.landtype.taxa.prop <- renderUI({
-    selectInput("taxa.landtype.taxa.prop", "Select habitat:", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
+  output$df_allOccCount_grid_table <- renderDT({
+    datatable(df_allOccCount_grid_table,
+              options = list(searching = FALSE, lengthMenu = list(c(15, -1), c('15', 'All'))))
   })
   
-  output$taxa.landtype.taxa.prop.count <- renderUI({
-    selectInput("taxa.landtype.taxa.prop.count", "Select visualization:", c("Count", "Proportion"))
+  
+  ## Taxa & basisOfRecord heatmap
+  df_taxa.basisOfRecord <- fread("www/data/processed/df_taxa.basisOfRecord.csv",
+                                 sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+  
+  output$df_bof <- renderPlotly({
+    
+    plot_ly(
+      data = df_taxa.basisOfRecord,
+      x = ~basisOfRecord,
+      y = ~taxaSubGroup,
+      z = ~count_numeric,
+      type = "heatmap",
+      colorscale = "Viridis",
+      showscale = FALSE,
+      colorbar = list(
+        title = "Record count",
+        tickvals = c(0, 1, 2, 3, 4, 5, 6, 7),
+        ticktext = c("0", "1-10", "11-100", "101-1,000", "1,001-10,000", "10,001-100,000", "100,001-10,000,000", "10,000,000+")
+      ),
+      text = ~paste0(taxaSubGroup, "<br>",
+                     basisOfRecord, "<br>",
+                     "Record count: ", count),
+      hoverinfo = "text") %>%
+      config(displayModeBar = FALSE) %>%
+      layout(xaxis = list(title = "Basis of Record"), 
+             yaxis = list(title = "Taxon group", tickangle = 45)) 
+    
+  })
+  
+  
+  ## The unrecorded taxa bar chart and their habitat
+  output$taxa.landtype.taxa.prop <- renderUI({
+    selectInput("taxa.landtype.taxa.prop", "Select habitat:", c("All", "is_terrestrial", "is_freshwater", "is_brackish", "is_marine"))
   })
   
   output$taxa.bar.unrecorded.taxa <- renderPlotly({
@@ -65,10 +103,10 @@ shinyServer(function(input, output, session) {
         fread("www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv",
         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
-      plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
-                           hoverinfo = 'text', text = ~paste0("Unrecorded species: ", cum.total), textposition = "none") %>%
-        add_trace(y = ~record.count, name = "Recorded", marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("Total species via TaiCOL: ", taicol.count, "<br>Recorded species: ", record.count), textposition = "none")
+      plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL:', y = ~taicol.count,
+                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count), textposition = "none") %>%
+        add_trace(y = ~record.count, name = "Recorded in TBIA:", marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count, "<br>Recorded in TBIA:", record.count), textposition = "none")
       
     } else {
       
@@ -81,22 +119,20 @@ shinyServer(function(input, output, session) {
       selected_habitat <- input$taxa.landtype.taxa.prop
       df_subset <- df_counts_by_habitats[df_counts_by_habitats$habitat == selected_habitat, ]
       
-      plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'Unrecorded', y = ~cum.total,
-                           hoverinfo = 'text', text = ~paste0("Unrecorded species: ", cum.total), textposition = "none") %>%
-        add_trace(y = ~record.count, name = 'Recorded', marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("Total species via TaiCOL: ", taicol.count, "<br>Recorded species: ", record.count), textposition = "none")
+      plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL:', y = ~taicol.count,
+                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count), textposition = "none") %>%
+        add_trace(y = ~record.count, name = 'Recorded in TBIA:', marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count, "<br>Recorded in TBIA:", record.count), textposition = "none")
       
     }
     
-    # Customize layout and configuration for the plot
+    ### Customize layout and configuration for the plot
     plot_data <- plot_data %>%
-      layout(barmode = 'stack', 
-             xaxis = list(title = "Taxa group", tickangle = 45), 
-             yaxis = list(title = "Record count", tickvals = seq(0, 12000, 500)),
+      layout(xaxis = list(title = "Taxon group", tickangle = 45), 
+             yaxis = list(title = "Species count", tickvals = seq(0, 12000, 500)),
              legend = list(x = 0, y = 1.1, orientation = "h")) %>%
         config(displayModeBar = FALSE)
-      
-    # Return the plotly object
+    
     return(plot_data)
 
   })
@@ -109,7 +145,7 @@ shinyServer(function(input, output, session) {
                    sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
   
   output$taxa.treeSubGroup <- renderUI({
-    selectInput("taxa.treeSubGroup", "Select taxa group:", sort(unique(df_tree$taxaSubGroup)))
+    selectInput("taxa.treeSubGroup", "Select taxon group:", sort(unique(df_tree$taxaSubGroup)))
   })
   
   speciesTree <- reactive({
@@ -129,12 +165,28 @@ shinyServer(function(input, output, session) {
   })
   
   
+  ## download unrecorded species list
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      "TBIA_unrecorded_species.csv"  # Name of the file to be downloaded
+    },
+    
+    content = function(file) {
+      download_url <- "https://drive.google.com/uc?export=download&id=1UBRm61yq9EiYZn5ziXcMJbbIPabzPX1h"
+      
+      # Download the file from the URL and save it to the specified file path
+      download.file(download_url, file)
+    }
+  )
+  
+  
   
   # Section: Temporal Gap
   ## load time data
   df_time <- reactive({
     fread("www/data/processed/df_time.csv",
-          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
+          sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>%
+      mutate(year = as.numeric(year), month = as.numeric(month), occCount = as.numeric(occCount))
   })
 
   ## Update taxaSubGroup choices
@@ -163,7 +215,14 @@ shinyServer(function(input, output, session) {
   
   ## Render year bar chart
   output$time.yearBarChart <- renderPlotly({
-    plot_ly(filtered_data(), x = ~year, type = "histogram", marker = list(color = "#76A678")) %>%
+    
+    aggregated_data <- filtered_data() %>%
+      group_by(year) %>%
+      summarise(total_occCount = sum(occCount), .groups = 'drop') %>%
+      mutate(hoverText = paste("Year:", year, "<br>Occurrence Count:", total_occCount))
+    
+    plot_ly(aggregated_data, x = ~year, y = ~total_occCount, type = "bar", marker = list(color = "#76A678"),
+            text = ~hoverText, hoverinfo = "text", textposition = "none") %>%
       layout(xaxis = list(title = "Year"), yaxis = list(title = "Record count")) %>%
       config(displayModeBar = FALSE)
   })
@@ -171,122 +230,126 @@ shinyServer(function(input, output, session) {
   ## Render month bar chart
   output$time.monthBarChart <- renderPlotly({
     req(input$time.month)
-    plot_ly(filtered_data(), x = ~month, type = "histogram", marker = list(color = "#76A678")) %>%
+    
+    aggregated_data <- filtered_data() %>%
+      group_by(month) %>%
+      summarise(total_occCount = sum(occCount), .groups = 'drop') %>%
+      mutate(hoverText = paste("Month:", month, "<br>Occurrence Count:", total_occCount))
+    
+    plot_ly(aggregated_data, x = ~month, y = ~total_occCount, type = "bar", marker = list(color = "#76A678"),
+            text = ~hoverText, hoverinfo = "text", textposition = "none") %>%
       layout(xaxis = list(title = "Month"), yaxis = list(title = "Record count")) %>%
       config(displayModeBar = FALSE)
   })
 
   
   
-  # Section : Spatial
-  ## Load taxa table
-  df_spatial_allOccCount_grid_table <- fread("www/data/processed/df_spatial_allOccCount_grid_table.csv",
-                                             sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
-  
-  output$df_spatial_allOccCount_grid_table <- renderDT({
-    datatable(df_spatial_allOccCount_grid_table,
-              options = list(searching = FALSE, lengthMenu = list(c(10, -1), c('10', 'All'))))
-  })
-  
+  # Section: Spatial
   # Load map data
   df_map <- st_read("www/data/processed/df_map.shp")
-  pal_map <- colorNumeric(palette = "YlOrRd", domain = df_map$occCount)
-  
   df_taxa_map <- st_read("www/data/processed/df_taxa_map.shp")
-  pal_taxa <- colorNumeric(palette = "YlOrRd", domain = df_taxa_map$occCount)
   
-  ## show maps
+  # Define color palettes and breaks
+  breaks <- c(1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_map$occCount, na.rm = TRUE))
+  pal_map <- colorBin(palette = "YlOrRd", domain = df_map$occCount, bins = breaks)
+  pal_taxa <- colorBin(palette = "YlOrRd", domain = df_taxa_map$occCount, bins = breaks)
+  
+  # Reactive expression for selected taxa map data
   df_taxa_map_selected <- reactive({
-    req(input$spatial.taxaSubGroup)  # Require input$spatial.taxaSubGroup to be available
-    df_taxa_map %>%
-      filter(tSG %in% input$spatial.taxaSubGroup)
+    req(input$spatial.taxaSubGroup)
+    df_taxa_map %>% filter(tSG %in% input$spatial.taxaSubGroup)
   })
-
-  # ## Render the spatialMap based on selection
+  
+  # Reactive expression for sum of selected occCount
+  df_taxa_map_summarized <- reactive({
+    df_taxa_map_selected() %>%
+      group_by(geometry) %>%
+      summarize(occCount = sum(occCount, na.rm = TRUE)) %>%
+      ungroup()
+  })
+  
+  # Render the spatial map based on selection
   output$spatialMap <- renderLeaflet({
+    base_map <- leaflet() %>%
+      addTiles() %>%
+      setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
+      addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
+      addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
+      addLayersControl(
+        baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
+        options = layersControlOptions(collapsed = TRUE)
+      ) %>%
+      addResetMapButton()
+    
     if (input$showAll) {
-
-      leaflet() %>%
-        addTiles() %>%
-        setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-        addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
-        #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
-        addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
-        addLayersControl(
-          baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-          #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
-          options = layersControlOptions(collapsed = TRUE)) %>%
-        addResetMapButton() %>%
+      base_map %>%
         addPolygons(
           data = df_map,
           fillColor = ~pal_map(occCount),
           weight = 1,
-          opacity = 0.5,
+          opacity = 0.4,
           color = 'orange',
-          fillOpacity = 0.5,
-          popup = ~paste("Number of records:", occCount)) %>%
+          fillOpacity = 0.4,
+          popup = ~paste("Number of records:", occCount)
+        ) %>%
         addLegend(
           data = df_map,
-          pal = pal_map,
           values = ~occCount,
-          opacity = 0.5,
+          pal = pal_map,
+          opacity = 0.4,
           title = "Record count",
-          position = "bottomright")
-
-      } else {
-
-        leaflet() %>%
-          addTiles() %>%
-          setView(lng = 120.5, lat = 22.5, zoom = 7) %>%
-          addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
-          #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
-          addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
-          addLayersControl(
-            baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-            #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
-            options = layersControlOptions(collapsed = TRUE)) %>%
-          addResetMapButton() %>%
-          addPolygons(
-            data = df_taxa_map_selected(),
-            fillColor = ~pal_taxa(occCount),
-            weight = 1,
-            opacity = 0.6,
-            color = 'purple',
-            fillOpacity = 0.5,
-            popup = ~paste("Number of records:", occCount)) %>%
-          addLegend(
-            data = df_map,
-            pal = pal_map,
-            values = ~occCount,
-            opacity = 0.5,
-            title = "Record count",
-            position = "bottomright")
-
+          position = "bottomright",
+          labFormat = labelFormat(digits = 0, big.mark = ",")
+        )
+    } else {
+      base_map %>%
+        addPolygons(
+          data = df_taxa_map_summarized(),
+          fillColor = ~pal_taxa(occCount),
+          weight = 1,
+          opacity = 0.4,
+          color = 'mediumvioletred',
+          fillOpacity = 0.4,
+          popup = ~paste("Number of selected records:", occCount)
+        ) %>%
+        addLegend(
+          data = df_taxa_map_summarized(),
+          values = ~occCount,
+          pal = pal_taxa,
+          opacity = 0.4,
+          title = "Record count",
+          position = "bottomright",
+          labFormat = labelFormat(digits = 0, big.mark = ",")
+        )
     }
   })
-
+  
   # Update selectizeInput choices based on df_spatial_allOccCount_grid_table
   observe({
-    updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_spatial_allOccCount_grid_table$taxaSubGroup), server = TRUE)
+    updateSelectizeInput(session, 'spatial.taxaSubGroup', choices = unique(df_allOccCount_grid_table$taxaSubGroup), server = TRUE)
   })
-
+  
   # Update checkbox based on selection
   observeEvent(input$spatial.taxaSubGroup, {
-    if (is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0) {
-      updateCheckboxInput(session, "showAll", value = TRUE)
-    } else {
-      updateCheckboxInput(session, "showAll", value = FALSE)
-    }
+    updateCheckboxInput(session, "showAll", value = is.null(input$spatial.taxaSubGroup) || length(input$spatial.taxaSubGroup) == 0)
   })
 
   
   
   # Section: Fill gap
   ## gapCount table
-  gapCountdf <- fread("www/data/processed/df_gapCount_table.csv",
-                      sep = ",", encoding = "UTF-8", na.strings = c("", "NA", "N/A")) %>% na.omit()
+  gapCountdf <- fread("www/data/processed/df_gapCount_table.csv", sep = ",", encoding = "UTF-8") %>%
+    mutate(priority = case_when(
+      priority == "建議優先填補" ~ "Priority grids to fill",  
+      priority == "建議填補" ~ "Recommended grids to fill",
+      priority == "資料筆數高於平均值" ~ "Grids with above average record count"
+    ))
+    
   
-  gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("Priority", "Intermediate", "Non-priority"))), ]
+  gapCountdf_sorted <- gapCountdf[order(factor(gapCountdf$priority, levels = c("Priority grids to fill", "Recommended grids to fill", "Grids with above average record count"))), ]
+  
+  gapCountdf_sorted <- gapCountdf_sorted %>%
+    rename("Priority" = "priority", "Land type" = "landType", "Grid count" = "gridCount")
   
   output$gapCount <- renderDT({
     datatable(gapCountdf_sorted, options = list(searching = FALSE, paging = FALSE))
@@ -295,37 +358,73 @@ shinyServer(function(input, output, session) {
   
   ## gapMap
   ## grid layer
-  occ.grid5km_sf <- st_read("tmp/to_grid5km.shp")
-  pal <- colorNumeric(palette = "YlOrRd", domain = occ.grid5km_sf$allOccC)
+  # Update selectizeInput choices based on the data
+  df_gapCount_table_shp <- st_read("www/data/processed/df_gapCount_table.shp") %>%
+    mutate(priority = case_when(
+      priority == "建議優先填補" ~ "Priority grids to fill",  
+      priority == "建議填補" ~ "Recommended grids to fill",
+      priority == "資料筆數高於平均值" ~ "Grids with above average record count"
+    ))
+  
+  # Dynamically generate the dropdown menu
+  output$gap.priority <- renderUI({
+    selectInput(
+      inputId = "priority",
+      label = "Select priority level:",
+      choices = unique(df_gapCount_table_shp$priority),
+      selected = unique(df_gapCount_table_shp$priority)[1]  # Default selection
+    )
+  })
+  
+  df_gap_map_selected <- reactive({
+    req(input$priority)
+    filtered <- df_gapCount_table_shp %>%
+      filter(priority == input$priority)
+    if (nrow(filtered) == 0) return(df_gapCount_table_shp)  # Fallback to full dataset if filter results in empty set
+    filtered
+  })
+  
+  breaks <- reactive({
+    c(0, 1, 10, 100, 1000, 5000, 10000, 50000, 100000, max(df_gapCount_table_shp$occCount, na.rm = TRUE))
+  })
+  
+  pal <- reactive({
+    colorBin(palette = "YlOrRd", domain = df_gapCount_table_shp$occCount, bins = breaks())
+  })
   
   output$gapMap <- renderLeaflet({
+    req(df_gap_map_selected())
+    
     leaflet() %>%
       addTiles() %>%
       setView(lng = 120, lat = 23, zoom = 7) %>%
       addProviderTiles(providers$Esri.WorldPhysical, group = "Esri.WorldPhysical") %>%
-      #addProviderTiles(providers$Esri.TopoMap, group = "Esri.TopoMap") %>%
       addProviderTiles(providers$Esri.OceanBasemap, group = "Esri.OceanBasemap") %>%
       addLayersControl(
         baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.OceanBasemap"),
-        #baseGroups = c("OSM", "Esri.WorldPhysical", "Esri.TopoMap", "Esri.OceanBasemap"),
-        options = layersControlOptions(collapsed = TRUE)) %>%
+        options = layersControlOptions(collapsed = TRUE)
+      ) %>%
       addResetMapButton() %>%
       addPolygons(
-        data = occ.grid5km_sf,
-        fillColor = ~pal(nmbr_f_),
-        weight = 1,
-        opacity = 1,
-        color = 'white',
+        data = df_gap_map_selected(),
+        fillColor = ~pal()(occCount),
+        weight = 0.5,
+        opacity = 0.6,
+        color = 'orange',
         fillOpacity = 0.5,
-        popup = ~paste("Number of records:", nmbr_f_)) %>%
+        popup = ~paste("<strong>Number of records:</strong>", occCount, "<br>",
+                       "<strong>Land type:</strong>", landType, "<br>",
+                       "<strong>Priority:</strong>", priority)
+      ) %>%
       addLegend(
-        data = occ.grid5km_sf,
-        pal = pal,
-        values = ~nmbr_f_,
+        data = df_gap_map_selected(),
+        pal = pal(),
+        values = ~occCount,
         opacity = 0.5,
         title = "Record count",
-        position = "bottomright")
+        position = "bottomright"
+      )
   })
-
-
+  
+  
 })
