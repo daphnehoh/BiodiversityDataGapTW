@@ -32,6 +32,11 @@ shinyUI(fluidPage(
     # header
     dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 300,
                     
+                    # language icon
+                    tags$li(class = "dropdown",
+                            tags$a(href = "https://biodivdatagap.tbiadata.tw", 
+                                   icon("globe"), class = "nav-link", target = "_blank")),
+                    
                     # github icon
                     tags$li(class = "dropdown",
                             tags$a(href = "https://github.com/daphnehoh/BiodiversityDataGapTW", 
@@ -151,7 +156,7 @@ shinyUI(fluidPage(
                 HTML("<h4><b>Taxon group on their habitat (based on TaiCOL):</b></h4>"),
                 HTML("Note: Some records contain species that have not yet been included in TaiCOL, so there may be cases where the “Number of recorded species in TBIA” is greater than the “Total number of species in TaiCOL”. This currently applies only to Amphibians and Ferns."),
                 br(),
-                HTML("The bar chart can be enlarged by selecting the range. Click twice to return to the default mode."),
+                HTML("The bar chart can be enlarged by selecting the range. Double-click to return to the default mode."),
                 br(),
                 br(),
                 column(2, uiOutput("taxa.landtype.taxa.prop"), br()),

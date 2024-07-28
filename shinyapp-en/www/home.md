@@ -1,6 +1,8 @@
 ## Hello :)
 <br>
 
+**中文版請到右上角地球按鈕做轉換。**
+
 This Shiny App dashboard visualize data overview and gap on the [Taiwan Biodiversity Information Alliance](https://tbiadata.tw) (hereafter referred as TBIA) data portal.<br>
 <br>
 
@@ -15,7 +17,7 @@ The left navigation panel menu allows you to view different types of visual char
 The code for creating this Shiny App is fully open and can be found on [GitHub](https://github.com/daphnehoh/BiodiversityDataGapTW).<br>
 <br>
 
-作者: 何芷蔚 Daphne Z Hoh*、吳俊毅 Jun-yi Wu、端木茂甯 Mao-Ning Tuanmu<br>
+Creator: 何芷蔚 Daphne Z Hoh*、吳俊毅 Jun-yi Wu、端木茂甯 Mao-Ning Tuanmu<br>
 <br>
 *Contact:<br>
 <i class="fa fa-envelope"></i> daphnehohzhiwei <i class="fa fa-at"></i> gmail.com / [ORCID](https://orcid.org/0000-0002-7810-1034) <br>
@@ -31,4 +33,4 @@ Taiwan Biodiversity Information Alliance<br>
 <br>
 <br>
 
-This work is supported by [Biodiversity Research Centre of Academia Sinica](https://www.biodiv.tw/), [Taiwan National Science and Technology Council](https://www.nstc.gov.tw/), and Taiwan [Forestry and Nature Conservation Agency](https://www.forest.gov.tw/).
+This work is supported by [Biodiversity Research Centre of Academia Sinica](https://www.biodiv.tw/), [Taiwan National Science and Technology Council](https://www.nstc.gov.tw/), and [Taiwan Forestry and Nature Conservation Agency](https://www.forest.gov.tw/).

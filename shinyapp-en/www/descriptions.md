@@ -1,4 +1,4 @@
-<h4>Data pre-processing (cleaning):</h4>
+<h3>Data pre-processing (cleaning):</h3>
 - Remove records without scientificName (283,577 records)<br>
 - Remove duplicated records (735 records)<br>
 - Remove records without coordinates (699,680 records)<br>

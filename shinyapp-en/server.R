@@ -103,10 +103,10 @@ shinyServer(function(input, output, session) {
         fread("www/data/processed/df_taxa.unrecorded.taxa.prop.groupAll.csv",
         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
       
-      plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL:', y = ~taicol.count,
-                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count), textposition = "none") %>%
-        add_trace(y = ~record.count, name = "Recorded in TBIA:", marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count, "<br>Recorded in TBIA:", record.count), textposition = "none")
+      plot_data <- plot_ly(df_taxa.unrecorded.taxa.prop.groupAll, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL', y = ~taicol.count,
+                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL: ", taicol.count), textposition = "none") %>%
+        add_trace(y = ~record.count, name = "Recorded in TBIA", marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL: ", taicol.count, "<br>Recorded in TBIA: ", record.count), textposition = "none")
       
     } else {
       
@@ -119,10 +119,10 @@ shinyServer(function(input, output, session) {
       selected_habitat <- input$taxa.landtype.taxa.prop
       df_subset <- df_counts_by_habitats[df_counts_by_habitats$habitat == selected_habitat, ]
       
-      plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL:', y = ~taicol.count,
-                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count), textposition = "none") %>%
-        add_trace(y = ~record.count, name = 'Recorded in TBIA:', marker = list(color = tbia.color_6[6]),
-                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL:", taicol.count, "<br>Recorded in TBIA:", record.count), textposition = "none")
+      plot_data <- plot_ly(df_subset, x = ~taxaSubGroup, type = 'bar', name = 'Total species count in TaiCOL', y = ~taicol.count,
+                           hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL: ", taicol.count), textposition = "none") %>%
+        add_trace(y = ~record.count, name = 'Recorded in TBIA', marker = list(color = tbia.color_6[6]),
+                  hoverinfo = 'text', text = ~paste0("Total species count in TaiCOL: ", taicol.count, "<br>Recorded in TBIA: ", record.count), textposition = "none")
       
     }
     

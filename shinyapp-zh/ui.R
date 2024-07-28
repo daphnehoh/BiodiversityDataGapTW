@@ -32,6 +32,11 @@ shinyUI(fluidPage(
     # header
     dashboardHeader(title="Taiwan Biodiversity Data Gap", titleWidth = 300,
                     
+                    # language icon
+                    tags$li(class = "dropdown",
+                            tags$a(href = "https://biodivdatagap-en.tbiadata.tw", 
+                                   icon("globe"), class = "nav-link", target = "_blank")),
+                    
                     # github icon
                     tags$li(class = "dropdown",
                             tags$a(href = "https://github.com/daphnehoh/BiodiversityDataGapTW", 

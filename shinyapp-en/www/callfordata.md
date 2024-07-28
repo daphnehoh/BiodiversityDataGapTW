@@ -9,7 +9,7 @@ In order to make Taiwan's biodiversity open data more comprehensive and facilita
 
 1. Environment: **Records of marine environment occurrences**. Taiwan is surrounded by sea, and this data will aid in marine conservation and sustainable use! <br>
 2. Data type: **DNA and eDNA derived occurrence records**. Molecular techniques have significantly improved biodiversity surveys. These data can supplement traditional morphological identification and uncover hidden biodiversity. <br>
-3. Species groups: **Bacteria, Archaea, Fungi and Lichens, Protists, Prototheca, Insects, Molluscs**. While large animals dominate the current database, these smaller organisms are crucial for understanding ecosystem structure and function. <br>
+3. Species groups: **Bacteria, Archaea, Fungi and Lichens, Protists, Chromista, Insects, Molluscs**. While data of large animals dominate the current database, data from these smaller organisms are crucial for understanding ecosystem structure and function. <br>
 
 To encourage data sharing, we offer professional services for data integration, cleaning, formatting, and publishing. If you are willing to share your data, our team will assist you through the entire process. Together, let's create a new chapter in Taiwan’s biodiversity open data!<br>
-Feel free to contact us any time at: taibif.brcas@gmail.com
+Feel free to contact us anytime at: taibif.brcas@gmail.com
