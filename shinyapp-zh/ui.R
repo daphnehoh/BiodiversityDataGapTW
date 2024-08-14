@@ -154,7 +154,7 @@ shinyUI(fluidPage(
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 
                 HTML("<h4><b>物種類群在各棲地類型（比照 TaiCOL）的數量統計：</b></h4>"),
-                HTML("備注：有些入口網的物種紀錄在 TaiCOL 還未收錄，所以會有 “入口網已紀錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩栖類與蕨類。"),
+                HTML("備注：有些入口網的物種紀錄在 TaiCOL 還未收錄，所以會有 “入口網已紀錄物種數” 比 “TaiCOL總物種數” 還要多的情況。這情況目前僅限於兩棲類與蕨類。"),
                 br(),
                 HTML("長條圖可用鼠標選擇範圍放大，點擊兩下會回到預設模式。"),
                 br(),
@@ -254,9 +254,9 @@ shinyUI(fluidPage(
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                fluidRow(valueBox(4393, "建議優先填補網格數", icon = icon("triangle-exclamation"), color = "red"),
-                         valueBox(390, "建議填補網格數", icon = icon("star"), color = "orange"),
-                         valueBox(1022, "資料筆數高於平均值網格數", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(valueBox(4393, "建議優先填補網格數", icon = icon("triangle-exclamation"), color = "maroon"),
+                         valueBox(390, "建議填補網格數", icon = icon("star"), color = "purple"),
+                         valueBox(1022, "資料筆數高於平均值網格數", icon = icon("thumbs-up"), "blue")),
                 fluidRow(column(width = 4, uiOutput("gap.priority"))),
                 fluidRow(column(width = 8, leafletOutput("gapMap", height = 650)),
                          column(width = 4, DTOutput("gapCount")))

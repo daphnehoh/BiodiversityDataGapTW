@@ -3,7 +3,7 @@
 
 **For the English version, please click the globe icon in the top right corner.**
 
-這個 Shiny App 視覺化了[臺灣生物多樣性資訊聯盟](https://tbiadata.tw)（以下簡稱：TBIA）入口網現在的資料空缺。<br>
+這個 Shiny App 視覺化了[臺灣生物多樣性資訊聯盟](https://tbiadata.tw)（以下簡稱：TBIA）入口網的資料概況與空缺。<br>
 <br>
 
 這個 App 的目標是讓任何人快速檢視在 TBIA 入口網站中的資料概況。<br>

@@ -154,7 +154,7 @@ shinyUI(fluidPage(
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
                 
                 HTML("<h4><b>Taxon group on their habitat (based on TaiCOL):</b></h4>"),
-                HTML("Note: Some records contain species that have not yet been included in TaiCOL, so there may be cases where the “Number of recorded species in TBIA” is greater than the “Total number of species in TaiCOL”. This currently applies only to Amphibians and Ferns."),
+                HTML("Note: Some records contain species that have not yet been included in TaiCOL, so there may be cases where the number of species “Recorded in TBIA” is greater than the “Total species count in TaiCOL”. This currently applies only to Amphibians and Ferns."),
                 br(),
                 HTML("The bar chart can be enlarged by selecting the range. Double-click to return to the default mode."),
                 br(),
@@ -254,9 +254,9 @@ shinyUI(fluidPage(
         tabItem(tabName = "fillgap",
                 includeMarkdown("www/fillgap.md"),
                 HTML("<hr style='border-color: darkgreen; border-width: 1px; border-style: solid;'>"),
-                fluidRow(valueBox(4393, "Number of priority grids to fill", icon = icon("triangle-exclamation"), color = "red"),
-                         valueBox(390, "Number of recommended grids to fill", icon = icon("star"), color = "orange"),
-                         valueBox(1022, "Number of grids with above average record count", icon = icon("thumbs-up"), "yellow")),
+                fluidRow(valueBox(4393, "Number of priority grids to fill", icon = icon("triangle-exclamation"), color = "maroon"),
+                         valueBox(390, "Number of recommended grids to fill", icon = icon("star"), color = "purple"),
+                         valueBox(1022, "Number of grids with above average record count", icon = icon("thumbs-up"), "blue")),
                 fluidRow(column(width = 4, uiOutput("gap.priority"))),
                 fluidRow(column(width = 8, leafletOutput("gapMap", height = 650)),
                          column(width = 4, DTOutput("gapCount")))
