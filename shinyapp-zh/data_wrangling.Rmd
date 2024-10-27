@@ -17,7 +17,7 @@ sapply(.packs, require, character.only = TRUE)
 ```
 
 ```{r load TBIA data}
-tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver5_ver20240704_shiny/tbia6_bof.csv",
+tbia <- fread("C:/Users/taibi/Documents/GitHub/TBIA-data-review/02.processed_data/ver6_ver20241026/tbia6_bof.csv",
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 names(tbia)
@@ -37,17 +37,17 @@ tbia <- tbia %>%
 
 
 ```{r load TaiCOL data}
-# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20240621.zip
+# download full TaiCOL list at https://taicol.tw/static/upload/TaiCOL_taxon_20241020.zip
 
 keep <- c("rank","taxon_id","simple_name","common_name_c",
           "is_endemic","alien_type","is_terrestrial","is_freshwater","is_brackish","is_marine","is_in_taiwan",
           "kingdom","kingdom_c","phylum","phylum_c","class","class_c","order","order_c","family","family_c","genus","genus_c")
           
-df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20240621.csv", select = keep,
+df.taicol.list <- fread("www/data/raw/TaiCOL_taxon_20241020.csv", #select = keep,
                         sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 df.taicol.list <- df.taicol.list %>% 
-  filter(is_in_taiwan == "true") # 94,684
+  filter(is_in_taiwan == "true") # 94,826
 
 # add a simple_scientificName column to extract species name without infraspecies for some stats
 df.taicol.list$simple_scientificName <- str_extract(df.taicol.list$simple_name, "^\\w+ \\w+") 
@@ -68,7 +68,7 @@ df.taicol.list$taxonRank <- tolower(df.taicol.list$taxonRank)
 
 taxa <- df.taicol.list
 
-taxa$micro <- fifelse(taxa$simple_name %in% c("Bacteria", "Archaea", "Protozoa", "Chromista"), paste0(taxa$simple_name), "x")
+#taxa$micro <- fifelse(taxa$simple_name %in% c("Bacteria", "Archaea", "Protozoa", "Chromista"), paste0(taxa$simple_name), "x")
 taxa$micro.k <- fifelse(taxa$kingdom %in% c("Bacteria", "Archaea", "Protozoa", "Chromista"), paste0(taxa$kingdom), "x")
 
 taxa$virus <- fifelse(taxa$kingdom %in% c("Orthornavirae", "Bamfordvirae", "Heunggongvirae", "Pararnavirae", 
@@ -123,11 +123,11 @@ taxa$animal <- fifelse(taxa$kingdom == "Animalia" & taxa$animal.tmp == "x", "Oth
 # combine and make taxaSubGroup
 taxa1 <- taxa %>%
   mutate_all(~ifelse(. == 'x', NA, .)) %>%
-  unite(taxaSubGroup, micro, micro.k, virus, fungi, plant, animal, sep = ",", remove = T, na.rm = T) %>%
+  unite(taxaSubGroup, micro.k, virus, fungi, plant, animal, sep = ",", remove = T, na.rm = T) %>%
   select(-c(plant.tmp, animal.tmp, is_in_taiwan))
 
 # those with incomplete taxa levels so the categorizing failed
-table(taxa1$taxaSubGroup) # 32 empty
+table(taxa1$taxaSubGroup) # 17 empty
 taxa1 <- taxa1 %>% 
   mutate(taxaSubGroup = replace(taxaSubGroup, taxaSubGroup %in% "", "Unclassified"))
 
@@ -142,12 +142,12 @@ taxa2 <- taxa1 %>%
   mutate(is_marine = replace(is_marine, is_marine == "true", "is_marine"))
 
 # final TaiCOL table that classified with taxaSubGroup
-fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv",
+fwrite(taxa2, "www/data/processed/TaiCOL_taxon_20241026_taxaSubGroup.csv",
        row.names = F, quote = T)
 ```
 
 ```{r prep: add habitat info to TBIA table}
-taxa2 <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
+taxa2 <- fread("www/data/processed/TaiCOL_taxon_20241026_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
 habitat <- select(taxa2, taxonID, is_terrestrial, is_freshwater, is_brackish, is_marine)
@@ -163,7 +163,7 @@ fwrite(tbia1, "www/data/processed/tbia_habitat.csv",
 tbia <- fread("www/data/processed/tbia_habitat.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 
-taicol <- fread("www/data/processed/TaiCOL_taxon_20240621_taxaSubGroup.csv", 
+taicol <- fread("www/data/processed/TaiCOL_taxon_20241026_taxaSubGroup.csv", 
               sep = ",", colClasses = "character", encoding = "UTF-8", na.strings = c("", "NA", "N/A"))
 ```
 
@@ -201,8 +201,8 @@ species_infraspecies <- c("species", "subspecies", "variety", "subvariety", "for
 df_taxa.rank.at.species <- tbia %>%
   filter(taxonRank %in% species_infraspecies) %>%
   summarise(count = n_distinct(simple_scientificName)) %>%
-  mutate(proportion = count / 64508 * 100) %>% # TaiCOL last stats 20240704
-  bind_rows(data.frame(count = 64508 - .$count, proportion = 100 - .$proportion)) %>% # 拿 TaiCOL 總數來減掉已記錄的數量
+  mutate(proportion = count / 94826 * 100) %>% # TaiCOL last stats 20241020
+  bind_rows(data.frame(count = 94826 - .$count, proportion = 100 - .$proportion)) %>% # 拿 TaiCOL 總數來減掉已記錄的數量
   mutate(category = c("入口網有記錄", "入口網未記錄"))
 
 fwrite(df_taxa.rank.at.species, "www/data/processed/df_taxa.rank.at.species.csv", 
@@ -220,7 +220,7 @@ taicol.group.all <- taicol %>%
   group_by(taxaSubGroup) %>%
   summarise(taicol.count = n())
 
-sum(taicol.group.all$taicol.count) # 63,789 species level (excluding infraspecies)
+sum(taicol.group.all$taicol.count) # 63,730 species level (excluding infraspecies)
 
 ### get total number of species (un)recorded in TBIA
 df_taxa.unrecorded.taxa.prop <- tbia %>%
@@ -291,13 +291,13 @@ fwrite(df_counts_by_habitats, "www/data/processed/df_counts_by_habitats.csv",
 
 # Subsection: Species Tree
 taicol_species <- taicol %>%
-  filter(taxonRank %in% species_infraspecies) %>%
-  distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
-  select(taxonID, taxaSubGroup, family, genus, simple_scientificName) %>%
+  filter(taxonRank == "species") %>%
+  distinct(taxonID, taxonRank, taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
+  select(taxonID, taxonRank, taxaSubGroup, family, genus, simple_scientificName) %>%
   filter(if_all(everything(), ~ !grepl("incertae sedis", ., ignore.case = TRUE))) # remove rows containing 'incertae sedis'
 
 tbia_recorded_species <- tbia %>%
-  filter(taxonRank %in% species_infraspecies) %>%
+  filter(taxonRank == "species") %>%
   distinct(taxaSubGroup, simple_scientificName, .keep_all = TRUE) %>%
   select(taxonID)
   
@@ -385,7 +385,7 @@ df_map <- tbia[, c("id", "longitude", "latitude", "coordinatePrecision", "coordi
 ## 1. exclude uncertainty in distance
 table(df_map$coordinatePrecision)
 table(df_map$coordinateUncertaintyInMeters)
-df_map <- df_map[df_map$coordinateUncertaintyInMeters < 5000 | is.na(df_map$coordinateUncertaintyInMeters)] # exclude < 5km (5000 meter) for 5km grid plotting, 1,180,542 excluded
+df_map <- df_map[df_map$coordinateUncertaintyInMeters < 5000 | is.na(df_map$coordinateUncertaintyInMeters)] # exclude < 5km (5000 meter) for 5km grid plotting, 1,183,339 excluded
 
 ## 2. map All records to grid
 df_map_stats <- df_map %>% 
@@ -409,7 +409,7 @@ catchLocation <- function(x){
 }
 
 #### parallel ####
-cpu.cores <- detectCores() - 8
+cpu.cores <- detectCores() - 10
 cl <- makeCluster(cpu.cores)
 clusterEvalQ(cl, { # make sure all clusters are ready
   library(tidyverse)
@@ -479,7 +479,7 @@ df_gapCount_with0 <- left_join(as.data.frame(grid5km_sf), as.data.frame(df_gapCo
 grid5km_sf <- st_read("www/data/layers/TWshp_land&sea_grids/TWshp_grid5km_landType.shp")
 number_of_grids_5km <- nrow(grid5km_sf)
 
-sum(df_gapCount_with0$occCount) / number_of_grids_5km # 3392.8
+sum(df_gapCount_with0$occCount) / number_of_grids_5km # 3419.203
 ## use 3,000 as average for gap level
 ## i.e. each grid has to contain at least 3,000 records to be considered as non-priority
 

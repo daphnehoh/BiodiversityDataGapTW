@@ -13,8 +13,20 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
+		<SimpleData name="id">10_01808</SimpleData>
+		<SimpleData name="occCount">6074</SimpleData>
+		<SimpleData name="center_x">114.374999999994</SimpleData>
+		<SimpleData name="center_y">10.395833838128</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>114.35,10.375 114.35,10.4166666666667 114.4,10.4166666666667 114.4,10.375 114.35,10.375</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_51255</SimpleData>
-		<SimpleData name="occCount">24926</SimpleData>
+		<SimpleData name="occCount">24764</SimpleData>
 		<SimpleData name="center_x">116.724999999994</SimpleData>
 		<SimpleData name="center_y">20.6875008490369</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -25,8 +37,20 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
+		<SimpleData name="id">10_57137</SimpleData>
+		<SimpleData name="occCount">3130</SimpleData>
+		<SimpleData name="center_x">120.825</SimpleData>
+		<SimpleData name="center_y">21.8958342057174</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.8,21.875 120.8,21.9166666666667 120.85,21.9166666666667 120.85,21.875 120.8,21.875</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57138</SimpleData>
-		<SimpleData name="occCount">8388</SimpleData>
+		<SimpleData name="occCount">8314</SimpleData>
 		<SimpleData name="center_x">120.875000000001</SimpleData>
 		<SimpleData name="center_y">21.8958342057184</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -38,7 +62,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57335</SimpleData>
-		<SimpleData name="occCount">12890</SimpleData>
+		<SimpleData name="occCount">13455</SimpleData>
 		<SimpleData name="center_x">120.725000000002</SimpleData>
 		<SimpleData name="center_y">21.9375008731056</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -50,7 +74,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57336</SimpleData>
-		<SimpleData name="occCount">22969</SimpleData>
+		<SimpleData name="occCount">23521</SimpleData>
 		<SimpleData name="center_x">120.774999999998</SimpleData>
 		<SimpleData name="center_y">21.9375008731051</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -62,7 +86,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57337</SimpleData>
-		<SimpleData name="occCount">105336</SimpleData>
+		<SimpleData name="occCount">105304</SimpleData>
 		<SimpleData name="center_x">120.825</SimpleData>
 		<SimpleData name="center_y">21.9375008731055</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -74,7 +98,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57535</SimpleData>
-		<SimpleData name="occCount">162195</SimpleData>
+		<SimpleData name="occCount">162283</SimpleData>
 		<SimpleData name="center_x">120.724999999999</SimpleData>
 		<SimpleData name="center_y">21.979167540495</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -86,7 +110,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57536</SimpleData>
-		<SimpleData name="occCount">14179</SimpleData>
+		<SimpleData name="occCount">14633</SimpleData>
 		<SimpleData name="center_x">120.775</SimpleData>
 		<SimpleData name="center_y">21.979167540494</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -98,7 +122,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57537</SimpleData>
-		<SimpleData name="occCount">39949</SimpleData>
+		<SimpleData name="occCount">39955</SimpleData>
 		<SimpleData name="center_x">120.825</SimpleData>
 		<SimpleData name="center_y">21.979167540496</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -109,8 +133,20 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
+		<SimpleData name="id">10_57738</SimpleData>
+		<SimpleData name="occCount">3074</SimpleData>
+		<SimpleData name="center_x">120.875000000002</SimpleData>
+		<SimpleData name="center_y">22.0208342078844</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.85,22.0 120.85,22.0416666666667 120.9,22.0416666666667 120.9,22.0 120.85,22.0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57752</SimpleData>
-		<SimpleData name="occCount">20870</SimpleData>
+		<SimpleData name="occCount">21667</SimpleData>
 		<SimpleData name="center_x">121.575000000001</SimpleData>
 		<SimpleData name="center_y">22.0208342078878</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -122,7 +158,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57934</SimpleData>
-		<SimpleData name="occCount">3867</SimpleData>
+		<SimpleData name="occCount">3933</SimpleData>
 		<SimpleData name="center_x">120.675000000005</SimpleData>
 		<SimpleData name="center_y">22.0625008752517</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -134,7 +170,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57935</SimpleData>
-		<SimpleData name="occCount">31395</SimpleData>
+		<SimpleData name="occCount">31256</SimpleData>
 		<SimpleData name="center_x">120.724999999998</SimpleData>
 		<SimpleData name="center_y">22.06250087525</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -146,7 +182,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57938</SimpleData>
-		<SimpleData name="occCount">4293</SimpleData>
+		<SimpleData name="occCount">4287</SimpleData>
 		<SimpleData name="center_x">120.875000000002</SimpleData>
 		<SimpleData name="center_y">22.0625008752548</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -158,7 +194,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57951</SimpleData>
-		<SimpleData name="occCount">19441</SimpleData>
+		<SimpleData name="occCount">20289</SimpleData>
 		<SimpleData name="center_x">121.525000000002</SimpleData>
 		<SimpleData name="center_y">22.0625008752561</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -170,7 +206,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_57952</SimpleData>
-		<SimpleData name="occCount">3469</SimpleData>
+		<SimpleData name="occCount">3903</SimpleData>
 		<SimpleData name="center_x">121.575000000001</SimpleData>
 		<SimpleData name="center_y">22.0625008752528</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -182,7 +218,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_58138</SimpleData>
-		<SimpleData name="occCount">19674</SimpleData>
+		<SimpleData name="occCount">19679</SimpleData>
 		<SimpleData name="center_x">120.875000000004</SimpleData>
 		<SimpleData name="center_y">22.1041675426398</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -194,7 +230,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_58335</SimpleData>
-		<SimpleData name="occCount">4340</SimpleData>
+		<SimpleData name="occCount">4355</SimpleData>
 		<SimpleData name="center_x">120.724999999999</SimpleData>
 		<SimpleData name="center_y">22.1458342100008</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -206,7 +242,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_58538</SimpleData>
-		<SimpleData name="occCount">4806</SimpleData>
+		<SimpleData name="occCount">4836</SimpleData>
 		<SimpleData name="center_x">120.875000000005</SimpleData>
 		<SimpleData name="center_y">22.1875008773733</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -218,7 +254,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_58938</SimpleData>
-		<SimpleData name="occCount">11804</SimpleData>
+		<SimpleData name="occCount">10648</SimpleData>
 		<SimpleData name="center_x">120.875000000005</SimpleData>
 		<SimpleData name="center_y">22.2708342120715</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -230,7 +266,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59138</SimpleData>
-		<SimpleData name="occCount">10143</SimpleData>
+		<SimpleData name="occCount">9576</SimpleData>
 		<SimpleData name="center_x">120.875</SimpleData>
 		<SimpleData name="center_y">22.312500879423</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -242,7 +278,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59328</SimpleData>
-		<SimpleData name="occCount">9246</SimpleData>
+		<SimpleData name="occCount">9685</SimpleData>
 		<SimpleData name="center_x">120.374999999997</SimpleData>
 		<SimpleData name="center_y">22.3541675467646</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -254,7 +290,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59333</SimpleData>
-		<SimpleData name="occCount">3471</SimpleData>
+		<SimpleData name="occCount">3478</SimpleData>
 		<SimpleData name="center_x">120.624999999998</SimpleData>
 		<SimpleData name="center_y">22.3541675467611</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -266,7 +302,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59338</SimpleData>
-		<SimpleData name="occCount">3787</SimpleData>
+		<SimpleData name="occCount">3794</SimpleData>
 		<SimpleData name="center_x">120.875</SimpleData>
 		<SimpleData name="center_y">22.3541675467595</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -278,7 +314,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59531</SimpleData>
-		<SimpleData name="occCount">5030</SimpleData>
+		<SimpleData name="occCount">5059</SimpleData>
 		<SimpleData name="center_x">120.525000000002</SimpleData>
 		<SimpleData name="center_y">22.395834214102</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -290,7 +326,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59532</SimpleData>
-		<SimpleData name="occCount">7481</SimpleData>
+		<SimpleData name="occCount">7513</SimpleData>
 		<SimpleData name="center_x">120.574999999997</SimpleData>
 		<SimpleData name="center_y">22.3958342141026</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -302,7 +338,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59730</SimpleData>
-		<SimpleData name="occCount">40900</SimpleData>
+		<SimpleData name="occCount">41039</SimpleData>
 		<SimpleData name="center_x">120.474999999995</SimpleData>
 		<SimpleData name="center_y">22.4375008814256</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -314,7 +350,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_59929</SimpleData>
-		<SimpleData name="occCount">25602</SimpleData>
+		<SimpleData name="occCount">26985</SimpleData>
 		<SimpleData name="center_x">120.425000000004</SimpleData>
 		<SimpleData name="center_y">22.4791675487529</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -326,7 +362,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60127</SimpleData>
-		<SimpleData name="occCount">19136</SimpleData>
+		<SimpleData name="occCount">19106</SimpleData>
 		<SimpleData name="center_x">120.325000000009</SimpleData>
 		<SimpleData name="center_y">22.5208342160732</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -338,7 +374,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60128</SimpleData>
-		<SimpleData name="occCount">37953</SimpleData>
+		<SimpleData name="occCount">37364</SimpleData>
 		<SimpleData name="center_x">120.374999999995</SimpleData>
 		<SimpleData name="center_y">22.5208342160761</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -350,7 +386,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60327</SimpleData>
-		<SimpleData name="occCount">23088</SimpleData>
+		<SimpleData name="occCount">23162</SimpleData>
 		<SimpleData name="center_x">120.325000000009</SimpleData>
 		<SimpleData name="center_y">22.5625008833938</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -362,7 +398,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60340</SimpleData>
-		<SimpleData name="occCount">18230</SimpleData>
+		<SimpleData name="occCount">18255</SimpleData>
 		<SimpleData name="center_x">120.974999999996</SimpleData>
 		<SimpleData name="center_y">22.5625008833907</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -374,7 +410,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60526</SimpleData>
-		<SimpleData name="occCount">19958</SimpleData>
+		<SimpleData name="occCount">20075</SimpleData>
 		<SimpleData name="center_x">120.275000000001</SimpleData>
 		<SimpleData name="center_y">22.6041675506932</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -386,7 +422,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60726</SimpleData>
-		<SimpleData name="occCount">109298</SimpleData>
+		<SimpleData name="occCount">109431</SimpleData>
 		<SimpleData name="center_x">120.274999999997</SimpleData>
 		<SimpleData name="center_y">22.6458342180029</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -398,7 +434,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60750</SimpleData>
-		<SimpleData name="occCount">8070</SimpleData>
+		<SimpleData name="occCount">8498</SimpleData>
 		<SimpleData name="center_x">121.474999999998</SimpleData>
 		<SimpleData name="center_y">22.6458342180039</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -410,7 +446,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60926</SimpleData>
-		<SimpleData name="occCount">36347</SimpleData>
+		<SimpleData name="occCount">36229</SimpleData>
 		<SimpleData name="center_x">120.274999999995</SimpleData>
 		<SimpleData name="center_y">22.6875008853039</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -422,7 +458,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60941</SimpleData>
-		<SimpleData name="occCount">11530</SimpleData>
+		<SimpleData name="occCount">11528</SimpleData>
 		<SimpleData name="center_x">121.025000000002</SimpleData>
 		<SimpleData name="center_y">22.6875008853055</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -434,7 +470,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60942</SimpleData>
-		<SimpleData name="occCount">22828</SimpleData>
+		<SimpleData name="occCount">22761</SimpleData>
 		<SimpleData name="center_x">121.075000000003</SimpleData>
 		<SimpleData name="center_y">22.6875008853036</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -446,7 +482,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_60950</SimpleData>
-		<SimpleData name="occCount">3272</SimpleData>
+		<SimpleData name="occCount">3613</SimpleData>
 		<SimpleData name="center_x">121.475000000001</SimpleData>
 		<SimpleData name="center_y">22.6875008853063</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -458,7 +494,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61126</SimpleData>
-		<SimpleData name="occCount">21491</SimpleData>
+		<SimpleData name="occCount">21529</SimpleData>
 		<SimpleData name="center_x">120.274999999997</SimpleData>
 		<SimpleData name="center_y">22.7291675526001</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -470,7 +506,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61143</SimpleData>
-		<SimpleData name="occCount">16487</SimpleData>
+		<SimpleData name="occCount">16479</SimpleData>
 		<SimpleData name="center_x">121.124999999999</SimpleData>
 		<SimpleData name="center_y">22.7291675525953</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -482,7 +518,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61325</SimpleData>
-		<SimpleData name="occCount">6443</SimpleData>
+		<SimpleData name="occCount">6508</SimpleData>
 		<SimpleData name="center_x">120.224999999996</SimpleData>
 		<SimpleData name="center_y">22.7708342198715</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -494,7 +530,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61344</SimpleData>
-		<SimpleData name="occCount">19600</SimpleData>
+		<SimpleData name="occCount">19634</SimpleData>
 		<SimpleData name="center_x">121.175000000003</SimpleData>
 		<SimpleData name="center_y">22.7708342198738</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -506,7 +542,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61525</SimpleData>
-		<SimpleData name="occCount">9670</SimpleData>
+		<SimpleData name="occCount">9796</SimpleData>
 		<SimpleData name="center_x">120.224999999997</SimpleData>
 		<SimpleData name="center_y">22.8125008871674</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -518,7 +554,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61544</SimpleData>
-		<SimpleData name="occCount">4057</SimpleData>
+		<SimpleData name="occCount">4269</SimpleData>
 		<SimpleData name="center_x">121.175000000005</SimpleData>
 		<SimpleData name="center_y">22.8125008871637</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -530,7 +566,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61725</SimpleData>
-		<SimpleData name="occCount">41046</SimpleData>
+		<SimpleData name="occCount">41089</SimpleData>
 		<SimpleData name="center_x">120.224999999998</SimpleData>
 		<SimpleData name="center_y">22.8541675544365</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -542,7 +578,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61744</SimpleData>
-		<SimpleData name="occCount">4556</SimpleData>
+		<SimpleData name="occCount">4656</SimpleData>
 		<SimpleData name="center_x">121.175000000004</SimpleData>
 		<SimpleData name="center_y">22.8541675544385</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -554,7 +590,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61924</SimpleData>
-		<SimpleData name="occCount">56287</SimpleData>
+		<SimpleData name="occCount">56248</SimpleData>
 		<SimpleData name="center_x">120.175000000003</SimpleData>
 		<SimpleData name="center_y">22.895834221716</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -566,7 +602,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_61945</SimpleData>
-		<SimpleData name="occCount">3337</SimpleData>
+		<SimpleData name="occCount">3364</SimpleData>
 		<SimpleData name="center_x">121.225000000001</SimpleData>
 		<SimpleData name="center_y">22.8958342217158</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -578,7 +614,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62124</SimpleData>
-		<SimpleData name="occCount">5285</SimpleData>
+		<SimpleData name="occCount">5329</SimpleData>
 		<SimpleData name="center_x">120.175000000001</SimpleData>
 		<SimpleData name="center_y">22.9375008889819</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -590,7 +626,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62323</SimpleData>
-		<SimpleData name="occCount">3106</SimpleData>
+		<SimpleData name="occCount">3162</SimpleData>
 		<SimpleData name="center_x">120.125</SimpleData>
 		<SimpleData name="center_y">22.9791675562322</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -602,7 +638,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62324</SimpleData>
-		<SimpleData name="occCount">14277</SimpleData>
+		<SimpleData name="occCount">14673</SimpleData>
 		<SimpleData name="center_x">120.175000000001</SimpleData>
 		<SimpleData name="center_y">22.9791675562303</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -614,7 +650,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62346</SimpleData>
-		<SimpleData name="occCount">3460</SimpleData>
+		<SimpleData name="occCount">3459</SimpleData>
 		<SimpleData name="center_x">121.274999999999</SimpleData>
 		<SimpleData name="center_y">22.9791675562316</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -638,7 +674,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62523</SimpleData>
-		<SimpleData name="occCount">80247</SimpleData>
+		<SimpleData name="occCount">80318</SimpleData>
 		<SimpleData name="center_x">120.124999999996</SimpleData>
 		<SimpleData name="center_y">23.0208342234903</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -650,7 +686,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62547</SimpleData>
-		<SimpleData name="occCount">28228</SimpleData>
+		<SimpleData name="occCount">28419</SimpleData>
 		<SimpleData name="center_x">121.324999999998</SimpleData>
 		<SimpleData name="center_y">23.0208342234944</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -662,7 +698,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62721</SimpleData>
-		<SimpleData name="occCount">30382</SimpleData>
+		<SimpleData name="occCount">30528</SimpleData>
 		<SimpleData name="center_x">120.024999999997</SimpleData>
 		<SimpleData name="center_y">23.0625008907514</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -674,7 +710,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62722</SimpleData>
-		<SimpleData name="occCount">108748</SimpleData>
+		<SimpleData name="occCount">108871</SimpleData>
 		<SimpleData name="center_x">120.075000000002</SimpleData>
 		<SimpleData name="center_y">23.062500890752</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -686,7 +722,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62921</SimpleData>
-		<SimpleData name="occCount">34636</SimpleData>
+		<SimpleData name="occCount">34823</SimpleData>
 		<SimpleData name="center_x">120.024999999997</SimpleData>
 		<SimpleData name="center_y">23.1041675579763</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -698,7 +734,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62922</SimpleData>
-		<SimpleData name="occCount">42434</SimpleData>
+		<SimpleData name="occCount">42499</SimpleData>
 		<SimpleData name="center_x">120.075000000002</SimpleData>
 		<SimpleData name="center_y">23.1041675579752</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -710,7 +746,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62948</SimpleData>
-		<SimpleData name="occCount">5717</SimpleData>
+		<SimpleData name="occCount">6024</SimpleData>
 		<SimpleData name="center_x">121.374999999997</SimpleData>
 		<SimpleData name="center_y">23.1041675579773</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -722,7 +758,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_62949</SimpleData>
-		<SimpleData name="occCount">4255</SimpleData>
+		<SimpleData name="occCount">4263</SimpleData>
 		<SimpleData name="center_x">121.425000000003</SimpleData>
 		<SimpleData name="center_y">23.1041675579767</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -734,7 +770,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63122</SimpleData>
-		<SimpleData name="occCount">21804</SimpleData>
+		<SimpleData name="occCount">21849</SimpleData>
 		<SimpleData name="center_x">120.075000000004</SimpleData>
 		<SimpleData name="center_y">23.1458342252237</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -746,7 +782,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63322</SimpleData>
-		<SimpleData name="occCount">30053</SimpleData>
+		<SimpleData name="occCount">30055</SimpleData>
 		<SimpleData name="center_x">120.075000000004</SimpleData>
 		<SimpleData name="center_y">23.1875008924573</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -758,7 +794,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63513</SimpleData>
-		<SimpleData name="occCount">3888</SimpleData>
+		<SimpleData name="occCount">3858</SimpleData>
 		<SimpleData name="center_x">119.625000000002</SimpleData>
 		<SimpleData name="center_y">23.2291675596772</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -770,7 +806,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63514</SimpleData>
-		<SimpleData name="occCount">3070</SimpleData>
+		<SimpleData name="occCount">3058</SimpleData>
 		<SimpleData name="center_x">119.674999999998</SimpleData>
 		<SimpleData name="center_y">23.2291675596818</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -782,7 +818,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63522</SimpleData>
-		<SimpleData name="occCount">7369</SimpleData>
+		<SimpleData name="occCount">7384</SimpleData>
 		<SimpleData name="center_x">120.075000000001</SimpleData>
 		<SimpleData name="center_y">23.2291675596794</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -794,7 +830,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63711</SimpleData>
-		<SimpleData name="occCount">15549</SimpleData>
+		<SimpleData name="occCount">15439</SimpleData>
 		<SimpleData name="center_x">119.524999999997</SimpleData>
 		<SimpleData name="center_y">23.270834226911</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -806,7 +842,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63714</SimpleData>
-		<SimpleData name="occCount">23646</SimpleData>
+		<SimpleData name="occCount">23712</SimpleData>
 		<SimpleData name="center_x">119.675000000003</SimpleData>
 		<SimpleData name="center_y">23.2708342269104</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -818,7 +854,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63923</SimpleData>
-		<SimpleData name="occCount">48476</SimpleData>
+		<SimpleData name="occCount">48364</SimpleData>
 		<SimpleData name="center_x">120.124999999995</SimpleData>
 		<SimpleData name="center_y">23.3125008941221</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -830,7 +866,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_63949</SimpleData>
-		<SimpleData name="occCount">5903</SimpleData>
+		<SimpleData name="occCount">6147</SimpleData>
 		<SimpleData name="center_x">121.425000000004</SimpleData>
 		<SimpleData name="center_y">23.3125008941241</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -842,7 +878,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64111</SimpleData>
-		<SimpleData name="occCount">3218</SimpleData>
+		<SimpleData name="occCount">3231</SimpleData>
 		<SimpleData name="center_x">119.524999999997</SimpleData>
 		<SimpleData name="center_y">23.3541675613325</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -854,7 +890,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64123</SimpleData>
-		<SimpleData name="occCount">15294</SimpleData>
+		<SimpleData name="occCount">15477</SimpleData>
 		<SimpleData name="center_x">120.124999999997</SimpleData>
 		<SimpleData name="center_y">23.3541675613304</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -866,7 +902,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64150</SimpleData>
-		<SimpleData name="occCount">4473</SimpleData>
+		<SimpleData name="occCount">4480</SimpleData>
 		<SimpleData name="center_x">121.474999999995</SimpleData>
 		<SimpleData name="center_y">23.3541675613297</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -878,7 +914,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64324</SimpleData>
-		<SimpleData name="occCount">22349</SimpleData>
+		<SimpleData name="occCount">22338</SimpleData>
 		<SimpleData name="center_x">120.175000000006</SimpleData>
 		<SimpleData name="center_y">23.3958342285392</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -890,7 +926,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64350</SimpleData>
-		<SimpleData name="occCount">3156</SimpleData>
+		<SimpleData name="occCount">3254</SimpleData>
 		<SimpleData name="center_x">121.474999999999</SimpleData>
 		<SimpleData name="center_y">23.3958342285377</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -902,7 +938,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64524</SimpleData>
-		<SimpleData name="occCount">45364</SimpleData>
+		<SimpleData name="occCount">45339</SimpleData>
 		<SimpleData name="center_x">120.175000000005</SimpleData>
 		<SimpleData name="center_y">23.4375008957378</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -914,7 +950,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64723</SimpleData>
-		<SimpleData name="occCount">47643</SimpleData>
+		<SimpleData name="occCount">47809</SimpleData>
 		<SimpleData name="center_x">120.124999999997</SimpleData>
 		<SimpleData name="center_y">23.4791675629286</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -926,7 +962,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64724</SimpleData>
-		<SimpleData name="occCount">43088</SimpleData>
+		<SimpleData name="occCount">43187</SimpleData>
 		<SimpleData name="center_x">120.175000000001</SimpleData>
 		<SimpleData name="center_y">23.4791675629277</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -938,7 +974,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64750</SimpleData>
-		<SimpleData name="occCount">3621</SimpleData>
+		<SimpleData name="occCount">3660</SimpleData>
 		<SimpleData name="center_x">121.474999999999</SimpleData>
 		<SimpleData name="center_y">23.4791675629241</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -950,7 +986,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64751</SimpleData>
-		<SimpleData name="occCount">4414</SimpleData>
+		<SimpleData name="occCount">4650</SimpleData>
 		<SimpleData name="center_x">121.525000000002</SimpleData>
 		<SimpleData name="center_y">23.4791675629234</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -962,7 +998,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64923</SimpleData>
-		<SimpleData name="occCount">138601</SimpleData>
+		<SimpleData name="occCount">138393</SimpleData>
 		<SimpleData name="center_x">120.124999999999</SimpleData>
 		<SimpleData name="center_y">23.5208342301168</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -974,7 +1010,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_64924</SimpleData>
-		<SimpleData name="occCount">46988</SimpleData>
+		<SimpleData name="occCount">47088</SimpleData>
 		<SimpleData name="center_x">120.175</SimpleData>
 		<SimpleData name="center_y">23.5208342301185</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -986,7 +1022,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65112</SimpleData>
-		<SimpleData name="occCount">6076</SimpleData>
+		<SimpleData name="occCount">6919</SimpleData>
 		<SimpleData name="center_x">119.574999999997</SimpleData>
 		<SimpleData name="center_y">23.5625008972955</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -998,7 +1034,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65113</SimpleData>
-		<SimpleData name="occCount">20635</SimpleData>
+		<SimpleData name="occCount">20672</SimpleData>
 		<SimpleData name="center_x">119.624999999998</SimpleData>
 		<SimpleData name="center_y">23.562500897299</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1010,7 +1046,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65123</SimpleData>
-		<SimpleData name="occCount">3659</SimpleData>
+		<SimpleData name="occCount">3621</SimpleData>
 		<SimpleData name="center_x">120.124999999997</SimpleData>
 		<SimpleData name="center_y">23.5625008972955</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1022,7 +1058,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65313</SimpleData>
-		<SimpleData name="occCount">6908</SimpleData>
+		<SimpleData name="occCount">7224</SimpleData>
 		<SimpleData name="center_x">119.625000000001</SimpleData>
 		<SimpleData name="center_y">23.6041675644758</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1034,7 +1070,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65513</SimpleData>
-		<SimpleData name="occCount">3917</SimpleData>
+		<SimpleData name="occCount">4161</SimpleData>
 		<SimpleData name="center_x">119.625000000002</SimpleData>
 		<SimpleData name="center_y">23.6458342316521</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1046,7 +1082,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65514</SimpleData>
-		<SimpleData name="occCount">4330</SimpleData>
+		<SimpleData name="occCount">4435</SimpleData>
 		<SimpleData name="center_x">119.675000000001</SimpleData>
 		<SimpleData name="center_y">23.6458342316527</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1058,7 +1094,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65751</SimpleData>
-		<SimpleData name="occCount">3224</SimpleData>
+		<SimpleData name="occCount">3229</SimpleData>
 		<SimpleData name="center_x">121.525000000006</SimpleData>
 		<SimpleData name="center_y">23.6875008988201</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1070,7 +1106,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65913</SimpleData>
-		<SimpleData name="occCount">14415</SimpleData>
+		<SimpleData name="occCount">14439</SimpleData>
 		<SimpleData name="center_x">119.624999999995</SimpleData>
 		<SimpleData name="center_y">23.7291675659781</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1082,7 +1118,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_65924</SimpleData>
-		<SimpleData name="occCount">12897</SimpleData>
+		<SimpleData name="occCount">12947</SimpleData>
 		<SimpleData name="center_x">120.175000000002</SimpleData>
 		<SimpleData name="center_y">23.7291675659811</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1094,7 +1130,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66152</SimpleData>
-		<SimpleData name="occCount">4453</SimpleData>
+		<SimpleData name="occCount">4478</SimpleData>
 		<SimpleData name="center_x">121.575000000005</SimpleData>
 		<SimpleData name="center_y">23.7708342331174</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1106,7 +1142,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66325</SimpleData>
-		<SimpleData name="occCount">10512</SimpleData>
+		<SimpleData name="occCount">10521</SimpleData>
 		<SimpleData name="center_x">120.224999999997</SimpleData>
 		<SimpleData name="center_y">23.8125009002824</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1118,7 +1154,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66352</SimpleData>
-		<SimpleData name="occCount">10519</SimpleData>
+		<SimpleData name="occCount">10563</SimpleData>
 		<SimpleData name="center_x">121.575000000004</SimpleData>
 		<SimpleData name="center_y">23.8125009002824</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1130,7 +1166,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66552</SimpleData>
-		<SimpleData name="occCount">4373</SimpleData>
+		<SimpleData name="occCount">4419</SimpleData>
 		<SimpleData name="center_x">121.575000000004</SimpleData>
 		<SimpleData name="center_y">23.854167567429</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1142,7 +1178,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66726</SimpleData>
-		<SimpleData name="occCount">3399</SimpleData>
+		<SimpleData name="occCount">3404</SimpleData>
 		<SimpleData name="center_x">120.275000000002</SimpleData>
 		<SimpleData name="center_y">23.8958342345584</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1154,7 +1190,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66752</SimpleData>
-		<SimpleData name="occCount">25930</SimpleData>
+		<SimpleData name="occCount">25994</SimpleData>
 		<SimpleData name="center_x">121.575000000001</SimpleData>
 		<SimpleData name="center_y">23.895834234557</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1166,7 +1202,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_66953</SimpleData>
-		<SimpleData name="occCount">69317</SimpleData>
+		<SimpleData name="occCount">69564</SimpleData>
 		<SimpleData name="center_x">121.624999999997</SimpleData>
 		<SimpleData name="center_y">23.9375009016876</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1178,7 +1214,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67127</SimpleData>
-		<SimpleData name="occCount">19677</SimpleData>
+		<SimpleData name="occCount">19699</SimpleData>
 		<SimpleData name="center_x">120.325000000004</SimpleData>
 		<SimpleData name="center_y">23.9791675688211</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1190,7 +1226,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67153</SimpleData>
-		<SimpleData name="occCount">39426</SimpleData>
+		<SimpleData name="occCount">39666</SimpleData>
 		<SimpleData name="center_x">121.624999999998</SimpleData>
 		<SimpleData name="center_y">23.9791675688212</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1202,7 +1238,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67353</SimpleData>
-		<SimpleData name="occCount">18997</SimpleData>
+		<SimpleData name="occCount">18506</SimpleData>
 		<SimpleData name="center_x">121.624999999996</SimpleData>
 		<SimpleData name="center_y">24.0208342359402</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1214,7 +1250,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67528</SimpleData>
-		<SimpleData name="occCount">17546</SimpleData>
+		<SimpleData name="occCount">17587</SimpleData>
 		<SimpleData name="center_x">120.375000000002</SimpleData>
 		<SimpleData name="center_y">24.0625009030528</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1226,7 +1262,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67553</SimpleData>
-		<SimpleData name="occCount">5898</SimpleData>
+		<SimpleData name="occCount">5922</SimpleData>
 		<SimpleData name="center_x">121.624999999998</SimpleData>
 		<SimpleData name="center_y">24.0625009030547</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1238,7 +1274,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_67753</SimpleData>
-		<SimpleData name="occCount">3768</SimpleData>
+		<SimpleData name="occCount">3765</SimpleData>
 		<SimpleData name="center_x">121.624999999998</SimpleData>
 		<SimpleData name="center_y">24.1041675701563</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1250,7 +1286,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68130</SimpleData>
-		<SimpleData name="occCount">25005</SimpleData>
+		<SimpleData name="occCount">24996</SimpleData>
 		<SimpleData name="center_x">120.474999999995</SimpleData>
 		<SimpleData name="center_y">24.1875009043509</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1262,7 +1298,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68154</SimpleData>
-		<SimpleData name="occCount">10949</SimpleData>
+		<SimpleData name="occCount">10857</SimpleData>
 		<SimpleData name="center_x">121.675000000002</SimpleData>
 		<SimpleData name="center_y">24.1875009043561</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1274,7 +1310,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68354</SimpleData>
-		<SimpleData name="occCount">14081</SimpleData>
+		<SimpleData name="occCount">16497</SimpleData>
 		<SimpleData name="center_x">121.675</SimpleData>
 		<SimpleData name="center_y">24.2291675714552</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1286,7 +1322,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68355</SimpleData>
-		<SimpleData name="occCount">9374</SimpleData>
+		<SimpleData name="occCount">4696</SimpleData>
 		<SimpleData name="center_x">121.725000000001</SimpleData>
 		<SimpleData name="center_y">24.2291675714516</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1298,7 +1334,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68531</SimpleData>
-		<SimpleData name="occCount">3030</SimpleData>
+		<SimpleData name="occCount">3125</SimpleData>
 		<SimpleData name="center_x">120.525000000006</SimpleData>
 		<SimpleData name="center_y">24.2708342385513</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1310,7 +1346,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68555</SimpleData>
-		<SimpleData name="occCount">8446</SimpleData>
+		<SimpleData name="occCount">9761</SimpleData>
 		<SimpleData name="center_x">121.725000000003</SimpleData>
 		<SimpleData name="center_y">24.270834238548</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1322,7 +1358,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68731</SimpleData>
-		<SimpleData name="occCount">43518</SimpleData>
+		<SimpleData name="occCount">44530</SimpleData>
 		<SimpleData name="center_x">120.525000000004</SimpleData>
 		<SimpleData name="center_y">24.3125009056116</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1334,7 +1370,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68756</SimpleData>
-		<SimpleData name="occCount">7868</SimpleData>
+		<SimpleData name="occCount">7887</SimpleData>
 		<SimpleData name="center_x">121.775000000002</SimpleData>
 		<SimpleData name="center_y">24.3125009056146</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1346,7 +1382,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68932</SimpleData>
-		<SimpleData name="occCount">6979</SimpleData>
+		<SimpleData name="occCount">6984</SimpleData>
 		<SimpleData name="center_x">120.575</SimpleData>
 		<SimpleData name="center_y">24.3541675726972</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1358,7 +1394,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_68956</SimpleData>
-		<SimpleData name="occCount">12997</SimpleData>
+		<SimpleData name="occCount">16680</SimpleData>
 		<SimpleData name="center_x">121.775000000003</SimpleData>
 		<SimpleData name="center_y">24.3541675726951</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1370,7 +1406,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69085</SimpleData>
-		<SimpleData name="occCount">6253</SimpleData>
+		<SimpleData name="occCount">6300</SimpleData>
 		<SimpleData name="center_x">118.225000000001</SimpleData>
 		<SimpleData name="center_y">24.3958342397599</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1382,7 +1418,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69086</SimpleData>
-		<SimpleData name="occCount">18047</SimpleData>
+		<SimpleData name="occCount">18099</SimpleData>
 		<SimpleData name="center_x">118.275000000002</SimpleData>
 		<SimpleData name="center_y">24.3958342397597</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1394,7 +1430,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69087</SimpleData>
-		<SimpleData name="occCount">29193</SimpleData>
+		<SimpleData name="occCount">29329</SimpleData>
 		<SimpleData name="center_x">118.324999999997</SimpleData>
 		<SimpleData name="center_y">24.3958342397578</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1406,7 +1442,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69089</SimpleData>
-		<SimpleData name="occCount">3813</SimpleData>
+		<SimpleData name="occCount">3797</SimpleData>
 		<SimpleData name="center_x">118.425000000002</SimpleData>
 		<SimpleData name="center_y">24.395834239759</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1418,7 +1454,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69156</SimpleData>
-		<SimpleData name="occCount">4733</SimpleData>
+		<SimpleData name="occCount">5706</SimpleData>
 		<SimpleData name="center_x">121.775000000002</SimpleData>
 		<SimpleData name="center_y">24.3958342397555</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1430,7 +1466,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69285</SimpleData>
-		<SimpleData name="occCount">94945</SimpleData>
+		<SimpleData name="occCount">96005</SimpleData>
 		<SimpleData name="center_x">118.225000000001</SimpleData>
 		<SimpleData name="center_y">24.4375009068263</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1442,7 +1478,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69286</SimpleData>
-		<SimpleData name="occCount">27582</SimpleData>
+		<SimpleData name="occCount">27532</SimpleData>
 		<SimpleData name="center_x">118.275000000004</SimpleData>
 		<SimpleData name="center_y">24.4375009068279</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1454,7 +1490,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69287</SimpleData>
-		<SimpleData name="occCount">110168</SimpleData>
+		<SimpleData name="occCount">114116</SimpleData>
 		<SimpleData name="center_x">118.324999999996</SimpleData>
 		<SimpleData name="center_y">24.4375009068304</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1466,7 +1502,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69288</SimpleData>
-		<SimpleData name="occCount">83214</SimpleData>
+		<SimpleData name="occCount">83350</SimpleData>
 		<SimpleData name="center_x">118.374999999997</SimpleData>
 		<SimpleData name="center_y">24.4375009068289</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1478,7 +1514,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69289</SimpleData>
-		<SimpleData name="occCount">56308</SimpleData>
+		<SimpleData name="occCount">56245</SimpleData>
 		<SimpleData name="center_x">118.425000000004</SimpleData>
 		<SimpleData name="center_y">24.4375009068289</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1490,7 +1526,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69290</SimpleData>
-		<SimpleData name="occCount">35153</SimpleData>
+		<SimpleData name="occCount">35095</SimpleData>
 		<SimpleData name="center_x">118.474999999999</SimpleData>
 		<SimpleData name="center_y">24.4375009068307</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1502,7 +1538,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69356</SimpleData>
-		<SimpleData name="occCount">32387</SimpleData>
+		<SimpleData name="occCount">32088</SimpleData>
 		<SimpleData name="center_x">121.775</SimpleData>
 		<SimpleData name="center_y">24.4375009068274</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1514,7 +1550,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69357</SimpleData>
-		<SimpleData name="occCount">23894</SimpleData>
+		<SimpleData name="occCount">23888</SimpleData>
 		<SimpleData name="center_x">121.825000000002</SimpleData>
 		<SimpleData name="center_y">24.4375009068294</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1526,7 +1562,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69486</SimpleData>
-		<SimpleData name="occCount">50098</SimpleData>
+		<SimpleData name="occCount">50079</SimpleData>
 		<SimpleData name="center_x">118.275000000001</SimpleData>
 		<SimpleData name="center_y">24.4791675738868</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1538,7 +1574,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69487</SimpleData>
-		<SimpleData name="occCount">231610</SimpleData>
+		<SimpleData name="occCount">232492</SimpleData>
 		<SimpleData name="center_x">118.324999999999</SimpleData>
 		<SimpleData name="center_y">24.4791675738853</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1550,7 +1586,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69488</SimpleData>
-		<SimpleData name="occCount">40957</SimpleData>
+		<SimpleData name="occCount">40927</SimpleData>
 		<SimpleData name="center_x">118.374999999994</SimpleData>
 		<SimpleData name="center_y">24.4791675738872</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1562,7 +1598,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69489</SimpleData>
-		<SimpleData name="occCount">88803</SimpleData>
+		<SimpleData name="occCount">88987</SimpleData>
 		<SimpleData name="center_x">118.425000000007</SimpleData>
 		<SimpleData name="center_y">24.4791675738868</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1574,7 +1610,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69490</SimpleData>
-		<SimpleData name="occCount">9850</SimpleData>
+		<SimpleData name="occCount">9838</SimpleData>
 		<SimpleData name="center_x">118.474999999999</SimpleData>
 		<SimpleData name="center_y">24.4791675738872</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1586,7 +1622,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69534</SimpleData>
-		<SimpleData name="occCount">4635</SimpleData>
+		<SimpleData name="occCount">4594</SimpleData>
 		<SimpleData name="center_x">120.674999999999</SimpleData>
 		<SimpleData name="center_y">24.4791675738855</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1598,7 +1634,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69557</SimpleData>
-		<SimpleData name="occCount">25060</SimpleData>
+		<SimpleData name="occCount">25469</SimpleData>
 		<SimpleData name="center_x">121.825000000003</SimpleData>
 		<SimpleData name="center_y">24.4791675738883</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1610,7 +1646,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69688</SimpleData>
-		<SimpleData name="occCount">3629</SimpleData>
+		<SimpleData name="occCount">3623</SimpleData>
 		<SimpleData name="center_x">118.374999999998</SimpleData>
 		<SimpleData name="center_y">24.5208342409306</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1622,7 +1658,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69689</SimpleData>
-		<SimpleData name="occCount">37588</SimpleData>
+		<SimpleData name="occCount">37631</SimpleData>
 		<SimpleData name="center_x">118.425000000002</SimpleData>
 		<SimpleData name="center_y">24.5208342409309</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1634,7 +1670,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69734</SimpleData>
-		<SimpleData name="occCount">8241</SimpleData>
+		<SimpleData name="occCount">8247</SimpleData>
 		<SimpleData name="center_x">120.675</SimpleData>
 		<SimpleData name="center_y">24.5208342409317</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1646,7 +1682,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69757</SimpleData>
-		<SimpleData name="occCount">35430</SimpleData>
+		<SimpleData name="occCount">34949</SimpleData>
 		<SimpleData name="center_x">121.824999999998</SimpleData>
 		<SimpleData name="center_y">24.5208342409304</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1657,8 +1693,20 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
+		<SimpleData name="id">10_69758</SimpleData>
+		<SimpleData name="occCount">3091</SimpleData>
+		<SimpleData name="center_x">121.875000000002</SimpleData>
+		<SimpleData name="center_y">24.5208342409301</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.85,24.5 121.85,24.5416666666667 121.9,24.5416666666667 121.9,24.5 121.85,24.5</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69935</SimpleData>
-		<SimpleData name="occCount">14401</SimpleData>
+		<SimpleData name="occCount">14232</SimpleData>
 		<SimpleData name="center_x">120.725000000001</SimpleData>
 		<SimpleData name="center_y">24.562500907975</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1670,7 +1718,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_69958</SimpleData>
-		<SimpleData name="occCount">4392</SimpleData>
+		<SimpleData name="occCount">5385</SimpleData>
 		<SimpleData name="center_x">121.875000000004</SimpleData>
 		<SimpleData name="center_y">24.5625009079802</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1682,7 +1730,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70135</SimpleData>
-		<SimpleData name="occCount">6544</SimpleData>
+		<SimpleData name="occCount">6513</SimpleData>
 		<SimpleData name="center_x">120.725000000003</SimpleData>
 		<SimpleData name="center_y">24.604167575023</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1694,7 +1742,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70158</SimpleData>
-		<SimpleData name="occCount">25955</SimpleData>
+		<SimpleData name="occCount">25551</SimpleData>
 		<SimpleData name="center_x">121.875000000003</SimpleData>
 		<SimpleData name="center_y">24.6041675750177</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1706,7 +1754,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70357</SimpleData>
-		<SimpleData name="occCount">95634</SimpleData>
+		<SimpleData name="occCount">95677</SimpleData>
 		<SimpleData name="center_x">121.824999999996</SimpleData>
 		<SimpleData name="center_y">24.6458342420552</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1718,7 +1766,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70537</SimpleData>
-		<SimpleData name="occCount">4047</SimpleData>
+		<SimpleData name="occCount">4081</SimpleData>
 		<SimpleData name="center_x">120.824999999995</SimpleData>
 		<SimpleData name="center_y">24.6875009090778</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1730,7 +1778,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70538</SimpleData>
-		<SimpleData name="occCount">3212</SimpleData>
+		<SimpleData name="occCount">3227</SimpleData>
 		<SimpleData name="center_x">120.875000000003</SimpleData>
 		<SimpleData name="center_y">24.6875009090784</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1742,7 +1790,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70557</SimpleData>
-		<SimpleData name="occCount">51680</SimpleData>
+		<SimpleData name="occCount">51638</SimpleData>
 		<SimpleData name="center_x">121.824999999993</SimpleData>
 		<SimpleData name="center_y">24.6875009090765</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1754,7 +1802,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70738</SimpleData>
-		<SimpleData name="occCount">4751</SimpleData>
+		<SimpleData name="occCount">4766</SimpleData>
 		<SimpleData name="center_x">120.875000000006</SimpleData>
 		<SimpleData name="center_y">24.7291675761077</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1766,7 +1814,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70757</SimpleData>
-		<SimpleData name="occCount">179055</SimpleData>
+		<SimpleData name="occCount">179954</SimpleData>
 		<SimpleData name="center_x">121.824999999995</SimpleData>
 		<SimpleData name="center_y">24.7291675761069</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1778,7 +1826,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_70957</SimpleData>
-		<SimpleData name="occCount">9287</SimpleData>
+		<SimpleData name="occCount">9261</SimpleData>
 		<SimpleData name="center_x">121.825000000001</SimpleData>
 		<SimpleData name="center_y">24.7708342431232</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1790,7 +1838,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71139</SimpleData>
-		<SimpleData name="occCount">184602</SimpleData>
+		<SimpleData name="occCount">184526</SimpleData>
 		<SimpleData name="center_x">120.924999999999</SimpleData>
 		<SimpleData name="center_y">24.8125009101256</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1802,7 +1850,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71157</SimpleData>
-		<SimpleData name="occCount">78820</SimpleData>
+		<SimpleData name="occCount">78755</SimpleData>
 		<SimpleData name="center_x">121.825000000001</SimpleData>
 		<SimpleData name="center_y">24.8125009101234</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1814,7 +1862,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71339</SimpleData>
-		<SimpleData name="occCount">14984</SimpleData>
+		<SimpleData name="occCount">15003</SimpleData>
 		<SimpleData name="center_x">120.924999999998</SimpleData>
 		<SimpleData name="center_y">24.8541675771242</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1826,7 +1874,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71357</SimpleData>
-		<SimpleData name="occCount">58324</SimpleData>
+		<SimpleData name="occCount">58401</SimpleData>
 		<SimpleData name="center_x">121.824999999999</SimpleData>
 		<SimpleData name="center_y">24.8541675771275</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1837,8 +1885,20 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
+		<SimpleData name="id">10_71359</SimpleData>
+		<SimpleData name="occCount">3097</SimpleData>
+		<SimpleData name="center_x">121.925</SimpleData>
+		<SimpleData name="center_y">24.8541675771274</SimpleData>
+		<SimpleData name="landType">coastal</SimpleData>
+		<SimpleData name="priority">資料筆數高於平均值</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.9,24.8333333333333 121.9,24.875 121.95,24.875 121.95,24.8333333333333 121.9,24.8333333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71360</SimpleData>
-		<SimpleData name="occCount">11472</SimpleData>
+		<SimpleData name="occCount">11478</SimpleData>
 		<SimpleData name="center_x">121.974999999995</SimpleData>
 		<SimpleData name="center_y">24.8541675771269</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1850,7 +1910,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71540</SimpleData>
-		<SimpleData name="occCount">11957</SimpleData>
+		<SimpleData name="occCount">12046</SimpleData>
 		<SimpleData name="center_x">120.974999999997</SimpleData>
 		<SimpleData name="center_y">24.8958342441347</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1862,7 +1922,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71557</SimpleData>
-		<SimpleData name="occCount">4885</SimpleData>
+		<SimpleData name="occCount">4943</SimpleData>
 		<SimpleData name="center_x">121.825000000001</SimpleData>
 		<SimpleData name="center_y">24.8958342441322</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1874,7 +1934,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71558</SimpleData>
-		<SimpleData name="occCount">3919</SimpleData>
+		<SimpleData name="occCount">3965</SimpleData>
 		<SimpleData name="center_x">121.875000000002</SimpleData>
 		<SimpleData name="center_y">24.8958342441325</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1886,7 +1946,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71758</SimpleData>
-		<SimpleData name="occCount">4919</SimpleData>
+		<SimpleData name="occCount">6929</SimpleData>
 		<SimpleData name="center_x">121.875</SimpleData>
 		<SimpleData name="center_y">24.9375009111298</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1898,7 +1958,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71759</SimpleData>
-		<SimpleData name="occCount">4233</SimpleData>
+		<SimpleData name="occCount">4461</SimpleData>
 		<SimpleData name="center_x">121.925</SimpleData>
 		<SimpleData name="center_y">24.9375009111299</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1910,7 +1970,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71941</SimpleData>
-		<SimpleData name="occCount">6646</SimpleData>
+		<SimpleData name="occCount">6790</SimpleData>
 		<SimpleData name="center_x">121.025000000009</SimpleData>
 		<SimpleData name="center_y">24.9791675781163</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1922,7 +1982,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_71959</SimpleData>
-		<SimpleData name="occCount">6616</SimpleData>
+		<SimpleData name="occCount">6695</SimpleData>
 		<SimpleData name="center_x">121.925</SimpleData>
 		<SimpleData name="center_y">24.9791675781152</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1934,7 +1994,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72141</SimpleData>
-		<SimpleData name="occCount">3084</SimpleData>
+		<SimpleData name="occCount">3453</SimpleData>
 		<SimpleData name="center_x">121.025000000011</SimpleData>
 		<SimpleData name="center_y">25.020834245082</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1946,7 +2006,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72142</SimpleData>
-		<SimpleData name="occCount">6618</SimpleData>
+		<SimpleData name="occCount">6657</SimpleData>
 		<SimpleData name="center_x">121.075000000001</SimpleData>
 		<SimpleData name="center_y">25.0208342450813</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1958,7 +2018,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72159</SimpleData>
-		<SimpleData name="occCount">225432</SimpleData>
+		<SimpleData name="occCount">225547</SimpleData>
 		<SimpleData name="center_x">121.925</SimpleData>
 		<SimpleData name="center_y">25.0208342450821</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1970,7 +2030,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72160</SimpleData>
-		<SimpleData name="occCount">5728</SimpleData>
+		<SimpleData name="occCount">5940</SimpleData>
 		<SimpleData name="center_x">121.975000000001</SimpleData>
 		<SimpleData name="center_y">25.0208342450847</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1982,7 +2042,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72161</SimpleData>
-		<SimpleData name="occCount">13517</SimpleData>
+		<SimpleData name="occCount">13595</SimpleData>
 		<SimpleData name="center_x">122.024999999994</SimpleData>
 		<SimpleData name="center_y">25.0208342450842</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1994,7 +2054,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72344</SimpleData>
-		<SimpleData name="occCount">44615</SimpleData>
+		<SimpleData name="occCount">44633</SimpleData>
 		<SimpleData name="center_x">121.175000000001</SimpleData>
 		<SimpleData name="center_y">25.0625009120746</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2006,7 +2066,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72359</SimpleData>
-		<SimpleData name="occCount">15027</SimpleData>
+		<SimpleData name="occCount">15357</SimpleData>
 		<SimpleData name="center_x">121.925000000004</SimpleData>
 		<SimpleData name="center_y">25.0625009120741</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2018,7 +2078,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72544</SimpleData>
-		<SimpleData name="occCount">70244</SimpleData>
+		<SimpleData name="occCount">70129</SimpleData>
 		<SimpleData name="center_x">121.174999999998</SimpleData>
 		<SimpleData name="center_y">25.1041675790316</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2030,7 +2090,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72545</SimpleData>
-		<SimpleData name="occCount">61276</SimpleData>
+		<SimpleData name="occCount">61378</SimpleData>
 		<SimpleData name="center_x">121.225</SimpleData>
 		<SimpleData name="center_y">25.1041675790298</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2042,7 +2102,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72546</SimpleData>
-		<SimpleData name="occCount">13910</SimpleData>
+		<SimpleData name="occCount">13957</SimpleData>
 		<SimpleData name="center_x">121.275000000003</SimpleData>
 		<SimpleData name="center_y">25.1041675790326</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2054,7 +2114,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72557</SimpleData>
-		<SimpleData name="occCount">9715</SimpleData>
+		<SimpleData name="occCount">9903</SimpleData>
 		<SimpleData name="center_x">121.825000000001</SimpleData>
 		<SimpleData name="center_y">25.1041675790369</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2066,7 +2126,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72558</SimpleData>
-		<SimpleData name="occCount">7074</SimpleData>
+		<SimpleData name="occCount">7269</SimpleData>
 		<SimpleData name="center_x">121.874999999998</SimpleData>
 		<SimpleData name="center_y">25.1041675790367</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2078,7 +2138,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72559</SimpleData>
-		<SimpleData name="occCount">5746</SimpleData>
+		<SimpleData name="occCount">6047</SimpleData>
 		<SimpleData name="center_x">121.925000000005</SimpleData>
 		<SimpleData name="center_y">25.1041675790324</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2090,7 +2150,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72748</SimpleData>
-		<SimpleData name="occCount">3095</SimpleData>
+		<SimpleData name="occCount">3002</SimpleData>
 		<SimpleData name="center_x">121.374999999999</SimpleData>
 		<SimpleData name="center_y">25.1458342459912</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2102,7 +2162,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72749</SimpleData>
-		<SimpleData name="occCount">53004</SimpleData>
+		<SimpleData name="occCount">52147</SimpleData>
 		<SimpleData name="center_x">121.425</SimpleData>
 		<SimpleData name="center_y">25.1458342459916</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2114,7 +2174,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72755</SimpleData>
-		<SimpleData name="occCount">13891</SimpleData>
+		<SimpleData name="occCount">14039</SimpleData>
 		<SimpleData name="center_x">121.725000000001</SimpleData>
 		<SimpleData name="center_y">25.1458342459941</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2126,7 +2186,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72756</SimpleData>
-		<SimpleData name="occCount">22632</SimpleData>
+		<SimpleData name="occCount">23212</SimpleData>
 		<SimpleData name="center_x">121.775000000001</SimpleData>
 		<SimpleData name="center_y">25.1458342459925</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2138,7 +2198,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72757</SimpleData>
-		<SimpleData name="occCount">9801</SimpleData>
+		<SimpleData name="occCount">10166</SimpleData>
 		<SimpleData name="center_x">121.825000000003</SimpleData>
 		<SimpleData name="center_y">25.1458342459931</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2150,7 +2210,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72949</SimpleData>
-		<SimpleData name="occCount">84984</SimpleData>
+		<SimpleData name="occCount">83100</SimpleData>
 		<SimpleData name="center_x">121.425000000001</SimpleData>
 		<SimpleData name="center_y">25.1875009129618</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2162,7 +2222,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_72954</SimpleData>
-		<SimpleData name="occCount">11733</SimpleData>
+		<SimpleData name="occCount">12239</SimpleData>
 		<SimpleData name="center_x">121.675</SimpleData>
 		<SimpleData name="center_y">25.1875009129564</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2174,7 +2234,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73149</SimpleData>
-		<SimpleData name="occCount">3194</SimpleData>
+		<SimpleData name="occCount">3182</SimpleData>
 		<SimpleData name="center_x">121.425000000002</SimpleData>
 		<SimpleData name="center_y">25.2291675798996</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2186,7 +2246,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73150</SimpleData>
-		<SimpleData name="occCount">3443</SimpleData>
+		<SimpleData name="occCount">3441</SimpleData>
 		<SimpleData name="center_x">121.474999999997</SimpleData>
 		<SimpleData name="center_y">25.2291675798996</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2198,7 +2258,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73153</SimpleData>
-		<SimpleData name="occCount">125794</SimpleData>
+		<SimpleData name="occCount">125828</SimpleData>
 		<SimpleData name="center_x">121.624999999997</SimpleData>
 		<SimpleData name="center_y">25.2291675799031</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2210,7 +2270,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73154</SimpleData>
-		<SimpleData name="occCount">78988</SimpleData>
+		<SimpleData name="occCount">79306</SimpleData>
 		<SimpleData name="center_x">121.674999999999</SimpleData>
 		<SimpleData name="center_y">25.2291675799014</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2222,7 +2282,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73350</SimpleData>
-		<SimpleData name="occCount">6019</SimpleData>
+		<SimpleData name="occCount">6059</SimpleData>
 		<SimpleData name="center_x">121.475</SimpleData>
 		<SimpleData name="center_y">25.270834246857</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2234,7 +2294,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73351</SimpleData>
-		<SimpleData name="occCount">24384</SimpleData>
+		<SimpleData name="occCount">24537</SimpleData>
 		<SimpleData name="center_x">121.525</SimpleData>
 		<SimpleData name="center_y">25.270834246858</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2246,7 +2306,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_73352</SimpleData>
-		<SimpleData name="occCount">4865</SimpleData>
+		<SimpleData name="occCount">4982</SimpleData>
 		<SimpleData name="center_x">121.575000000005</SimpleData>
 		<SimpleData name="center_y">25.2708342468555</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2258,7 +2318,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_74363</SimpleData>
-		<SimpleData name="occCount">4610</SimpleData>
+		<SimpleData name="occCount">4621</SimpleData>
 		<SimpleData name="center_x">122.124999999999</SimpleData>
 		<SimpleData name="center_y">25.4791675814843</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2270,7 +2330,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_75162</SimpleData>
-		<SimpleData name="occCount">3415</SimpleData>
+		<SimpleData name="occCount">3466</SimpleData>
 		<SimpleData name="center_x">122.075000000003</SimpleData>
 		<SimpleData name="center_y">25.6458342490853</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2282,7 +2342,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_76520</SimpleData>
-		<SimpleData name="occCount">5627</SimpleData>
+		<SimpleData name="occCount">5633</SimpleData>
 		<SimpleData name="center_x">119.975</SimpleData>
 		<SimpleData name="center_y">25.9375009171423</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2294,7 +2354,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_76719</SimpleData>
-		<SimpleData name="occCount">8319</SimpleData>
+		<SimpleData name="occCount">8344</SimpleData>
 		<SimpleData name="center_x">119.925000000003</SimpleData>
 		<SimpleData name="center_y">25.9791675839855</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2306,7 +2366,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_76720</SimpleData>
-		<SimpleData name="occCount">11413</SimpleData>
+		<SimpleData name="occCount">11500</SimpleData>
 		<SimpleData name="center_x">119.975000000002</SimpleData>
 		<SimpleData name="center_y">25.9791675839875</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2318,7 +2378,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_77519</SimpleData>
-		<SimpleData name="occCount">44670</SimpleData>
+		<SimpleData name="occCount">44901</SimpleData>
 		<SimpleData name="center_x">119.925000000003</SimpleData>
 		<SimpleData name="center_y">26.1458342512824</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2330,7 +2390,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_77520</SimpleData>
-		<SimpleData name="occCount">9853</SimpleData>
+		<SimpleData name="occCount">9875</SimpleData>
 		<SimpleData name="center_x">119.974999999999</SimpleData>
 		<SimpleData name="center_y">26.1458342512852</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2342,7 +2402,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_77719</SimpleData>
-		<SimpleData name="occCount">4591</SimpleData>
+		<SimpleData name="occCount">4600</SimpleData>
 		<SimpleData name="center_x">119.925000000006</SimpleData>
 		<SimpleData name="center_y">26.1875009180998</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2354,7 +2414,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_77920</SimpleData>
-		<SimpleData name="occCount">13244</SimpleData>
+		<SimpleData name="occCount">13323</SimpleData>
 		<SimpleData name="center_x">119.975000000006</SimpleData>
 		<SimpleData name="center_y">26.2291675849146</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2366,7 +2426,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_78530</SimpleData>
-		<SimpleData name="occCount">137017</SimpleData>
+		<SimpleData name="occCount">136322</SimpleData>
 		<SimpleData name="center_x">120.474999999996</SimpleData>
 		<SimpleData name="center_y">26.3541675852891</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -2378,7 +2438,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_資料筆數高於平均值.coastal">
 		<SimpleData name="id">10_78531</SimpleData>
-		<SimpleData name="occCount">7381</SimpleData>
+		<SimpleData name="occCount">7357</SimpleData>
 		<SimpleData name="center_x">120.525000000008</SimpleData>
 		<SimpleData name="center_y">26.354167585289</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>

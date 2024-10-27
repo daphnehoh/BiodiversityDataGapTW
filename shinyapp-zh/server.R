@@ -303,7 +303,7 @@ shinyServer(function(input, output, session) {
           data = df_taxa_map_summarized(),
           fillColor = ~pal_taxa(occCount),
           weight = 1,
-          opacity = 0.4,
+          opacity = 0.2,
           color = 'mediumvioletred',
           fillOpacity = 0.4,
           popup = ~paste("Number of selected records:", occCount)
@@ -312,7 +312,7 @@ shinyServer(function(input, output, session) {
           data = df_taxa_map_summarized(),
           values = ~occCount,
           pal = pal_taxa,
-          opacity = 0.4,
+          opacity = 0.2,
           title = "Record count",
           position = "bottomright",
           labFormat = labelFormat(digits = 0, big.mark = ",")

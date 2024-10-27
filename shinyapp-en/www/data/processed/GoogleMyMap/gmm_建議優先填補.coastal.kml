@@ -13,18 +13,6 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
-		<SimpleData name="id">10_01608</SimpleData>
-		<SimpleData name="occCount">191</SimpleData>
-		<SimpleData name="center_x">114.374999999997</SimpleData>
-		<SimpleData name="center_y">10.3541671696318</SimpleData>
-		<SimpleData name="landType">coastal</SimpleData>
-		<SimpleData name="priority">建議優先填補</SimpleData>
-	</SchemaData></ExtendedData>
-      <Polygon><outerBoundaryIs><LinearRing><coordinates>114.35,10.3333333333333 114.35,10.375 114.4,10.375 114.4,10.3333333333333 114.35,10.3333333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
-  </Placemark>
-  <Placemark>
-	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_56537</SimpleData>
 		<SimpleData name="occCount">1</SimpleData>
 		<SimpleData name="center_x">120.824999999998</SimpleData>
@@ -38,7 +26,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57338</SimpleData>
-		<SimpleData name="occCount">475</SimpleData>
+		<SimpleData name="occCount">472</SimpleData>
 		<SimpleData name="center_x">120.875000000003</SimpleData>
 		<SimpleData name="center_y">21.9375008731061</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -50,7 +38,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57353</SimpleData>
-		<SimpleData name="occCount">390</SimpleData>
+		<SimpleData name="occCount">411</SimpleData>
 		<SimpleData name="center_x">121.624999999996</SimpleData>
 		<SimpleData name="center_y">21.9375008731083</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -62,7 +50,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57534</SimpleData>
-		<SimpleData name="occCount">393</SimpleData>
+		<SimpleData name="occCount">795</SimpleData>
 		<SimpleData name="center_x">120.675</SimpleData>
 		<SimpleData name="center_y">21.9791675404972</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -74,7 +62,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57538</SimpleData>
-		<SimpleData name="occCount">852</SimpleData>
+		<SimpleData name="occCount">871</SimpleData>
 		<SimpleData name="center_x">120.875000000004</SimpleData>
 		<SimpleData name="center_y">21.9791675404967</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -86,7 +74,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57552</SimpleData>
-		<SimpleData name="occCount">88</SimpleData>
+		<SimpleData name="occCount">251</SimpleData>
 		<SimpleData name="center_x">121.575</SimpleData>
 		<SimpleData name="center_y">21.9791675404918</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -122,7 +110,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_57950</SimpleData>
-		<SimpleData name="occCount">237</SimpleData>
+		<SimpleData name="occCount">303</SimpleData>
 		<SimpleData name="center_x">121.475</SimpleData>
 		<SimpleData name="center_y">22.0625008752536</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -134,7 +122,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_58134</SimpleData>
-		<SimpleData name="occCount">20</SimpleData>
+		<SimpleData name="occCount">19</SimpleData>
 		<SimpleData name="center_x">120.675000000001</SimpleData>
 		<SimpleData name="center_y">22.1041675426402</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -158,7 +146,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_58151</SimpleData>
-		<SimpleData name="occCount">144</SimpleData>
+		<SimpleData name="occCount">154</SimpleData>
 		<SimpleData name="center_x">121.525000000003</SimpleData>
 		<SimpleData name="center_y">22.1041675426352</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -170,7 +158,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_58152</SimpleData>
-		<SimpleData name="occCount">365</SimpleData>
+		<SimpleData name="occCount">594</SimpleData>
 		<SimpleData name="center_x">121.575000000001</SimpleData>
 		<SimpleData name="center_y">22.1041675426403</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -182,7 +170,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_58334</SimpleData>
-		<SimpleData name="occCount">328</SimpleData>
+		<SimpleData name="occCount">337</SimpleData>
 		<SimpleData name="center_x">120.675</SimpleData>
 		<SimpleData name="center_y">22.1458342100004</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -194,7 +182,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_58933</SimpleData>
-		<SimpleData name="occCount">210</SimpleData>
+		<SimpleData name="occCount">212</SimpleData>
 		<SimpleData name="center_x">120.624999999997</SimpleData>
 		<SimpleData name="center_y">22.2708342120739</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -206,7 +194,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_59332</SimpleData>
-		<SimpleData name="occCount">638</SimpleData>
+		<SimpleData name="occCount">663</SimpleData>
 		<SimpleData name="center_x">120.574999999998</SimpleData>
 		<SimpleData name="center_y">22.3541675467602</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -218,7 +206,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_59729</SimpleData>
-		<SimpleData name="occCount">917</SimpleData>
+		<SimpleData name="occCount">965</SimpleData>
 		<SimpleData name="center_x">120.425000000002</SimpleData>
 		<SimpleData name="center_y">22.4375008814256</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -230,7 +218,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_59940</SimpleData>
-		<SimpleData name="occCount">234</SimpleData>
+		<SimpleData name="occCount">239</SimpleData>
 		<SimpleData name="center_x">120.974999999993</SimpleData>
 		<SimpleData name="center_y">22.4791675487543</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -253,18 +241,6 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
-		<SimpleData name="id">10_60326</SimpleData>
-		<SimpleData name="occCount">685</SimpleData>
-		<SimpleData name="center_x">120.274999999999</SimpleData>
-		<SimpleData name="center_y">22.5625008833915</SimpleData>
-		<SimpleData name="landType">coastal</SimpleData>
-		<SimpleData name="priority">建議優先填補</SimpleData>
-	</SchemaData></ExtendedData>
-      <Polygon><outerBoundaryIs><LinearRing><coordinates>120.25,22.5416666666667 120.25,22.5833333333333 120.3,22.5833333333333 120.3,22.5416666666667 120.25,22.5416666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
-  </Placemark>
-  <Placemark>
-	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_60341</SimpleData>
 		<SimpleData name="occCount">8</SimpleData>
 		<SimpleData name="center_x">121.025000000006</SimpleData>
@@ -278,7 +254,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_60541</SimpleData>
-		<SimpleData name="occCount">885</SimpleData>
+		<SimpleData name="occCount">892</SimpleData>
 		<SimpleData name="center_x">121.025000000005</SimpleData>
 		<SimpleData name="center_y">22.6041675506908</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -290,7 +266,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_60725</SimpleData>
-		<SimpleData name="occCount">631</SimpleData>
+		<SimpleData name="occCount">642</SimpleData>
 		<SimpleData name="center_x">120.224999999999</SimpleData>
 		<SimpleData name="center_y">22.6458342180034</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -302,7 +278,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_60943</SimpleData>
-		<SimpleData name="occCount">100</SimpleData>
+		<SimpleData name="occCount">102</SimpleData>
 		<SimpleData name="center_x">121.125</SimpleData>
 		<SimpleData name="center_y">22.6875008853038</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -314,7 +290,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_60951</SimpleData>
-		<SimpleData name="occCount">837</SimpleData>
+		<SimpleData name="occCount">915</SimpleData>
 		<SimpleData name="center_x">121.525000000004</SimpleData>
 		<SimpleData name="center_y">22.6875008853081</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -326,7 +302,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_61125</SimpleData>
-		<SimpleData name="occCount">419</SimpleData>
+		<SimpleData name="occCount">456</SimpleData>
 		<SimpleData name="center_x">120.224999999998</SimpleData>
 		<SimpleData name="center_y">22.7291675525966</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -338,7 +314,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_61144</SimpleData>
-		<SimpleData name="occCount">638</SimpleData>
+		<SimpleData name="occCount">644</SimpleData>
 		<SimpleData name="center_x">121.174999999999</SimpleData>
 		<SimpleData name="center_y">22.7291675525983</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -374,7 +350,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_61724</SimpleData>
-		<SimpleData name="occCount">898</SimpleData>
+		<SimpleData name="occCount">955</SimpleData>
 		<SimpleData name="center_x">120.175000000005</SimpleData>
 		<SimpleData name="center_y">22.8541675544395</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -386,7 +362,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_61946</SimpleData>
-		<SimpleData name="occCount">513</SimpleData>
+		<SimpleData name="occCount">519</SimpleData>
 		<SimpleData name="center_x">121.275</SimpleData>
 		<SimpleData name="center_y">22.8958342217162</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -398,7 +374,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_62748</SimpleData>
-		<SimpleData name="occCount">82</SimpleData>
+		<SimpleData name="occCount">92</SimpleData>
 		<SimpleData name="center_x">121.374999999996</SimpleData>
 		<SimpleData name="center_y">23.0625008907512</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -409,20 +385,8 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
-		<SimpleData name="id">10_63149</SimpleData>
-		<SimpleData name="occCount">923</SimpleData>
-		<SimpleData name="center_x">121.425000000001</SimpleData>
-		<SimpleData name="center_y">23.1458342252218</SimpleData>
-		<SimpleData name="landType">coastal</SimpleData>
-		<SimpleData name="priority">建議優先填補</SimpleData>
-	</SchemaData></ExtendedData>
-      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.4,23.125 121.4,23.1666666666667 121.45,23.1666666666667 121.45,23.125 121.4,23.125</coordinates></LinearRing></outerBoundaryIs></Polygon>
-  </Placemark>
-  <Placemark>
-	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63309</SimpleData>
-		<SimpleData name="occCount">384</SimpleData>
+		<SimpleData name="occCount">426</SimpleData>
 		<SimpleData name="center_x">119.425000000002</SimpleData>
 		<SimpleData name="center_y">23.1875008924547</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -434,7 +398,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63349</SimpleData>
-		<SimpleData name="occCount">225</SimpleData>
+		<SimpleData name="occCount">255</SimpleData>
 		<SimpleData name="center_x">121.425000000002</SimpleData>
 		<SimpleData name="center_y">23.1875008924581</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -458,7 +422,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63511</SimpleData>
-		<SimpleData name="occCount">693</SimpleData>
+		<SimpleData name="occCount">692</SimpleData>
 		<SimpleData name="center_x">119.524999999998</SimpleData>
 		<SimpleData name="center_y">23.2291675596795</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -482,7 +446,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63549</SimpleData>
-		<SimpleData name="occCount">909</SimpleData>
+		<SimpleData name="occCount">914</SimpleData>
 		<SimpleData name="center_x">121.425000000005</SimpleData>
 		<SimpleData name="center_y">23.2291675596772</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -494,7 +458,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63907</SimpleData>
-		<SimpleData name="occCount">753</SimpleData>
+		<SimpleData name="occCount">769</SimpleData>
 		<SimpleData name="center_x">119.324999999997</SimpleData>
 		<SimpleData name="center_y">23.3125008941255</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -506,7 +470,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_63922</SimpleData>
-		<SimpleData name="occCount">66</SimpleData>
+		<SimpleData name="occCount">69</SimpleData>
 		<SimpleData name="center_x">120.075000000002</SimpleData>
 		<SimpleData name="center_y">23.3125008941223</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -518,7 +482,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64110</SimpleData>
-		<SimpleData name="occCount">771</SimpleData>
+		<SimpleData name="occCount">761</SimpleData>
 		<SimpleData name="center_x">119.475000000007</SimpleData>
 		<SimpleData name="center_y">23.3541675613337</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -542,7 +506,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64310</SimpleData>
-		<SimpleData name="occCount">275</SimpleData>
+		<SimpleData name="occCount">269</SimpleData>
 		<SimpleData name="center_x">119.475000000004</SimpleData>
 		<SimpleData name="center_y">23.3958342285376</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -554,7 +518,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64311</SimpleData>
-		<SimpleData name="occCount">270</SimpleData>
+		<SimpleData name="occCount">281</SimpleData>
 		<SimpleData name="center_x">119.524999999996</SimpleData>
 		<SimpleData name="center_y">23.3958342285349</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -566,7 +530,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64323</SimpleData>
-		<SimpleData name="occCount">847</SimpleData>
+		<SimpleData name="occCount">904</SimpleData>
 		<SimpleData name="center_x">120.124999999996</SimpleData>
 		<SimpleData name="center_y">23.3958342285405</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -590,7 +554,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64551</SimpleData>
-		<SimpleData name="occCount">17</SimpleData>
+		<SimpleData name="occCount">19</SimpleData>
 		<SimpleData name="center_x">121.525000000002</SimpleData>
 		<SimpleData name="center_y">23.4375008957384</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -602,7 +566,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64711</SimpleData>
-		<SimpleData name="occCount">201</SimpleData>
+		<SimpleData name="occCount">200</SimpleData>
 		<SimpleData name="center_x">119.524999999993</SimpleData>
 		<SimpleData name="center_y">23.4791675629264</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -626,7 +590,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64721</SimpleData>
-		<SimpleData name="occCount">0</SimpleData>
+		<SimpleData name="occCount">1</SimpleData>
 		<SimpleData name="center_x">120.024999999996</SimpleData>
 		<SimpleData name="center_y">23.4791675629274</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -650,7 +614,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64911</SimpleData>
-		<SimpleData name="occCount">439</SimpleData>
+		<SimpleData name="occCount">512</SimpleData>
 		<SimpleData name="center_x">119.524999999998</SimpleData>
 		<SimpleData name="center_y">23.5208342301179</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -662,7 +626,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64913</SimpleData>
-		<SimpleData name="occCount">648</SimpleData>
+		<SimpleData name="occCount">696</SimpleData>
 		<SimpleData name="center_x">119.624999999998</SimpleData>
 		<SimpleData name="center_y">23.5208342301153</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -674,7 +638,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64914</SimpleData>
-		<SimpleData name="occCount">9</SimpleData>
+		<SimpleData name="occCount">22</SimpleData>
 		<SimpleData name="center_x">119.675000000004</SimpleData>
 		<SimpleData name="center_y">23.5208342301174</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -698,7 +662,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64921</SimpleData>
-		<SimpleData name="occCount">30</SimpleData>
+		<SimpleData name="occCount">29</SimpleData>
 		<SimpleData name="center_x">120.024999999995</SimpleData>
 		<SimpleData name="center_y">23.5208342301177</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -710,7 +674,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64922</SimpleData>
-		<SimpleData name="occCount">0</SimpleData>
+		<SimpleData name="occCount">1</SimpleData>
 		<SimpleData name="center_x">120.075000000002</SimpleData>
 		<SimpleData name="center_y">23.5208342301163</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -722,7 +686,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_64951</SimpleData>
-		<SimpleData name="occCount">266</SimpleData>
+		<SimpleData name="occCount">270</SimpleData>
 		<SimpleData name="center_x">121.525000000002</SimpleData>
 		<SimpleData name="center_y">23.5208342301169</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -734,7 +698,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65110</SimpleData>
-		<SimpleData name="occCount">761</SimpleData>
+		<SimpleData name="occCount">774</SimpleData>
 		<SimpleData name="center_x">119.475000000004</SimpleData>
 		<SimpleData name="center_y">23.5625008972937</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -746,7 +710,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65111</SimpleData>
-		<SimpleData name="occCount">815</SimpleData>
+		<SimpleData name="occCount">887</SimpleData>
 		<SimpleData name="center_x">119.525000000002</SimpleData>
 		<SimpleData name="center_y">23.5625008972945</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -782,7 +746,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65151</SimpleData>
-		<SimpleData name="occCount">262</SimpleData>
+		<SimpleData name="occCount">259</SimpleData>
 		<SimpleData name="center_x">121.524999999999</SimpleData>
 		<SimpleData name="center_y">23.5625008972963</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -794,25 +758,13 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65310</SimpleData>
-		<SimpleData name="occCount">207</SimpleData>
+		<SimpleData name="occCount">208</SimpleData>
 		<SimpleData name="center_x">119.475000000003</SimpleData>
 		<SimpleData name="center_y">23.604167564479</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
 		<SimpleData name="priority">建議優先填補</SimpleData>
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>119.45,23.5833333333333 119.45,23.625 119.5,23.625 119.5,23.5833333333333 119.45,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
-  </Placemark>
-  <Placemark>
-	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
-		<SimpleData name="id">10_65312</SimpleData>
-		<SimpleData name="occCount">845</SimpleData>
-		<SimpleData name="center_x">119.575000000001</SimpleData>
-		<SimpleData name="center_y">23.6041675644731</SimpleData>
-		<SimpleData name="landType">coastal</SimpleData>
-		<SimpleData name="priority">建議優先填補</SimpleData>
-	</SchemaData></ExtendedData>
-      <Polygon><outerBoundaryIs><LinearRing><coordinates>119.55,23.5833333333333 119.55,23.625 119.6,23.625 119.6,23.5833333333333 119.55,23.5833333333333</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
@@ -842,7 +794,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65712</SimpleData>
-		<SimpleData name="occCount">840</SimpleData>
+		<SimpleData name="occCount">881</SimpleData>
 		<SimpleData name="center_x">119.574999999998</SimpleData>
 		<SimpleData name="center_y">23.6875008988212</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -854,7 +806,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65713</SimpleData>
-		<SimpleData name="occCount">195</SimpleData>
+		<SimpleData name="occCount">199</SimpleData>
 		<SimpleData name="center_x">119.624999999999</SimpleData>
 		<SimpleData name="center_y">23.6875008988216</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -878,7 +830,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65723</SimpleData>
-		<SimpleData name="occCount">95</SimpleData>
+		<SimpleData name="occCount">99</SimpleData>
 		<SimpleData name="center_x">120.124999999998</SimpleData>
 		<SimpleData name="center_y">23.6875008988125</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -890,7 +842,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65752</SimpleData>
-		<SimpleData name="occCount">224</SimpleData>
+		<SimpleData name="occCount">228</SimpleData>
 		<SimpleData name="center_x">121.574999999999</SimpleData>
 		<SimpleData name="center_y">23.6875008988192</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -902,7 +854,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65912</SimpleData>
-		<SimpleData name="occCount">759</SimpleData>
+		<SimpleData name="occCount">716</SimpleData>
 		<SimpleData name="center_x">119.575000000003</SimpleData>
 		<SimpleData name="center_y">23.7291675659773</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -914,7 +866,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65923</SimpleData>
-		<SimpleData name="occCount">14</SimpleData>
+		<SimpleData name="occCount">19</SimpleData>
 		<SimpleData name="center_x">120.124999999995</SimpleData>
 		<SimpleData name="center_y">23.7291675659845</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -926,7 +878,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_65952</SimpleData>
-		<SimpleData name="occCount">534</SimpleData>
+		<SimpleData name="occCount">530</SimpleData>
 		<SimpleData name="center_x">121.575000000004</SimpleData>
 		<SimpleData name="center_y">23.7291675659806</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -950,7 +902,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66113</SimpleData>
-		<SimpleData name="occCount">463</SimpleData>
+		<SimpleData name="occCount">454</SimpleData>
 		<SimpleData name="center_x">119.624999999996</SimpleData>
 		<SimpleData name="center_y">23.7708342331177</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -962,7 +914,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66124</SimpleData>
-		<SimpleData name="occCount">782</SimpleData>
+		<SimpleData name="occCount">788</SimpleData>
 		<SimpleData name="center_x">120.175000000002</SimpleData>
 		<SimpleData name="center_y">23.770834233121</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1010,7 +962,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66525</SimpleData>
-		<SimpleData name="occCount">16</SimpleData>
+		<SimpleData name="occCount">38</SimpleData>
 		<SimpleData name="center_x">120.224999999997</SimpleData>
 		<SimpleData name="center_y">23.85416756743</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1022,7 +974,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66553</SimpleData>
-		<SimpleData name="occCount">168</SimpleData>
+		<SimpleData name="occCount">173</SimpleData>
 		<SimpleData name="center_x">121.624999999996</SimpleData>
 		<SimpleData name="center_y">23.8541675674249</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1034,7 +986,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66725</SimpleData>
-		<SimpleData name="occCount">10</SimpleData>
+		<SimpleData name="occCount">12</SimpleData>
 		<SimpleData name="center_x">120.224999999996</SimpleData>
 		<SimpleData name="center_y">23.8958342345546</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1046,7 +998,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_66753</SimpleData>
-		<SimpleData name="occCount">861</SimpleData>
+		<SimpleData name="occCount">885</SimpleData>
 		<SimpleData name="center_x">121.624999999995</SimpleData>
 		<SimpleData name="center_y">23.8958342345576</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1070,7 +1022,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_67126</SimpleData>
-		<SimpleData name="occCount">81</SimpleData>
+		<SimpleData name="occCount">113</SimpleData>
 		<SimpleData name="center_x">120.274999999997</SimpleData>
 		<SimpleData name="center_y">23.9791675688226</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1082,7 +1034,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_67527</SimpleData>
-		<SimpleData name="occCount">199</SimpleData>
+		<SimpleData name="occCount">197</SimpleData>
 		<SimpleData name="center_x">120.325000000004</SimpleData>
 		<SimpleData name="center_y">24.0625009030501</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1094,7 +1046,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_67754</SimpleData>
-		<SimpleData name="occCount">693</SimpleData>
+		<SimpleData name="occCount">699</SimpleData>
 		<SimpleData name="center_x">121.675000000002</SimpleData>
 		<SimpleData name="center_y">24.1041675701564</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1118,7 +1070,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_67928</SimpleData>
-		<SimpleData name="occCount">53</SimpleData>
+		<SimpleData name="occCount">65</SimpleData>
 		<SimpleData name="center_x">120.374999999996</SimpleData>
 		<SimpleData name="center_y">24.145834237269</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1130,7 +1082,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_68129</SimpleData>
-		<SimpleData name="occCount">60</SimpleData>
+		<SimpleData name="occCount">67</SimpleData>
 		<SimpleData name="center_x">120.425000000004</SimpleData>
 		<SimpleData name="center_y">24.1875009043514</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1142,7 +1094,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_68530</SimpleData>
-		<SimpleData name="occCount">439</SimpleData>
+		<SimpleData name="occCount">453</SimpleData>
 		<SimpleData name="center_x">120.474999999994</SimpleData>
 		<SimpleData name="center_y">24.2708342385508</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1178,7 +1130,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_68931</SimpleData>
-		<SimpleData name="occCount">51</SimpleData>
+		<SimpleData name="occCount">58</SimpleData>
 		<SimpleData name="center_x">120.525000000004</SimpleData>
 		<SimpleData name="center_y">24.354167572696</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1214,7 +1166,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_69132</SimpleData>
-		<SimpleData name="occCount">955</SimpleData>
+		<SimpleData name="occCount">956</SimpleData>
 		<SimpleData name="center_x">120.574999999997</SimpleData>
 		<SimpleData name="center_y">24.3958342397571</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1262,7 +1214,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_69533</SimpleData>
-		<SimpleData name="occCount">24</SimpleData>
+		<SimpleData name="occCount">32</SimpleData>
 		<SimpleData name="center_x">120.625000000001</SimpleData>
 		<SimpleData name="center_y">24.4791675738896</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1274,7 +1226,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_69558</SimpleData>
-		<SimpleData name="occCount">290</SimpleData>
+		<SimpleData name="occCount">265</SimpleData>
 		<SimpleData name="center_x">121.875</SimpleData>
 		<SimpleData name="center_y">24.4791675738862</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1298,7 +1250,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_69934</SimpleData>
-		<SimpleData name="occCount">244</SimpleData>
+		<SimpleData name="occCount">248</SimpleData>
 		<SimpleData name="center_x">120.674999999999</SimpleData>
 		<SimpleData name="center_y">24.5625009079768</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1334,7 +1286,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_70536</SimpleData>
-		<SimpleData name="occCount">35</SimpleData>
+		<SimpleData name="occCount">38</SimpleData>
 		<SimpleData name="center_x">120.775000000002</SimpleData>
 		<SimpleData name="center_y">24.6875009090784</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1346,7 +1298,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_70938</SimpleData>
-		<SimpleData name="occCount">190</SimpleData>
+		<SimpleData name="occCount">198</SimpleData>
 		<SimpleData name="center_x">120.875000000005</SimpleData>
 		<SimpleData name="center_y">24.7708342431211</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1358,7 +1310,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_71138</SimpleData>
-		<SimpleData name="occCount">50</SimpleData>
+		<SimpleData name="occCount">51</SimpleData>
 		<SimpleData name="center_x">120.875000000003</SimpleData>
 		<SimpleData name="center_y">24.8125009101283</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1370,7 +1322,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_71539</SimpleData>
-		<SimpleData name="occCount">236</SimpleData>
+		<SimpleData name="occCount">238</SimpleData>
 		<SimpleData name="center_x">120.924999999998</SimpleData>
 		<SimpleData name="center_y">24.8958342441369</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1406,7 +1358,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_71940</SimpleData>
-		<SimpleData name="occCount">189</SimpleData>
+		<SimpleData name="occCount">190</SimpleData>
 		<SimpleData name="center_x">120.974999999993</SimpleData>
 		<SimpleData name="center_y">24.979167578115</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1418,7 +1370,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_72341</SimpleData>
-		<SimpleData name="occCount">1</SimpleData>
+		<SimpleData name="occCount">2</SimpleData>
 		<SimpleData name="center_x">121.025000000007</SimpleData>
 		<SimpleData name="center_y">25.0625009120726</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1430,7 +1382,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_72746</SimpleData>
-		<SimpleData name="occCount">23</SimpleData>
+		<SimpleData name="occCount">26</SimpleData>
 		<SimpleData name="center_x">121.275000000003</SimpleData>
 		<SimpleData name="center_y">25.1458342459956</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1442,7 +1394,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_72747</SimpleData>
-		<SimpleData name="occCount">220</SimpleData>
+		<SimpleData name="occCount">221</SimpleData>
 		<SimpleData name="center_x">121.324999999996</SimpleData>
 		<SimpleData name="center_y">25.1458342459916</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1454,7 +1406,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_72758</SimpleData>
-		<SimpleData name="occCount">187</SimpleData>
+		<SimpleData name="occCount">191</SimpleData>
 		<SimpleData name="center_x">121.874999999996</SimpleData>
 		<SimpleData name="center_y">25.1458342459937</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1465,20 +1417,8 @@
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
-		<SimpleData name="id">10_72948</SimpleData>
-		<SimpleData name="occCount">163</SimpleData>
-		<SimpleData name="center_x">121.375000000001</SimpleData>
-		<SimpleData name="center_y">25.1875009129592</SimpleData>
-		<SimpleData name="landType">coastal</SimpleData>
-		<SimpleData name="priority">建議優先填補</SimpleData>
-	</SchemaData></ExtendedData>
-      <Polygon><outerBoundaryIs><LinearRing><coordinates>121.35,25.1666666666667 121.35,25.2083333333333 121.4,25.2083333333333 121.4,25.1666666666667 121.35,25.1666666666667</coordinates></LinearRing></outerBoundaryIs></Polygon>
-  </Placemark>
-  <Placemark>
-	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_72955</SimpleData>
-		<SimpleData name="occCount">577</SimpleData>
+		<SimpleData name="occCount">655</SimpleData>
 		<SimpleData name="center_x">121.725000000001</SimpleData>
 		<SimpleData name="center_y">25.1875009129596</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1490,7 +1430,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_73155</SimpleData>
-		<SimpleData name="occCount">65</SimpleData>
+		<SimpleData name="occCount">69</SimpleData>
 		<SimpleData name="center_x">121.725000000003</SimpleData>
 		<SimpleData name="center_y">25.229167579899</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1502,7 +1442,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_73353</SimpleData>
-		<SimpleData name="occCount">765</SimpleData>
+		<SimpleData name="occCount">791</SimpleData>
 		<SimpleData name="center_x">121.624999999996</SimpleData>
 		<SimpleData name="center_y">25.2708342468545</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1514,7 +1454,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_74159</SimpleData>
-		<SimpleData name="occCount">497</SimpleData>
+		<SimpleData name="occCount">493</SimpleData>
 		<SimpleData name="center_x">121.925000000005</SimpleData>
 		<SimpleData name="center_y">25.4375009145718</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1574,7 +1514,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_77720</SimpleData>
-		<SimpleData name="occCount">987</SimpleData>
+		<SimpleData name="occCount">999</SimpleData>
 		<SimpleData name="center_x">119.975000000001</SimpleData>
 		<SimpleData name="center_y">26.1875009181012</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1586,7 +1526,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_77922</SimpleData>
-		<SimpleData name="occCount">369</SimpleData>
+		<SimpleData name="occCount">371</SimpleData>
 		<SimpleData name="center_x">120.074999999999</SimpleData>
 		<SimpleData name="center_y">26.2291675849105</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
@@ -1610,7 +1550,7 @@
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gmm_建議優先填補.coastal">
 		<SimpleData name="id">10_78121</SimpleData>
-		<SimpleData name="occCount">100</SimpleData>
+		<SimpleData name="occCount">101</SimpleData>
 		<SimpleData name="center_x">120.024999999998</SimpleData>
 		<SimpleData name="center_y">26.2708342517044</SimpleData>
 		<SimpleData name="landType">coastal</SimpleData>
